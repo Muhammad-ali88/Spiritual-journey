@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dhikr — Spiritual Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg0:#04070D;--bg1:#080E1C;--bg2:#0C1528;--bg3:#111E35;--bg4:#162440;
+  --gold:#C9A84C;--gold2:#E2C97A;--gold3:#F5E9C0;
+  --golddim:rgba(201,168,76,.08);--goldbdr:rgba(201,168,76,.18);--goldglow:rgba(201,168,76,.22);
+  --teal:#2FB89A;--tealdim:rgba(47,184,154,.08);--tealbdr:rgba(47,184,154,.22);
+  --blue:#7AABF0;--bluedim:rgba(122,171,240,.08);--bluebdr:rgba(122,171,240,.22);
+  --amber:#E0A030;--amberdim:rgba(224,160,48,.08);--amberbdr:rgba(224,160,48,.22);
+  --purple:#A87FD0;--purpledim:rgba(168,127,208,.08);--purplebdr:rgba(168,127,208,.22);
+  --text:#D4CBB8;--text2:#8A9BB0;--text3:#4A5B70;
+  --border:rgba(201,168,76,.10);--border2:rgba(201,168,76,.05);
+  --font-head:'Cinzel',serif;--font-body:'Lora',serif;--font-arab:'Noto Naskh Arabic',serif;--font-ar:'Noto Naskh Arabic',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 800px 500px at 20% 10%,rgba(201,168,76,.025),transparent 60%),
+             radial-gradient(ellipse 600px 400px at 80% 80%,rgba(47,184,154,.02),transparent 60%);}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:90;background:rgba(4,7,13,.97);border-bottom:1px solid var(--border2);backdrop-filter:blur(20px);padding:0 22px;height:56px;display:flex;align-items:center;gap:14px}
+.hdr-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.3)}
+.hdr-titles{flex:1}
+.hdr-title{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase}
+.hdr-sub{font-family:var(--font-head);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--goldbdr);border-radius:20px;padding:3px}
+.lt{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 10px;border-radius:16px;cursor:pointer;transition:all .2s;color:var(--text3);user-select:none}
+.lt.on{background:var(--gold);color:#000;font-weight:700}
+.back-link{font-family:var(--font-head);font-size:8.5px;letter-spacing:.8px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:6px;transition:all .15s;text-transform:uppercase;flex-shrink:0}
+.back-link:hover{color:var(--gold2);border-color:var(--goldbdr)}
+
+/* PAGE */
+.page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:24px 18px 60px}
+
+/* CONCEPT TABS */
+.concept-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cn-btn{font-family:var(--font-head);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:8px;border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.cn-btn:hover{border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn.on{background:var(--golddim);border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn .ar{font-family:var(--font-arab);font-size:14px;letter-spacing:0;display:block;margin-top:2px}
+.cn-badge{display:inline-block;font-size:7px;padding:1px 5px;border-radius:4px;margin-left:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);vertical-align:middle}
+.cn-badge.pending{background:var(--amberdim);border-color:var(--amberbdr);color:var(--amber)}
+
+/* SECTION */
+.concept-section{display:none}
+.concept-section.active{display:block}
+
+/* SECTION HEADER */
+.sec-hdr{text-align:center;padding:20px 0 28px;border-bottom:1px solid var(--border2);margin-bottom:28px}
+.sec-hdr-ar{font-family:var(--font-arab);font-size:52px;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.25);line-height:1.2;margin-bottom:8px}
+.sec-hdr-en{font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase}
+.sec-hdr-ur{font-family:var(--font-arab);font-size:20px;color:var(--gold2);margin-top:4px}
+.sec-hdr-root{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--text2);margin-top:10px;text-transform:uppercase}
+.sec-hdr-rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+.sec-hdr-intro{font-size:13px;color:var(--text2);line-height:1.85;max-width:600px;margin:0 auto;font-style:italic}
+
+/* ROOT ANALYSIS BOX */
+.root-analysis{background:var(--bg2);border:1px solid var(--goldbdr);border-radius:12px;padding:20px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+.root-analysis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ra-label{font-family:var(--font-head);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ra-label::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ra-root{font-family:var(--font-arab);font-size:30px;color:var(--gold2);direction:rtl;margin-bottom:12px}
+.ra-letters{display:flex;gap:10px;flex-direction:row-reverse;margin-bottom:14px}
+.ra-letter{background:rgba(201,168,76,.06);border:1px solid var(--goldbdr);border-radius:8px;padding:8px 14px;text-align:center}
+.ra-letter-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold2);display:block}
+.ra-letter-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:4px;display:block}
+.ra-meaning{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.ra-meaning-ur{font-family:var(--font-arab);font-size:14px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:12px}
+.ra-forms{display:flex;gap:8px;flex-wrap:wrap}
+.ra-form{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;text-align:center}
+.ra-form-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl}
+.ra-form-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:2px}
+.ra-count{font-family:var(--font-head);font-size:9px;color:var(--teal);margin-top:12px;letter-spacing:.5px}
+
+/* ERA DIVIDER */
+.era-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px}
+.era-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.era-early{background:var(--amber)}
+.era-middle{background:var(--gold)}
+.era-late{background:var(--teal)}
+.era-madani{background:var(--blue)}
+.era-label{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.era-label-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2)}
+.era-line{flex:1;height:1px;background:var(--border2)}
+.era-count{font-family:var(--font-head);font-size:8px;color:var(--text3);flex-shrink:0}
+
+/* AYAH CARD */
+.ayah-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.ayah-card.open{border-color:var(--goldbdr)}
+.ayah-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;user-select:none}
+.rev-badge{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;padding:3px 8px;border-radius:5px;flex-shrink:0;text-transform:uppercase}
+.rev-early{background:var(--amberdim);border:1px solid var(--amberbdr);color:var(--amber)}
+.rev-middle{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+.rev-late{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.rev-madani{background:var(--bluedim);border:1px solid var(--bluebdr);color:var(--blue)}
+.card-ref{font-family:var(--font-head);font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0}
+.card-preview{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.card-chevron{color:var(--text3);font-size:16px;transition:transform .25s;flex-shrink:0}
+.ayah-card.open .card-chevron{transform:rotate(90deg);color:var(--gold)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border2)}
+.ayah-card.open .card-body{display:block}
+
+/* ARABIC */
+.ayah-arabic{font-family:var(--font-arab);font-size:clamp(20px,3.5vw,28px);color:var(--gold2);direction:rtl;text-align:right;line-height:2.2;padding:18px 0 12px;text-shadow:0 0 20px rgba(201,168,76,.1);border-bottom:1px solid var(--border2);margin-bottom:12px}
+.ayah-tr-en{font-size:13px;color:var(--text);font-style:italic;line-height:1.85;margin-bottom:6px;border-left:3px solid var(--goldbdr);padding:8px 14px;border-radius:0 6px 6px 0;background:rgba(201,168,76,.03)}
+.ayah-tr-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;border-right:3px solid var(--goldbdr);padding:8px 14px 8px 8px;border-radius:6px 0 0 6px;background:rgba(201,168,76,.03);margin-bottom:6px}
+.ayah-ref-line{font-family:var(--font-head);font-size:9px;color:var(--gold);letter-spacing:.8px;margin-bottom:14px}
+
+/* BOXES */
+.ctx-box{background:rgba(0,0,0,.2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:12px}
+.ctx-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.ctx-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--amber);margin-bottom:5px}
+.ctx-txt{font-size:12px;color:var(--text2);line-height:1.75}
+.ctx-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2}
+
+.root-box{background:rgba(201,168,76,.04);border:1px solid var(--goldbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.root-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.root-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--gold);margin-bottom:7px}
+.root-wd{font-family:var(--font-arab);font-size:19px;color:var(--gold2);direction:rtl;display:inline-block;margin-left:8px}
+.root-fm{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl}
+.root-mn{font-size:12px;color:var(--text2);line-height:1.7;margin-top:5px}
+.root-mn-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-top:5px}
+
+.uniq-box{background:var(--tealdim);border:1px solid var(--tealbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.uniq-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.uniq-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--teal);margin-bottom:5px}
+.uniq-txt{font-size:12.5px;color:var(--text);line-height:1.75}
+.uniq-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text);direction:rtl;text-align:right;line-height:2}
+
+.sunnah-box{background:var(--purpledim);border:1px solid var(--purplebdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.sun-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.sun-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--purple);margin-bottom:8px}
+.sun-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-en{font-size:12px;color:var(--text2);font-style:italic;line-height:1.7;margin-bottom:5px}
+.sun-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+.grade{display:inline-block;font-family:var(--font-head);font-size:7.5px;padding:2px 7px;border-radius:4px;margin-left:6px}
+.g-sahih{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.g-hasan{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+
+/* NOTES */
+.notes-sec{margin-top:14px;border-top:1px solid var(--border2);padding-top:12px}
+.notes-hdr{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notes-hdr::after{content:'';flex:1;height:1px;background:var(--border2)}
+.note-f{margin-bottom:7px}
+.note-lbl{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nsv{font-family:var(--font-head);font-size:7px;letter-spacing:.3px;color:var(--text3);margin-left:auto;transition:color .3s}
+.nsv.flash{color:var(--teal)}
+.note-ta{width:100%;min-height:78px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:7px;outline:none;padding:10px 12px;font-family:var(--font-body);font-size:12.5px;color:var(--text);line-height:1.75;resize:vertical;transition:border-color .2s}
+.note-ta:focus{border-color:var(--goldbdr)}
+.note-ta::placeholder{color:var(--text3);font-style:italic;font-size:11.5px}
+.note-ta-ur{font-family:var(--font-arab);font-size:14px;direction:rtl;text-align:right}
+
+/* STANDALONE HADITH */
+.sh-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;margin-bottom:10px}
+.sh-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sh-lbl::after{content:'';flex:1;height:1px;background:var(--border2)}
+.sh-ar{font-family:var(--font-arab);font-size:clamp(15px,3vw,19px);color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:9px;padding:10px 14px;background:rgba(201,168,76,.04);border-radius:7px}
+.sh-en{font-size:12.5px;color:var(--text);font-style:italic;line-height:1.8;margin-bottom:7px}
+.sh-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;margin-bottom:7px}
+.sh-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+
+/* PENDING */
+.pending{background:var(--bg2);border:1px dashed var(--amberbdr);border-radius:12px;padding:24px 20px;margin-top:20px;text-align:center}
+.pending-icon{font-size:28px;margin-bottom:10px}
+.pending-title{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--text2);line-height:1.75;max-width:600px;margin:0 auto}
+
+/* ── Language toggle — body class approach ─────── */
+.en-blk{display:block}
+.ur-blk{display:none}
+.en-inl{display:inline}
+.ur-inl{display:none}
+body.ur-mode .en-blk{display:none}
+body.ur-mode .ur-blk{display:block}
+body.ur-mode .en-inl{display:none}
+body.ur-mode .ur-inl{display:inline}
+body.ur-mode span.ur-blk{display:inline}
+body.ur-mode span.en-blk{display:none}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:rgba(12,21,40,.98);border:1px solid var(--goldbdr);border-radius:8px;padding:9px 20px;font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--gold2);z-index:300;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .page{padding:18px 12px 60px}
+  .ra-letters{gap:6px}
+  .ra-letter{padding:6px 10px}
+  .ayah-arabic{font-size:clamp(18px,5vw,24px)}
+}
+
+.file-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg1);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;gap:8px;}
+.file-nav-link{font-family:var(--font-head);font-size:11px;letter-spacing:.5px;color:var(--gold2);text-decoration:none;padding:6px 10px;border:1px solid var(--goldbdr);border-radius:6px;white-space:nowrap;}
+.file-nav-link:hover{background:var(--golddim);}
+.file-nav-home{font-family:var(--font-head);font-size:10px;letter-spacing:.8px;color:var(--text2);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;}
+.file-nav-home:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-nav-center{display:flex;align-items:center;gap:8px;}
+.lang-btn{font-size:11px;font-family:var(--font-head);letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text2);padding:4px 8px;cursor:pointer;transition:opacity .2s;}
+.lang-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 20px 48px;border-top:1px solid var(--border);margin-top:40px;}
+
+/* ── Stage 3 Scholar Cards ─────────────── */
+.stage3-hdr{margin:40px 0 24px;text-align:center;}
+.stage3-hdr-ar{font-family:var(--font-ar);font-size:22px;color:var(--purple);margin-bottom:4px;}
+.stage3-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;}
+.stage3-hdr-rule{width:50px;height:1px;background:var(--purplebdr);margin:12px auto;}
+.stage3-intro{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;max-width:640px;margin:0 auto 16px;}
+.scholar-card{border:1px solid var(--purplebdr);border-radius:10px;margin-bottom:14px;overflow:hidden;background:rgba(168,127,208,.03);}
+.scholar-card .card-body{display:none;padding:20px;border-top:1px solid var(--purplebdr);}
+.scholar-card.open .card-body{display:block;}
+.sc-hdr{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;transition:background .15s;}
+.sc-hdr:hover{background:var(--purpledim);}
+.sc-num{font-family:var(--font-head);font-size:11px;color:var(--purple);min-width:22px;opacity:.7;}
+.sc-hdr-main{flex:1;}
+.sc-name-en{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.3px;}
+.sc-name-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);}
+.sc-dates{font-family:var(--font-body);font-size:11px;color:var(--text3);margin-top:2px;font-style:italic;}
+.sc-badge{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 8px;border-radius:4px;border:1px solid var(--purplebdr);color:var(--purple);text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.sc-chevron{font-size:18px;color:var(--purple);opacity:.6;transition:transform .2s;}
+.scholar-card.open .sc-chevron{transform:rotate(90deg);}
+.bio-box summary{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--purple);text-transform:uppercase;cursor:pointer;padding:8px 0;border-bottom:1px solid var(--purplebdr);margin-bottom:12px;display:block;list-style:none;}
+.bio-box summary::-webkit-details-marker{display:none;}
+.bio-box summary::before{content:"+ ";}
+details[open] summary::before{content:"- ";}
+.bio-txt{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:10px;}
+.bio-txt-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2.1;direction:rtl;text-align:right;margin-bottom:10px;}
+.bio-works{font-family:var(--font-head);font-size:10px;letter-spacing:.3px;color:var(--text3);line-height:1.8;margin-bottom:4px;}
+.sc-sec{font-family:var(--font-head);font-size:9px;letter-spacing:1.2px;color:var(--purple);text-transform:uppercase;margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--purplebdr);}
+.sc-finding{font-family:var(--font-body);font-size:13.5px;color:var(--text);line-height:1.9;margin-bottom:6px;}
+.sc-finding-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);line-height:2.1;direction:rtl;text-align:right;margin-bottom:14px;}
+.sc-quote-ar{font-family:var(--font-ar);font-size:17px;color:var(--gold);line-height:2;text-align:right;direction:rtl;margin:12px 0 8px;padding:12px;background:var(--golddim);border-right:3px solid var(--gold);border-radius:0 6px 6px 0;}
+.sc-quote-en{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;font-style:italic;margin-bottom:4px;}
+.sc-quote-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;margin-bottom:6px;}
+.sc-quote-src{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:.3px;margin-bottom:14px;}
+.sc-contrib{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:6px;}
+.sc-contrib-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;}
+.sc-controversy{font-family:var(--font-body);font-size:12px;color:var(--amber);line-height:1.85;padding:10px 12px;background:var(--amberdim);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;margin-top:14px;}
+/* ── Divergence Section ─────────────────── */
+.div-wrap{border:1px solid var(--goldbdr);border-radius:10px;margin-top:32px;overflow:hidden;}
+.div-hdr{background:var(--golddim);padding:18px 20px;border-bottom:1px solid var(--goldbdr);}
+.div-hdr-ar{font-family:var(--font-ar);font-size:20px;color:var(--gold);margin-bottom:4px;}
+.div-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;}
+.div-hdr-desc{font-family:var(--font-body);font-size:12px;color:var(--text2);line-height:1.85;margin-top:8px;}
+.div-point{padding:20px;border-bottom:1px solid var(--goldbdr);}
+.div-num{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.div-q{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.2px;margin-bottom:14px;line-height:1.5;}
+.div-q-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:14px;}
+.div-pos-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.div-scholars{font-family:var(--font-head);font-size:9px;color:var(--purple);letter-spacing:.3px;min-width:160px;padding-top:3px;flex-shrink:0;}
+.div-view{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;}
+.div-ground{background:var(--bg2);border-radius:6px;padding:12px;margin:12px 0;}
+.div-ground-lbl{font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;}
+.div-ground-txt{font-family:var(--font-body);font-size:12.5px;color:var(--text2);line-height:1.85;}
+.div-verdict{font-family:var(--font-body);font-size:13px;color:var(--text);line-height:1.85;font-style:italic;border-left:2px solid var(--teal);padding-left:10px;margin-top:4px;}
+.div-pos-box{padding:20px;background:var(--bg2);}
+.div-pos-lbl{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<div class="file-topbar">
+  <span></span>
+  <div class="file-nav-center">
+    <a href="index.html" class="file-nav-home">☰ Index</a>
+    <button class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang-btn="ur" onclick="setLang('ur')">اردو</button>
+  </div>
+  <a href="taqwa.html" class="file-nav-link">Taqwa →</a>
+</div>
+
+<div class="concept-section active" id="sec-dhikr">
+
+<div class="sec-hdr">
+  <div class="sec-hdr-ar">ذِكْر</div>
+  <div class="sec-hdr-en en-blk">Dhikr — Remembrance</div>
+  <div class="sec-hdr-ur ur-blk">ذکر — یاد</div>
+  <div class="sec-hdr-rule"></div>
+  <div class="sec-hdr-root en-blk">Root: ذ — ك — ر · Appears 280+ times · 19 key ayat in revelation order</div>
+  <div class="sec-hdr-root ur-blk">جڑ: ذ — ک — ر · ۲۸۰ سے زیادہ بار · ترتیبِ نزول میں ۱۹ اہم آیات</div>
+  <div class="sec-hdr-intro en-blk">The Quran uses Dhikr in multiple layers — as the Quran itself, as remembrance of Allah in the heart, as verbal mention, and as reminder. The ayat below trace how this concept develops from the first revelations in Makkah to its complete articulation in Madinah. Read them in order. Each one adds a dimension the others do not.</div>
+  <div class="sec-hdr-intro ur-blk">قرآن ذکر کو کئی تہوں میں استعمال کرتا ہے — خود قرآن کے طور پر، دل میں اللہ کی یاد، زبانی ذکر۔ نیچے آیات ترتیبِ نزول میں ہیں — ابتدائی مکی وحی سے مدنی تکمیل تک۔ ترتیب سے پڑھیں — ہر آیت کچھ نیا جوڑتی ہے۔</div>
+</div>
+
+<div class="root-analysis">
+  <div class="ra-label"><span class="en-blk">Root Word Analysis — ذ ك ر</span><span class="ur-blk">جڑ کا تجزیہ — ذ ک ر</span></div>
+  <div class="ra-root">ذَكَرَ · يَذْكُرُ · ذِكْر · تَذَكُّر · تَذْكِرَة</div>
+  <div class="ra-letters">
+    <div class="ra-letter"><span class="ra-letter-ar">ذ</span><span class="ra-letter-en">Dh</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ك</span><span class="ra-letter-en">K</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ر</span><span class="ra-letter-en">R</span></div>
+  </div>
+  <div class="ra-meaning en-blk">The root Dh-K-R carries three interconnected meanings in classical Arabic: <strong style="color:var(--gold2)">to remember after forgetting</strong> (implying something was known and then lost — the fitrah knew Allah; dhikr is the recovery), <strong style="color:var(--gold2)">to mention aloud</strong> (bringing from the inner to the outer — what the heart knows the tongue must say), and <strong style="color:var(--gold2)">to keep present</strong> (maintaining ongoing awareness — not a momentary act but a continuous state). All three meanings operate simultaneously in Quranic usage. When Allah commands dhikr He is commanding all three at once.</div>
+  <div class="ra-meaning ur-blk">جڑ ذ-ک-ر تین آپس میں جڑے معانی رکھتی ہے: بھولنے کے بعد یاد کرنا (فطرت اللہ کو جانتی تھی — ذکر واپسی ہے)، بلند آواز سے ذکر کرنا (دل سے زبان پر لانا)، اور موجود رکھنا (مستقل کیفیت)۔ تینوں ایک ساتھ۔</div>
+  <div class="ra-forms">
+    <div class="ra-form"><div class="ra-form-ar">ذِكْر</div><div class="ra-form-en en-blk">Remembrance / The Quran</div><div class="ra-form-en ur-blk">یاد / قرآن</div></div>
+    <div class="ra-form"><div class="ra-form-ar">تَذَكُّر</div><div class="ra-form-en en-blk">Reflection / Taking heed</div><div class="ra-form-en ur-blk">غور / یاد آنا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">ذَاكِر</div><div class="ra-form-en en-blk">One who remembers</div><div class="ra-form-en ur-blk">ذاکر</div></div>
+    <div class="ra-form"><div class="ra-form-ar">تَذْكِرَة</div><div class="ra-form-en en-blk">Reminder</div><div class="ra-form-en ur-blk">یاددہانی</div></div>
+    <div class="ra-form"><div class="ra-form-ar">مُذَكِّر</div><div class="ra-form-en en-blk">The Reminder</div><div class="ra-form-en ur-blk">یاد دلانے والا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">ذِكْرَى</div><div class="ra-form-en en-blk">Remembrance / Reminder</div><div class="ra-form-en ur-blk">یاد / تذکیر</div></div>
+  </div>
+  <div class="ra-count en-blk">✦ Root appears 280+ times across 114 surahs — the most frequently occurring spiritual concept in the Quran after Taqwa</div>
+  <div class="ra-count ur-blk">✦ یہ جڑ ۱۱۴ سورتوں میں ۲۸۰ سے زیادہ بار — تقویٰ کے بعد قرآن کا سب سے زیادہ ذکر ہونے والا روحانی تصور</div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-early"></div>
+  <div class="era-label en-blk">Early Makki · 610–615 CE</div>
+  <div class="era-label-ur ur-blk">ابتدائی مکی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-87-1">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-87-1')">
+    <span class="rev-badge rev-early en-blk">Rev. #8</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #8</span>
+    <span class="card-ref">Al-Ala 87:1</span>
+    <span class="card-preview">سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى</div>
+    <div class="ayah-tr-en en-blk">"Glorify the name of your Lord, the Most High."</div>
+    <div class="ayah-tr-ur ur-blk">«اپنے رب کے نام کی تسبیح کریں جو سب سے اعلیٰ ہے۔»</div>
+    <div class="ayah-ref-line">Al-Ala 87:1</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Among the earliest revelations — 8th surah. The very first Quranic command related to dhikr. One word: Sabbih. The tongue learns to say what the fitrah already recognises. The Prophet ﷺ loved this surah and recited it in every Jumu'ah and Eid prayer.</div>
+      <div class="ctx-txt-ur ur-blk">ابتدائی وحی — ۸ویں سورت۔ ذکر سے متعلق پہلا قرآنی حکم — تسبیح۔ زبان وہ کہنا سیکھتی ہے جو فطرت پہلے سے پہچانتی ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">سَبِّحِ</span> <span class="root-fm">س-ب-ح · Tasbeeh</span>
+      <div class="root-mn en-blk">From S-B-H — to swim, to float freely. Tasbeeh: the heart and tongue moving in Allah's greatness, declaring Him above all deficiency. SubhanAllah means Allah is above everything wrongly attributed to Him. This is the foundation of all dhikr — begin with what Allah is NOT before approaching what He IS.</div>
+      <div class="root-mn-ur ur-blk">س-ب-ح — تیرنا، آزادانہ بہنا۔ تسبیح: اللہ کی عظمت میں بہنا۔ سبحان اللہ: اللہ ہر عیب سے پاک۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The first Quranic command of dhikr. The command is to glorify the Name — not just think about Allah but to say His Name. The Name carries the reality of the Named. Every dhikr begins here.</div>
+      <div class="uniq-txt-ur ur-blk">ترتیبِ نزول میں ذکر کا پہلا حکم۔ نام کی تسبیح — کہنے کا حکم۔ ہر ذکر یہیں سے شروع ہوتا ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-87-1-my"></span></div>
+        <textarea class="note-ta" id="note-87-1-my" placeholder="What does this first command — glorify the Name — mean to you today?" oninput="autoSave('87-1-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-87-1-after"></span></div>
+        <textarea class="note-ta" id="note-87-1-after" placeholder="After tafseer — what dimension did you miss?" oninput="autoSave('87-1-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-73-8">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-73-8')">
+    <span class="rev-badge rev-early en-blk">Rev. #3</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #3</span>
+    <span class="card-ref">Al-Muzzammil 73:8</span>
+    <span class="card-preview">وَاذْكُرِ اسْمَ رَبِّكَ وَتَبَتَّلْ إِلَيْهِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاذْكُرِ اسْمَ رَبِّكَ وَتَبَتَّلْ إِلَيْهِ تَبْتِيلًا</div>
+    <div class="ayah-tr-en en-blk">"And remember the name of your Lord and devote yourself to Him with complete devotion."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اپنے رب کا نام یاد کرو اور یکسو ہو کر اسی کی طرف لگ جاؤ — مکمل یکسوئی کے ساتھ۔»</div>
+    <div class="ayah-ref-line">Al-Muzzammil 73:8</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Muzzammil is the 3rd surah. This earliest complete dhikr instruction pairs dhikr with Tabattul — complete turning toward Allah, severing from everything else. The Sufis considered Tabattul the destination that dhikr produces. Dhikr is the means; Tabattul is the goal.</div>
+      <div class="ctx-txt-ur ur-blk">مزمل تیسری سورت۔ پہلی مکمل ذکر تعلیم — ذکر اور تبتّل کو جوڑتی ہے۔ تبتّل: مکمل یکسوئی۔ صوفیاء کے لیے ذکر وسیلہ، تبتّل منزل۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تَبَتَّلْ</span> <span class="root-fm">ب-ت-ل · Complete severance toward Allah</span>
+      <div class="root-mn en-blk">From B-T-L — to cut, sever completely. Tabattul: cutting yourself off from everything other than Allah. The same root gives Batool — title of Maryam (AS). Dhikr is the means; Tabattul is the destination.</div>
+      <div class="root-mn-ur ur-blk">ب-ت-ل — کاٹنا، مکمل انقطاع۔ اسی سے بتول — مریم علیہ السلام کا لقب۔ ذکر وسیلہ، تبتّل منزل۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr is a path, not just an act. The Name is the beginning — complete orientation of the heart is the destination. First time the Quran shows dhikr leading somewhere deeper.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر ایک راستہ ہے۔ نام لینا آغاز، دل کی مکمل یکسوئی منزل۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-73-8-my"></span></div>
+        <textarea class="note-ta" id="note-73-8-my" placeholder="Tabattul — complete turning toward Allah. Do you experience anything like this during or after dhikr?" oninput="autoSave('73-8-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-73-8-after"></span></div>
+        <textarea class="note-ta" id="note-73-8-after" placeholder="What changed after deeper study?" oninput="autoSave('73-8-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-76-25">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-76-25')">
+    <span class="rev-badge rev-early en-blk">Rev. #98</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #98</span>
+    <span class="card-ref">Al-Insan 76:25</span>
+    <span class="card-preview">وَاذْكُرِ اسْمَ رَبِّكَ بُكْرَةً وَأَصِيلًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاذْكُرِ اسْمَ رَبِّكَ بُكْرَةً وَأَصِيلًا</div>
+    <div class="ayah-tr-en en-blk">"And remember the name of your Lord in the morning and the evening."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اپنے رب کا نام صبح اور شام یاد کریں۔»</div>
+    <div class="ayah-ref-line">Al-Insan 76:25</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The Quran introduces structured dhikr times — morning (Bukrah) and evening (Aseel). This is the Quranic origin of morning and evening adhkar. The Prophet ﷺ then gave specific authenticated formulas for these times, building on this Quranic framework.</div>
+      <div class="ctx-txt-ur ur-blk">قرآن صبح اور شام کے مقررہ اوقات متعارف کراتا ہے۔ اذکارِ صبح و شام کا قرآنی ماخذ یہی آیت ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">بُكْرَةً وَأَصِيلًا</span> <span class="root-fm">First light of dawn · Late afternoon into evening</span>
+      <div class="root-mn en-blk">Bukrah: the first light of dawn. Aseel: late afternoon into evening. These are not arbitrary. Dawn: the nafs wakes and its first orientation is set for the day. Evening: the day closes and its account begins. The day is framed by remembrance at both ends.</div>
+      <div class="root-mn-ur ur-blk">بکرۃ: صبحِ اول۔ اصیل: سہ پہر سے شام۔ دن کی ابتدا اور انتہا ذکر سے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr has a rhythm — not only a response to need but a structure that holds the day. Morning and evening create the frame. Between these two points of remembrance everything else is contained.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر کا ریتھم ہے — محض ضرورت کا جواب نہیں۔ صبح اور شام دن کو اپنے درمیان رکھتے ہیں۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-76-25-my"></span></div>
+        <textarea class="note-ta" id="note-76-25-my" placeholder="Do you have a morning and evening dhikr practice? What does your day look like without this structure?" oninput="autoSave('76-25-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-76-25-after"></span></div>
+        <textarea class="note-ta" id="note-76-25-after" placeholder="What changed after deeper study?" oninput="autoSave('76-25-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-52-48">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-52-48')">
+    <span class="rev-badge rev-early en-blk">Rev. #23</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #23</span>
+    <span class="card-ref">At-Tur 52:48</span>
+    <span class="card-preview">وَسَبِّحْ بِحَمْدِ رَبِّكَ حِينَ تَقُومُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا ۖ وَسَبِّحْ بِحَمْدِ رَبِّكَ حِينَ تَقُومُ</div>
+    <div class="ayah-tr-en en-blk">"And be patient for the judgment of your Lord — for indeed you are under Our eyes — and glorify the praise of your Lord when you arise."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اپنے رب کے فیصلے پر صبر کریں — بے شک آپ ہماری آنکھوں کے سامنے ہیں — اور جب اٹھیں تو اپنے رب کی حمد کے ساتھ تسبیح کریں۔»</div>
+    <div class="ayah-ref-line">At-Tur 52:48</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The command to begin every rising with dhikr. Hina taqum: when you arise — from sleep, from sitting, from any state. The authentic morning dua (Alhamdulillahil-ladhi ahyana) is the prophetic implementation of this ayah. Every transition from one state to another becomes an opportunity for dhikr.</div>
+      <div class="ctx-txt-ur ur-blk">ہر اٹھنے پر ذکر کا حکم — نیند سے، بیٹھے سے۔ صبح کی دعا — الحمدللہ الذی احیانا — اسی آیت کا نبوی نفاذ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">حِينَ تَقُومُ</span> <span class="root-fm">ق-و-م · When you arise / stand</span>
+      <div class="root-mn en-blk">Hina taqum — when you arise. Every transition from one state to another is an opportunity for dhikr. Rising from sleep, from a gathering, before prayer. The act of standing itself becomes an act of conscious awareness.</div>
+      <div class="root-mn-ur ur-blk">حین تقوم — جب اٹھو۔ ہر حالت کی تبدیلی ذکر کا موقع۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr at every moment of arising — extending the morning/evening structure into all transitions. Dhikr woven into the fabric of daily movement, not confined to dedicated worship times.</div>
+      <div class="uniq-txt-ur ur-blk">ہر اٹھنے پر ذکر — صبح و شام سے آگے، تمام بدلاؤ میں۔ روزمرہ حرکت میں ذکر۔</div>
+    </div>
+    
+    <div class="sunnah-box">
+      <div class="sun-lbl en-blk">Connected Sunnah</div>
+      <div class="sun-lbl ur-blk">متعلقہ سنت</div>
+      <div class="sun-ar">الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ</div>
+      <div class="sun-en en-blk">"Praise be to Allah who gave us life after He had caused us to die, and to Him is the resurrection."</div>
+      <div class="sun-ur ur-blk">«الحمدللہ جس نے مرنے کے بعد ہمیں زندگی دی اور اسی کی طرف اٹھنا ہے۔»</div>
+      <div class="sun-src">Sahih Bukhari 6312 <span class="grade grade-sahih">✦ Sahih</span></div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-52-48-my"></span></div>
+        <textarea class="note-ta" id="note-52-48-my" placeholder="Every time you arise — do you begin with His name or with the agenda?" oninput="autoSave('52-48-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-52-48-after"></span></div>
+        <textarea class="note-ta" id="note-52-48-after" placeholder="What changed after deeper study?" oninput="autoSave('52-48-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider">
+  <div class="era-dot era-middle"></div>
+  <div class="era-label en-blk">Middle Makki · 615–620 CE</div>
+  <div class="era-label-ur ur-blk">وسطی مکی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-20-14">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-20-14')">
+    <span class="rev-badge rev-middle en-blk">Rev. #45</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #45</span>
+    <span class="card-ref">Ta-Ha 20:14</span>
+    <span class="card-preview">وَأَقِمِ الصَّلَاةَ لِذِكْرِي</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّنِي أَنَا اللَّهُ لَا إِلَٰهَ إِلَّا أَنَا فَاعْبُدْنِي وَأَقِمِ الصَّلَاةَ لِذِكْرِي</div>
+    <div class="ayah-tr-en en-blk">"Indeed, I am Allah. There is no deity except Me, so worship Me and establish prayer for My remembrance."</div>
+    <div class="ayah-tr-ur ur-blk">«بے شک میں اللہ ہوں، میرے سوا کوئی معبود نہیں — پس میری عبادت کریں اور میری یاد کے لیے نماز قائم کریں۔»</div>
+    <div class="ayah-ref-line">Ta-Ha 20:14</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Allah speaks directly to Musa (AS) at the burning bush. The most direct Quranic statement on Salah's purpose — established FOR dhikr. Li-dhikri: for My remembrance. Not primarily for reward, not as obligation alone. Al-Ghazali's entire chapter on Salah in the Ihya builds on this single ayah.</div>
+      <div class="ctx-txt-ur ur-blk">اللہ نے موسیٰ علیہ السلام سے براہ راست کلام کیا۔ نماز کا مقصد: ذکر کے لیے۔ الغزالی کا نماز پر پورا باب اسی ایک آیت پر۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لِذِكْرِي</span> <span class="root-fm">لام تعلیل · For My remembrance</span>
+      <div class="root-mn en-blk">Laam of purpose — Li-dhikri: in order that My remembrance may occur. Salah is not an end in itself but the most powerful means of dhikr. Every movement, recitation, and posture in prayer is dhikr in embodied form. A prayer performed with heedless heart fulfils the form but misses the purpose.</div>
+      <div class="root-mn-ur ur-blk">لام تعلیل — لذکری: تاکہ ذکر ہو۔ نماز ذکر کا وسیلہ ہے۔ غافل دل سے نماز شکل پوری کرتی ہے لیکن مقصد غائب۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The purpose of Salah is explicitly stated as dhikr. The inner architecture of Islam's greatest pillar is revealed here. A prayer without dhikr has the form but is missing its soul.</div>
+      <div class="uniq-txt-ur ur-blk">نماز کا مقصد صریح: ذکر۔ اسلام کے سب سے بڑے رکن کی باطنی ساخت۔</div>
+    </div>
+    
+    <div class="sunnah-box">
+      <div class="sun-lbl en-blk">Connected Sunnah</div>
+      <div class="sun-lbl ur-blk">متعلقہ سنت</div>
+      <div class="sun-ar">أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ</div>
+      <div class="sun-en en-blk">"The closest a servant comes to his Lord is when he is in prostration."</div>
+      <div class="sun-ur ur-blk">«بندہ اپنے رب کے سب سے قریب سجدے میں ہوتا ہے۔»</div>
+      <div class="sun-src">Sahih Muslim 482 <span class="grade grade-sahih">✦ Sahih</span></div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-20-14-my"></span></div>
+        <textarea class="note-ta" id="note-20-14-my" placeholder="Salah is for dhikr — does knowing this change how you experience your prayer?" oninput="autoSave('20-14-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-20-14-after"></span></div>
+        <textarea class="note-ta" id="note-20-14-after" placeholder="What changed?" oninput="autoSave('20-14-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-29-45">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-29-45')">
+    <span class="rev-badge rev-middle en-blk">Rev. #85</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #85</span>
+    <span class="card-ref">Al-Ankabut 29:45</span>
+    <span class="card-preview">وَلَذِكْرُ اللَّهِ أَكْبَرُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">اتْلُ مَا أُوحِيَ إِلَيْكَ مِنَ الْكِتَابِ وَأَقِمِ الصَّلَاةَ ۖ إِنَّ الصَّلَاةَ تَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ ۗ وَلَذِكْرُ اللَّهِ أَكْبَرُ</div>
+    <div class="ayah-tr-en en-blk">"Recite what has been revealed to you and establish prayer. Indeed prayer prevents immorality and wrongdoing — and the remembrance of Allah is greater."</div>
+    <div class="ayah-tr-ur ur-blk">«جو کتاب وحی ہوئی پڑھیں اور نماز قائم کریں۔ نماز بے حیائی اور برائی سے روکتی ہے — اور اللہ کا ذکر بہت بڑا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Ankabut 29:45</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The last three words — Wa la-dhikrullahi akbar — are among the most debated in the Quran. Two valid readings: (1) Allah's remembrance of His servants is greater than all acts including Salah. (2) The act of remembering Allah is the greatest act. Ibn Kathir favours reading (1): His remembering you is the greater half of the exchange.</div>
+      <div class="ctx-txt-ur ur-blk">آخری تین الفاظ دو قرأتیں: اللہ کا بندے کو یاد کرنا نماز سے بھی بڑا؛ یا ذکرِ الٰہی سب سے بڑا عمل۔ ابن کثیر: اللہ کا آپ کو یاد کرنا آپ کے یاد کرنے سے بڑا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَكْبَرُ</span> <span class="root-fm">ك-ب-ر · Greater — comparative</span>
+      <div class="root-mn en-blk">Akbar — greater than what? Greater than Salah's preventive function. Ibn Taymiyyah: if Salah prevents evil AND dhikr is greater than Salah, then dhikr is the supreme act of worship. Also introduces the bidirectional nature: your remembrance of Allah meets His remembrance of you.</div>
+      <div class="root-mn-ur ur-blk">اکبر — نماز سے بڑا۔ ابن تیمیہ: ذکر سب سے اعلیٰ عبادت۔ دوطرفہ تعلق: آپ کا ذکر — اللہ کا آپ کو یاد کرنا۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr placed ABOVE Salah. The most direct Quranic statement about dhikr's supreme status. Also: dhikr is bidirectional — your remembrance of Allah is met by His remembrance of you.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر نماز سے بڑا — سب سے صریح بیان۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-29-45-my"></span></div>
+        <textarea class="note-ta" id="note-29-45-my" placeholder=""The remembrance of Allah is greater" — greater than what, and what does this mean for how you prioritise?" oninput="autoSave('29-45-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-29-45-after"></span></div>
+        <textarea class="note-ta" id="note-29-45-after" placeholder="What changed?" oninput="autoSave('29-45-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-18-28">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-18-28')">
+    <span class="rev-badge rev-middle en-blk">Rev. #69</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #69</span>
+    <span class="card-ref">Al-Kahf 18:28</span>
+    <span class="card-preview">وَاصْبِرْ نَفْسَكَ مَعَ الَّذِينَ يَدْعُونَ رَبَّهُم</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاصْبِرْ نَفْسَكَ مَعَ الَّذِينَ يَدْعُونَ رَبَّهُم بِالْغَدَاةِ وَالْعَشِيِّ يُرِيدُونَ وَجْهَهُ ۖ وَلَا تَعْدُ عَيْنَاكَ عَنْهُمْ</div>
+    <div class="ayah-tr-en en-blk">"And keep yourself with those who call upon their Lord morning and evening, seeking His face — and let not your eyes pass beyond them."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اپنے آپ کو ان لوگوں کے ساتھ روکے رکھیں جو اپنے رب کو صبح اور شام پکارتے ہیں — اس کی رضا چاہتے ہیں — اور نگاہ نہ ہٹائیں۔»</div>
+    <div class="ayah-ref-line">Al-Kahf 18:28</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Quraysh asked the Prophet ﷺ to keep the poor companions away. This ayah was the response: stay WITH the people of dhikr. The Sufis consider this the Quranic validation of suhba — spiritual companionship is commanded, not optional.</div>
+      <div class="ctx-txt-ur ur-blk">قریش نے غریب صحابہ ہٹانے کو کہا۔ جواب: اہلِ ذکر کے ساتھ رہو۔ صوفیاء اسے سہبا کی قرآنی سند سمجھتے ہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">يُرِيدُونَ وَجْهَهُ</span> <span class="root-fm">و-ج-ه · Seeking His face / essence</span>
+      <div class="root-mn en-blk">Yuridoona wajhahu — seeking His face. Wajh: face but also essence and being. Doing dhikr purely for Allah's sake — not reputation, not social acceptance. This qualifier distinguishes genuine dhikr from performance.</div>
+      <div class="root-mn-ur ur-blk">یریدون وجہہ — اس کا وجہ چاہنا۔ خالصتاً اللہ کے لیے — شہرت نہیں، قبولیت نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr is communal as well as personal. The company of people of dhikr is commanded. The Quranic basis for suhba. The purpose qualifier — seeking His face — distinguishes genuine dhikr from performance.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر اجتماعی بھی ہے۔ اہلِ ذکر کی صحبت حکم — سہبا کی قرآنی بنیاد۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-18-28-my"></span></div>
+        <textarea class="note-ta" id="note-18-28-my" placeholder="Who are the people in your life who help you remember Allah? Do you spend time with them?" oninput="autoSave('18-28-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-18-28-after"></span></div>
+        <textarea class="note-ta" id="note-18-28-after" placeholder="What changed?" oninput="autoSave('18-28-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-20-33">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-20-33')">
+    <span class="rev-badge rev-middle en-blk">Rev. #45</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #45</span>
+    <span class="card-ref">Ta-Ha 20:33-34</span>
+    <span class="card-preview">لِنُسَبِّحَكَ كَثِيرًا وَنَذْكُرَكَ كَثِيرًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">لِنُسَبِّحَكَ كَثِيرًا ۞ وَنَذْكُرَكَ كَثِيرًا ۞ إِنَّكَ كُنتَ بِنَا بَصِيرًا</div>
+    <div class="ayah-tr-en en-blk">"That we may glorify You much and remember You much. Indeed You are ever Seeing of us."</div>
+    <div class="ayah-tr-ur ur-blk">«تاکہ ہم آپ کی بکثرت تسبیح کریں اور آپ کو بکثرت یاد کریں۔ بے شک آپ ہمیں دیکھتے رہتے ہیں۔»</div>
+    <div class="ayah-ref-line">Ta-Ha 20:33-34</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Musa (AS) asks Allah for Harun (AS) as a helper — and the stated purpose is: so that we may do dhikr much. Not better leadership, not military strength — abundant dhikr. This is the prophetic understanding: we need community in order to increase in remembrance.</div>
+      <div class="ctx-txt-ur ur-blk">موسیٰ علیہ السلام نے ہارون کو وزیر مانگا — اور مقصد: بکثرت ذکر۔ اقتدار نہیں، طاقت نہیں — ذکر میں اضافہ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">كَثِيرًا</span> <span class="root-fm">ك-ث-ر · Much / abundant</span>
+      <div class="root-mn en-blk">Katheera — the same word as 33:41. Musa (AS) specifically requests a companion SO THAT dhikr may be katheera. Isolation reduces dhikr; community increases it. This is the prophetic validation of communal dhikr practice.</div>
+      <div class="root-mn-ur ur-blk">کثیراً — وہی لفظ جو ۳۳:۴۱ میں۔ موسیٰ علیہ السلام نے مددگار اس لیے مانگا کہ ذکر بڑھے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">A Prophet asks for a companion specifically in order to increase dhikr. The purpose of human companionship as stated by Musa (AS) to Allah is to enable more dhikr. The deepest Quranic rationale for suhba.</div>
+      <div class="uniq-txt-ur ur-blk">نبی نے ساتھی اس لیے مانگا کہ ذکر بڑھے — سہبا کی گہری قرآنی دلیل۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-20-33-my"></span></div>
+        <textarea class="note-ta" id="note-20-33-my" placeholder="Who helps you remember Allah more? Who makes you forget?" oninput="autoSave('20-33-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-20-33-after"></span></div>
+        <textarea class="note-ta" id="note-20-33-after" placeholder="What changed?" oninput="autoSave('20-33-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider">
+  <div class="era-dot era-late"></div>
+  <div class="era-label en-blk">Late Makki · 620–622 CE</div>
+  <div class="era-label-ur ur-blk">اواخرِ مکی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-13-28">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-13-28')">
+    <span class="rev-badge rev-late en-blk">Rev. #96</span>
+    <span class="rev-badge rev-late ur-blk">ترتیب #96</span>
+    <span class="card-ref">Ar-Ra'd 13:28</span>
+    <span class="card-preview">أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
+    <div class="ayah-tr-en en-blk">"Those who believed and whose hearts find rest in the remembrance of Allah. Verily — in the remembrance of Allah do hearts find rest."</div>
+    <div class="ayah-tr-ur ur-blk">«وہ جو ایمان لائے اور ان کے دلوں کو اللہ کے ذکر سے اطمینان ملتا ہے۔ یاد رہے — اللہ کے ذکر سے ہی دلوں کو اطمینان ملتا ہے۔»</div>
+    <div class="ayah-ref-line">Ar-Ra'd 13:28</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The most cited ayah in Islamic spiritual literature. It connects dhikr to tuma'ninah — the same root as nafs al-mutma'inna (Al-Fajr 89:27). Al-Ghazali considered this the single most important ayah about dhikr. The heart that achieves tuma'ninah through dhikr is the same nafs called back to its Lord at death.</div>
+      <div class="ctx-txt-ur ur-blk">اسلامی روحانی ادب میں سب سے زیادہ حوالہ دی گئی آیت۔ ذکر کو طمانینہ سے جوڑتی ہے — نفسِ مطمئنہ کی اسی جڑ سے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تَطْمَئِنُّ</span> <span class="root-fm">ط-م-أ-ن · Tuma'ninah — complete rest after agitation</span>
+      <div class="root-mn en-blk">From T-M-A-N — complete stillness after agitation. The settling of water after turbulence. The Quran says ONLY in the remembrance of Allah — not wealth, success, love, or knowledge. One source. The emphatic Ala: certainly, without doubt, this is a universal law. Every heart, without exception.</div>
+      <div class="root-mn-ur ur-blk">ط-م-ا-ن — طوفان کے بعد مکمل سکون۔ صرف اللہ کے ذکر میں — دولت نہیں، کامیابی نہیں۔ «الا» — عالمگیر قانون۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The RESULT of dhikr is tuma'ninah — stated as a universal law with the emphatic particle Ala. Perhaps the most testable claim in the entire Quran — verifiable in your own experience. Try it.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر کا نتیجہ طمانینہ — «الا» کے ساتھ عالمگیر قانون۔ قرآن کے سب سے قابلِ تصدیق دعووں میں سے ایک۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-13-28-my"></span></div>
+        <textarea class="note-ta" id="note-13-28-my" placeholder="Have you experienced tuma'ninah — genuine rest of the heart? When? What produced it?" oninput="autoSave('13-28-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-13-28-after"></span></div>
+        <textarea class="note-ta" id="note-13-28-after" placeholder="What changed?" oninput="autoSave('13-28-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider">
+  <div class="era-dot era-madani"></div>
+  <div class="era-label en-blk">Madani · 622–632 CE</div>
+  <div class="era-label-ur ur-blk">مدنی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-2-152">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-2-152')">
+    <span class="rev-badge rev-madani en-blk">Rev. #87</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #87</span>
+    <span class="card-ref">Al-Baqarah 2:152</span>
+    <span class="card-preview">فَاذْكُرُونِي أَذْكُرْكُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ</div>
+    <div class="ayah-tr-en en-blk">"Remember Me — and I will remember you. Be grateful to Me and do not be ungrateful."</div>
+    <div class="ayah-tr-ur ur-blk">«مجھے یاد کرو — میں تمہیں یاد کروں گا۔ میرا شکر ادا کرو اور ناشکرے نہ بنو۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:152</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The foundational exchange. Dhikr is bilateral — not a monologue but a conversation. You remember Allah — He remembers you. His remembrance of you means: His mercy flows toward you, His protection encompasses you, He mentions you among the angels. The authenticated Hadith Qudsi confirms this directly.</div>
+      <div class="ctx-txt-ur ur-blk">بنیادی تبادلہ۔ ذکر دوطرفہ — مکالمہ۔ اللہ کا یاد کرنا: رحمت، حفاظت، فرشتوں میں ذکر۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَذْكُرْكُمْ</span> <span class="root-fm">Divine reciprocity — same verb both sides</span>
+      <div class="root-mn en-blk">The same verb root used for both sides — dhikr. Human remembers Allah; Allah remembers human. The only place in Quran where a human act is met with the exact same act from Allah. The equality of the exchange is deliberate. Your dhikr is an invitation for His.</div>
+      <div class="root-mn-ur ur-blk">دونوں طرف ایک ہی فعل — ذکر۔ قرآن کی واحد جگہ جہاں انسانی عمل کا جواب اللہ کی طرف سے اسی عمل سے ملتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr is mutual. This changes the motivation entirely — not just your duty to Allah but your invitation to be remembered by Him. The greatest Being in existence remembers you in return for your remembrance of Him.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر باہمی — محرک بدل جاتا ہے۔ صرف فرض نہیں — اللہ کے ذکر میں آنے کی دعوت۔</div>
+    </div>
+    
+    <div class="sunnah-box">
+      <div class="sun-lbl en-blk">Connected Sunnah</div>
+      <div class="sun-lbl ur-blk">متعلقہ سنت</div>
+      <div class="sun-ar">مَنْ ذَكَرَنِي فِي نَفْسِهِ ذَكَرْتُهُ فِي نَفْسِي وَمَنْ ذَكَرَنِي فِي مَلَأٍ ذَكَرْتُهُ فِي مَلَأٍ خَيْرٍ مِنْهُمْ</div>
+      <div class="sun-en en-blk">"Whoever mentions Me to himself, I mention him to Myself. Whoever mentions Me in a gathering, I mention him in a gathering better than his."</div>
+      <div class="sun-ur ur-blk">«جو مجھے دل میں یاد کرے میں اسے اپنے پاس یاد کرتا ہوں۔ مجلس میں یاد کرے تو اس سے بہتر مجلس میں یاد کرتا ہوں۔»</div>
+      <div class="sun-src">Sahih Bukhari 7405 — Hadith Qudsi <span class="grade grade-sahih">✦ Sahih</span></div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-2-152-my"></span></div>
+        <textarea class="note-ta" id="note-2-152-my" placeholder="Allah says He will remember you when you remember Him — what does this mean to you personally?" oninput="autoSave('2-152-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-2-152-after"></span></div>
+        <textarea class="note-ta" id="note-2-152-after" placeholder="What changed?" oninput="autoSave('2-152-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-33-41">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-33-41')">
+    <span class="rev-badge rev-madani en-blk">Rev. #90</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #90</span>
+    <span class="card-ref">Al-Ahzab 33:41-42</span>
+    <span class="card-preview">اذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا ۞ وَسَبِّحُوهُ بُكْرَةً وَأَصِيلًا</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — remember Allah with much remembrance, and glorify Him morning and evening."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — اللہ کو بکثرت یاد کرو، اور صبح و شام اس کی تسبیح کرو۔»</div>
+    <div class="ayah-ref-line">Al-Ahzab 33:41-42</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Dhikran Katheera — much remembrance. Ibn Taymiyyah: every act of worship has a specified limit except dhikr — the Quran says "much" without a ceiling. This is deliberate. The Sufis built their concept of da'im al-dhikr (continuous remembrance) on this ayah. You cannot do too much dhikr.</div>
+      <div class="ctx-txt-ur ur-blk">ذکراً کثیراً۔ ابن تیمیہ: ہر عبادت کی حد ہے سوائے ذکر کے — قرآن نے کوئی حد نہیں بتائی۔ صوفیاء نے دائم الذکر کا تصور اسی سے لیا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">ذِكْرًا كَثِيرًا</span> <span class="root-fm">ك-ث-ر · Abundance without ceiling</span>
+      <div class="root-mn en-blk">The only command in the Quran given without a specified quantity. Pray: 5 times. Fast: 30 days. Hajj: once. Dhikr: much — no number, no time limit. You cannot do too much dhikr. This is the most open-ended command in Islam.</div>
+      <div class="root-mn-ur ur-blk">قرآن کا واحد حکم بغیر مقدار کے۔ نماز: ۵ وقت۔ روزہ: ۳۰ دن۔ حج: ایک بار۔ ذکر: بکثرت — کوئی حد نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr has no upper limit — the only commandment in Islam without a specified quantity. The Quranic validation of continuous remembrance as a goal, not just an occasional practice.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر بے حد — اسلام کا واحد حکم بغیر مقدار کے۔ مستقل ذکر محض عمل نہیں، منزل ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-33-41-my"></span></div>
+        <textarea class="note-ta" id="note-33-41-my" placeholder=""Much remembrance" with no upper limit — what would it practically mean to make dhikr truly abundant in your life?" oninput="autoSave('33-41-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-33-41-after"></span></div>
+        <textarea class="note-ta" id="note-33-41-after" placeholder="What changed?" oninput="autoSave('33-41-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-3-191">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-3-191')">
+    <span class="rev-badge rev-madani en-blk">Rev. #89</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #89</span>
+    <span class="card-ref">Aal Imran 3:191</span>
+    <span class="card-preview">يَذْكُرُونَ اللَّهَ قِيَامًا وَقُعُودًا وَعَلَىٰ جُنُوبِهِمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">الَّذِينَ يَذْكُرُونَ اللَّهَ قِيَامًا وَقُعُودًا وَعَلَىٰ جُنُوبِهِمْ وَيَتَفَكَّرُونَ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ رَبَّنَا مَا خَلَقْتَ هَٰذَا بَاطِلًا</div>
+    <div class="ayah-tr-en en-blk">"Those who remember Allah standing, sitting, and lying on their sides — and who reflect on the creation of the heavens and earth: Our Lord, You have not created this in vain."</div>
+    <div class="ayah-tr-ur ur-blk">«وہ جو اللہ کو کھڑے، بیٹھے اور پہلوؤں پر لیٹے یاد کرتے ہیں — اور آسمانوں اور زمین کی تخلیق میں غور کرتے ہیں: اے رب، تو نے یہ بیکار نہیں بنایا۔»</div>
+    <div class="ayah-ref-line">Aal Imran 3:191</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The definition of Ulu al-Albab — those possessing the Lubb (innermost core). Two simultaneous activities: dhikr in all physical positions AND tafakkur (deep reflection on creation). Not one without the other. The Sufis called this the integration of heart and mind in constant orientation toward Allah.</div>
+      <div class="ctx-txt-ur ur-blk">اولو الالباب کی تعریف — لب والے۔ دو بیک وقت سرگرمیاں: تمام حالات میں ذکر اور تفکر۔ نہ ایک نہ دوسرا — دونوں ساتھ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">وَيَتَفَكَّرُونَ</span> <span class="root-fm">ف-ك-ر · Tafakkur — deep reflection</span>
+      <div class="root-mn en-blk">Yatafakkaroona — they deeply reflect. F-K-R: to think deeply, contemplate. Dhikr of the mind complementing dhikr of tongue and heart. The Sufis identified three levels: dhikr al-lisan (tongue), dhikr al-qalb (heart), dhikr al-'aql (intellect). 3:191 requires all three simultaneously.</div>
+      <div class="root-mn-ur ur-blk">یتفکرون — گہرا غور۔ تین سطحیں: ذکرِ لسان، ذکرِ قلب، ذکرِ عقل۔ ۳:۱۹۱ تینوں ایک ساتھ مانگتی ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr transcends all physical positions — it is a state of the inner self, not a posture. Combined with tafakkur, it defines those who have accessed the deepest level of inner architecture (lubb). The highest Quranic description of the person of dhikr.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر تمام حالات سے ماورا — باطنی کیفیت۔ تفکر کے ساتھ اولو الالباب کی تعریف۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-3-191-my"></span></div>
+        <textarea class="note-ta" id="note-3-191-my" placeholder="Dhikr AND tafakkur together — do you experience these as different things or simultaneously?" oninput="autoSave('3-191-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-3-191-after"></span></div>
+        <textarea class="note-ta" id="note-3-191-after" placeholder="What changed?" oninput="autoSave('3-191-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-33-35">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-33-35')">
+    <span class="rev-badge rev-madani en-blk">Rev. #90</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #90</span>
+    <span class="card-ref">Al-Ahzab 33:35</span>
+    <span class="card-preview">وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُم مَّغْفِرَةً وَأَجْرًا عَظِيمًا</div>
+    <div class="ayah-tr-en en-blk">"And the men who remember Allah much and the women who remember — Allah has prepared for them forgiveness and a great reward."</div>
+    <div class="ayah-tr-ur ur-blk">«اور وہ مرد جو اللہ کو بکثرت یاد کرتے ہیں اور وہ عورتیں — اللہ نے ان کے لیے مغفرت اور بڑا اجر تیار کر رکھا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Ahzab 33:35</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Umm Salamah (RA) asked why the Quran only addresses men. This ayah was revealed listing ten believer qualities — dhikr is the final and highest in the list. Both genders explicitly named. Reward: Maghfirah AND Ajr Atheem — both together, already prepared.</div>
+      <div class="ctx-txt-ur ur-blk">ام سلمہ کے سوال پر نازل ہوئی۔ دس خوبیوں کی فہرست — ذکر آخری اور بلند ترین۔ مرد اور عورتیں دونوں صریح۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَعَدَّ</span> <span class="root-fm">ع-د-د · Already prepared — divine certainty</span>
+      <div class="root-mn en-blk">A'adda — prepared in advance, already ready. Not: will prepare. Already done. The reward for abundant dhikr is already waiting. Past tense of divine certainty.</div>
+      <div class="root-mn-ur ur-blk">اَعَدَّ — پہلے سے تیار کر رکھا۔ الٰہی یقین کا ماضی — انعام پہلے سے تیار۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr is last in a list of ten virtues — after faith, patience, charity, fasting — because it is the encompassing practice that makes all others real. Both genders explicitly named. Reward: forgiveness AND great reward together.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر دس خوبیوں میں آخر میں — کیونکہ سب کو محیط ہے۔ دونوں جنسیں صریح۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-33-35-my"></span></div>
+        <textarea class="note-ta" id="note-33-35-my" placeholder="Dhikr is tenth and last in a list of ten virtues — what does its placement tell you?" oninput="autoSave('33-35-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-33-35-after"></span></div>
+        <textarea class="note-ta" id="note-33-35-after" placeholder="What changed?" oninput="autoSave('33-35-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-4-103">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-4-103')">
+    <span class="rev-badge rev-madani en-blk">Rev. #92</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #92</span>
+    <span class="card-ref">An-Nisa 4:103</span>
+    <span class="card-preview">فَاذْكُرُوا اللَّهَ قِيَامًا وَقُعُودًا وَعَلَىٰ جُنُوبِكُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">فَإِذَا قَضَيْتُمُ الصَّلَاةَ فَاذْكُرُوا اللَّهَ قِيَامًا وَقُعُودًا وَعَلَىٰ جُنُوبِكُمْ</div>
+    <div class="ayah-tr-en en-blk">"When you have completed the prayer, remember Allah standing, sitting, and lying on your sides."</div>
+    <div class="ayah-tr-ur ur-blk">«جب نماز ادا کر چکو تو اللہ کو کھڑے، بیٹھے اور پہلوؤں پر لیٹے یاد کرتے رہو۔»</div>
+    <div class="ayah-ref-line">An-Nisa 4:103</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">This ayah uses the same three positions as 3:191 — confirming that dhikr continues AFTER Salah ends. Prayer does not conclude dhikr — prayer is a concentrated form within a continuous state. The transition from structured prayer to unstructured dhikr is seamless.</div>
+      <div class="ctx-txt-ur ur-blk">وہی تین حالات جو ۳:۱۹۱ میں — ذکر نماز کے بعد بھی جاری ہے۔ نماز ذکر کی مرتکز شکل ہے مستقل کیفیت کے اندر۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">فَإِذَا قَضَيْتُمُ</span> <span class="root-fm">ق-ض-ي · When you have fulfilled / completed</span>
+      <div class="root-mn en-blk">Fa-idha qadaytum — when you have fulfilled prayer. The Fa (then) connects immediately: when prayer ends — remember Allah. No gap, no break. Salah FOR dhikr (20:14); then dhikr continues beyond Salah (4:103). The circle is complete.</div>
+      <div class="root-mn-ur ur-blk">فاذا قضیتم — جب نماز مکمل ہو۔ فوری طور پر ذکر۔ ۲۰:۱۴ نماز ذکر کے لیے؛ ۴:۱۰۳ نماز کے بعد ذکر جاری۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr continues after Salah. Prayer is the concentrated peak within a continuous state. The two ayat 20:14 and 4:103 form a complete circle: Salah established FOR dhikr, then dhikr continuing BEYOND Salah.</div>
+      <div class="uniq-txt-ur ur-blk">نماز کے بعد بھی ذکر۔ ۲۰:۱۴ اور ۴:۱۰۳ مل کر دائرہ مکمل کرتی ہیں۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-4-103-my"></span></div>
+        <textarea class="note-ta" id="note-4-103-my" placeholder="After Salah — what do you do immediately? Does dhikr continue or does the day take over?" oninput="autoSave('4-103-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-4-103-after"></span></div>
+        <textarea class="note-ta" id="note-4-103-after" placeholder="What changed?" oninput="autoSave('4-103-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-8-45">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-8-45')">
+    <span class="rev-badge rev-madani en-blk">Rev. #88</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #88</span>
+    <span class="card-ref">Al-Anfal 8:45</span>
+    <span class="card-preview">وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا لَقِيتُمْ فِئَةً فَاثْبُتُوا وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — when you encounter a force, stand firm and remember Allah much, that you may succeed."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — جب کسی فوج سے ٹکراؤ تو ثابت قدم رہو اور اللہ کو بکثرت یاد کرو تاکہ فلاح پاؤ۔»</div>
+    <div class="ayah-ref-line">Al-Anfal 8:45</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Dhikr commanded in battle — maximum danger, maximum fear. The command is to remember Allah. The scholars note: dhikr in difficulty is harder but more powerful than dhikr in ease. This ayah reveals dhikr is not a practice for comfortable moments — it is the primary resource in difficulty.</div>
+      <div class="ctx-txt-ur ur-blk">میدانِ جنگ میں ذکر کا حکم۔ مشکل وقت کا ذکر آسانی کے ذکر سے زیادہ طاقتور۔ ذکر آرام کا عمل نہیں — مشکل کا بنیادی وسیلہ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">فَاثْبُتُوا</span> <span class="root-fm">ث-ب-ت · Thabat — firmness</span>
+      <div class="root-mn en-blk">Fathbutu — stand firm. Then: remember Allah. Stability and dhikr are paired in difficulty. Stand firm through dhikr; or: stand firm then let dhikr follow naturally. The two are inseparable.</div>
+      <div class="root-mn-ur ur-blk">فاثبتوا — ثابت رہو۔ پھر: ذکر۔ ثبات اور ذکر مشکل میں لازم و ملزوم۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Dhikr is commanded in the hardest circumstances. Not just worship moments but battle. The Muslim's primary resource in all difficulty: dhikr. The Sufis based the principle of dhikr in hardship on this ayah.</div>
+      <div class="uniq-txt-ur ur-blk">مشکل ترین حالات میں ذکر۔ مسلمان کا بنیادی وسیلہ — ذکر۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-8-45-my"></span></div>
+        <textarea class="note-ta" id="note-8-45-my" placeholder="When is it hardest for you to do dhikr? Does this ayah change how you approach those moments?" oninput="autoSave('8-45-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-8-45-after"></span></div>
+        <textarea class="note-ta" id="note-8-45-after" placeholder="What changed?" oninput="autoSave('8-45-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-24-36">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-24-36')">
+    <span class="rev-badge rev-madani en-blk">Rev. #102</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #102</span>
+    <span class="card-ref">An-Nur 24:36-37</span>
+    <span class="card-preview">فِي بُيُوتٍ أَذِنَ اللَّهُ أَن تُرْفَعَ وَيُذْكَرَ فِيهَا اسْمُهُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">فِي بُيُوتٍ أَذِنَ اللَّهُ أَن تُرْفَعَ وَيُذْكَرَ فِيهَا اسْمُهُ يُسَبِّحُ لَهُ فِيهَا بِالْغُدُوِّ وَالْآصَالِ ۞ رِجَالٌ لَّا تُلْهِيهِمْ تِجَارَةٌ وَلَا بَيْعٌ عَن ذِكْرِ اللَّهِ</div>
+    <div class="ayah-tr-en en-blk">"In houses which Allah has permitted to be raised and in which His name is mentioned — men glorifying Him morning and evening. Men whom neither trade nor sale diverts from the remembrance of Allah."</div>
+    <div class="ayah-tr-ur ur-blk">«ان گھروں میں جنہیں اللہ نے اونچا کرنے کی اجازت دی اور جن میں اس کا نام یاد کیا جاتا ہے — ایسے لوگ جنہیں تجارت اللہ کے ذکر سے غافل نہیں کرتی۔»</div>
+    <div class="ayah-ref-line">An-Nur 24:36-37</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The houses of Allah are defined by dhikr in them. The ideal men are defined by: trade does not divert them from dhikr. Not that they avoid trade — they do trade. But the trade does not achieve lahw over them. World engagement without world absorption.</div>
+      <div class="ctx-txt-ur ur-blk">مساجد کی تعریف: ذکر۔ مثالی انسان کی تعریف: تجارت غافل نہیں کرتی۔ دنیا میں مصروف لیکن دنیا میں محو نہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لَّا تُلْهِيهِمْ</span> <span class="root-fm">ل-ه-و · Distraction / absorption</span>
+      <div class="root-mn en-blk">La tulhihim — does not distract them. These men engage in trade but trade does not achieve lahw (absorption, heedlessness) over them. Engagement without absorption. Dhikr maintains the distinction between what they do and what they are.</div>
+      <div class="root-mn-ur ur-blk">لا تلہیہم — غافل نہیں کرتی۔ تجارت کرتے ہیں لیکن تجارت ان پر غالب نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The ideal is not withdrawal from trade — it is engagement without absorption. Dhikr maintains the distinction between your actions and your inner state. Work in the world without the world entering your heart.</div>
+      <div class="uniq-txt-ur ur-blk">مثالی: دنیا ترک نہیں — بغیر استغراق کے مصروف۔ ذکر کام اور وجود کے درمیان فرق قائم رکھتا ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-24-36-my"></span></div>
+        <textarea class="note-ta" id="note-24-36-my" placeholder="These men trade but are not diverted from dhikr — what would this look like in your professional life?" oninput="autoSave('24-36-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-24-36-after"></span></div>
+        <textarea class="note-ta" id="note-24-36-after" placeholder="What changed?" oninput="autoSave('24-36-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-57-16">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-57-16')">
+    <span class="rev-badge rev-madani en-blk">Rev. #94</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #94</span>
+    <span class="card-ref">Al-Hadid 57:16</span>
+    <span class="card-preview">أَلَمْ يَأْنِ لِلَّذِينَ آمَنُوا أَن تَخْشَعَ قُلُوبُهُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">أَلَمْ يَأْنِ لِلَّذِينَ آمَنُوا أَن تَخْشَعَ قُلُوبُهُمْ لِذِكْرِ اللَّهِ وَمَا نَزَلَ مِنَ الْحَقِّ وَلَا يَكُونُوا كَالَّذِينَ أُوتُوا الْكِتَابَ مِن قَبْلُ فَطَالَ عَلَيْهِمُ الْأَمَدُ فَقَسَتْ قُلُوبُهُمْ</div>
+    <div class="ayah-tr-en en-blk">"Has the time not come for those who believe that their hearts should become humbly submissive at the remembrance of Allah? And that they not be like those who were given the Book before — a long period passed over them and their hearts hardened."</div>
+    <div class="ayah-tr-ur ur-blk">«کیا ایمان والوں کے لیے وہ وقت نہیں آیا کہ ان کے دل ذکرِ الٰہی کے لیے خشوع اختیار کریں؟ اور وہ ان جیسے نہ بنیں جنہیں کتاب دی گئی — مدت گزری اور دل سخت ہو گئے۔»</div>
+    <div class="ayah-ref-line">Al-Hadid 57:16</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The warning ayah. Ibn Masud (RA): only four years after embracing Islam this was revealed — and hearts had already begun to harden. The danger is dhikr WITHOUT khushu'. Time + dhikr without presence = hardened heart. The warning compares believers to People of the Book whose hearts hardened over time despite having revelation.</div>
+      <div class="ctx-txt-ur ur-blk">تنبیہ۔ ابن مسعود: صرف چار سال بعد۔ خطرہ: بغیر خشوع ذکر۔ وقت + بغیر حضور ذکر = سخت دل۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تَخْشَعَ</span> <span class="root-fm">خ-ش-ع · Khushu — humble submission</span>
+      <div class="root-mn en-blk">Takhsha'a — to become humbly submissive, to soften. Khushu': the state of being affected, moved, present. The opposite is qaswah — hardness. Time alone does not create spiritual depth. Only dhikr WITH khushu' does.</div>
+      <div class="root-mn-ur ur-blk">تخشع — نرم پڑنا، عاجزی۔ خشوع: متاثر ہونا، حاضر دل۔ متضاد: قساوت۔ معیار: خشوع — کثرتِ فارمولہ نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most sobering ayah in the sequence. A believer can recite dhikr regularly and still have a heart unmoved by it. The criterion is not frequency but khushu' — the heart must be present.</div>
+      <div class="uniq-txt-ur ur-blk">سلسلے کی سب سے سنگین آیت۔ باقاعدہ ذکر — پھر بھی دل سخت۔ معیار: خشوع — دل کی حضوری۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-57-16-my"></span></div>
+        <textarea class="note-ta" id="note-57-16-my" placeholder="Be honest — does your dhikr produce khushu'? Or has it become mechanical? What is the gap?" oninput="autoSave('57-16-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-57-16-after"></span></div>
+        <textarea class="note-ta" id="note-57-16-after" placeholder="What changed?" oninput="autoSave('57-16-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-63-9">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-63-9')">
+    <span class="rev-badge rev-madani en-blk">Rev. #104</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #104</span>
+    <span class="card-ref">Al-Munafiqun 63:9</span>
+    <span class="card-preview">لَا تُلْهِكُمْ أَمْوَالُكُمْ وَلَا أَوْلَادُكُمْ عَن ذِكْرِ اللَّهِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُلْهِكُمْ أَمْوَالُكُمْ وَلَا أَوْلَادُكُمْ عَن ذِكْرِ اللَّهِ ۚ وَمَن يَفْعَلْ ذَٰلِكَ فَأُولَٰئِكَ هُمُ الْخَاسِرُونَ</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — let not your wealth or your children divert you from the remembrance of Allah. And whoever does that — those are the losers."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — تمہارے مال اور تمہاری اولاد تمہیں اللہ کے ذکر سے غافل نہ کر دے۔ جو ایسا کرے وہی نقصان اٹھانے والے ہیں۔»</div>
+    <div class="ayah-ref-line">Al-Munafiqun 63:9</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The Quran names the two greatest threats to dhikr: wealth and children. Not sins — the two most loved gifts. The verb Tulhikum: from L-H-W — to divert, absorb, make heedless. The judgment for allowing this distraction: Khasiroon — the losers. Strong word, deliberate.</div>
+      <div class="ctx-txt-ur ur-blk">دو سب سے بڑے خطرے: مال اور اولاد۔ گناہ نہیں — سب سے محبوب تحائف۔ سزا: خاسرون — خسارہ اٹھانے والے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْخَاسِرُونَ</span> <span class="root-fm">خ-س-ر · Loss — those who lost the trade</span>
+      <div class="root-mn en-blk">Al-Khasiroon — those who incurred loss. Kh-S-R: commercial loss. The Quran frames the person distracted from dhikr as having made the worst possible trade — gave their highest asset (connection to Allah) for a temporary commodity.</div>
+      <div class="root-mn-ur ur-blk">الخاسرون — خ-س-ر — تجارتی نقصان۔ اللہ کا ذکر چھوڑنا: اعلیٰ سرمایہ عارضی چیز کے بدلے بیچنا۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The enemy of dhikr is not evil — it is distraction by what is good. This addresses the sophisticated believer who has moved past obvious sins but is still diverted by legitimate love. Khasiroon is devastating — the worst possible trade.</div>
+      <div class="uniq-txt-ur ur-blk">ذکر کا دشمن برائی نہیں — اچھائی کا استغراق۔ پختہ مومن کے لیے تنبیہ۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-63-9-my"></span></div>
+        <textarea class="note-ta" id="note-63-9-my" placeholder="Wealth and children — your greatest loves named as greatest threats. What diverts you most from dhikr?" oninput="autoSave('63-9-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-63-9-after"></span></div>
+        <textarea class="note-ta" id="note-63-9-after" placeholder="What changed?" oninput="autoSave('63-9-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-62-10">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-62-10')">
+    <span class="rev-badge rev-madani en-blk">Rev. #110</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #110</span>
+    <span class="card-ref">Al-Jumuah 62:9-10</span>
+    <span class="card-preview">وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ ۞ فَإِذَا قُضِيَتِ الصَّلَاةُ فَانتَشِرُوا فِي الْأَرْضِ وَابْتَغُوا مِن فَضْلِ اللَّهِ وَاذْكُرُوا اللَّهَ كَثِيرًا لَّعَلَّكُمْ تُفْلِحُونَ</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — when the call to prayer is made on Friday, hasten to the remembrance of Allah. When prayer is concluded, disperse and seek Allah's bounty — and remember Allah much that you may succeed."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — جمعے کے دن اذان ہو تو اللہ کے ذکر کی طرف دوڑو۔ نماز ادا ہو تو زمین میں پھیلو اور اللہ کا فضل تلاش کرو — اور بکثرت ذکر کرو تاکہ فلاح پاؤ۔»</div>
+    <div class="ayah-ref-line">Al-Jumuah 62:9-10</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The Jumu'ah call is described as "call to dhikr" — not "call to prayer." Friday congregational prayer = dhikr. After prayer: seek livelihood AND remember Allah much. Dhikr does not stop when you re-enter the world. The world is entered with dhikr continuing.</div>
+      <div class="ctx-txt-ur ur-blk">جمعے کی اذان «ذکر کی طرف بلانا» — نماز = ذکر۔ نماز کے بعد: کاروبار بھی، ذکر بھی۔ دنیا میں ذکر کے ساتھ واپس جاؤ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ</span> <span class="root-fm">س-ع-ي · Hasten toward dhikr</span>
+      <div class="root-mn en-blk">Fas'aw — hasten, hurry. Same verb as running between Safa and Marwa. Run toward dhikr. The destination is named as dhikr, not prayer — because prayer IS dhikr, confirming 20:14.</div>
+      <div class="root-mn-ur ur-blk">فاسعوا — دوڑو۔ صفا مروہ کا وہی فعل۔ منزل: ذکر — کیونکہ نماز خود ذکر ہے (۲۰:۱۴)۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Friday prayer = dhikr. After prayer: re-enter the world WITH dhikr continuing. The two commands are paired: seek livelihood AND remember Allah much. The fully integrated life — work and dhikr together.</div>
+      <div class="uniq-txt-ur ur-blk">جمعہ = ذکر۔ نماز کے بعد دنیا میں ذکر کے ساتھ۔ دو احکام جوڑے گئے: رزق اور ذکر — مکمل یکجا زندگی۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-62-10-my"></span></div>
+        <textarea class="note-ta" id="note-62-10-my" placeholder="Friday is called the day of dhikr — how do you experience Jumu'ah? Is it a peak of remembrance?" oninput="autoSave('62-10-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-62-10-after"></span></div>
+        <textarea class="note-ta" id="note-62-10-after" placeholder="What changed?" oninput="autoSave('62-10-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider" style="margin-top:32px">
+  <div class="era-dot" style="background:var(--purple)"></div>
+  <div class="era-label en-blk">Sunnah on Dhikr — Authenticated Hadith</div>
+  <div class="era-label-ur ur-blk">ذکر پر سنت — مستند احادیث</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Majlis of Dhikr — Angels Surround</span><span class="ur-blk">مجلسِ ذکر — فرشتے گھیر لیتے ہیں</span></div>
+  <div class="sh-ar">مَا جَلَسَ قَوْمٌ يَذْكُرُونَ اللَّهَ إِلَّا حَفَّتْهُمُ الْمَلَائِكَةُ وَغَشِيَتْهُمُ الرَّحْمَةُ وَنَزَلَتْ عَلَيْهِمُ السَّكِينَةُ وَذَكَرَهُمُ اللَّهُ فِيمَنْ عِنْدَهُ</div>
+  <div class="sh-en en-blk">"No people sit remembering Allah except that the angels surround them, mercy envelops them, tranquility descends upon them, and Allah mentions them to those in His presence."</div>
+  <div class="sh-ur ur-blk">«جو لوگ بیٹھ کر اللہ کو یاد کریں انہیں فرشتے گھیر لیتے ہیں، رحمت ڈھانپ لیتی ہے، سکینہ نازل ہوتا ہے، اور اللہ انہیں اپنے پاس والوں میں یاد کرتا ہے۔»</div>
+  <div class="sh-src">Sahih Muslim 2700 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Living vs Dead — The Dhakir and the Non-Dhakir</span><span class="ur-blk">زندہ اور مردہ</span></div>
+  <div class="sh-ar">مَثَلُ الَّذِي يَذْكُرُ رَبَّهُ وَالَّذِي لَا يَذْكُرُ رَبَّهُ مَثَلُ الْحَيِّ وَالْمَيِّتِ</div>
+  <div class="sh-en en-blk">"The example of one who remembers his Lord and one who does not is like the living and the dead."</div>
+  <div class="sh-ur ur-blk">«اللہ کو یاد کرنے والے اور نہ یاد کرنے والے کی مثال زندہ اور مردہ کی طرح ہے۔»</div>
+  <div class="sh-src">Sahih Bukhari 6407 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Best Dhikr</span><span class="ur-blk">بہترین ذکر</span></div>
+  <div class="sh-ar">أَفْضَلُ الذِّكْرِ لَا إِلَهَ إِلَّا اللَّهُ</div>
+  <div class="sh-en en-blk">"The best dhikr is La ilaha illallah."</div>
+  <div class="sh-ur ur-blk">«بہترین ذکر لا الہ الا اللہ ہے۔»</div>
+  <div class="sh-src">Tirmidhi 3383 — Sahih Al-Albani <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Gardens of Paradise — The Circles of Dhikr</span><span class="ur-blk">جنت کے باغ — ذکر کے حلقے</span></div>
+  <div class="sh-ar">إِذَا مَرَرْتُمْ بِرِيَاضِ الْجَنَّةِ فَارْتَعُوا. قَالُوا وَمَا رِيَاضُ الْجَنَّةِ قَالَ حِلَقُ الذِّكْرِ</div>
+  <div class="sh-en en-blk">"When you pass by the gardens of Paradise, graze in them." They asked: what are the gardens of Paradise? He said: "The circles of dhikr."</div>
+  <div class="sh-ur ur-blk">«جنت کے باغوں سے گزرو تو چرو۔» پوچھا: باغ کیا ہیں؟ فرمایا: «ذکر کے حلقے۔»</div>
+  <div class="sh-src">Tirmidhi 3510 — Hasan <span class="grade grade-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Dhikr After Every Salah — Forgiveness Like Foam of the Sea</span><span class="ur-blk">ہر نماز کے بعد ذکر</span></div>
+  <div class="sh-ar">مَنْ سَبَّحَ اللَّهَ فِي دُبُرِ كُلِّ صَلَاةٍ ثَلَاثًا وَثَلَاثِينَ وَحَمِدَ اللَّهَ ثَلَاثًا وَثَلَاثِينَ وَكَبَّرَ اللَّهَ ثَلَاثًا وَثَلَاثِينَ</div>
+  <div class="sh-en en-blk">"Whoever glorifies Allah 33 times after every prayer, praises Allah 33 times, declares His greatness 33 times — and completes the hundred with La ilaha illallah wahdahu... his sins will be forgiven even if they are like the foam of the sea."</div>
+  <div class="sh-ur ur-blk">«جو ہر نماز کے بعد ۳۳ بار سبحان اللہ، ۳۳ بار الحمدللہ، ۳۳ بار اللہ اکبر کہے... اس کے گناہ معاف ہوں گے چاہے سمندر کی جھاگ جتنے ہوں۔»</div>
+  <div class="sh-src">Sahih Muslim 597 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Lightest on the Tongue, Heaviest on the Scale</span><span class="ur-blk">زبان پر ہلکا، میزان میں بھاری</span></div>
+  <div class="sh-ar">كَلِمَتَانِ خَفِيفَتَانِ عَلَى اللِّسَانِ ثَقِيلَتَانِ فِي الْمِيزَانِ حَبِيبَتَانِ إِلَى الرَّحْمَنِ سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ</div>
+  <div class="sh-en en-blk">"Two words are light on the tongue, heavy on the Scale, beloved to the Most Merciful: SubhanAllahi wa bihamdihi, SubhanAllahil Adheem."</div>
+  <div class="sh-ur ur-blk">«دو کلمے زبان پر ہلکے، میزان میں بھاری، رحمن کو پیارے: سبحان اللہ وبحمدہ، سبحان اللہ العظیم۔»</div>
+  <div class="sh-src">Sahih Bukhari 6682, Muslim 2694 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The One Who Does Not Do Dhikr — Loss of Allah's Mercy in the Gathering</span><span class="ur-blk">ذکر کے بغیر مجلس — خسارہ</span></div>
+  <div class="sh-ar">مَا مِنْ قَوْمٍ يَقُومُونَ مِنْ مَجْلِسٍ لَا يَذْكُرُونَ اللَّهَ فِيهِ إِلَّا قَامُوا عَنْ مِثْلِ جِيفَةِ حِمَارٍ وَكَانَ عَلَيْهِمْ حَسْرَةً</div>
+  <div class="sh-en en-blk">"No people rise from a gathering in which they did not remember Allah except that they rise as if from a carcass, and it will be a cause of regret for them."</div>
+  <div class="sh-ur ur-blk">«جو لوگ ایسی مجلس سے اٹھیں جس میں اللہ کا ذکر نہ کیا ہو وہ ایسے اٹھتے ہیں جیسے گدھے کی لاش کے پاس سے۔ اور یہ ان کے لیے حسرت کا باعث ہوگا۔»</div>
+  <div class="sh-src">Abu Dawud 4855 — Hasan <span class="grade grade-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Morning Dhikr — Protection for the Day</span><span class="ur-blk">صبح کا ذکر — دن کی حفاظت</span></div>
+  <div class="sh-ar">مَنْ قَالَ حِينَ يُصْبِحُ وَحِينَ يُمْسِي سُبْحَانَ اللَّهِ وَبِحَمْدِهِ مِئَةَ مَرَّةٍ لَمْ يَأْتِ أَحَدٌ يَوْمَ الْقِيَامَةِ بِأَفْضَلَ مِمَّا جَاءَ بِهِ</div>
+  <div class="sh-en en-blk">"Whoever says SubhanAllahi wa bihamdihi 100 times in the morning and evening — no one will come on the Day of Resurrection with something better than what he came with."</div>
+  <div class="sh-ur ur-blk">«جو صبح و شام سبحان اللہ وبحمدہ سو بار کہے — قیامت کے دن کوئی اس سے بہتر لے کر نہیں آئے گا۔»</div>
+  <div class="sh-src">Sahih Muslim 2692 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+
+<div class="stage3-hdr">
+  <div class="stage3-hdr-ar">الصوفية على الذكر</div>
+  <div class="stage3-hdr-en en-blk">Sufi Tradition on Dhikr &#8212; Seven Scholars</div>
+  <div class="stage3-hdr-rule"></div>
+</div>
+<p class="stage3-intro en-blk">Seven scholars in chronological order &#8212; each treated separately, not merged. Their disagreements are as important as their agreements. Read each card fully before moving to the next. The Divergence section draws out the three live debates that remain unresolved after twelve centuries.</p>
+<p class="stage3-intro ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">سات علماء تاریخی ترتیب میں &#8212; ہر ایک الگ، ملا کر نہیں۔ اختلافات اتفاقات جتنے اہم ہیں۔ ہر کارڈ اگلے سے پہلے مکمل پڑھیں۔ اختلاف کے حصے میں وہ تین زندہ بحثیں ہیں جو بارہ صدیوں بعد بھی حل نہیں ہوئیں۔</p>
+
+<div class="scholar-card" id="sc-d-basri">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-basri')">
+    <div class="sc-num">01</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Hasan al-Basri</div>
+      <div class="sc-name-ur ur-blk">حسن بصری</div>
+      <div class="sc-dates">642&#8211;728 CE &middot; Basra &middot; Companion-generation bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Prologue</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in Medina, son of a freed Persian slave. Met over 70 Companions of the Prophet including Uthman, Ali, and Anas ibn Malik &#8212; a living link to the prophetic generation. Moved to Basra where he became the most influential scholar and spiritual guide of his era. Known for intense fear of Allah, near-constant weeping, and extreme austerity. The entire early Sufi tradition traces its chain back through him. Left no written works.</div>
+      <div class="bio-txt-ur ur-blk">مدینہ میں پیدا۔ ۷۰ سے زیادہ صحابہ سے ملاقات۔ بصرہ میں اپنے دور کے سب سے بااثر عالم۔ خوفِ الٰہی، کثرتِ گریہ اور سادگی۔ پوری ابتدائی صوفی روایت ان سے جڑتی ہے۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> No written works; teachings preserved in Abu Nuaym's Hilyat al-Awliya, Ibn al-Jawzi's Sifat al-Safwa, and early hadith compilations.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">Dhikr is inseparable from emotional response &#8212; it cannot be valid without the heart being moved. His entire understanding of remembrance is bound to khawf (fear) and raja (hope): remember Allah with the full weight of who He is, and the heart cannot remain unmoved. He is also the first to name that ghaflah is not the absence of verbal dhikr but the absence of a present heart while the tongue moves. Quantity of words without quality of attention is not dhikr &#8212; it is habit.</div>
+    <div class="sc-finding-ur ur-blk">ذکر جذباتی جواب سے الگ نہیں &#8212; دل کے بغیر درست نہیں۔ خوف اور رجاء سے جڑا نظریہ۔ غفلت: زبان چلے، دل غائب ہو &#8212; الفاظ کی کثرت بغیر توجہ عادت ہے ذکر نہیں۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">مَثَلُ الْقَلْبِ الَّذِي يَذْكُرُ اللَّهَ كَمَثَلِ السَّمَكَةِ فِي الْمَاءِ &#8212; وَمَثَلُ الْقَلْبِ الْغَافِلِ كَمَثَلِ السَّمَكَةِ عَلَى الْيَابِسَةِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;The heart that remembers Allah is like a fish in water &#8212; and the heedless heart is like a fish on dry land.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;ذکرِ الٰہی میں مشغول دل پانی میں مچھلی &#8212; اور غافل دل خشکی پر مچھلی۔&raquo;</div>
+    <div class="sc-quote-src">Hilyat al-Awliya (Abu Nuaym al-Isbahani); also cited and transmitted in Al-Wabil al-Sayyib (Ibn al-Qayyim)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Establishes the emotional grammar of dhikr: a moved heart is not a bonus, it is what makes the act dhikr rather than noise. Creates the image &#8212; heart as fish in water &#8212; that Ibn al-Qayyim preserves six centuries later, making a visible chain of insight from the Companion generation to the 14th century.</div>
+    <div class="sc-contrib-ur ur-blk">ذکر کی جذباتی گرامر: متاثر دل اضافہ نہیں &#8212; اسے ذکر بناتا ہے۔ مچھلی کی مثال: ابن قیم چھ صدیاں بعد محفوظ کریں گے &#8212; صحابی دور سے ۱۴ویں صدی تک سلسلہ نظر آتا ہے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-basri"></span></div>
+        <textarea class="note-ta" id="note-d3-basri" placeholder="Hasan al-Basri: dhikr without a moved heart is mechanical repetition. Right now &#8212; when you make dhikr, is your heart present or is it on a separate track while your tongue moves?" oninput="autoSave('d3-basri',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-d-muhasibi">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-muhasibi')">
+    <div class="sc-num">02</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Muhasibi</div>
+      <div class="sc-name-ur ur-blk">الحارث المحاسبی</div>
+      <div class="sc-dates">781&#8211;857 CE &middot; Basra / Baghdad &middot; Psychological school</div>
+    </div>
+    <div class="sc-badge en-blk">Psychology</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Harith ibn Asad al-Muhasibi. His name &#8212; the one who holds the nafs to account &#8212; describes his entire project. Born in Basra, lived in Baghdad. The first Islamic thinker to systematically apply psychological analysis to spiritual states. Contemporary of Ahmad ibn Hanbal, who disliked his use of Greek logical categories but agreed with his conclusions. Influenced al-Junayd directly.</div>
+      <div class="bio-txt-ur ur-blk">پورا نام: حارث بن اسد المحاسبی۔ نام &#8212; نفس کا محاسبہ کرنے والا۔ روحانی کیفیات پر منظم نفسیاتی تجزیہ کرنے والے پہلے اسلامی مفکر۔ الجنید پر براہِ راست اثر۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ri&#39;aya li-Huquq Allah (Observance of Allah&#39;s Rights); Muhasabat al-Nufus (Self-Examination); Al-Wasaya (Counsels); Sharh al-Marifah.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">The most important insight: you cannot truly remember Allah while secretly pleased with yourself for remembering Him. The nafs infiltrates dhikr &#8212; it takes the spiritual credit. Muhasabah (honest self-accounting) must precede and accompany dhikr, otherwise the ego turns remembrance into another form of self-congratulation. The dhikr that heals begins with the honest admission: I am not yet the one who truly remembers.</div>
+    <div class="sc-finding-ur ur-blk">اہم ترین نکتہ: اللہ کو یاد کرتے ہوئے خود پر خوشی ہو کہ یاد کر رہا ہوں &#8212; اصل ذکر نہیں ہوا۔ نفس ذکر میں کریڈٹ لیتا ہے۔ محاسبہ پہلے ضروری &#8212; ورنہ نفس کی خودنمائی۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">مَنْ ذَكَرَ اللَّهَ وَقَلْبُهُ مُتَعَلِّقٌ بِغَيْرِهِ فَهُوَ كَمَنْ يُنَادِي مَوْلَاهُ وَهُوَ مُعْرِضٌ عَنْهُ</div>
+    <div class="sc-quote-en en-blk">&ldquo;One who remembers Allah while his heart is attached to something other than Him is like one who calls upon his master while turned away from him.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;جو اللہ کو یاد کرے جبکہ دل کسی اور سے وابستہ &#8212; وہ ایسا ہے جو مولا کو پکارے مگر منہ موڑے ہوئے ہو۔&raquo;</div>
+    <div class="sc-quote-src">Ri&#39;aya li-Huquq Allah; cited in Hilyat al-Awliya (Abu Nuaym al-Isbahani)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Introduces the diagnostic question no subsequent scholar can ignore: where is the nafs in this act? Without al-Muhasibi, the interior sciences have no vocabulary for self-deception in spiritual practice. He makes it impossible to practice dhikr without honestly asking: am I actually turned toward Allah, or performing for myself?</div>
+    <div class="sc-contrib-ur ur-blk">تشخیصی سوال متعارف: اس عمل میں نفس کہاں ہے؟ ان کے بغیر باطنی علوم میں خود فریبی کی کوئی زبان نہ ہوتی۔ ذکر کو ایمانداری سے کرنا مشکل بناتے ہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-muhasibi"></span></div>
+        <textarea class="note-ta" id="note-d3-muhasibi" placeholder="Al-Muhasibi: the nafs takes the spiritual credit for dhikr. Think of the last time you felt good about your dhikr. Was that feeling from the act itself &#8212; or from being someone who does dhikr?" oninput="autoSave('d3-muhasibi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-d-junayd">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-junayd')">
+    <div class="sc-num">03</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Junayd al-Baghdadi</div>
+      <div class="sc-name-ur ur-blk">الجنید البغدادی</div>
+      <div class="sc-dates">830&#8211;910 CE &middot; Baghdad &middot; Technical school</div>
+    </div>
+    <div class="sc-badge en-blk">Sayyid al-Taifa</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Al-Junayd ibn Muhammad al-Baghdadi. Born in Nihavand, raised in Baghdad. Student of his maternal uncle Sari al-Saqati. Called Sayyid al-Taifa &#8212; Master of the Group &#8212; the undisputed master of the Baghdad school. Worked as a glass merchant by day. Insisted all Sufi knowledge must be grounded in Quran and Sunnah, famously saying: this knowledge of ours is built from the Quran and the Sunnah.</div>
+      <div class="bio-txt-ur ur-blk">بغداد میں پیدا و پرورش۔ ماموں سری السقطی کے شاگرد۔ سید الطائفہ &#8212; بغداد مدرسے کے بے تکرار امام۔ دن کو شیشے کا کاروبار۔ اصول: ہمارا علم قرآن اور سنت سے ہے۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Rasa&#39;il (Letters &#8212; earliest technical Sufi epistles); sayings preserved in Al-Sulami&#39;s Tabaqat al-Sufiyya and Abu Nuaym&#39;s Hilyat al-Awliya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">Al-Junayd defines the three levels of dhikr that become the template for all later theory. Level one: tongue without heart &#8212; a beginning, not sufficient. Level two: heart-dhikr &#8212; the interior practice. Level three: the state where the dhakir (rememberer) is erased in the presence of the madhkur (the One remembered) &#8212; la dhakira wa la madhkur. Critically, he insists this is a passing state (hal), not a permanent station (maqam), and is followed by baqa &#8212; a return that is grounded and strengthened, not a dissolution of the servant.</div>
+    <div class="sc-finding-ur ur-blk">ذکر کی تین سطحیں: زبان بغیر دل &#8212; دل بغیر زبان &#8212; وہ کیفیت جہاں ذاکر مذکور میں فنا۔ اہم: یہ حال ہے مقام نہیں &#8212; پھر بقا &#8212; مضبوط واپسی، فنا نہیں۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الذِّكْرُ مَحْوُ الذَّاكِرِ بِمُشَاهَدَةِ الْمَذْكُورِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Dhikr is the erasing of the one who remembers through the witnessing of the One remembered.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;ذکر: مذکور کے مشاہدے کے ذریعے ذاکر کا مٹ جانا۔&raquo;</div>
+    <div class="sc-quote-src">From his Rasa&#39;il (Letters); preserved in Tabaqat al-Sufiyya (al-Sulami al-Nisaburi)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Creates the technical vocabulary &#8212; dhakir, madhkur, fana, baqa, hal, maqam &#8212; that every subsequent scholar either uses, refines, or argues against. Without al-Junayd there is no precise language for the inner states of dhikr. His insistence on Quran and Sunnah as the boundaries of legitimate spiritual experience sets the guardrail that prevented the Baghdad school from drifting without Islamic content.</div>
+    <div class="sc-contrib-ur ur-blk">تکنیکی الفاظ تخلیق کرتے ہیں جو بعد کے سب علماء استعمال کرتے ہیں &#8212; یا ان سے اختلاف۔ قرآن اور سنت کی حد: وہ ریل جس نے بغداد مدرسے کو اسلامی مواد کے بغیر بہنے سے روکا۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-junayd"></span></div>
+        <textarea class="note-ta" id="note-d3-junayd" placeholder="Al-Junayd: three levels &#8212; tongue, heart, then erasing in the remembered. Where do you honestly spend most of your dhikr? Have you ever touched the third level, even briefly?" oninput="autoSave('d3-junayd',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-d-ghazali">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-ghazali')">
+    <div class="sc-num">04</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Ghazali</div>
+      <div class="sc-name-ur ur-blk">ابوحامد الغزالی</div>
+      <div class="sc-dates">1058&#8211;1111 CE &middot; Tus / Baghdad / Nishapur &middot; Systematic bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Hujjat al-Islam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Abu Hamid Muhammad ibn Muhammad al-Ghazali al-Tusi. Born in Tus, Khorasan. Rose to the highest-ranking scholarly position in the Abbasid world &#8212; professor at the Nizamiyya of Baghdad. At age 37 suffered a spiritual crisis that left him unable to speak or teach. Spent years in solitude, travel, and practice in Syria, Jerusalem, Mecca, and Medina. The Ihya Ulum al-Din was written from this experience. His project: prevent the permanent rupture between formal Islamic law and the interior life of the heart.</div>
+      <div class="bio-txt-ur ur-blk">طوس میں پیدا۔ بغداد نظامیہ کے پروفیسر &#8212; پوری عباسی دنیا کے اعلیٰ ترین عالم۔ ۳۷ سال میں روحانی بحران۔ شام، بیت المقدس، مکہ، مدینہ میں سالوں خلوت۔ احیاء علوم الدین: اسلامی ادب کی اثرانگیزترین کتاب۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ihya Ulum al-Din (4 vols.); Minhaj al-Abidin; Kimiya-yi Sa&#39;adat (Persian); Al-Munqidh min al-Dalal (autobiography); Mishkat al-Anwar.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">The most systematic framework for understanding dhikr. The heart is a mirror: dhikr polishes it; sins tarnish it; the polished mirror reflects divine light. Al-Ghazali integrates faculty-psychology (nafs, qalb, ruh, sirr, lubb) with a graduated practice: each level of the self requires a corresponding mode of remembrance. The lower levels &#8212; including imperfect tongue-dhikr &#8212; are not abandoned in pursuit of the higher. They are included and transcended. The polish reaches the deeper layers through consistent application.</div>
+    <div class="sc-finding-ur ur-blk">منظم ترین ڈھانچہ۔ دل آئینہ: ذکر صیقل، گناہ زنگ، صاف آئینہ الٰہی نور۔ نفسیاتِ نفس سے تدریجی مشق۔ نچلی سطحیں &#8212; ناقص زبانی ذکر بھی &#8212; ترک نہیں، شمولیت کے ساتھ تجاوز۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْقَلْبُ كَالْمِرْآةِ وَالذِّكْرُ كَالصَّقَالِ وَالذُّنُوبُ كَالصَّدَأِ &#8212; فَاجْلُ الْمِرْآةَ بِالذِّكْرِ حَتَّى يَظْهَرَ فِيهَا نُورُ الْحَقِّ</div>
+    <div class="sc-quote-en en-blk">&ldquo;The heart is like a mirror, dhikr is its polish, sins are its rust &#8212; so polish the mirror with dhikr until the light of Truth appears in it.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;دل آئینہ، ذکر صیقل، گناہ زنگ &#8212; ذکر سے آئینہ صاف کرو یہاں تک کہ اس میں حق کا نور ظاہر ہو۔&raquo;</div>
+    <div class="sc-quote-src">Ihya Ulum al-Din, Book 9: Kitab Dhikr Allah wa al-Dua (The Book of Remembrance of Allah and Supplication)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Prevents the permanent rupture between the formal scholars and the interior scholars. The Ihya demonstrates that interior sciences are the necessary depth of Islamic practice, not extra-Islamic additions. His framework for dhikr &#8212; levels, faculty-psychology, Sunnah anchoring &#8212; becomes the reference no subsequent scholar can ignore. It is why Ibn al-Qayyim engages Sufi concepts with genuine appreciation rather than dismissing them.</div>
+    <div class="sc-contrib-ur ur-blk">فقہاء اور اہلِ باطن کے درمیان مستقل تفرقہ روکا۔ احیاء: باطنی علوم اسلامی عمل کی ضروری گہرائی ہیں۔ ابن قیم اسی لیے صوفی تصورات سے سنجیدگی سے متعامل ہوتے ہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-ghazali"></span></div>
+        <textarea class="note-ta" id="note-d3-ghazali" placeholder="Al-Ghazali: the mirror and the polish. How much of your heart is currently tarnished, and how much polished by dhikr? Be honest &#8212; what tarnishes it most often?" oninput="autoSave('d3-ghazali',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-d-atailla">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-atailla')">
+    <div class="sc-num">05</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Ata&#39;illah al-Iskandari</div>
+      <div class="sc-name-ur ur-blk">ابن عطاء اللہ الاسکندری</div>
+      <div class="sc-dates">1259&#8211;1309 CE &middot; Alexandria / Cairo &middot; Shadhili order</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Hikam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Ahmad ibn Muhammad Ibn Ata&#39;illah al-Iskandari al-Maliki. Born in Alexandria, died in Cairo. Third master of the Shadhili Sufi order. Trained as a Maliki jurist before encountering the Shadhili path &#8212; unusually solid legal grounding for his spiritual work. His Al-Hikam (264 aphorisms) became the most memorised and commented text in the history of Sufism. Publicly debated Ibn Taymiyya in Cairo; both reportedly respected each other. Author of the only book in Islamic history dedicated entirely to dhikr practice.</div>
+      <div class="bio-txt-ur ur-blk">اسکندریہ میں پیدا، قاہرہ میں انتقال۔ شاذلی سلسلے کے تیسرے مرشد۔ مالکی فقیہ پہلے، پھر شاذلی طریقہ۔ الحکم &#8212; صوفی روایت میں سب سے زیادہ حفظ و شرح۔ مفتاح الفلاح: ذکر پر اسلامی تاریخ میں واحد مکمل کتاب۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Hikam al-Ata&#39;iyyah (264 aphorisms); Miftah al-Falah wa Misbah al-Arwah (dedicated entirely to dhikr); Al-Tanwir fi Isqat al-Tadbir; Lata&#39;if al-Minan.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">The most counterintuitive and practically important argument in the entire dhikr literature: even dhikr done with ghaflah (heedlessness) is better than no dhikr. The spark on the tongue, if maintained, eventually reaches the heart. The practitioner does not need to wait for a perfect interior state before beginning. This directly counters the paralysing perfectionism that prevents people from starting. His three levels mirror al-Junayd&#39;s &#8212; tongue, heart, sirr &#8212; with the crucial addition: the tongue level is still real dhikr even when imperfect, and must not be abandoned in pursuit of the higher.</div>
+    <div class="sc-finding-ur ur-blk">سب سے غیرمتوقع اور عملی دلیل: غفلت کے ساتھ بھی ذکر نہ کرنے سے بہتر ہے۔ زبان کی چنگاری دل تک پہنچتی ہے۔ کمال پرستی کے خلاف جو آغاز روکے۔ زبان کی سطح ناقص بھی ہو تو اصل ذکر ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">لَا تَتْرُكِ الذِّكْرَ لِعَدَمِ حُضُورِكَ مَعَ اللَّهِ فِيهِ &#8212; فَإِنَّ غَفْلَتَكَ عَنِ الذِّكْرِ أَشَدُّ مِنْ غَفْلَتِكَ فِي الذِّكْرِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Do not abandon dhikr because you sense no presence in it &#8212; for your heedlessness away from dhikr is worse than your heedlessness within it.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;ذکر مت چھوڑو اس لیے کہ اس میں حضور نہیں &#8212; کیونکہ ذکر سے باہر تمہاری غفلت ذکر میں غفلت سے زیادہ سخت ہے۔&raquo;</div>
+    <div class="sc-quote-src">Al-Hikam al-Ata&#39;iyyah (various editions; authentically his)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The only scholar in this seven who dedicated an entire book to dhikr practice. His theological contribution is the defence of imperfect dhikr against perfectionism: where al-Muhasibi warns about performing dhikr with the wrong interior state, Ibn Ata&#39;illah says begin anyway &#8212; the act itself produces the state. This is the most immediately useful insight for anyone who currently feels their dhikr is inadequate.</div>
+    <div class="sc-contrib-ur ur-blk">واحد عالم جس نے پوری کتاب ذکر کی مشق پر لکھی۔ ناقص ذکر کا دفاع: شروع کرو &#8212; عمل خود کیفیت پیدا کرتا ہے۔ جو اپنا ذکر ناکافی سمجھے &#8212; اس کے لیے سب سے فوری مفید۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-atailla"></span></div>
+        <textarea class="note-ta" id="note-d3-atailla" placeholder="Ibn Ata&#39;illah: do not abandon dhikr because your heart is not present. Have you ever stopped a dhikr practice because it felt hollow? What would change if you applied this aphorism today?" oninput="autoSave('d3-atailla',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-d-ibnqayyim">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-ibnqayyim')">
+    <div class="sc-num">06</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn al-Qayyim al-Jawziyya</div>
+      <div class="sc-name-ur ur-blk">ابن قیم الجوزیہ</div>
+      <div class="sc-dates">1292&#8211;1350 CE &middot; Damascus &middot; Quran-anchored tradition</div>
+    </div>
+    <div class="sc-badge en-blk">Rigorous</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Shams al-Din Muhammad ibn Abi Bakr ibn al-Qayyim al-Jawziyya. Born in Damascus. Student and loyal companion of Ibn Taymiyya &#8212; imprisoned alongside him in the Damascus Citadel. While his teacher was the polemicist, Ibn al-Qayyim was the doctor of hearts: profoundly spiritual, the most literate of all classical scholars in Arabic poetry, and able to engage Sufi concepts with genuine appreciation alongside rigorous critique.</div>
+      <div class="bio-txt-ur ur-blk">دمشق میں پیدا۔ ابن تیمیہ کے وفادار شاگرد &#8212; ان کے ساتھ قید۔ استاد بحث کرتے، ابن قیم دلوں کے طبیب &#8212; روحانی گہرائی، عربی شاعری میں یکتا، صوفی تصورات سے قدردانی اور تنقید دونوں کے ساتھ۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Wabil al-Sayyib min al-Kalim al-Tayyib (on dhikr &#8212; 100+ benefits); Madarij al-Salikin (Levels of the Wayfarers); Kitab al-Ruh; Rawdat al-Muhibbin; Zad al-Ma&#39;ad.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">Dhikr is simultaneously the means and the end &#8212; not a tool to reach a higher state, but itself the highest state available in this life. Al-Wabil al-Sayyib catalogues over a hundred specific benefits drawn entirely from Quran and Sunnah. His sharpest position: tongue-dhikr that moves the heart, combined with heart-dhikr, is the highest form. Not silent dhikr alone (which can drift into pretension) nor loud dhikr alone (which can remain mechanical). He also firmly distinguishes authenticated Sunnah forms from later methodological innovations.</div>
+    <div class="sc-finding-ur ur-blk">ذکر بیک وقت وسیلہ اور منزل &#8212; اس دنیا کی اعلیٰ ترین کیفیت۔ سو سے زیادہ فوائد قرآن و سنت سے۔ اعلیٰ ترین شکل: زبان اور دل مل کر &#8212; نہ صرف خاموش (تکبر بن سکتا ہے) نہ صرف اونچا (میکانکی رہ سکتا ہے)۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الذِّكْرُ لِلْقَلْبِ كَالْمَاءِ لِلسَّمَكَةِ &#8212; فَكَيْفَ حَالُ السَّمَكَةِ إِذَا فَارَقَتِ الْمَاءَ؟</div>
+    <div class="sc-quote-en en-blk">&ldquo;Dhikr to the heart is as water to the fish &#8212; what then is the condition of the fish when it leaves the water?&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;ذکر دل کے لیے ایسا ہے جیسے پانی مچھلی کے لیے &#8212; پھر مچھلی کا کیا حال ہوگا جب پانی چھوڑ دے؟&raquo;</div>
+    <div class="sc-quote-src">Al-Wabil al-Sayyib min al-Kalim al-Tayyib &#8212; he attributes the fish-water image to Hasan al-Basri while transmitting and restating it</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most comprehensive evidence-based catalogue of dhikr in the tradition &#8212; and the strongest anchor to Quran and Sunnah without losing the interior dimension. Demonstrates that everything the Sufi tradition rightly values in dhikr is already present in prophetic practice. Transmits the fish image from Hasan al-Basri, making a visible chain of insight across seven centuries.</div>
+    <div class="sc-contrib-ur ur-blk">ذکر کا سب سے جامع قرآن-سنت پر مبنی خاکہ۔ ثابت کرتے ہیں: صوفی روایت جو قدر کرتی ہے وہ سب نبوی عمل میں موجود۔ حسن بصری کی مثال محفوظ &#8212; سات صدیوں کا سلسلہ نظر آتا ہے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-ibnqayyim"></span></div>
+        <textarea class="note-ta" id="note-d3-ibnqayyim" placeholder="Ibn al-Qayyim: dhikr is not a means to something else &#8212; it IS the highest state available in this life. Do you experience dhikr as a tool or as a destination? Has it ever felt like the latter?" oninput="autoSave('d3-ibnqayyim',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-d-ibnarabi">
+  <div class="sc-hdr" onclick="toggleCard('sc-d-ibnarabi')">
+    <div class="sc-num">07</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Arabi</div>
+      <div class="sc-name-ur ur-blk">ابن عربی</div>
+      <div class="sc-dates">1165&#8211;1240 CE &middot; Murcia / Damascus &middot; Metaphysical school</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Shaykh al-Akbar</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Muhyi al-Din Muhammad ibn Ali ibn Arabi al-Hatimi. Born in Murcia, al-Andalus (modern Spain). Met the philosopher Ibn Rushd (Averroes) in Cordoba as a young man &#8212; a meeting he described as two radically different kinds of knowing. Traveled through North Africa, Egypt, the Hijaz, and Anatolia, settling in Damascus where he died. The Futuhat al-Makkiyya alone spans 37 volumes. The most contested figure in Islamic intellectual history: revered as al-Shaykh al-Akbar (the Greatest Master) by one tradition; considered a serious theological innovator by Ibn Taymiyya and Ibn al-Qayyim, who is also in this list.</div>
+      <div class="bio-txt-ur ur-blk">مرسیہ اندلس میں پیدا۔ قرطبہ میں ابن رشد سے ملاقات &#8212; دو بالکل مختلف طریقوں کا سامنا۔ دمشق میں انتقال۔ الفتوحات المکیہ &#8212; ۳۷ جلدیں۔ اسلامی فکری تاریخ کی سب سے متنازع شخصیت: ایک روایت میں الشیخ الاکبر، ابن تیمیہ اور ابن قیم کے نزدیک الٰہیاتی مبتدع۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Futuhat al-Makkiyya (37 vols.); Fusus al-Hikam (The Bezels of Wisdom); Tarjuman al-Ashwaq; Al-Tajalliyat al-Ilahiyya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Dhikr</div>
+    <div class="sc-finding en-blk">For Ibn Arabi, dhikr is not primarily a human practice &#8212; it is an ontological reality. The radical position: the servant does not remember Allah; Allah remembers Himself through the servant. The human being is the locus (mazhar) of divine self-remembrance. This follows from Wahdat al-Wujud: since there is ultimately only one reality, rememberer and remembered are modes of that same reality &#8212; the apparent distance between dhakir and madhkur is itself an illusion of the creaturely perspective. Dhikr, in his framework, cannot be performed in the ordinary subject-object sense.</div>
+    <div class="sc-finding-ur ur-blk">ابن عربی کے لیے ذکر انسانی عمل نہیں &#8212; وجودی حقیقت ہے۔ بندہ اللہ کو یاد نہیں کرتا؛ اللہ بندے کے ذریعے اپنے آپ کو یاد کرتا ہے۔ وحدۃ الوجود: ذاکر اور مذکور ایک حقیقت کے دو رنگ &#8212; ظاہری فاصلہ وہم ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">اعْلَمْ أَنَّ ذِكْرَ الْعَبْدِ لِرَبِّهِ هُوَ فِي الْحَقِيقَةِ ذِكْرُ الرَّبِّ لِعَبْدِهِ &#8212; إِذْ لَا يَذْكُرُ الْعَبْدُ إِلَّا بِذِكْرٍ مِنَ اللَّهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Know that the servant&#39;s remembrance of his Lord is in truth the Lord&#39;s remembrance of His servant &#8212; for the servant only remembers through a remembrance given him by Allah.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;جان لو کہ بندے کا رب کا ذکر حقیقت میں رب کا بندے کا ذکر ہے &#8212; کیونکہ بندہ صرف اللہ کی طرف سے عطا کردہ ذکر کے ذریعے یاد کرتا ہے۔&raquo;</div>
+    <div class="sc-quote-src">Al-Futuhat al-Makkiyya, Chapter on Dhikr and its Realities</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most radical ontological reframing of dhikr in the tradition. Every other scholar asks: how should the human perform dhikr? Ibn Arabi asks: who is actually performing it? His answer either opens the deepest reading of 2:152 (Remember Me and I will remember you &#8212; which comes first?) or risks dissolving the permanent abd-rabb distinction that Islamic theology insists on. This unresolvable tension is addressed directly in the Divergence section.</div>
+    <div class="sc-contrib-ur ur-blk">ذکر کی سب سے بنیادی وجودی بازتشکیل۔ باقی سب: انسان ذکر کیسے کرے؟ ابن عربی: اصل میں کون کر رہا ہے؟ سوال ۲:۱۵۲ کی گہری قرأت کھولتا ہے &#8212; یا عبد-رب کا فاصلہ مٹاتا ہے۔ یہ تناؤ اختلاف کے حصے میں۔</div>
+    <div class="sc-controversy"><strong>Note on Controversy:</strong> Ibn Arabi&#39;s Wahdat al-Wujud framework is the most contested position in Islamic intellectual history. Ibn al-Qayyim &#8212; whose Al-Wabil al-Sayyib you have just studied &#8212; explicitly considered aspects of this metaphysics incompatible with sound Tawhid: the abd-rabb distinction is permanent and cannot be dissolved, even in the highest spiritual states. Neither endorsement nor dismissal: both his contribution and the theological concerns are genuine. The Divergence section addresses where this leads.</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-d3-ibnarabi"></span></div>
+        <textarea class="note-ta" id="note-d3-ibnarabi" placeholder="Ibn Arabi: the servant does not remember Allah &#8212; Allah remembers Himself through the servant. Sit with this before evaluating. Does it open something or close something? What is your instinct and why?" oninput="autoSave('d3-ibnarabi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap">
+  <div class="div-hdr">
+    <div class="div-hdr-ar">الاختلاف</div>
+    <div class="div-hdr-en en-blk">Divergence &#8212; Three Live Disagreements on Dhikr</div>
+    <div class="div-hdr-desc en-blk">These are not minor methodological differences. They are the three live debates that have shaped how Muslims understand and practise dhikr for over twelve centuries. Each remains unresolved. State your own position on each &#8212; and date it, because honest positions change as understanding deepens.</div>
+    <div class="div-hdr-desc ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">یہ معمولی اختلافات نہیں &#8212; تین زندہ بحثیں جنہوں نے بارہ صدیوں سے مسلمانوں کے ذکر کو شکل دی۔ ہر ایک حل نہیں ہوا۔ تاریخ کے ساتھ اپنی پوزیشن بیان کریں۔</div>
+  </div>
+
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 01</div>
+    <div class="div-q en-blk">Is the highest form of dhikr verbal (jahr) or silent (khafi)?</div>
+    <div class="div-q-ur ur-blk">ذکر کی اعلیٰ ترین شکل زبانی (جہر) ہے یا خاموش (خفی)؟</div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Hasan al-Basri &middot; Ibn al-Qayyim</div>
+      <div class="div-view en-blk">Tongue-dhikr that moves the heart, combined with heart-dhikr, is the highest form. Silent dhikr that bypasses the tongue entirely risks becoming a claim to an interior state the person has not actually reached. The Sunnah establishes verbal forms as the fullest expression, not as inferior entry-points.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Junayd &middot; Ibn Ata&#39;illah</div>
+      <div class="div-view en-blk">The highest dhikr is of the sirr &#8212; below the level of conscious formulation. The tongue is irrelevant at this level not because verbal dhikr is inferior but because dhikr has moved to a layer language cannot reach. Ibn Ata&#39;illah adds: this is an arrived state, not a starting method &#8212; begin with the tongue regardless.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Ibn Arabi</div>
+      <div class="div-view en-blk">The question is misconceived from the start: if dhikr is Allah remembering Himself through the creature, then verbal and silent are not different levels but different instruments of the same reality. The distinction collapses at the ontological level.</div>
+    </div>
+    <div class="div-ground">
+      <div class="div-ground-lbl en-blk">Quranic Grounding</div>
+      <div class="div-ground-txt en-blk">7:205 (remember your Lord within yourself, without loudness) favours the silent; multiple Prophetic dhikr formulas are verbal. 13:28 (hearts find rest in the remembrance of Allah) is neutral on mode. The Quran does not privilege one mode absolutely; the Sunnah establishes verbal forms as the authenticated practice. Both sides find Quranic grounding; neither has exclusive support.</div>
+    </div>
+    <div class="div-verdict en-blk">Verbal dhikr in authenticated Sunnah forms is the established practice; heart-dhikr is the aspiration it aims to produce; silent dhikr of the sirr is an arrived state, not a method to choose. Begin with the tongue. Do not replace it with silence as a claim to a higher level not yet reached.</div>
+  </div>
+
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 02</div>
+    <div class="div-q en-blk">Does dhikr require authorisation through a living shaykh &#8212; or is the Sunnah itself the sufficient chain?</div>
+    <div class="div-q-ur ur-blk">کیا ذکر کے لیے زندہ شیخ کی اجازت ضروری ہے &#8212; یا سنت خود کافی سلسلہ ہے؟</div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Junayd &middot; Ibn Ata&#39;illah &middot; Sufi orders generally</div>
+      <div class="div-view en-blk">The wird, the method, and the baraka attached to it must be transmitted through a living authorised shaykh in a chain reaching the Prophet. Without this chain, the practitioner risks going astray without realising it. The shaykh is not optional &#8212; he is the guardrail and the mirror.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Ibn al-Qayyim &middot; Hasan al-Basri (pre-tariqah)</div>
+      <div class="div-view en-blk">Authenticated dhikr formulas are transmitted through hadith &#8212; the chain is to the Prophet through the sciences of hadith, not through a living master. A knowledgeable teacher is genuinely beneficial but not structurally required. No innovation in formula or method can be validated by silsilah; it must be traced to the Prophet in text.</div>
+    </div>
+    <div class="div-ground">
+      <div class="div-ground-lbl en-blk">Quranic Grounding</div>
+      <div class="div-ground-txt en-blk">Nothing in the Quran requires authorisation from a living master for dhikr. The Prophet taught dhikr directly; his Companions practised without ongoing shaykh supervision. The hadith transmission system is itself a form of silsilah going back to the Prophet through a verified chain. The shaykh-requirement is a later structural addition. The benefit of a living teacher is real; the structural requirement has no textual basis.</div>
+    </div>
+    <div class="div-verdict en-blk">The shaykh-requirement has no Quranic or authenticated Sunnah basis. A knowledgeable teacher is genuinely beneficial &#8212; especially to prevent methodological errors. But the chain that matters is the hadith chain. Dhikr in authenticated Sunnah formulas, with sincerity and consistency, is fully valid without living shaykh authorisation. Ibn al-Qayyim&#39;s position has stronger textual grounding.</div>
+  </div>
+
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 03</div>
+    <div class="div-q en-blk">Does the dhakir eventually disappear into the madhkur &#8212; and what does fana actually mean?</div>
+    <div class="div-q-ur ur-blk">کیا ذاکر مذکور میں فنا ہو جاتا ہے &#8212; اور فنا کا اصل مطلب کیا ہے؟</div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Junayd (careful formulation)</div>
+      <div class="div-view en-blk">Fana is a passing state (hal), not a permanent station (maqam). The servant temporarily loses awareness of self in the overwhelming presence of the madhkur. This is always followed by baqa &#8212; a return that is grounded and deepened. The servant remains the servant; the temporary overwhelming does not dissolve the abd-rabb distinction permanently.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Ibn Arabi</div>
+      <div class="div-view en-blk">Fana is not a state the servant enters but a recognition of what was always true: the servant never had an independent existence to lose. Wahdat al-Wujud makes the dhakir-madhkur separation ultimately illusory. This is not a psychological experience of overwhelming but an ontological recognition that cannot be undone.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Ibn al-Qayyim</div>
+      <div class="div-view en-blk">The servant (abd) remains the servant before Allah permanently. States of overwhelming can and do occur as temporary psychological experiences; they must not be described as dissolution of the permanent abd-rabb distinction. The language of permanent fana risks a theological error that Islamic kalam consistently rejects.</div>
+    </div>
+    <div class="div-ground">
+      <div class="div-ground-lbl en-blk">Quranic Grounding</div>
+      <div class="div-ground-txt en-blk">The Quran consistently uses the language of abd (servant) and Rabb (Lord) &#8212; a relationship that is never dissolved, not even in the highest spiritual states. Abd is not a temporary designation that spiritual progress transcends. Al-Junayd&#39;s careful formulation (fana as temporary passing state followed by baqa) preserves this. Ibn Arabi&#39;s ontological reading presses against the permanent servant-Lord distinction. Ibn al-Qayyim has the strongest Quranic grounding.</div>
+    </div>
+    <div class="div-verdict en-blk">Al-Junayd&#39;s formulation is the most defensible: fana as a passing state of overwhelming where self-awareness temporarily recedes, always followed by return (baqa). The servant remains the servant. States of intense presence in dhikr are real &#8212; they are temporary immersion, not dissolution. Ibn Arabi&#39;s position, while intellectually profound, presses against the permanent abd-rabb distinction the Quran insists on.</div>
+  </div>
+
+  <div class="div-pos-box">
+    <div class="div-pos-lbl en-blk">Your Personal Position &#8212; Dhikr Stage 3</div>
+    <div class="div-pos-lbl ur-blk" style="font-family:var(--font-ar)">آپ کی ذاتی پوزیشن &#8212; ذکر مرحلہ ۳</div>
+    <p class="en-blk" style="font-size:12.5px;color:var(--text2);line-height:1.85;margin:0 0 12px">After all seven scholars and all three divergence points: state your current position on each. Date it. Positions should change as understanding deepens &#8212; dating them makes that visible.</p>
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Position on the Three Divergences (dated)</span><span class="ur-blk">تین اختلافات پر میری پوزیشن (بتاریخ)</span><span class="nsv" id="sv-d3-pos"></span></div>
+      <textarea class="note-ta" id="note-d3-pos" style="min-height:120px" placeholder="(1) Verbal vs silent: my current position and why. (2) Shaykh requirement: required or beneficial-not-required? (3) Fana: al-Junayd or Ibn Arabi &#8212; and what does my own experience say? Date: " oninput="autoSave('d3-pos',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="file-bottom-nav">
+  <span></span>
+  <a href="index.html" class="file-nav-home">☰ Index</a>
+  <a href="taqwa.html" class="file-nav-link">Taqwa →</a>
+</div>
+
+<script>
+function toggleCard(id){
+  var el=document.getElementById(id);
+  if(el){el.classList.toggle('open');}
+}
+
+function autoSave(key,val){
+  localStorage.setItem('ss_'+key,val);
+  var sv=document.getElementById('sv-'+key);
+  if(sv){sv.textContent='✦';sv.style.color='var(--teal)';}
+}
+
+function loadNotes(){
+  document.querySelectorAll('textarea.note-ta').forEach(function(ta){
+    var k='ss_'+ta.id.replace('note-','');
+    var v=localStorage.getItem(k);
+    if(v){ta.value=v;}
+  });
+  document.querySelectorAll('.nsv').forEach(function(sv){
+    var k='ss_'+sv.id.replace('sv-','');
+    if(localStorage.getItem(k)){sv.textContent='✦';sv.style.color='var(--teal)';}
+  });
+}
+
+function setLang(lang){
+  localStorage.setItem('ss_lang',lang);
+  if(lang==='ur'){
+    document.body.classList.add('ur-mode');
+  } else {
+    document.body.classList.remove('ur-mode');
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.style.opacity=(btn.getAttribute('data-lang-btn')===lang)?'1':'0.45';
+  });
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  loadNotes();
+  var lang=localStorage.getItem('ss_lang')||'en';
+  setLang(lang);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ihsan — Spiritual Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg0:#04070D;--bg1:#080E1C;--bg2:#0C1528;--bg3:#111E35;--bg4:#162440;
+  --gold:#C9A84C;--gold2:#E2C97A;--gold3:#F5E9C0;
+  --golddim:rgba(201,168,76,.08);--goldbdr:rgba(201,168,76,.18);--goldglow:rgba(201,168,76,.22);
+  --teal:#2FB89A;--tealdim:rgba(47,184,154,.08);--tealbdr:rgba(47,184,154,.22);
+  --blue:#7AABF0;--bluedim:rgba(122,171,240,.08);--bluebdr:rgba(122,171,240,.22);
+  --amber:#E0A030;--amberdim:rgba(224,160,48,.08);--amberbdr:rgba(224,160,48,.22);
+  --purple:#A87FD0;--purpledim:rgba(168,127,208,.08);--purplebdr:rgba(168,127,208,.22);
+  --text:#D4CBB8;--text2:#8A9BB0;--text3:#4A5B70;
+  --border:rgba(201,168,76,.10);--border2:rgba(201,168,76,.05);
+  --font-head:'Cinzel',serif;--font-body:'Lora',serif;--font-arab:'Noto Naskh Arabic',serif;--font-ar:'Noto Naskh Arabic',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 800px 500px at 20% 10%,rgba(201,168,76,.025),transparent 60%),
+             radial-gradient(ellipse 600px 400px at 80% 80%,rgba(47,184,154,.02),transparent 60%);}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:90;background:rgba(4,7,13,.97);border-bottom:1px solid var(--border2);backdrop-filter:blur(20px);padding:0 22px;height:56px;display:flex;align-items:center;gap:14px}
+.hdr-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.3)}
+.hdr-titles{flex:1}
+.hdr-title{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase}
+.hdr-sub{font-family:var(--font-head);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--goldbdr);border-radius:20px;padding:3px}
+.lt{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 10px;border-radius:16px;cursor:pointer;transition:all .2s;color:var(--text3);user-select:none}
+.lt.on{background:var(--gold);color:#000;font-weight:700}
+.back-link{font-family:var(--font-head);font-size:8.5px;letter-spacing:.8px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:6px;transition:all .15s;text-transform:uppercase;flex-shrink:0}
+.back-link:hover{color:var(--gold2);border-color:var(--goldbdr)}
+
+/* PAGE */
+.page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:24px 18px 60px}
+
+/* CONCEPT TABS */
+.concept-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cn-btn{font-family:var(--font-head);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:8px;border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.cn-btn:hover{border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn.on{background:var(--golddim);border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn .ar{font-family:var(--font-arab);font-size:14px;letter-spacing:0;display:block;margin-top:2px}
+.cn-badge{display:inline-block;font-size:7px;padding:1px 5px;border-radius:4px;margin-left:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);vertical-align:middle}
+.cn-badge.pending{background:var(--amberdim);border-color:var(--amberbdr);color:var(--amber)}
+
+/* SECTION */
+.concept-section{display:none}
+.concept-section.active{display:block}
+
+/* SECTION HEADER */
+.sec-hdr{text-align:center;padding:20px 0 28px;border-bottom:1px solid var(--border2);margin-bottom:28px}
+.sec-hdr-ar{font-family:var(--font-arab);font-size:52px;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.25);line-height:1.2;margin-bottom:8px}
+.sec-hdr-en{font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase}
+.sec-hdr-ur{font-family:var(--font-arab);font-size:20px;color:var(--gold2);margin-top:4px}
+.sec-hdr-root{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--text2);margin-top:10px;text-transform:uppercase}
+.sec-hdr-rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+.sec-hdr-intro{font-size:13px;color:var(--text2);line-height:1.85;max-width:600px;margin:0 auto;font-style:italic}
+
+/* ROOT ANALYSIS BOX */
+.root-analysis{background:var(--bg2);border:1px solid var(--goldbdr);border-radius:12px;padding:20px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+.root-analysis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ra-label{font-family:var(--font-head);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ra-label::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ra-root{font-family:var(--font-arab);font-size:30px;color:var(--gold2);direction:rtl;margin-bottom:12px}
+.ra-letters{display:flex;gap:10px;flex-direction:row-reverse;margin-bottom:14px}
+.ra-letter{background:rgba(201,168,76,.06);border:1px solid var(--goldbdr);border-radius:8px;padding:8px 14px;text-align:center}
+.ra-letter-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold2);display:block}
+.ra-letter-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:4px;display:block}
+.ra-meaning{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.ra-meaning-ur{font-family:var(--font-arab);font-size:14px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:12px}
+.ra-forms{display:flex;gap:8px;flex-wrap:wrap}
+.ra-form{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;text-align:center}
+.ra-form-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl}
+.ra-form-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:2px}
+.ra-count{font-family:var(--font-head);font-size:9px;color:var(--teal);margin-top:12px;letter-spacing:.5px}
+
+/* ERA DIVIDER */
+.era-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px}
+.era-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.era-early{background:var(--amber)}
+.era-middle{background:var(--gold)}
+.era-late{background:var(--teal)}
+.era-madani{background:var(--blue)}
+.era-label{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.era-label-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2)}
+.era-line{flex:1;height:1px;background:var(--border2)}
+.era-count{font-family:var(--font-head);font-size:8px;color:var(--text3);flex-shrink:0}
+
+/* AYAH CARD */
+.ayah-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.ayah-card.open{border-color:var(--goldbdr)}
+.ayah-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;user-select:none}
+.rev-badge{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;padding:3px 8px;border-radius:5px;flex-shrink:0;text-transform:uppercase}
+.rev-early{background:var(--amberdim);border:1px solid var(--amberbdr);color:var(--amber)}
+.rev-middle{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+.rev-late{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.rev-madani{background:var(--bluedim);border:1px solid var(--bluebdr);color:var(--blue)}
+.card-ref{font-family:var(--font-head);font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0}
+.card-preview{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.card-chevron{color:var(--text3);font-size:16px;transition:transform .25s;flex-shrink:0}
+.ayah-card.open .card-chevron{transform:rotate(90deg);color:var(--gold)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border2)}
+.ayah-card.open .card-body{display:block}
+
+/* ARABIC */
+.ayah-arabic{font-family:var(--font-arab);font-size:clamp(20px,3.5vw,28px);color:var(--gold2);direction:rtl;text-align:right;line-height:2.2;padding:18px 0 12px;text-shadow:0 0 20px rgba(201,168,76,.1);border-bottom:1px solid var(--border2);margin-bottom:12px}
+.ayah-tr-en{font-size:13px;color:var(--text);font-style:italic;line-height:1.85;margin-bottom:6px;border-left:3px solid var(--goldbdr);padding:8px 14px;border-radius:0 6px 6px 0;background:rgba(201,168,76,.03)}
+.ayah-tr-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;border-right:3px solid var(--goldbdr);padding:8px 14px 8px 8px;border-radius:6px 0 0 6px;background:rgba(201,168,76,.03);margin-bottom:6px}
+.ayah-ref-line{font-family:var(--font-head);font-size:9px;color:var(--gold);letter-spacing:.8px;margin-bottom:14px}
+
+/* BOXES */
+.ctx-box{background:rgba(0,0,0,.2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:12px}
+.ctx-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.ctx-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--amber);margin-bottom:5px}
+.ctx-txt{font-size:12px;color:var(--text2);line-height:1.75}
+.ctx-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2}
+
+.root-box{background:rgba(201,168,76,.04);border:1px solid var(--goldbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.root-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.root-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--gold);margin-bottom:7px}
+.root-wd{font-family:var(--font-arab);font-size:19px;color:var(--gold2);direction:rtl;display:inline-block;margin-left:8px}
+.root-fm{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl}
+.root-mn{font-size:12px;color:var(--text2);line-height:1.7;margin-top:5px}
+.root-mn-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-top:5px}
+
+.uniq-box{background:var(--tealdim);border:1px solid var(--tealbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.uniq-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.uniq-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--teal);margin-bottom:5px}
+.uniq-txt{font-size:12.5px;color:var(--text);line-height:1.75}
+.uniq-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text);direction:rtl;text-align:right;line-height:2}
+
+.sunnah-box{background:var(--purpledim);border:1px solid var(--purplebdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.sun-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.sun-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--purple);margin-bottom:8px}
+.sun-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-en{font-size:12px;color:var(--text2);font-style:italic;line-height:1.7;margin-bottom:5px}
+.sun-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+.grade{display:inline-block;font-family:var(--font-head);font-size:7.5px;padding:2px 7px;border-radius:4px;margin-left:6px}
+.g-sahih{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.g-hasan{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+
+/* NOTES */
+.notes-sec{margin-top:14px;border-top:1px solid var(--border2);padding-top:12px}
+.notes-hdr{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notes-hdr::after{content:'';flex:1;height:1px;background:var(--border2)}
+.note-f{margin-bottom:7px}
+.note-lbl{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nsv{font-family:var(--font-head);font-size:7px;letter-spacing:.3px;color:var(--text3);margin-left:auto;transition:color .3s}
+.nsv.flash{color:var(--teal)}
+.note-ta{width:100%;min-height:78px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:7px;outline:none;padding:10px 12px;font-family:var(--font-body);font-size:12.5px;color:var(--text);line-height:1.75;resize:vertical;transition:border-color .2s}
+.note-ta:focus{border-color:var(--goldbdr)}
+.note-ta::placeholder{color:var(--text3);font-style:italic;font-size:11.5px}
+.note-ta-ur{font-family:var(--font-arab);font-size:14px;direction:rtl;text-align:right}
+
+/* STANDALONE HADITH */
+.sh-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;margin-bottom:10px}
+.sh-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sh-lbl::after{content:'';flex:1;height:1px;background:var(--border2)}
+.sh-ar{font-family:var(--font-arab);font-size:clamp(15px,3vw,19px);color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:9px;padding:10px 14px;background:rgba(201,168,76,.04);border-radius:7px}
+.sh-en{font-size:12.5px;color:var(--text);font-style:italic;line-height:1.8;margin-bottom:7px}
+.sh-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;margin-bottom:7px}
+.sh-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+
+/* PENDING */
+.pending{background:var(--bg2);border:1px dashed var(--amberbdr);border-radius:12px;padding:24px 20px;margin-top:20px;text-align:center}
+.pending-icon{font-size:28px;margin-bottom:10px}
+.pending-title{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--text2);line-height:1.75;max-width:600px;margin:0 auto}
+
+/* ── Language toggle — body class approach ─────── */
+.en-blk{display:block}
+.ur-blk{display:none}
+.en-inl{display:inline}
+.ur-inl{display:none}
+body.ur-mode .en-blk{display:none}
+body.ur-mode .ur-blk{display:block}
+body.ur-mode .en-inl{display:none}
+body.ur-mode .ur-inl{display:inline}
+body.ur-mode span.ur-blk{display:inline}
+body.ur-mode span.en-blk{display:none}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:rgba(12,21,40,.98);border:1px solid var(--goldbdr);border-radius:8px;padding:9px 20px;font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--gold2);z-index:300;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .page{padding:18px 12px 60px}
+  .ra-letters{gap:6px}
+  .ra-letter{padding:6px 10px}
+  .ayah-arabic{font-size:clamp(18px,5vw,24px)}
+}
+
+.file-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg1);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;gap:8px;}
+.file-nav-link{font-family:var(--font-head);font-size:11px;letter-spacing:.5px;color:var(--gold2);text-decoration:none;padding:6px 10px;border:1px solid var(--goldbdr);border-radius:6px;white-space:nowrap;}
+.file-nav-link:hover{background:var(--golddim);}
+.file-nav-home{font-family:var(--font-head);font-size:10px;letter-spacing:.8px;color:var(--text2);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;}
+.file-nav-home:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-nav-center{display:flex;align-items:center;gap:8px;}
+.lang-btn{font-size:11px;font-family:var(--font-head);letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text2);padding:4px 8px;cursor:pointer;transition:opacity .2s;}
+.lang-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 20px 48px;border-top:1px solid var(--border);margin-top:40px;}
+.stage3-hdr{margin:40px 0 24px;text-align:center;}.stage3-hdr-ar{font-family:var(--font-ar);font-size:22px;color:var(--purple);margin-bottom:4px;}.stage3-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;}.stage3-hdr-rule{width:50px;height:1px;background:var(--purplebdr);margin:12px auto;}.stage3-intro{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;max-width:640px;margin:0 auto 16px;}.scholar-card{border:1px solid var(--purplebdr);border-radius:10px;margin-bottom:14px;overflow:hidden;background:rgba(168,127,208,.03);}.scholar-card .card-body{display:none;padding:20px;border-top:1px solid var(--purplebdr);}.scholar-card.open .card-body{display:block;}.sc-hdr{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;transition:background .15s;}.sc-hdr:hover{background:var(--purpledim);}.sc-num{font-family:var(--font-head);font-size:11px;color:var(--purple);min-width:22px;opacity:.7;}.sc-hdr-main{flex:1;}.sc-name-en{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.3px;}.sc-name-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);}.sc-dates{font-family:var(--font-body);font-size:11px;color:var(--text3);margin-top:2px;font-style:italic;}.sc-badge{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 8px;border-radius:4px;border:1px solid var(--purplebdr);color:var(--purple);text-transform:uppercase;white-space:nowrap;flex-shrink:0;}.sc-chevron{font-size:18px;color:var(--purple);opacity:.6;transition:transform .2s;}.scholar-card.open .sc-chevron{transform:rotate(90deg);}.bio-box summary{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--purple);text-transform:uppercase;cursor:pointer;padding:8px 0;border-bottom:1px solid var(--purplebdr);margin-bottom:12px;display:block;list-style:none;}.bio-box summary::-webkit-details-marker{display:none;}.bio-box summary::before{content:"+ ";}.details[open] summary::before,.bio-box details[open] summary::before{content:"- ";}.bio-txt{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:10px;}.bio-txt-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2.1;direction:rtl;text-align:right;margin-bottom:10px;}.bio-works{font-family:var(--font-head);font-size:10px;color:var(--text3);line-height:1.8;margin-bottom:4px;}.sc-sec{font-family:var(--font-head);font-size:9px;letter-spacing:1.2px;color:var(--purple);text-transform:uppercase;margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--purplebdr);}.sc-finding{font-family:var(--font-body);font-size:13.5px;color:var(--text);line-height:1.9;margin-bottom:6px;}.sc-finding-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);line-height:2.1;direction:rtl;text-align:right;margin-bottom:14px;}.sc-quote-ar{font-family:var(--font-ar);font-size:17px;color:var(--gold);line-height:2;text-align:right;direction:rtl;margin:12px 0 8px;padding:12px;background:var(--golddim);border-right:3px solid var(--gold);border-radius:0 6px 6px 0;}.sc-quote-en{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;font-style:italic;margin-bottom:4px;}.sc-quote-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;margin-bottom:6px;}.sc-quote-src{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:.3px;margin-bottom:14px;}.sc-contrib{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:6px;}.sc-contrib-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;}.sc-controversy{font-family:var(--font-body);font-size:12px;color:var(--amber);line-height:1.85;padding:10px 12px;background:var(--amberdim);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;margin-top:14px;}.div-wrap{border:1px solid var(--goldbdr);border-radius:10px;margin-top:32px;overflow:hidden;}.div-hdr{background:var(--golddim);padding:18px 20px;border-bottom:1px solid var(--goldbdr);}.div-hdr-ar{font-family:var(--font-ar);font-size:20px;color:var(--gold);margin-bottom:4px;}.div-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;}.div-hdr-desc{font-family:var(--font-body);font-size:12px;color:var(--text2);line-height:1.85;margin-top:8px;}.div-point{padding:20px;border-bottom:1px solid var(--goldbdr);}.div-num{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}.div-q{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.2px;margin-bottom:14px;line-height:1.5;}.div-q-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:14px;}.div-pos-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}.div-scholars{font-family:var(--font-head);font-size:9px;color:var(--purple);letter-spacing:.3px;min-width:160px;padding-top:3px;flex-shrink:0;}.div-view{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;}.div-ground{background:var(--bg2);border-radius:6px;padding:12px;margin:12px 0;}.div-ground-lbl{font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;}.div-ground-txt{font-family:var(--font-body);font-size:12.5px;color:var(--text2);line-height:1.85;}.div-verdict{font-family:var(--font-body);font-size:13px;color:var(--text);line-height:1.85;font-style:italic;border-left:2px solid var(--teal);padding-left:10px;margin-top:4px;}.div-pos-box{padding:20px;background:var(--bg2);}.div-pos-lbl{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<div class="file-topbar">
+  <a href="muraqabah.html" class="file-nav-link">← Muraqabah</a>
+  <div class="file-nav-center">
+    <a href="index.html" class="file-nav-home">☰ Index</a>
+    <button class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang-btn="ur" onclick="setLang('ur')">اردو</button>
+  </div>
+  <span></span>
+</div>
+
+<div class="concept-section active" id="sec-ihsan">
+
+<div class="sec-hdr">
+  <div class="sec-hdr-ar">إِحْسَان</div>
+  <div class="sec-hdr-en en-blk">Ihsan — Beautiful Excellence</div>
+  <div class="sec-hdr-ur ur-blk">احسان — خوبصورت اتقان</div>
+  <div class="sec-hdr-rule"></div>
+  <div class="sec-hdr-root en-blk">Root: ح — س — ن · 14 key ayat in revelation order · 6 authenticated hadith</div>
+  <div class="sec-hdr-root ur-blk">جڑ: ح — س — ن · ترتیبِ نزول میں ۱۴ اہم آیات · ۶ مستند احادیث</div>
+  <div class="sec-hdr-intro en-blk">Ihsan is where the five-concept journey arrives. Dhikr placed Allah in awareness. Zuhd cleared the heart of what would distort that awareness. Taqwa guarded it. Muraqabah deepened it into the knowledge of being with Him. Ihsan is what happens when that awareness becomes the ground you act from: you do everything as beautifully as it can possibly be done, because you know the One watching is the Most Beautiful — and He deserves your finest. The Prophet ﷺ defined it precisely in the Hadith of Jibreel: worship Allah as if you see Him — and if you cannot see Him, know that He sees you. Ihsan is not a spiritual level reserved for saints. It is the natural result of everything that came before it.</div>
+  <div class="sec-hdr-intro ur-blk">احسان وہ مقام ہے جہاں پانچ تصورات کا سفر پہنچتا ہے۔ ذکر نے اللہ کو شعور میں رکھا۔ زہد نے دل کو وابستگیوں سے صاف کیا۔ تقویٰ نے اسے محفوظ کیا۔ مراقبہ نے اسے گہرا کیا۔ احسان وہ ہے جو اس وقت ہوتا ہے جب یہ شعور آپ کے عمل کی بنیاد بن جاتا ہے: ہر کام کو ممکنہ خوبصورتی سے کریں کیونکہ آپ جانتے ہیں کہ نگراں سب سے خوبصورت ہے — اور وہ آپ کا بہترین مانگتا ہے۔ نبی کریم ﷺ نے حدیثِ جبریل میں اسے صریح بیان کیا: اللہ کی عبادت ایسے کرو جیسے تم اسے دیکھ رہے ہو — اگر نہیں دیکھ سکتے تو جانو کہ وہ تمہیں دیکھ رہا ہے۔</div>
+</div>
+
+<div class="root-analysis">
+  <div class="ra-label"><span class="en-blk">Root Word Analysis — ح س ن</span><span class="ur-blk">جڑ کا تجزیہ — ح س ن</span></div>
+  <div class="ra-root">أَحْسَنَ · الإِحْسَان · حُسْن · مُحْسِن · الحُسْنَى</div>
+  <div class="ra-letters">
+    <div class="ra-letter"><span class="ra-letter-ar">ح</span><span class="ra-letter-en">H</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">س</span><span class="ra-letter-en">S</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ن</span><span class="ra-letter-en">N</span></div>
+  </div>
+  <div class="ra-meaning en-blk">The root H-S-N carries both aesthetic and moral meaning simultaneously — unlike most languages which treat beauty and goodness as separate categories. <strong style="color:var(--gold2)">Husn</strong>: beauty, goodness, the quality of being excellent. <strong style="color:var(--gold2)">Ahsana</strong>: to do something beautifully, to perfect it, to bring it to its finest expression. <strong style="color:var(--gold2)">Muhsin</strong>: the one who does Ihsan — whose every act carries this quality of beauty and excellence. <strong style="color:var(--gold2)">Al-Husna</strong>: the most beautiful — also one of the names of Jannah and a reference to the highest divine reward. This is the root from which Allah's name Al-Husna derives: the Most Beautiful. Ihsan is, at its core, responding to the Most Beautiful with the most beautiful you are capable of — in worship, in character, in work, in relationship, in everything. The Hadith of Jibreel ties this to Muraqabah: you act with Ihsan because you are aware you are seen by One who is Himself the source of all Husn.</div>
+  <div class="ra-meaning ur-blk">جڑ ح-س-ن بیک وقت جمالیاتی اور اخلاقی معنی رکھتی ہے — اکثر زبانوں کے برعکس جو خوبصورتی اور نیکی کو الگ رکھتی ہیں۔ <strong style="color:var(--gold2)">حسن</strong>: خوبصورتی، نیکی، عمدگی۔ <strong style="color:var(--gold2)">أحسن</strong>: کسی کام کو خوبصورتی سے کرنا، کمال تک پہنچانا۔ <strong style="color:var(--gold2)">محسن</strong>: وہ جو احسان کرے۔ <strong style="color:var(--gold2)">الحسنی</strong>: سب سے خوبصورت — جنت کا نام بھی اور اعلیٰ ترین الٰہی جزا کا حوالہ بھی۔ احسان: سب سے خوبصورت کا جواب اپنے بہترین سے دینا — عبادت، کردار، کام، تعلقات، ہر چیز میں۔</div>
+  <div class="ra-forms">
+    <div class="ra-form"><div class="ra-form-ar">إِحْسَان</div><div class="ra-form-en en-blk">The act of beautiful excellence</div><div class="ra-form-en ur-blk">خوبصورت اتقان کا عمل</div></div>
+    <div class="ra-form"><div class="ra-form-ar">مُحْسِن</div><div class="ra-form-en en-blk">One who practises Ihsan</div><div class="ra-form-en ur-blk">احسان کرنے والا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">الحُسْنَى</div><div class="ra-form-en en-blk">The most beautiful — divine reward</div><div class="ra-form-en ur-blk">سب سے خوبصورت — الٰہی جزا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">أَحْسَنَ</div><div class="ra-form-en en-blk">He did beautifully / He perfected</div><div class="ra-form-en ur-blk">اس نے خوبصورتی سے کیا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">حُسْن الظَّنّ</div><div class="ra-form-en en-blk">Beautiful thinking — good opinion</div><div class="ra-form-en ur-blk">اچھا گمان</div></div>
+    <div class="ra-form"><div class="ra-form-ar">حَسَنَة</div><div class="ra-form-en en-blk">A good deed — a beautiful act</div><div class="ra-form-en ur-blk">نیکی — خوبصورت عمل</div></div>
+  </div>
+  <div class="ra-count en-blk">✦ Root H-S-N appears 190+ times across the Quran — among the highest-frequency roots · "Allah loves the Muhsineen" appears 11 times · The root is used for divine creation (ahsana kulla shay khalaqahu — 32:7), for human character, for social relations, and for the highest spiritual state</div>
+  <div class="ra-count ur-blk">✦ جڑ ح-س-ن قرآن میں ۱۹۰ سے زیادہ بار — سب سے زیادہ استعمال ہونے والی جڑوں میں · "اللہ محسنین سے محبت کرتا ہے" ۱۱ بار · الٰہی تخلیق، انسانی کردار، سماجی تعلقات اور اعلیٰ ترین روحانی کیفیت سب کے لیے</div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-early"></div>
+  <div class="era-label en-blk">Early Makki · 610–615 CE · The Cosmic Law</div>
+  <div class="era-label-ur ur-blk">ابتدائی مکی · کائناتی قانون</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">2 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-i-53-31">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-53-31')">
+    <span class="rev-badge rev-early en-blk">Rev. #23</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #23</span>
+    <span class="card-ref">An-Najm 53:31</span>
+    <span class="card-preview">لِّيَجْزِيَ الَّذِينَ أَسَاءُوا بِمَا عَمِلُوا وَيَجْزِيَ الَّذِينَ أَحْسَنُوا بِالْحُسْنَى</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">لِّيَجْزِيَ الَّذِينَ أَسَاءُوا بِمَا عَمِلُوا وَيَجْزِيَ الَّذِينَ أَحْسَنُوا بِالْحُسْنَى</div>
+    <div class="ayah-tr-en en-blk">"So that He may recompense those who did evil with what they did, and recompense those who did Ihsan with al-Husna — the most beautiful."</div>
+    <div class="ayah-tr-ur ur-blk">«تاکہ وہ بدی کرنے والوں کو ان کے اعمال کا بدلہ دے، اور احسان کرنے والوں کو الحسنیٰ سے نوازے۔»</div>
+    <div class="ayah-ref-line">An-Najm 53:31</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">An-Najm — 23rd surah — one of the earliest revelations, dealing with the nature of revelation and the reality of the Hereafter. This ayah establishes the fundamental law of divine justice: Isa'a (doing evil) is recompensed with its like; Ihsan is recompensed with al-Husna — the most beautiful, the finest, the highest. Al-Husna is grammatically feminine of Ahsan — the most excellent. It refers both to the highest divine reward (Jannah at its finest) and to the quality of Allah's response to Ihsan: He answers beauty with the Most Beautiful. This is the first Quranic statement that Ihsan earns something categorically different from ordinary good deeds.</div>
+      <div class="ctx-txt-ur ur-blk">النجم — ۲۳ویں سورت — ابتدائی ترین وحیوں میں۔ الٰہی عدل کا بنیادی قانون: اساءت کا بدلہ اس کے مثل؛ احسان کا بدلہ الحسنیٰ۔ الحسنیٰ: احسن کی مؤنث — سب سے عمدہ، بہترین۔ جنت کا اعلیٰ ترین مقام اور اللہ کے جواب کا معیار: خوبصورتی کا جواب سب سے خوبصورت سے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">بِالْحُسْنَى</span> <span class="root-fm">ح-س-ن · Al-Husna — the most beautiful, the finest divine response</span>
+      <div class="root-mn en-blk">H-S-N in superlative feminine: al-Husna — the most beautiful of all possible responses. The Quran is precise: those who did evil receive what they did (equivalence). Those who did Ihsan receive al-Husna (something greater — the Most Beautiful in response to beauty). This asymmetry is the Quran's first statement that Allah does not merely match Ihsan — He exceeds it with what only He can give. Al-Husna is also used for the beautiful names of Allah (al-asma' al-husna) and for Jannah's highest degree. The Muhsin is promised the finest Allah has.</div>
+      <div class="root-mn-ur ur-blk">الحسنیٰ — ح-س-ن تفضیل مؤنث: سب سے خوبصورت جواب۔ قرآن صحیح: بدی کرنے والے کو اس کے مثل، احسان کرنے والے کو الحسنیٰ — کچھ زیادہ، جو صرف اللہ دے سکتا ہے۔ الحسنیٰ: اسمائے حسنیٰ اور جنت کے اعلیٰ درجے کے لیے بھی۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The first Quranic statement that Ihsan is categorically different from ordinary goodness: it earns al-Husna. Not merely reward but the Most Beautiful of all rewards. The Quran establishes this in the 23rd surah — one of the earliest. Ihsan was never a later refinement added to Islam; it was embedded from the beginning as the highest category of human response to Allah, earning the highest divine response in return.</div>
+      <div class="uniq-txt-ur ur-blk">پہلا قرآنی بیان کہ احسان عام نیکی سے کیفی طور پر مختلف ہے: الحسنیٰ ملتی ہے۔ نہ محض ثواب — سب سے خوبصورت ثواب۔ ۲۳ویں سورت میں — ابتدائی ترین وحی میں۔ احسان بعد میں شامل نہیں ہوا — ابتداء سے اعلیٰ ترین انسانی جواب کی قسم تھا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-53-31-my"></span></div>
+        <textarea class="note-ta" id="note-i-53-31-my" placeholder="Those who do Ihsan receive al-Husna — the Most Beautiful. What would it mean to do the work you do today as if it deserves al-Husna in response? What would change?" oninput="autoSave('i-53-31-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-53-31-after"></span></div>
+        <textarea class="note-ta" id="note-i-53-31-after" placeholder="What changed after deeper study?" oninput="autoSave('i-53-31-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-55-60">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-55-60')">
+    <span class="rev-badge rev-early en-blk">Rev. #43</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #43</span>
+    <span class="card-ref">Al-Rahman 55:60</span>
+    <span class="card-preview">هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ</div>
+    <div class="ayah-tr-en en-blk">"Is the reward of Ihsan anything but Ihsan?"</div>
+    <div class="ayah-tr-ur ur-blk">«کیا احسان کا بدلہ احسان کے سوا کچھ ہے؟»</div>
+    <div class="ayah-ref-line">Al-Rahman 55:60</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Cosmic Law</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Rahman — 43rd surah — the surah of divine blessings, where every passage closes with: Fa-bi-ayyi ala'i rabbikuma tukadhdhiban (then which of your Lord's blessings do you deny?). This ayah appears in the midst of the description of Jannah. The question is rhetorical and total: Hal jaza'ul Ihsani illa al-Ihsan — is there any reward for Ihsan except Ihsan? This is the most compressed statement of a cosmic law in the Quran: Ihsan generates Ihsan. You give beauty — the universe, and its Lord, respond with beauty. This operates at the human level (doing Ihsan to others generates Ihsan from them) and the divine level (doing Ihsan toward Allah generates Ihsan from Allah).</div>
+      <div class="ctx-txt-ur ur-blk">الرحمن — ۴۳ویں سورت — الٰہی نعمتوں کی سورت۔ جنت کے وصف کے درمیان۔ سب سے مختصر کائناتی قانون: احسان کا بدلہ احسان ہے۔ انسانی سطح پر (احسان کریں تو جواب میں احسان) اور الٰہی سطح پر (اللہ کی طرف احسان — اللہ کا احسان)۔ احسان خوبصورتی پیدا کرتا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْإِحْسَانُ</span> <span class="root-fm">ح-س-ن · Al-Ihsan — the act of beautiful excellence in its full noun form</span>
+      <div class="root-mn en-blk">H-S-N as a noun: al-Ihsan — the state, the practice, the act of beautiful excellence. The ayah uses the same word twice — as the action and as its reward. This is a complete equation: Ihsan = Ihsan. Not: Ihsan generates forgiveness (though it does). Not: Ihsan generates reward (though it does). Ihsan generates more Ihsan. This reveals the nature of the concept: it is self-perpetuating. Once you begin acting with Ihsan, the universe cooperates. Allah responds. Other people respond. The quality expands. Ihsan is not a finite act but a generative state.</div>
+      <div class="root-mn-ur ur-blk">الاحسان — ح-س-ن بطور اسم — کیفیت، مشق، عمل۔ آیت ایک لفظ دو بار: احسان = احسان۔ نہ: احسان → مغفرت۔ نہ: احسان → ثواب۔ احسان → مزید احسان۔ احسان خود پیدا کرنے والا ہے: ایک بار شروع کریں، کائنات ساتھ دیتی ہے، اللہ جواب دیتا ہے، لوگ جواب دیتے ہیں۔ محدود عمل نہیں — پیدا کرنے والی کیفیت۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Most Compressed Quranic Law</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most compressed and complete statement of Ihsan in the Quran. A question that answers itself and admits no exception: is the reward of Ihsan anything but Ihsan? No. The word Ihsan covers both sides of the equation — your act and Allah's response are described with the same word. This means Allah's response to your Ihsan is itself an act of Ihsan — He responds with beauty to beauty. The practice of Ihsan is therefore not a transaction with a separate currency. It is entering a loop of beauty that was always available and always waiting.</div>
+      <div class="uniq-txt-ur ur-blk">قرآن میں احسان کا سب سے مختصر اور مکمل بیان۔ جواب خود دینے والا سوال: نہیں — احسان کا بدلہ احسان ہی ہے۔ دونوں طرف ایک لفظ: آپ کا عمل اور اللہ کا جواب — احسان۔ اللہ کا آپ کے احسان کا جواب خود احسان ہے — خوبصورتی کا جواب خوبصورتی سے۔ احسان کوئی سودا نہیں — خوبصورتی کے اس چکر میں داخل ہونا ہے جو ہمیشہ سے دستیاب تھا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-55-60-my"></span></div>
+        <textarea class="note-ta" id="note-i-55-60-my" placeholder="Hal jaza'ul Ihsani illa al-Ihsan — is there any reward for Ihsan except Ihsan? Apply this to your life right now: where have you done something with genuine beauty and seen it returned? Where have you withheld Ihsan and noticed what is missing?" oninput="autoSave('i-55-60-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-55-60-after"></span></div>
+        <textarea class="note-ta" id="note-i-55-60-after" placeholder="What changed after deeper study?" oninput="autoSave('i-55-60-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-middle"></div>
+  <div class="era-label en-blk">Middle Makki · 615–622 CE · The Scope Expanded</div>
+  <div class="era-label-ur ur-blk">وسطی مکی · دائرہ وسیع ہوا</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">5 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-i-39-10">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-39-10')">
+    <span class="rev-badge rev-middle en-blk">Rev. #59</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #59</span>
+    <span class="card-ref">Az-Zumar 39:10</span>
+    <span class="card-preview">إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">قُلْ يَا عِبَادِ الَّذِينَ آمَنُوا اتَّقُوا رَبَّكُمْ ۚ لِلَّذِينَ أَحْسَنُوا فِي هَٰذِهِ الدُّنْيَا حَسَنَةٌ ۗ وَأَرْضُ اللَّهِ وَاسِعَةٌ ۗ إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ</div>
+    <div class="ayah-tr-en en-blk">"Say: O My servants who believe — have Taqwa of your Lord. For those who did Ihsan in this world, there is Hasana. And the earth of Allah is vast. Indeed, those who are patient will be given their reward without account."</div>
+    <div class="ayah-tr-ur ur-blk">«کہو: اے میرے بندو جو ایمان لائے — اپنے رب سے تقویٰ رکھو۔ جنہوں نے اس دنیا میں احسان کیا ان کے لیے حسنہ ہے۔ اور اللہ کی زمین وسیع ہے۔ بیشک صبر کرنے والوں کو بے حساب اجر دیا جائے گا۔»</div>
+    <div class="ayah-ref-line">Az-Zumar 39:10</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Az-Zumar — 59th surah — the surah of sincere religion, addressing those who worship Allah purely. The sequence in this ayah is the complete spiritual chain: Taqwa (have Taqwa of your Lord) → Ihsan fi hadhi al-dunya (those who did Ihsan in this world receive Hasana). The world is where Ihsan is practised; the divine reward comes from it. The closing — reward without account for the patient — is connected to Ihsan because genuine Ihsan requires Sabr: doing things beautifully when it is difficult is the full expression of the concept.</div>
+      <div class="ctx-txt-ur ur-blk">الزمر — ۵۹ویں سورت — خالص عبادت کی سورت۔ مکمل روحانی سلسلہ: تقویٰ → احسان فی ہذہ الدنیا (دنیا میں احسان) → حسنہ۔ دنیا احسان کا میدان ہے؛ الٰہی جزا اسی سے آتی ہے۔ اختتام: صبر کرنے والوں کو بے حساب اجر — کیونکہ مشکل میں خوبصورتی سے کرنا احسان کا مکمل اظہار ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">بِغَيْرِ حِسَابٍ</span> <span class="root-fm">ص-ب-ر + ح-س-ب · Bi-ghayri hisab — without account, beyond counting</span>
+      <div class="root-mn en-blk">The connection of Sabr (patience) to Ihsan here is exact: Bi-ghayri hisab — without account, beyond any calculation. Most divine rewards are counted (Hasanat multiplied by ten, etc.). The reward of those who do Ihsan with patience has no ceiling. H-S-B: to count, to calculate. Bi-ghayri hisab: without calculation. This describes what Ihsan earns when it is maintained through difficulty — a reward that cannot be quantified because it matches the quality of something that has no fixed measure.</div>
+      <div class="root-mn-ur ur-blk">صبر اور احسان کا ربط: بغیر حساب — بغیر کسی حد کے۔ اکثر الٰہی اجر گنے جاتے ہیں (نیکیاں دس گنا وغیرہ)۔ مشکل میں احسان کرنے والوں کا اجر بے حساب — اس لیے کہ اس معیار کی چیز کا حساب نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Ihsan fi hadhi al-dunya — Ihsan in this world specifically. Not in worship only, not in the hereafter. The world is the arena where Ihsan is practised and tested. Every act in this world — work, conversation, cooking a meal, raising a child — is an opportunity for Ihsan. And the closing connects Ihsan to Sabr: easy Ihsan is the beginning; Ihsan maintained through difficulty is the full expression. The reward for that is bi-ghayri hisab — beyond any accounting system.</div>
+      <div class="uniq-txt-ur ur-blk">احسان فی ہذہ الدنیا — خاص طور پر اس دنیا میں۔ نہ صرف عبادت میں، نہ صرف آخرت میں۔ دنیا احسان کا میدان ہے۔ ہر کام — کام، گفتگو، کھانا پکانا، بچہ پالنا — احسان کا موقع ہے۔ اختتام: مشکل میں احسان — بے حساب جزا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-39-10-my"></span></div>
+        <textarea class="note-ta" id="note-i-39-10-my" placeholder="Ihsan fi hadhi al-dunya — in this very world, in ordinary life. What is one thing you do regularly that you could begin doing with Ihsan — with full awareness and full beauty? What would actually change?" oninput="autoSave('i-39-10-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-39-10-after"></span></div>
+        <textarea class="note-ta" id="note-i-39-10-after" placeholder="What changed after deeper study?" oninput="autoSave('i-39-10-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-12-90">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-12-90')">
+    <span class="rev-badge rev-middle en-blk">Rev. #53</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #53</span>
+    <span class="card-ref">Yusuf 12:90</span>
+    <span class="card-preview">إِنَّهُ مَن يَتَّقِ وَيَصْبِرْ فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّهُ مَن يَتَّقِ وَيَصْبِرْ فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, whoever has Taqwa and is patient — indeed Allah does not waste the reward of the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«بیشک جو تقویٰ رکھے اور صبر کرے — اللہ محسنین کا اجر ضائع نہیں کرتا۔»</div>
+    <div class="ayah-ref-line">Yusuf 12:90</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — Yusuf AS Speaks After All He Endured</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Surah Yusuf — 53rd surah — the same surah that gave Z-H-D its defining inversion (12:20). Here Yusuf AS speaks to his brothers who threw him in a well and sold him into slavery. After everything — the well, the false accusation, the prison, the years — he says this. Taqwa + Sabr = the Muhsin. Ihsan is not theoretical; it is the state that survives everything that the world does to break it. Yusuf AS is the proof: the person who maintained Ihsan in every condition — in slavery, in false imprisonment, in the palace — and whose Ihsan was not wasted.</div>
+      <div class="ctx-txt-ur ur-blk">سورہ یوسف — ۵۳ویں سورت — وہی جس نے ز-ه-د کی تعریف دی (۱۲:۲۰)۔ یوسف علیہ السلام اپنے بھائیوں سے کہہ رہے ہیں جنہوں نے انہیں کنویں میں پھینکا اور بیچا۔ سب کے بعد: تقویٰ + صبر = محسن۔ احسان نظری نہیں — وہ کیفیت ہے جو ہر مشکل میں باقی رہتی ہے۔ یوسف علیہ السلام: غلامی، جھوٹا الزام، قید، محل — ہر حال میں احسان — ضائع نہیں ہوا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْمُحْسِنِينَ</span> <span class="root-fm">ت-ق-ي + ص-ب-ر → ح-س-ن · Taqwa + Sabr → Muhsineen</span>
+      <div class="root-mn en-blk">The equation here is explicit: man yattaqi (whoever has Taqwa — guarding the heart) wa yasbir (and is patient — maintaining quality through difficulty) → fa-inna Allaha la yudhi'u ajra al-Muhsineen (Allah does not waste the reward of those who do Ihsan). Taqwa guards the heart; Sabr sustains the act when circumstances press against it; Ihsan is what emerges from their combination. This is the psychological anatomy of Ihsan: it is not spontaneous excellence but excellence that has been built, guarded, and maintained.</div>
+      <div class="root-mn-ur ur-blk">مساوات صریح: من یتقی (تقویٰ — دل کی حفاظت) + یصبر (مشکل میں معیار قائم رکھنا) → احسان کا اجر ضائع نہیں۔ تقویٰ دل کو محفوظ کرتی ہے؛ صبر مشکل میں عمل جاری رکھتا ہے؛ احسان دونوں کے ملنے سے نکلتا ہے۔ احسان کی نفسیاتی ساخت: خودبخود نہیں — بنایا، محفوظ کیا، برقرار رکھا۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Formula for Ihsan</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Taqwa + Sabr = Muhsin. This is the explicit Quranic formula. Taqwa without Sabr can dissolve under pressure. Sabr without Taqwa is endurance without direction. Together they produce the state from which Ihsan naturally emerges. And the guarantee: la yudhi'u — Allah does not waste. Not a single act of Ihsan — no matter how small, no matter how unseen, no matter how difficult the condition it was produced in — is wasted. This is the most important guarantee for those who try to live with Ihsan in ordinary, difficult life.</div>
+      <div class="uniq-txt-ur ur-blk">تقویٰ + صبر = محسن۔ صریح قرآنی فارمولا۔ تقویٰ بغیر صبر دباؤ میں ٹوٹ سکتی ہے۔ صبر بغیر تقویٰ سمت کے برداشت ہے۔ مل کر: احسان کی کیفیت پیدا ہوتی ہے۔ اور ضمانت: لا یضیع — ایک بھی عمل ضائع نہیں — چاہے کتنا چھوٹا، کتنا غیر مرئی، کتنی مشکل حالت میں۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-12-90-my"></span></div>
+        <textarea class="note-ta" id="note-i-12-90-my" placeholder="Taqwa + Sabr = Muhsin. Yusuf AS said this after the well, the accusation, the prison. In what condition in your own life right now is it hardest to maintain Ihsan? What is the Sabr required?" oninput="autoSave('i-12-90-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-12-90-after"></span></div>
+        <textarea class="note-ta" id="note-i-12-90-after" placeholder="What changed after deeper study?" oninput="autoSave('i-12-90-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-16-90">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-16-90')">
+    <span class="rev-badge rev-middle en-blk">Rev. #70</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #70</span>
+    <span class="card-ref">An-Nahl 16:90</span>
+    <span class="card-preview">إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ وَإِيتَاءِ ذِي الْقُرْبَىٰ وَيَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ وَالْبَغْيِ ۚ يَعِظُكُمْ لَعَلَّكُمْ تَذَكَّرُونَ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, Allah commands justice and Ihsan and giving to relatives — and forbids indecency, wrong, and transgression. He admonishes you so that you may remember."</div>
+    <div class="ayah-tr-ur ur-blk">«بیشک اللہ عدل اور احسان اور قریبی رشتہ داروں کو دینے کا حکم دیتا ہے — اور بے حیائی، برائی اور سرکشی سے روکتا ہے۔ وہ تمہیں نصیحت کرتا ہے تاکہ تم یاد رکھو۔»</div>
+    <div class="ayah-ref-line">An-Nahl 16:90</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Social Command</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">An-Nahl — 70th surah — a comprehensive Middle Makki surah on divine signs and divine guidance. This is the only ayah in the Quran that places Ihsan directly alongside Adl (justice) as a divine command — and goes beyond it. The sequence is exact: Adl is the minimum standard (give everyone what they are owed); Ihsan is beyond it (give more than what is owed, give with beauty). Adl can be cold and transactional. Ihsan is warm and generous. Allah does not merely command justice — He commands that you go beyond it. This is also the ayah the Imam reads at the close of Jumu'ah khutbah every Friday.</div>
+      <div class="ctx-txt-ur ur-blk">النحل — ۷۰ویں سورت — جامع وسطی مکی۔ واحد آیت جو احسان کو عدل کے ساتھ الٰہی حکم کے طور پر رکھتی ہے۔ ترتیب صحیح: عدل کم از کم معیار (حق دو)؛ احسان اس سے آگے (حق سے زیادہ، خوبصورتی سے دو)۔ عدل ٹھنڈا اور تبادلاتی ہو سکتا ہے۔ احسان گرم اور فیاض۔ اللہ صرف انصاف نہیں مانگتا — اس سے آگے جانے کا حکم دیتا ہے۔ یہی آیت جمعہ کے خطبے میں پڑھی جاتی ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْعَدْلِ وَالْإِحْسَانِ</span> <span class="root-fm">ع-د-ل · Adl — justice, giving each their due · ح-س-ن · Ihsan — going beyond what is due with beauty</span>
+      <div class="root-mn en-blk">Adl (A-D-L): the equal, the balanced, the just — giving each person exactly what they are owed. It is the floor of social ethics. Ihsan is deliberately placed after it and above it: where Adl stops, Ihsan begins. You have paid your debt — now give from generosity. You have been fair — now be beautiful. The pairing also reveals that Ihsan is not merely a spiritual interior state; it has a social and moral expression. The Quran commands it as a civic obligation alongside justice, alongside care for relatives. Ihsan is required of you in how you treat people.</div>
+      <div class="root-mn-ur ur-blk">عدل (ع-د-ل): مساوی، متوازن — حق دینا۔ سماجی اخلاق کی بنیاد۔ احسان جان بوجھ کر اس کے بعد اور اس سے اوپر: جہاں عدل رکتا ہے احسان شروع ہوتا ہے۔ قرض ادا کیا — اب سخاوت سے دو۔ انصاف کیا — اب خوبصورتی سے کرو۔ احسان صرف روحانی اندرونی کیفیت نہیں — سماجی ذمہ داری ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — Ihsan as a Civic Command</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Ihsan is not optional for believers — it is commanded alongside the most basic of social obligations (justice, care for relatives). This removes the misunderstanding that Ihsan is an advanced spiritual state reserved for those who have reached a certain level. It is a present command: inna Allaha ya'muru bil-Ihsan — Allah commands it now. From you. In your relationships, your transactions, your daily dealings. The movement from Adl to Ihsan is the movement from what you owe to what you give — and Allah commands the second as much as He commands the first.</div>
+      <div class="uniq-txt-ur ur-blk">احسان اہل ایمان کے لیے اختیاری نہیں — بنیادی سماجی فرائض کے ساتھ حکم ہے (عدل، صلہ رحم)۔ غلط فہمی دور: احسان اعلیٰ درجے کا روحانی مقام نہیں — ابھی کا حکم ہے: ان اللہ یأمر بالاحسان — ابھی، آپ سے، آپ کے تعلقات میں۔ عدل سے احسان کی طرف: جو آپ مدیون ہیں اس سے جو آپ دیتے ہیں کی طرف۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-16-90-my"></span></div>
+        <textarea class="note-ta" id="note-i-16-90-my" placeholder="Allah commands Adl (give what is owed) AND Ihsan (give more than what is owed, with beauty). In which relationship in your life are you giving Adl but not yet Ihsan? What would Ihsan look like there?" oninput="autoSave('i-16-90-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-16-90-after"></span></div>
+        <textarea class="note-ta" id="note-i-16-90-after" placeholder="What changed after deeper study?" oninput="autoSave('i-16-90-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-31-22">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-31-22')">
+    <span class="rev-badge rev-middle en-blk">Rev. #57</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #57</span>
+    <span class="card-ref">Luqman 31:22</span>
+    <span class="card-preview">وَمَن يُسْلِمْ وَجْهَهُ إِلَى اللَّهِ وَهُوَ مُحْسِنٌ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقَىٰ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَن يُسْلِمْ وَجْهَهُ إِلَى اللَّهِ وَهُوَ مُحْسِنٌ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقَىٰ ۗ وَإِلَى اللَّهِ عَاقِبَةُ الْأُمُورِ</div>
+    <div class="ayah-tr-en en-blk">"And whoever surrenders his face to Allah while he is a Muhsin — he has grasped the firmest handhold. And to Allah belongs the outcome of all affairs."</div>
+    <div class="ayah-tr-ur ur-blk">«اور جو اللہ کی طرف اپنا رخ سپرد کرے جبکہ وہ محسن ہو — اس نے مضبوط ترین کڑے کو تھام لیا۔ اور تمام معاملات کا انجام اللہ کی طرف ہے۔»</div>
+    <div class="ayah-ref-line">Luqman 31:22</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Luqman — 57th surah — the surah of wisdom (Hikma), containing the counsel of Luqman to his son. This ayah defines the firmest possible hold a human being can have: Man yuslim wajhahu ilallah wa huwa muhsin. Two conditions simultaneously: Yuslim wajhahu (surrender the face — meaning the self, the will, the direction) to Allah, AND wa huwa muhsin — while being a Muhsin. Surrender alone without Ihsan is passive. Ihsan without surrender is self-directed excellence. Together: surrender + excellence = the Urwat al-Wuthqa — the firmest handhold. The metaphor is of a rope: you hold something as firm as it is possible to hold.</div>
+      <div class="ctx-txt-ur ur-blk">لقمان — ۵۷ویں سورت — حکمت کی سورت۔ سب سے مضبوط تھامے جانے والی چیز کی تعریف: دو شرائط بیک وقت — یسلم وجہہ (خود، ارادہ، رخ — اللہ کی طرف سپرد) اور محسن ہو۔ تسلیم تنہا غیر فعّال۔ احسان تنہا خود ہدایت۔ مل کر: عروۃ الوثقیٰ — مضبوط ترین۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْعُرْوَةِ الْوُثْقَىٰ</span> <span class="root-fm">ع-ر-و · Urwa — handhold, handle · و-ث-ق · Wuthqa — firmest, most secure, most trustworthy</span>
+      <div class="root-mn en-blk">Urwa from A-R-W: a handhold, a handle — the part of something you grip. Wuthqa from W-Th-Q: firm, trustworthy, secure — from the same root as Wuthooq (trust). Al-Urwat al-Wuthqa appears twice in the Quran: here (Luqman 31:22) and in Al-Baqarah 2:256 (in the context of belief in Allah after clear truth has come). In both cases, it describes the grip that cannot be broken. The Muhsin who surrenders to Allah has the most secure possible hold — not because of their strength but because of what they are holding.</div>
+      <div class="root-mn-ur ur-blk">عروة — ع-ر-و — دستہ، جسے تھاما جائے۔ وثقی — و-ث-ق — مضبوط، قابل اعتماد۔ العروۃ الوثقیٰ قرآن میں دو بار: یہاں (۳۱:۲۲) اور البقرہ ۲:۲۵۶ (ایمان کے سیاق میں)۔ دونوں میں: وہ پکڑ جو ٹوٹ نہیں سکتی۔ محسن جو تسلیم کرے — سب سے محفوظ پکڑ — اپنی طاقت سے نہیں بلکہ جسے پکڑا اس کی وجہ سے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The combination that creates the firmest possible grip on reality: surrender (Islam of the face/self) + Ihsan. This is the Luqmanic definition of the complete human. Surrender without Ihsan is compliance without quality. Ihsan without surrender is self-directed excellence that serves the ego. The Muhsin who surrenders has both: the direction is Allah's, and the quality of execution is the highest the human is capable of. This is the complete picture of the Muhsin's relationship with both Allah and with action.</div>
+      <div class="uniq-txt-ur ur-blk">مضبوط ترین پکڑ کا مجموعہ: اسلام (تسلیم) + احسان۔ لقمانی تعریفِ کامل انسان۔ تسلیم بغیر احسان — معیار کے بغیر اطاعت۔ احسان بغیر تسلیم — نفس کی خدمت کرنے والی خود ہدایت۔ محسن جو تسلیم کرے — رخ اللہ کا، معیار اعلیٰ ترین ممکن۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-31-22-my"></span></div>
+        <textarea class="note-ta" id="note-i-31-22-my" placeholder="Surrender + Ihsan = the firmest handhold. In the things you do most regularly, are you surrendered to Allah's direction while doing them with Ihsan? Or are they surrendered without Ihsan — or done with effort but not truly surrendered?" oninput="autoSave('i-31-22-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-31-22-after"></span></div>
+        <textarea class="note-ta" id="note-i-31-22-after" placeholder="What changed after deeper study?" oninput="autoSave('i-31-22-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-37-80">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-37-80')">
+    <span class="rev-badge rev-middle en-blk">Rev. #56</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #56</span>
+    <span class="card-ref">As-Saffat 37:80</span>
+    <span class="card-preview">إِنَّا كَذَٰلِكَ نَجْزِي الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّا كَذَٰلِكَ نَجْزِي الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, thus do We recompense the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«بیشک ہم اسی طرح محسنین کو جزا دیتے ہیں۔»</div>
+    <div class="ayah-ref-line">As-Saffat 37:80</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Divine Refrain for the Prophets</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">As-Saffat — 56th surah. This phrase — Inna kadhalika najzi al-Muhsineen — appears repeatedly across this surah as a closing refrain after each Prophet's story: after Ibrahim AS (37:80), after Nuh AS (37:121), after Ilyas AS (37:131), after Lut AS (37:113). It is the divine pattern: the Prophet endures, maintains Ihsan through everything, and the refrain closes: this is how We recompense the Muhsineen. The phrase is not describing a unique event — it is describing a law. Ihsan from the Prophets generated the divine response; Ihsan from anyone generates the same divine response.</div>
+      <div class="ctx-txt-ur ur-blk">الصافات — ۵۶ویں سورت۔ یہ عبارت بار بار بطور اختتامی نغمہ: ابراہیم علیہ السلام (۳۷:۸۰)، نوح علیہ السلام (۳۷:۱۲۱)، الیاس علیہ السلام (۳۷:۱۳۱)، لوط علیہ السلام (۳۷:۱۱۳) کے بعد۔ الٰہی طرز: نبی صبر کرتا ہے، احسان برقرار رکھتا ہے — نغمہ: ہم اسی طرح محسنین کو جزا دیتے ہیں۔ منفرد واقعہ نہیں — قانون۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">نَجْزِي الْمُحْسِنِينَ</span> <span class="root-fm">ج-ز-ي · Najzi — We recompense, We give full reward · كَذَٰلِكَ — thus, in this exact manner</span>
+      <div class="root-mn en-blk">Najzi from J-Z-Y: to give full recompense, to give what is fully owed. Kadhalika: thus — in exactly this way. The refrain says: what happened to Ibrahim is the pattern. What happened to Nuh is the pattern. Not special favours to special people — a law that operates consistently. Any Muhsin, in any era, doing Ihsan in any domain, triggers this same divine response: kadhalika najzi — thus We recompense. The repetition of the refrain across the surah is itself a statement: Allah is declaring the law publicly and repeatedly so that no Muhsin can miss it.</div>
+      <div class="root-mn-ur ur-blk">نجزی — ج-ز-ی — مکمل جزا دینا۔ کذلک: اسی طرح — ٹھیک اسی انداز میں۔ نغمہ کہتا ہے: ابراہیم کے ساتھ جو ہوا وہ طرز ہے۔ خاص لوگوں پر خاص احسان نہیں — مستقل قانون۔ کوئی بھی محسن، کسی بھی دور میں — اسی الٰہی جواب کو متحرک کرتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Prophetic Pattern as Universal Law</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The stories of the Prophets are not just history — they are demonstrations of a law. The Quran narrates Ibrahim, Nuh, Ilyas, Lut, and then closes each with the refrain: this is how We recompense the Muhsineen. The implication is clear: you are not Ibrahim AS, but the law that operated for him operates for you. Every act of Ihsan you produce — in your family, your work, your worship — is entering the same divine equation. Kadhalika najzi: thus, in exactly this way, We recompense.</div>
+      <div class="uniq-txt-ur ur-blk">انبیاء کے قصے صرف تاریخ نہیں — قانون کا مظاہرہ ہیں۔ قرآن ہر قصے کے بعد نغمہ لاتا ہے: ہم اسی طرح محسنین کو جزا دیتے ہیں۔ مطلب واضح: آپ ابراہیم نہیں لیکن ان کے لیے جو قانون تھا آپ کے لیے بھی۔ ہر احسان — گھر میں، کام میں، عبادت میں — اسی الٰہی مساوات میں داخل ہوتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-37-80-my"></span></div>
+        <textarea class="note-ta" id="note-i-37-80-my" placeholder="Inna kadhalika najzi al-Muhsineen — the same law that operated for Ibrahim and Nuh operates for you. Where in your life are you Ibrahim at the moment — maintaining Ihsan in a condition of difficulty — and not yet seeing the kadhalika najzi?" oninput="autoSave('i-37-80-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-37-80-after"></span></div>
+        <textarea class="note-ta" id="note-i-37-80-after" placeholder="What changed after deeper study?" oninput="autoSave('i-37-80-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-madani"></div>
+  <div class="era-label en-blk">Madani · 622–632 CE · The Completion and the Guarantee</div>
+  <div class="era-label-ur ur-blk">مدنی · تکمیل اور ضمانت</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">7 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-i-2-83">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-2-83')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Baqarah 2:83</span>
+    <span class="card-preview">وَبِالْوَالِدَيْنِ إِحْسَانًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَإِذْ أَخَذْنَا مِيثَاقَ بَنِي إِسْرَائِيلَ لَا تَعْبُدُونَ إِلَّا اللَّهَ وَبِالْوَالِدَيْنِ إِحْسَانًا وَذِي الْقُرْبَىٰ وَالْيَتَامَىٰ وَالْمَسَاكِينِ</div>
+    <div class="ayah-tr-en en-blk">"And recall when We took the covenant of the Children of Israel: worship none but Allah, and with parents — Ihsan, and with relatives, the orphans, and the poor."</div>
+    <div class="ayah-tr-ur ur-blk">«اور یاد کرو جب ہم نے بنی اسرائیل سے عہد لیا: اللہ کے سوا کسی کی عبادت نہ کرنا، اور والدین کے ساتھ احسان، اور قریبی رشتہ داروں، یتیموں اور مسکینوں کے ساتھ۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:83</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Universal Covenant</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Baqarah — the longest surah, the most comprehensive Madani legislation. This ayah describes a covenant taken from all of the Children of Israel — not just a personal recommendation but a formal divine agreement. The sequence is exact: Tawhid (worship Allah alone) → Ihsan with parents → Ihsan with relatives → Ihsan with orphans → Ihsan with the poor. Ihsan is what connects every horizontal human relationship to the vertical relationship with Allah. After Tawhid, the first obligation is Ihsan — and it is specified person by person: parents, kin, orphans, the poor. Ihsan is particular, not abstract.</div>
+      <div class="ctx-txt-ur ur-blk">البقرہ — سب سے طویل، جامع ترین مدنی۔ بنی اسرائیل سے لیا گیا عہد — ذاتی سفارش نہیں، رسمی الٰہی معاہدہ۔ ترتیب: توحید → والدین سے احسان → رشتہ دار → یتیم → مسکین۔ احسان ہر افقی انسانی تعلق کو عمودی تعلق سے جوڑتا ہے۔ توحید کے بعد پہلا فرض احسان — اور ہر شخص کے لیے خاص: والدین، رشتہ دار، یتیم، مسکین۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">إِحْسَانًا</span> <span class="root-fm">ح-س-ن · Ihsanan — Ihsan as an action noun, the specific quality of dealing</span>
+      <div class="root-mn en-blk">Ihsanan: Ihsan in the accusative — doing Ihsan, practising Ihsan. With the parents specifically. Not merely: be good to them. Be excellent with them. Give them your finest attention, your most patient response, your most beautiful conduct. The Quran took this as a divine covenant — meaning it is not optional, not situational, not dependent on whether they deserve it. Ihsan with parents is unconditional because it is anchored in your relationship with Allah, not in their behaviour.</div>
+      <div class="root-mn-ur ur-blk">احسانًا: احسان بطور مفعول مطلق — کرنا، مشق کرنا۔ والدین کے ساتھ خاص طور پر۔ نہ محض: ان سے اچھے ہو۔ بلکہ: عمدہ ہو — بہترین توجہ، صبیح ترین جواب، خوبصورت ترین برتاؤ۔ عہد کے طور پر — یعنی اختیاری نہیں، حالات پر منحصر نہیں، ان کی استحقاق پر نہیں۔ اللہ سے آپ کے تعلق میں لنگر ڈالا ہوا ہے، ان کے رویے پر نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — Ihsan as the Social Architecture of Tawhid</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Ihsan is the first command after Tawhid. This is precise: believing in Allah alone must immediately translate into beautiful treatment of the humans closest to you. Tawhid without Ihsan is a theology that has not yet reached human relationships. Ihsan without Tawhid is excellent behaviour without divine grounding. Together: the vertical anchor (Tawhid) generates the horizontal expression (Ihsan to everyone around you). The Quran lists them in order of proximity: parents first, then kin, then orphans, then the poor. Ihsan radiates outward from the nearest to the furthest.</div>
+      <div class="uniq-txt-ur ur-blk">احسان توحید کے بعد پہلا حکم ہے۔ یہ صحیح ہے: اللہ پر ایمان فوری طور پر قریبی انسانوں سے خوبصورت برتاؤ میں ڈھلنا چاہیے۔ توحید بغیر احسان: وہ عقیدہ جو ابھی انسانی تعلقات تک نہیں پہنچا۔ مل کر: عمودی لنگر (توحید) افقی اظہار پیدا کرتا ہے (سب سے احسان)۔ ترتیب: والدین، پھر رشتہ دار، پھر یتیم، پھر مسکین — قریب سے دور۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-2-83-my"></span></div>
+        <textarea class="note-ta" id="note-i-2-83-my" placeholder="Ihsan comes directly after Tawhid. With whom in your life do you have the most difficulty practising Ihsan — the most genuine, beautiful, not-just-adequate dealing? What is between you and Ihsan with them?" oninput="autoSave('i-2-83-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-2-83-after"></span></div>
+        <textarea class="note-ta" id="note-i-2-83-after" placeholder="What changed after deeper study?" oninput="autoSave('i-2-83-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-2-195">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-2-195')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Baqarah 2:195</span>
+    <span class="card-preview">وَأَحْسِنُوا ۛ إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَأَنفِقُوا فِي سَبِيلِ اللَّهِ وَلَا تُلْقُوا بِأَيْدِيكُمْ إِلَى التَّهْلُكَةِ ۛ وَأَحْسِنُوا ۛ إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"And spend in the way of Allah and do not throw yourselves into destruction — and do Ihsan. Indeed, Allah loves the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اللہ کی راہ میں خرچ کرو اور اپنے آپ کو ہلاکت میں نہ ڈالو — اور احسان کرو۔ بیشک اللہ محسنین سے محبت کرتا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:195</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Direct Command and Divine Love</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Baqarah — in the context of spending in the path of Allah. The Quran commands spending, then warns against destruction, then simply: Wa ahsinu — and do Ihsan. The command is absolute, unqualified, and standing alone. And then the reason: Inna Allaha yuhibbu al-Muhsineen — Allah loves the Muhsineen. This phrase appears 11 times in the Quran. Of all the qualities Allah is described as loving, Muhsineen is among the most repeated. The grammar of Yuhibbu (He loves) + Muhsineen (the Muhsineen — defined people, not a general category) is precise: not just loving the act but loving the person who has become one who does Ihsan.</div>
+      <div class="ctx-txt-ur ur-blk">البقرہ — اللہ کی راہ میں خرچ کے سیاق میں۔ خرچ کا حکم، پھر ہلاکت سے منع، پھر: واحسنوا — احسان کرو۔ مطلق، غیر مشروط۔ پھر وجہ: ان اللہ یحب المحسنین۔ یہ عبارت قرآن میں ۱۱ بار۔ یحب (وہ محبت کرتا ہے) + المحسنین (متعین افراد): نہ صرف عمل سے محبت — اس شخص سے جو محسن بن گیا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">يُحِبُّ</span> <span class="root-fm">ح-ب-ب · Yuhibbu — He loves, present continuous</span>
+      <div class="root-mn en-blk">H-B-B: love, deep attachment. Yuhibbu: He loves — present, ongoing. Allah's love of the Muhsineen is described as continuous, not historical. He is loving them now. The people He loves most in the Quran: the patient (2:153), the just (5:42), the God-fearing/Taqwa (3:76), the purified (2:222), the Muhsineen (2:195). Ihsan earns one of the highest positions in the taxonomy of divine love. And the love here is personal — yuhibbu al-Muhsineen — not just the action of Ihsan but the person who is a Muhsin.</div>
+      <div class="root-mn-ur ur-blk">ح-ب-ب — محبت، گہری وابستگی۔ یحب: وہ محبت کرتا ہے — حال، مستمر۔ اللہ کی محبت مستمر ہے۔ جن سے اللہ سب سے زیادہ محبت کرتا ہے: صابرین، عادل، متقین، مطہرین، محسنین — اعلیٰ ترین مرتبہ۔ محبت ذاتی: اس عمل سے نہیں — اس شخص سے جو محسن ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Goal Made Explicit</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Inna Allaha yuhibbu al-Muhsineen. Of all the things the Quran could say to motivate Ihsan — reward, paradise, protection from harm — it says this: Allah loves the Muhsineen. Love is the highest relational category. This is the goal of the entire five-concept journey: not merely to obey, not merely to avoid punishment, not merely to earn reward — but to become someone Allah loves. Dhikr, Zuhd, Taqwa, Muraqabah all prepare the heart for Ihsan, which earns this.</div>
+      <div class="uniq-txt-ur ur-blk">ان اللہ یحب المحسنین۔ احسان کے تمام ممکنہ محرکات میں سے قرآن نے یہ کہا: اللہ محسنین سے محبت کرتا ہے۔ محبت اعلیٰ ترین تعلقاتی مرتبہ۔ پانچوں تصورات کا ہدف: نہ محض اطاعت، نہ محض سزا سے بچنا، نہ محض جزا — بلکہ وہ بننا جسے اللہ محبت کرتا ہے۔ ذکر، زہد، تقویٰ، مراقبہ سب احسان کے لیے دل تیار کرتے ہیں جو یہ کماتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-2-195-my"></span></div>
+        <textarea class="note-ta" id="note-i-2-195-my" placeholder="Inna Allaha yuhibbu al-Muhsineen — Allah loves the Muhsineen. The goal of the entire journey is to become someone Allah loves. Reflect honestly: does your practice of the five concepts feel like it is moving toward this? What is the distance right now?" oninput="autoSave('i-2-195-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-2-195-after"></span></div>
+        <textarea class="note-ta" id="note-i-2-195-after" placeholder="What changed after deeper study?" oninput="autoSave('i-2-195-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-3-134">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-3-134')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Imran 3:134</span>
+    <span class="card-preview">وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">الَّذِينَ يُنفِقُونَ فِي السَّرَّاءِ وَالضَّرَّاءِ وَالْكَاظِمِينَ الْغَيْظَ وَالْعَافِينَ عَنِ النَّاسِ ۗ وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"Those who spend in ease and in adversity, and who suppress their anger, and who pardon people — and Allah loves the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«وہ لوگ جو آسانی اور تنگی دونوں میں خرچ کرتے ہیں، اور غصے کو پی جاتے ہیں، اور لوگوں کو معاف کرتے ہیں — اور اللہ محسنین سے محبت کرتا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Imran 3:134</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Character Portrait of the Muhsin</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Imran — 89th surah — in the context of the description of those who will receive Jannah and Allah's forgiveness. This ayah is the Quran's most detailed character portrait of the Muhsin. Three qualities: (1) Yunfiquna fis-sarrai waddarrai — they spend in ease AND adversity. Not only when comfortable. (2) Al-kadhimina al-ghayza — they suppress/swallow their anger. Kadhama: to suppress, to hold down. Not that anger does not arise — they hold it down. (3) Al-afina anil-nas — they pardon people. Afuw: complete pardon, wiping clean. Then: Allah loves the Muhsineen. The qualities described are the acts; the Muhsin is the person who has made these acts their character.</div>
+      <div class="ctx-txt-ur ur-blk">آل عمران — ۸۹ویں سورت — محسن کی سب سے تفصیلی کردار کی تصویر۔ تین صفات: (۱) آسانی اور تنگی دونوں میں خرچ — نہ صرف راحت میں۔ (۲) غصے کو پی جانا — کاظمین: دبانا، روکنا۔ غصہ نہیں آتا نہیں — پی جاتے ہیں۔ (۳) لوگوں کو معاف کرنا — عفو: مکمل معافی، صاف کرنا۔ پھر: اللہ محسنین سے محبت کرتا ہے۔ یہ اعمال ہیں؛ محسن وہ ہے جس نے یہ اعمال اپنا کردار بنا لیا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْكَاظِمِينَ الْغَيْظَ</span> <span class="root-fm">ك-ظ-م · Kadhama — to suppress, to swallow, to hold down what rises</span>
+      <div class="root-mn en-blk">K-Dh-M: to swallow, to suppress what rises in the throat. Kadhimina al-ghayza: those who suppress their anger — specifically the anger that has already risen. Not anger that never arises (that would be repression or numbness) but anger that arises and is held down through conscious choice. This is Ihsan in the moment of provocation: the most difficult place to maintain beauty. The three qualities form a sequence: generosity (external, giving) → anger-suppression (internal, holding) → pardoning (relational, releasing). Together they describe Ihsan in three domains simultaneously.</div>
+      <div class="root-mn-ur ur-blk">ك-ظ-م — نگلنا، جو اوپر آئے اسے دبانا۔ کاظمین الغیظ: غصے کو پی جانے والے — وہ غصہ جو پہلے ہی اوپر آ چکا ہو۔ نہ وہ غصہ جو آتا ہی نہیں (وہ سن ہوجانا ہوگا) — آتا ہے اور شعوری انتخاب سے روکا جاتا ہے۔ تین صفات مل کر: سخاوت (باہری، دینا) + غصے کی روک (اندرونی، تھامنا) + معافی (تعلقاتی، چھوڑنا) = بیک وقت تین دائروں میں احسان۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — Ihsan in the Hardest Moments</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The portrait of the Muhsin is deliberately set in difficulty: they spend even in adversity, they hold down anger that has already risen, they pardon when they could justifiably refuse. Ihsan is not described as easy beauty. It is beauty maintained when the natural response would be something else. This connects directly to 12:90 (Taqwa + Sabr = Muhsin) and to the Jibreel definition: you worship as if you see Allah even when the moment does not feel divine. The three qualities here are the behavioural expressions of someone who has genuinely internalised Muraqabah.</div>
+      <div class="uniq-txt-ur ur-blk">محسن کی تصویر جان بوجھ کر مشکل میں: تنگی میں بھی خرچ، اٹھا ہوا غصہ پی جانا، جائز طور پر انکار کی جگہ معاف کرنا۔ احسان آسان خوبصورتی نہیں — وہ خوبصورتی جو اس وقت قائم رہے جب قدرتی جواب کچھ اور ہو۔ ۱۲:۹۰ (تقویٰ + صبر = محسن) اور حدیثِ جبریل سے ربط: جب لمحہ الٰہی نہ لگے تب بھی اس طرح عبادت کرو جیسے دیکھ رہے ہو۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-3-134-my"></span></div>
+        <textarea class="note-ta" id="note-i-3-134-my" placeholder="Spending in ease AND adversity · suppressing anger that has already risen · pardoning when you could refuse. Which of these three is your weakest expression of Ihsan right now? What would it take to strengthen it?" oninput="autoSave('i-3-134-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-3-134-after"></span></div>
+        <textarea class="note-ta" id="note-i-3-134-after" placeholder="What changed after deeper study?" oninput="autoSave('i-3-134-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-4-125">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-4-125')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">An-Nisa 4:125</span>
+    <span class="card-preview">وَمَنْ أَحْسَنُ دِينًا مِّمَّنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَنْ أَحْسَنُ دِينًا مِّمَّنْ أَسْلَمَ وَجْهَهُ لِلَّهِ وَهُوَ مُحْسِنٌ وَاتَّبَعَ مِلَّةَ إِبْرَاهِيمَ حَنِيفًا ۗ وَاتَّخَذَ اللَّهُ إِبْرَاهِيمَ خَلِيلًا</div>
+    <div class="ayah-tr-en en-blk">"And who is better in religion than one who surrenders his face to Allah while being a Muhsin and follows the way of Ibrahim, upright? And Allah took Ibrahim as a close friend — Khalil."</div>
+    <div class="ayah-tr-ur ur-blk">«اور دین میں اس سے بہتر کون ہے جو اللہ کی طرف اپنا رخ سپرد کرے جبکہ محسن ہو اور ابراہیم کی حنیف ملت کی پیروی کرے؟ اور اللہ نے ابراہیم کو خلیل بنایا۔»</div>
+    <div class="ayah-ref-line">An-Nisa 4:125</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Best of Religion Defined</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">An-Nisa — 92nd surah — the surah of social law, rights, and relationships. This ayah defines what the best possible religion looks like: Aslama wajhahu lillah (surrendered his face to Allah — full submission of self and direction) + wa huwa muhsin (while being a Muhsin) + followed the way of Ibrahim in uprightness. The answer to Wa man ahsanu dinan (who is better in religion?) is precise: not more ritual, not more knowledge alone, not more outward compliance — surrender + Ihsan. And the consequence: Ibrahim AS is the model — and Allah took him as Khalil (close friend, intimate companion).</div>
+      <div class="ctx-txt-ur ur-blk">النساء — ۹۲ویں سورت — سماجی قانون کی سورت۔ بہترین دین کی تعریف: اسلم وجہہ للہ (مکمل تسلیم) + محسن ہو + ابراہیم کی ملت کی پیروی۔ ومن احسن دینًا: بہتر دین والا کون؟ نہ زیادہ رسومات، نہ زیادہ علم، نہ زیادہ ظاہری اطاعت — تسلیم + احسان۔ نتیجہ: ابراہیم علیہ السلام نمونہ — اللہ نے خلیل لیا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">خَلِيلًا</span> <span class="root-fm">خ-ل-ل · Khalil — intimate friend, the one whose love penetrates to the innermost</span>
+      <div class="root-mn en-blk">Kh-L-L: to penetrate, to be intimate, to fill the interstices. Khalil: the intimate friend whose love enters the innermost — from Khulla (the innermost, the core). Ibrahim AS was taken as Khalilullah — the intimate friend of Allah. The word Khalil carries the sense of love that has no gap, no separation. This is the highest relational description between a human and Allah in the Quran. And the ayah places it as the consequence of: surrender + Ihsan + following the upright way. The Muhsin who surrenders is on the path toward what Ibrahim reached.</div>
+      <div class="root-mn-ur ur-blk">خ-ل-ل — گھسنا، قریب ہونا، اندر تک بھرنا۔ خلیل: وہ قریبی دوست جس کی محبت اندر تک پہنچے — خُلّہ سے (اندرونی، مرکز)۔ ابراہیم علیہ السلام خلیل اللہ — قرآن میں انسان اور اللہ کے درمیان سب سے اعلیٰ تعلقاتی وصف۔ اور آیت اسے نتیجے کے طور پر رکھتی ہے: تسلیم + احسان + مستقیم راستہ۔ محسن جو تسلیم کرے اسی راستے پر ہے جہاں ابراہیم پہنچے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Destination of Ihsan</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The best of religion is defined: surrender + Ihsan. Not as a formula to tick off but as a living state. And the model is Ibrahim AS — who maintained this surrender and Ihsan through fire, exile, the command to sacrifice his son, and every test. The consequence for Ibrahim: Khalil — Allah's intimate friend. This is the destination that the five-concept path leads toward. Not merely entry into Jannah but a relationship of intimate love with Allah. The Muhsin who surrenders is not merely saved — they are drawn close.</div>
+      <div class="uniq-txt-ur ur-blk">بہترین دین: تسلیم + احسان۔ فارمولا نہیں — زندہ کیفیت۔ نمونہ ابراہیم علیہ السلام: آگ، جلاوطنی، بیٹے کی قربانی — سب میں تسلیم اور احسان۔ نتیجہ: خلیل۔ پانچوں تصورات کا راستہ یہاں لے جاتا ہے: نہ محض جنت میں داخلہ — اللہ کے ساتھ قربت کا تعلق۔ محسن جو تسلیم کرے صرف محفوظ نہیں — قریب کھینچا جاتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-4-125-my"></span></div>
+        <textarea class="note-ta" id="note-i-4-125-my" placeholder="The best of religion: surrender + Ihsan. Ibrahim AS was taken as Khalil through this. On a scale of honesty — how much of your religious practice is surrender + Ihsan, and how much is compliance without Ihsan?" oninput="autoSave('i-4-125-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-4-125-after"></span></div>
+        <textarea class="note-ta" id="note-i-4-125-after" placeholder="What changed after deeper study?" oninput="autoSave('i-4-125-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-29-69">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-29-69')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Ankabut 29:69</span>
+    <span class="card-preview">وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا ۚ وَإِنَّ اللَّهَ لَمَعَ الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا ۚ وَإِنَّ اللَّهَ لَمَعَ الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"And those who strive for Us — We will surely guide them to Our paths. And indeed, Allah is with the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«اور جو لوگ ہماری خاطر جدوجہد کرتے ہیں ہم انہیں اپنے راستوں کی طرف ضرور ہدایت دیتے ہیں — اور بیشک اللہ محسنین کے ساتھ ہے۔»</div>
+    <div class="ayah-ref-line">Al-Ankabut 29:69</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Promise to Those Who Strive</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Ankabut — the Spider — a Makki/early Madani surah revealed to a community under persecution, addressing those who struggle to maintain faith under pressure. This is the closing ayah of the surah, its seal. Walladhina jahadu fina: those who strive for Us — specifically for Us, not for themselves or for people. La-nahdiyannhum subulana: We will surely guide them to Our paths. The Lam + Noon of emphasis: a divine oath of certainty. And then: Wa inna Allaha lama'a al-Muhsineen. The Maiyya promised here is specific — not the general with-ness of 57:4 but the divine companionship earned by those who strive and do Ihsan.</div>
+      <div class="ctx-txt-ur ur-blk">العنکبوت — ابتدائی مدنی، ایذا رسانی کے تحت ایمان برقرار رکھنے والوں کو۔ سورت کی آخری آیت — مہر۔ جاہدوا فینا: ہماری خاطر جدوجہد — خاص طور پر ہمارے لیے، خود کے لیے یا لوگوں کے لیے نہیں۔ ضرور راستہ دکھائیں گے — لام + نون تاکید: الٰہی قسم۔ اور: ان اللہ لمع المحسنین۔ یہاں معیت خاص — ۵۷:۴ کی عمومی نہیں — جو جدوجہد اور احسان سے کمائی جائے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لَمَعَ الْمُحْسِنِينَ</span> <span class="root-fm">ج-ه-د · Jahadu — they strive, they exert themselves · م-ع · Lama'a — specifically with, a confirming emphasis</span>
+      <div class="root-mn en-blk">Jahadu from J-H-D: to strive, to exert full effort, to put everything into something. Fina: for Us — the direction is Allah. La-ma'a: the Lam of emphasis + Ma'a (with) — indeed, specifically, certainly with. The Maiyya earned by the Muhsineen who strive is confirmed with the strongest possible grammatical emphasis. The connection between Jihad (striving) and Ihsan is exact: striving is the effort; Ihsan is the quality. You strive with Ihsan — the direction is Allah, the quality is the finest you have — and the result is divine guidance and divine companionship.</div>
+      <div class="root-mn-ur ur-blk">جاهد — ج-ه-د — جدوجہد، پوری کوشش، سب کچھ لگانا۔ فینا: ہمارے لیے — سمت اللہ۔ لمع: لام تاکید + مع — یقیناً، خاص طور پر، ضرور ساتھ۔ محسنین جو جدوجہد کریں — معیت سب سے زور دار گرامر کے ساتھ تصدیق شدہ۔ جہاد + احسان: کوشش (سمت اللہ) + معیار (بہترین) = الٰہی ہدایت + ساتھ۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Maiyya Earned by Ihsan</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The special Maiyya of the Muhsineen, confirmed with the strongest possible emphasis. The general Maiyya of 57:4 is for all. The specific Maiyya here — Inna Allaha lama'a al-Muhsineen — is earned through two things: striving for Allah (not for oneself, not for people) and doing Ihsan. This is the closing word of Al-Ankabut — after the surah of endurance under pressure. The promise to those who have not given up: keep striving for Us with Ihsan, and We are with you. Not as a distant Raqib, not as a general presence — specifically, personally, with you.</div>
+      <div class="uniq-txt-ur ur-blk">محسنین کی خاص معیت، سب سے زور دار تاکید کے ساتھ۔ ۵۷:۴ کی عمومی معیت سب کے لیے۔ یہاں خاص: جاهدوا فینا + احسان سے کمائی۔ العنکبوت کا اختتامی لفظ — دباؤ میں برداشت کی سورت کے بعد۔ ہمت نہ ہارنے والوں کا وعدہ: ہماری خاطر احسان کے ساتھ جدوجہد جاری رکھو — ہم ساتھ ہیں۔ دور سے نہیں — خاص، ذاتی طور پر۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-29-69-my"></span></div>
+        <textarea class="note-ta" id="note-i-29-69-my" placeholder="Those who strive for Us — We guide them. And Allah is with the Muhsineen. Where in your life are you striving fina — specifically for Allah, not for yourself or for others to see? Is that striving accompanied by Ihsan?" oninput="autoSave('i-29-69-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-29-69-after"></span></div>
+        <textarea class="note-ta" id="note-i-29-69-after" placeholder="What changed after deeper study?" oninput="autoSave('i-29-69-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-5-93">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-5-93')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Ma'idah 5:93</span>
+    <span class="card-preview">وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">لَيْسَ عَلَى الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ جُنَاحٌ فِيمَا طَعِمُوا إِذَا مَا اتَّقَوا وَّآمَنُوا وَعَمِلُوا الصَّالِحَاتِ ثُمَّ اتَّقَوا وَّآمَنُوا ثُمَّ اتَّقَوا وَّأَحْسَنُوا ۗ وَاللَّهُ يُحِبُّ الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"There is no sin upon those who believe and do righteous deeds for what they consumed — as long as they have Taqwa, believe, and do righteous deeds, then have Taqwa and believe, then have Taqwa and do Ihsan. And Allah loves the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«جو لوگ ایمان لائے اور نیک عمل کیے ان پر کوئی گناہ نہیں جو انہوں نے کھایا — جب تک تقویٰ رکھیں، ایمان لائیں، نیک عمل کریں، پھر تقویٰ + ایمان، پھر تقویٰ + احسان۔ اور اللہ محسنین سے محبت کرتا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Ma'idah 5:93</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Progression to Ihsan</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Ma'idah — 112th surah, one of the last revealed — in the context of the prohibition of alcohol and gambling. This ayah shows the spiritual progression that matters: Taqwa + Iman + Salih (righteous deeds) — then Taqwa + Iman — then Taqwa + Ihsan. The progression is exact: it moves from the full description (Taqwa + Iman + Amal) to the simplified (Taqwa + Iman) to the final and highest (Taqwa + Ihsan). The closing is always Ihsan. The Quran is showing that religious development has stages — and the culminating stage is not more ritual, not more knowledge, but Ihsan.</div>
+      <div class="ctx-txt-ur ur-blk">المائدہ — ۱۱۲ویں سورت، آخری میں سے ایک — شراب کی حرمت کے سیاق میں۔ روحانی ترقی کی ترتیب: تقویٰ + ایمان + صالح اعمال، پھر تقویٰ + ایمان، پھر تقویٰ + احسان۔ ترقی صحیح: بھری وصف سے سادہ تک پھر اعلیٰ تک۔ اختتام ہمیشہ احسان۔ قرآن دکھاتا ہے: دینی ترقی کے مراحل ہیں — اور اعلیٰ ترین نہ زیادہ رسومات نہ زیادہ علم — احسان۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">ثُمَّ اتَّقَوا وَّأَحْسَنُوا</span> <span class="root-fm">ت-ق-ي + ح-س-ن · Thumma ittaqaw wa ahsanu — then they had Taqwa and did Ihsan — the culminating pair</span>
+      <div class="root-mn en-blk">Thumma: then — sequential, indicating progression. Ittaqaw (Taqwa) + ahsanu (Ihsan). The Quran presents this as the culminating level: after Taqwa + Iman + Amal, after Taqwa + Iman, the final stage is simply Taqwa + Ihsan. This connects back to the five-concept sequence: Taqwa guards the heart; Ihsan is the quality that emerges from that guarded heart operating at its finest. The religion does not stop at prohibition and permission — it reaches for the excellence that makes everything permissible in this framework lose its pull entirely.</div>
+      <div class="root-mn-ur ur-blk">ثم — پھر، ترتیب وار۔ اتقوا + احسنوا — اعلیٰ ترین سطح۔ تقویٰ + احسان آخری جوڑا۔ پانچوں تصورات سے ربط: تقویٰ دل کی حفاظت؛ احسان اس محفوظ دل کی بہترین کارکردگی۔ دین حلال و حرام پر نہیں رکتا — اس اتقان تک پہنچتا ہے جو ہر اجازت کو بے رنگ بنا دے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Progression of Religion</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Religious development is shown explicitly as a progression, and Ihsan is the culminating level. After all the stages of Taqwa and Iman and Amal — the final form is: Taqwa + Ihsan. This prevents the misunderstanding that Islam is a fixed set of obligations to fulfil. It is a journey with a destination, and the destination is not merely correct practice but beautiful practice — Ihsan. And again: Wallahu yuhibbu al-Muhsineen. The love of Allah is the destination, and Ihsan is the road.</div>
+      <div class="uniq-txt-ur ur-blk">دینی ترقی صریح طور پر ترتیب کے ساتھ دکھائی گئی، احسان اعلیٰ ترین سطح۔ تمام مراحل کے بعد آخری شکل: تقویٰ + احسان۔ غلط فہمی دور: اسلام فرائض کا مجموعہ نہیں — منزل والا سفر ہے، اور منزل محض درست عمل نہیں بلکہ خوبصورت عمل — احسان۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-5-93-my"></span></div>
+        <textarea class="note-ta" id="note-i-5-93-my" placeholder="The Quran shows the progression: Taqwa + Iman + Amal → Taqwa + Iman → Taqwa + Ihsan. Where on this progression are you honestly? What is the gap between your current practice and Taqwa + Ihsan?" oninput="autoSave('i-5-93-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-5-93-after"></span></div>
+        <textarea class="note-ta" id="note-i-5-93-after" placeholder="What changed after deeper study?" oninput="autoSave('i-5-93-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-i-9-120">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-i-9-120')">
+    <span class="rev-badge rev-madani en-blk">Madani — Late</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی — اواخر</span>
+    <span class="card-ref">At-Tawbah 9:120</span>
+    <span class="card-preview">إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">ذَٰلِكَ بِأَنَّهُمْ لَا يُصِيبُهُمْ ظَمَأٌ وَلَا نَصَبٌ وَلَا مَخْمَصَةٌ فِي سَبِيلِ اللَّهِ وَلَا يَطَئُونَ مَوْطِئًا يَغِيظُ الْكُفَّارَ وَلَا يَنَالُونَ مِنْ عَدُوٍّ نَّيْلًا إِلَّا كُتِبَ لَهُم بِهِ عَمَلٌ صَالِحٌ ۚ إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ</div>
+    <div class="ayah-tr-en en-blk">"That is because they are not afflicted by thirst, nor exhaustion, nor hunger in the way of Allah, nor do they tread a place that enrages the disbelievers, nor do they gain anything from an enemy — except that a righteous deed is recorded for them by it. Indeed, Allah does not waste the reward of the Muhsineen."</div>
+    <div class="ayah-tr-ur ur-blk">«یہ اس لیے کہ انہیں اللہ کی راہ میں کوئی پیاس نہیں لگتی، نہ تھکاوٹ، نہ بھوک، نہ کوئی قدم اٹھاتے جو کافروں کو غصہ دلائے، نہ دشمن سے کچھ حاصل کرتے — مگر اس کے بدلے ان کے لیے نیک عمل لکھا جاتا ہے۔ بیشک اللہ محسنین کا اجر ضائع نہیں کرتا۔»</div>
+    <div class="ayah-ref-line">At-Tawbah 9:120</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Total Guarantee</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">At-Tawbah — one of the very last surahs revealed. This ayah is the Quran's most comprehensive guarantee for the Muhsin: not a single act is wasted. The list is exhaustive: thirst (Dhama) → exhaustion (Nasab) → hunger (Makhmasah) → every step taken → every gain from an enemy. All of it — every physical hardship, every step, every victory — is recorded as Amal Salih. Then: Inna Allaha la yudhi'u ajra al-Muhsineen. This phrase appears earlier (12:90, 39:10) and now closes the Quran's legislative discourse with the strongest possible guarantee. Nothing of Ihsan — no matter how invisible, how unrewarded by people, how difficult the condition — is lost.</div>
+      <div class="ctx-txt-ur ur-blk">التوبہ — آخری ترین سورتوں میں سے۔ محسن کے لیے سب سے جامع ضمانت: ایک عمل ضائع نہیں۔ فہرست جامع: پیاس، تھکاوٹ، بھوک، ہر قدم، ہر فتح — سب کچھ نیک عمل درج۔ پھر: ان اللہ لا یضیع اجر المحسنین۔ یہ عبارت پہلے آچکی (۱۲:۹۰، ۳۹:۱۰) اور اب قرآن کے قانونی خطاب کو اعلیٰ ترین ضمانت کے ساتھ بند کرتی ہے۔ احسان کا کوئی بھی عمل — چاہے کتنا غیر مرئی، انعام کے بغیر، مشکل حالت میں — ضائع نہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لَا يُضِيعُ</span> <span class="root-fm">ض-ي-ع · La yudhi'u — He does not waste, He does not allow to be lost</span>
+      <div class="root-mn en-blk">D-Y-A: to be wasted, to be lost, to perish without trace. La yudhi'u: He does not allow it to be wasted. The negation is absolute — la (not) + yudhi'u (he wastes). Not: He sometimes loses track. Not: He rewards the big acts and misses the small ones. Not: He rewards only what is seen by others. La yudhi'u: none of it is wasted. The ayah lists the smallest, most invisible acts (every step in the way of Allah, physical discomfort) to show that the guarantee applies to the smallest granularity of Ihsan. This is the Quranic seal on every act of Ihsan you have ever done that no one saw.</div>
+      <div class="root-mn-ur ur-blk">ض-ي-ع — ضائع ہونا، بغیر نشان کے ختم ہونا۔ لا یضیع: ضائع نہیں ہونے دیتا۔ نفی مطلق۔ نہ: کبھی کبھی بھول جاتا ہے۔ نہ: بڑے اعمال یاد، چھوٹے بھول جاتا ہے۔ نہ: صرف مرئی اعمال۔ لا یضیع: کچھ نہیں۔ آیت سب سے چھوٹے، غیر مرئی اعمال گنتی ہے یہ دکھانے کے لیے کہ ضمانت احسان کی چھوٹی ترین تفصیل تک لاگو ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Final and Absolute Guarantee</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The closing guarantee of the entire Ihsan framework: La yudhi'u ajra al-Muhsineen. In one of the last surahs of the Quran, after everything has been commanded, narrated, and legislated — the Quran closes with this. Every act of Ihsan, no matter how small or invisible, is recorded and will be given. The person who maintained Ihsan in difficulty, in private, without recognition, under pressure — their reward is not wasted. This is the Quran's final word on what it means to be a Muhsin: the act may be unseen, but the One who sees everything sees it. And He does not waste it.</div>
+      <div class="uniq-txt-ur ur-blk">احسان کے پورے ڈھانچے کی اختتامی ضمانت: لا یضیع اجر المحسنین۔ آخری ترین سورتوں میں سے ایک، سب کچھ حکم، بیان، قانون کے بعد — قرآن یہاں بند ہوتا ہے۔ احسان کا ہر عمل، چاہے کتنا چھوٹا یا غیر مرئی، درج اور ملے گا۔ مشکل میں، خلوت میں، بغیر شناخت، دباؤ میں احسان کرنے والا — ضائع نہیں۔ یہ قرآن کی محسن پر آخری بات: عمل غیر مرئی ہو سکتا ہے، مگر ہر چیز دیکھنے والا دیکھتا ہے اور ضائع نہیں کرتا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-i-9-120-my"></span></div>
+        <textarea class="note-ta" id="note-i-9-120-my" placeholder="La yudhi'u ajra al-Muhsineen. Think of an act of Ihsan you have done that no one saw, that received no recognition, that cost you something. Know that it is recorded. Does that knowledge change anything for you right now?" oninput="autoSave('i-9-120-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-i-9-120-after"></span></div>
+        <textarea class="note-ta" id="note-i-9-120-after" placeholder="What changed after deeper study?" oninput="autoSave('i-9-120-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider" style="margin-top:32px">
+  <div class="era-dot" style="background:var(--purple)"></div>
+  <div class="era-label en-blk">Sunnah on Ihsan — Authenticated Hadith Only</div>
+  <div class="era-label-ur ur-blk">احسان پر سنت — صرف مستند احادیث</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Jibreel Definition — The Only Prophetic Definition of Ihsan in the Quran or Sunnah</span><span class="ur-blk">جبریل کی تعریف — قرآن اور سنت میں احسان کی واحد نبوی تعریف</span></div>
+  <div class="sh-ar">مَا الْإِحْسَانُ؟ قَالَ: أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ، فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ</div>
+  <div class="sh-en en-blk">"What is Ihsan?" He said: "That you worship Allah as if you see Him — and if you cannot see Him, then know that He sees you."</div>
+  <div class="sh-ur ur-blk">«احسان کیا ہے؟ آپ ﷺ نے فرمایا: کہ اللہ کی عبادت اس طرح کرو جیسے تم اسے دیکھ رہے ہو — اور اگر تم اسے نہیں دیکھ سکتے تو بیشک وہ تمہیں دیکھ رہا ہے۔»</div>
+  <div class="sh-src">Sahih Bukhari 50, Sahih Muslim 8 — Hadith of Jibreel <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Allah Has Prescribed Ihsan Upon Everything</span><span class="ur-blk">اللہ نے ہر چیز پر احسان فرض کیا</span></div>
+  <div class="sh-ar">إِنَّ اللَّهَ كَتَبَ الْإِحْسَانَ عَلَى كُلِّ شَيْءٍ</div>
+  <div class="sh-en en-blk">"Indeed, Allah has prescribed Ihsan upon everything. So when you kill, kill with Ihsan; and when you slaughter, slaughter with Ihsan — let one of you sharpen his blade and spare the animal suffering."</div>
+  <div class="sh-ur ur-blk">«اللہ نے ہر چیز پر احسان فرض کیا ہے۔ پس جب قتل کرو تو احسان کے ساتھ؛ جب ذبح کرو تو احسان کے ساتھ — چھری تیز کرو اور جانور کو تکلیف سے بچاؤ۔»</div>
+  <div class="sh-src">Sahih Muslim 1955 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Whoever Perfects Their Islam — Ihsan as the Mark of Completion</span><span class="ur-blk">جو اپنے اسلام کو بہتر بنائے</span></div>
+  <div class="sh-ar">مَنْ أَحْسَنَ فِي الْإِسْلَامِ لَمْ يُؤَاخَذْ بِمَا عَمِلَ فِي الْجَاهِلِيَّةِ وَمَنْ أَسَاءَ فِي الْإِسْلَامِ أُخِذَ بِالْأَوَّلِ وَالْآخِرِ</div>
+  <div class="sh-en en-blk">"Whoever does Ihsan in Islam will not be held accountable for what he did in the days of ignorance. And whoever does evil in Islam will be held accountable for the first and the last."</div>
+  <div class="sh-ur ur-blk">«جس نے اسلام میں احسان کیا اسے جاہلیت کے اعمال پر نہیں پکڑا جائے گا۔ اور جس نے اسلام میں برائی کی اسے پہلے اور بعد دونوں پر پکڑا جائے گا۔»</div>
+  <div class="sh-src">Sahih Muslim 129 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Righteousness Is Beautiful Character — The Social Face of Ihsan</span><span class="ur-blk">نیکی خوبصورت اخلاق ہے — احسان کا سماجی چہرہ</span></div>
+  <div class="sh-ar">الْبِرُّ حُسْنُ الْخُلُقِ</div>
+  <div class="sh-en en-blk">"Righteousness is beautiful character."</div>
+  <div class="sh-ur ur-blk">«نیکی خوبصورت اخلاق ہے۔»</div>
+  <div class="sh-src">Sahih Muslim 2553 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Fear Allah, Follow a Bad Deed with a Good One, and Treat People with Beautiful Character — Muraqabah into Ihsan</span><span class="ur-blk">تقویٰ، برائی کے بعد نیکی، خوبصورت اخلاق — مراقبہ سے احسان</span></div>
+  <div class="sh-ar">اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ، وَأَتْبِعِ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا، وَخَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ</div>
+  <div class="sh-en en-blk">"Fear Allah wherever you are. Follow a bad deed with a good one — it will wipe it out. And treat people with beautiful character."</div>
+  <div class="sh-ur ur-blk">«جہاں بھی ہو اللہ سے ڈرو۔ برائی کے بعد نیکی کرو — وہ اسے مٹا دے گی۔ اور لوگوں سے خوبصورت اخلاق کے ساتھ پیش آؤ۔»</div>
+  <div class="sh-src">Tirmidhi 1987 — Hasan <span class="grade grade-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Allah Does Not Look at Forms — He Looks at Hearts and Deeds</span><span class="ur-blk">اللہ صورتوں کو نہیں دیکھتا — دلوں اور اعمال کو دیکھتا ہے</span></div>
+  <div class="sh-ar">إِنَّ اللَّهَ لَا يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ</div>
+  <div class="sh-en en-blk">"Indeed Allah does not look at your forms or your wealth — but He looks at your hearts and your deeds."</div>
+  <div class="sh-ur ur-blk">«اللہ تمہاری صورتوں اور مالوں کو نہیں دیکھتا — بلکہ تمہارے دلوں اور اعمال کو دیکھتا ہے۔»</div>
+  <div class="sh-src">Sahih Muslim 2564 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card" style="border-color:var(--goldbdr);background:rgba(201,168,76,.04)">
+  <div class="sh-lbl"><span class="en-blk">Connected Concepts — The Summit and Its Foundations</span><span class="ur-blk">متعلقہ تصورات — چوٹی اور اس کی بنیادیں</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;line-height:1.85;color:var(--text)"><strong style="color:var(--gold2)">Ikhlas (Sincerity)</strong> — Ihsan without Ikhlas becomes performance. The Hadith of Jibreel defines Ihsan as worship Ka-annaka tarahu — as if you see Him. The moment you are doing it to be seen by others, Ikhlas is gone and Ihsan becomes its counterfeit: Riya. Ikhlas is the internal condition that gives Ihsan its genuine quality. You cannot do Ihsan for Allah and for people simultaneously — one will dominate.<br><br><strong style="color:var(--gold2)">Tawadu (Humility)</strong> — Ihsan without Tawadu produces pride in one's excellence. The Muhsin who is aware of the source of all Husn — Allah — naturally has humility: my Ihsan is a reflection of His, not an achievement of mine. Tawadu is the posture that keeps Ihsan from becoming self-congratulation.<br><br><strong style="color:var(--gold2)">Muraqabah → Ihsan</strong> — The Jibreel definition makes this explicit: you do Ihsan because you are aware of being seen (Ka-annaka tarahu). Muraqabah is not an end in itself — it is the awareness that generates Ihsan. The higher the Muraqabah, the more naturally Ihsan emerges. A person who genuinely lives with the awareness of being in Allah's sight cannot help but do things beautifully — the awareness itself produces the excellence.</div>
+  <div class="sh-ur ur-blk" style="font-style:normal;line-height:2;color:var(--text);direction:rtl;text-align:right"><strong style="color:var(--gold2)">اخلاص</strong> — احسان بغیر اخلاص نمائش بن جاتا ہے۔ جبریل کی تعریف: کأنک تراہ — جیسے اللہ کو دیکھ رہے ہو۔ لوگوں کے لیے کرنے کا لمحہ — اخلاص ختم، احسان ریا بن گیا۔<br><br><strong style="color:var(--gold2)">تواضع</strong> — احسان بغیر تواضع تکبر پیدا کرتا ہے۔ محسن جو جانتا ہے کہ تمام حسن اللہ سے ہے — قدرتی طور پر متواضع: میرا احسان اس کا عکس ہے، میری کامیابی نہیں۔<br><br><strong style="color:var(--gold2)">مراقبہ → احسان</strong> — جبریل کی تعریف صریح: احسان اس لیے کہ دیکھے جانے کا شعور ہے۔ مراقبہ خود غایت نہیں — وہ شعور ہے جو احسان پیدا کرتا ہے۔ شعور جتنا اونچا احسان اتنا قدرتی۔</div>
+</div>
+
+<div class="sh-card" style="margin-top:20px">
+  <div class="sh-lbl"><span class="en-blk">Your Personal Understanding of Ihsan — The Journey's End</span><span class="ur-blk">احسان کے بارے میں آپ کا ذاتی فہم — سفر کا اختتام</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;color:var(--text2);font-size:13px;line-height:1.8">You have studied all five concepts. Dhikr placed Allah in awareness. Zuhd cleared what would distort that awareness. Taqwa guarded it. Muraqabah deepened it into knowing you are with Him. Ihsan is the flower of all of it: acting from that awareness with the most beautiful quality you are capable of — in worship, in relationships, in work, in everything. Write your honest synthesis. Where are you in the five-concept journey? What does Ihsan mean to you now — not theoretically, but as something you are or are not doing? What would your life look like if you moved from Muraqabah into genuine Ihsan?</div>
+  <div class="sh-ur ur-blk" style="font-size:14px;color:var(--text2);line-height:2;direction:rtl;text-align:right">پانچوں تصورات کا مطالعہ کیا۔ ذکر نے شعور میں رکھا۔ زہد نے صاف کیا۔ تقویٰ نے محفوظ کیا۔ مراقبہ نے گہرا کیا۔ احسان سب کا پھول ہے: اس شعور سے، بہترین ممکن معیار کے ساتھ — عبادت، تعلقات، کام، ہر چیز میں۔ صادقانہ خلاصہ لکھیں۔ پانچ تصورات کے سفر میں آپ کہاں ہیں؟ احسان اب آپ کے لیے کیا ہے — نظری نہیں، عملی؟</div>
+  <div class="notes-sec" style="border-top:none;padding-top:8px">
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Synthesis — The Five Concepts and Where I Am</span><span class="ur-blk">میرا خلاصہ — پانچ تصورات اور میں کہاں ہوں</span><span class="nsv" id="sv-i-synth"></span></div>
+      <textarea class="note-ta" id="note-i-synth" style="min-height:140px" placeholder="Write honestly: Dhikr, Zuhd, Taqwa, Muraqabah, Ihsan. Which of these five has the firmest grip on your life right now? Which is furthest? What is one thing — one specific act — you will do with Ihsan tomorrow that you would not have thought to do before this study?" oninput="autoSave('i-synth',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+
+<div class="stage3-hdr">
+  <div class="stage3-hdr-ar">الصوفية على الإحسان</div>
+  <div class="stage3-hdr-en en-blk">Sufi Tradition on Ihsan &#8212; Seven Scholars</div>
+  <div class="stage3-hdr-rule"></div>
+</div>
+<p class="stage3-intro en-blk">Seven scholars in chronological order &#8212; each separately. Ihsan is the culmination: all five concepts are visible from here.</p>
+<p class="stage3-intro ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">سات علماء تاریخی ترتیب میں۔ احسان انتہا ہے: یہاں سے پانچوں تصورات نظر آتے ہیں۔</p>
+
+<div class="scholar-card" id="sc-i-basri">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-basri')">
+    <div class="sc-num">01</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Hasan al-Basri</div>
+      <div class="sc-name-ur ur-blk">حسن بصری</div>
+      <div class="sc-dates">642&#8211;728 CE &middot; Basra &middot; Companion-generation bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Prologue</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in Medina, met over 70 Companions. Foundational voice of the early spiritual tradition.</div>
+      <div class="bio-txt-ur ur-blk">مدینہ میں پیدا، ۷۰ سے زیادہ صحابہ سے ملاقات۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Preserved in Hilyat al-Awliya and Sifat al-Safwa.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">Hasan al-Basri lived Ihsan before the concept was named. His entire life was an expression of doing everything at its highest possible quality in the awareness of Allah&#39;s gaze. His teaching: &#39;Do good as though you see Allah &#8212; for if you do not see Him, He sees you.&#39; This is almost verbatim the Jibreel definition of Ihsan &#8212; centuries before it was systematised. His unique angle: Ihsan in social dealings was the primary test. The person who has Ihsan treats every human with the quality of attention that comes from knowing Allah is watching that interaction. He was famous for weeping in the night and being generous and patient in the day &#8212; the two halves of Ihsan visible simultaneously.</div>
+    <div class="sc-finding-ur ur-blk">حسن بصری نے احسان کا نام آنے سے پہلے جیا۔ تعلیم: نیکی کرو جیسے اللہ کو دیکھ رہے ہو &#8212; اگر نہیں دیکھتے تو وہ دیکھ رہا ہے۔ یہ تقریباً حدیثِ جبریل کا لفظ ہے۔ سماجی معاملات میں احسان: ہر انسان کے ساتھ اس توجہ سے کہ اللہ یہ تعامل دیکھ رہا ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">أَحْسِنْ كَأَنَّكَ تَرَى اللَّهَ &#8212; فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Do good as though you see Allah &#8212; for if you do not see Him, He sees you.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;نیکی کرو جیسے اللہ کو دیکھ رہے ہو &#8212; اگر نہیں دیکھتے تو وہ دیکھتا ہے۔&raquo;</div>
+    <div class="sc-quote-src">Preserved in Hilyat al-Awliya (Abu Nuaym)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Anticipates the Jibreel definition of Ihsan by over a century, demonstrating that the concept was already fully lived in the generation closest to the Prophet ﷺ. He also grounds Ihsan in social life &#8212; not just worship. This prevents the misunderstanding that Ihsan is a private spiritual state. For Hasan al-Basri, Ihsan is visible in how you treat people, not only in how you pray.</div>
+    <div class="sc-contrib-ur ur-blk">حدیثِ جبریل کی تعریف ایک صدی سے پہلے جیتے ہیں۔ احسان کو سماجی زندگی میں زمین دیتے ہیں &#8212; صرف عبادت نہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-basri"></span></div>
+        <textarea class="note-ta" id="note-i3-basri" placeholder="Hasan al-Basri: do good as though you see Allah. Which relationships in your life currently receive the quality of attention that comes from this awareness &#8212; and which ones do not?" oninput="autoSave('i3-basri',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-i-muhasibi">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-muhasibi')">
+    <div class="sc-num">02</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Muhasibi</div>
+      <div class="sc-name-ur ur-blk">الحارث المحاسبی</div>
+      <div class="sc-dates">781&#8211;857 CE &middot; Baghdad &middot; Psychological school</div>
+    </div>
+    <div class="sc-badge en-blk">Psychology</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">First to apply psychology to spiritual states.</div>
+      <div class="bio-txt-ur ur-blk">روحانی کیفیات پر نفسیاتی تجزیہ کے پیشرو۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ri&#39;aya li-Huquq Allah; Muhasabat al-Nufus.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">Al-Muhasibi identifies the primary obstacle to Ihsan that no other scholar names as clearly: Ujb &#8212; self-admiration for one&#39;s own excellence. The person who acts with Ihsan and then admires their Ihsan has immediately diminished it. The nafs takes the credit for the beauty of the act and makes it a possession &#8212; and a possession is a veil. His muhasabah applied to Ihsan: after every act of quality, the honest question is not &#39;was it excellent?&#39; but &#39;for whom was it excellent?&#39; &#8212; for Allah or for my own sense of myself as someone who acts with excellence?</div>
+    <div class="sc-finding-ur ur-blk">المحاسبی سب سے واضح طور پر احسان کی رکاوٹ بیان کرتے ہیں: عجب &#8212; اپنی عمدگی پر خودپسندی۔ احسان سے عمل کرنا پھر اپنے احسان کو سراہنا &#8212; فوراً کم ہو گیا۔ نفس کریڈٹ لیتا ہے۔ محاسبہ احسان پر: یہ کس کے لیے عمدہ تھا؟ اللہ کے لیے یا میری ذات کے لیے؟</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْإِحْسَانُ لَا يَكُونُ إِحْسَاناً حَتَّى يَكُونَ لِلَّهِ لَا لِلنَّفْسِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Ihsan is not Ihsan until it is for Allah &#8212; not for the self.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;احسان اس وقت تک احسان نہیں جب تک اللہ کے لیے نہ ہو &#8212; نفس کے لیے نہیں۔&raquo;</div>
+    <div class="sc-quote-src">Ri&#39;aya li-Huquq Allah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Names the internal corruption of Ihsan: Ujb (self-admiration). Without this insight, a person can spend years developing beautiful action while simultaneously developing a beautiful image of themselves as someone who acts beautifully &#8212; which is a sophisticated form of Riya. He makes the Ikhlas-Ihsan connection explicit: Ihsan without Ikhlas is performance; Ikhlas without Ihsan is sincerity without quality. Both are required simultaneously.</div>
+    <div class="sc-contrib-ur ur-blk">احسان کی اندرونی خرابی: عجب۔ سالوں خوبصورت عمل کرتے ہوئے خوبصورت عامل کی تصویر بنانا &#8212; ریا کی نفیس شکل۔ اخلاص اور احسان کا ربط: اخلاص بغیر احسان سادہ نیت، احسان بغیر اخلاص نمائش۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-muhasibi"></span></div>
+        <textarea class="note-ta" id="note-i3-muhasibi" placeholder="Al-Muhasibi: Ihsan is not Ihsan until it is for Allah. After your last beautiful act &#8212; did you notice any admiration of yourself for having done it? What does that tell you?" oninput="autoSave('i3-muhasibi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-i-junayd">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-junayd')">
+    <div class="sc-num">03</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Junayd al-Baghdadi</div>
+      <div class="sc-name-ur ur-blk">الجنید البغدادی</div>
+      <div class="sc-dates">830&#8211;910 CE &middot; Baghdad &middot; Technical school</div>
+    </div>
+    <div class="sc-badge en-blk">Sayyid al-Taifa</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Master of the Baghdad school. Created the technical vocabulary of inner states.</div>
+      <div class="bio-txt-ur ur-blk">بغداد مدرسے کے امام۔ باطنی کیفیات کی تکنیکی زبان کے خالق۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Rasa&#39;il; in Tabaqat al-Sufiyya and Hilyat al-Awliya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">Al-Junayd&#39;s definition of Ihsan is the most technically exact: &#39;Ihsan is that you worship Allah as if you see Him &#8212; and this seeing is real, not metaphorical, for the person of complete station.&#39; His contribution: the Jibreel hadith&#39;s &#39;as if you see Him&#39; (Ka-annaka) is a metaphor for the beginner and a description of reality for the advanced. The person who has moved from Mushahada (witnessing) to Muaqaba (knowledge-based watchfulness) and back to Mushahada is not acting &#39;as if&#39; they see Allah &#8212; they are, at least in flashes, genuinely perceiving something. Ihsan, at its depth, is not excellent action done by a person who pretends to see Allah &#8212; it is excellent action done by a person who actually does.</div>
+    <div class="sc-finding-ur ur-blk">الجنید کی سب سے تکنیکی صحیح تعریف: احسان یہ ہے کہ اللہ کی عبادت کریں جیسے اسے دیکھ رہے ہیں &#8212; اور یہ دیکھنا اعلیٰ مقام والے کے لیے حقیقی ہے، استعارہ نہیں۔ کأنک کا مطلب: مبتدی کے لیے تشبیہ، اعلیٰ کے لیے حقیقت کا بیان۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْإِحْسَانُ أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ &#8212; وَتِلْكَ الرُّؤْيَةُ حَقِيقِيَّةٌ لِصَاحِبِ الْمَقَامِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Ihsan is that you worship Allah as if you see Him &#8212; and that seeing is real for the person of complete station.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;احسان اللہ کی عبادت جیسے اسے دیکھ رہے ہیں &#8212; اور یہ دیکھنا صاحبِ مقام کے لیے حقیقی ہے۔&raquo;</div>
+    <div class="sc-quote-src">Tabaqat al-Sufiyya (al-Sulami)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Deepens the Jibreel hadith by distinguishing two readings of Ka-annaka. For most people it is a simulation &#8212; act as if you see Him, even though you do not. For the person of advanced station, it is a description: they are actually, at least momentarily, perceiving something that ordinary consciousness does not reach. This prevents Ihsan from being reduced to a technique (act as if) and reveals it as a state (actual perception). The distinction is the difference between theater and reality.</div>
+    <div class="sc-contrib-ur ur-blk">کأنک کی دو قرائتوں میں فرق: اکثر کے لیے تشبیہ &#8212; جیسے دیکھ رہے ہو۔ اعلیٰ مقام کے لیے حقیقت کا بیان۔ احسان کو تکنیک سے کیفیت بناتے ہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-junayd"></span></div>
+        <textarea class="note-ta" id="note-i3-junayd" placeholder="Al-Junayd: as if you see Him is a metaphor for the beginner and a description for the advanced. Where on this spectrum does your worship currently sit &#8212; honest simulation or something closer to actual perception?" oninput="autoSave('i3-junayd',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-i-ghazali">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-ghazali')">
+    <div class="sc-num">04</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Ghazali</div>
+      <div class="sc-name-ur ur-blk">ابوحامد الغزالی</div>
+      <div class="sc-dates">1058&#8211;1111 CE &middot; Tus / Baghdad &middot; Systematic bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Hujjat al-Islam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Left his position after spiritual crisis at 37. Spent years in solitary practice. The Ihya is the most comprehensive treatment of the interior life.</div>
+      <div class="bio-txt-ur ur-blk">احیاء: باطنی زندگی کا سب سے جامع علاج۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ihya Ulum al-Din; Minhaj al-Abidin; Kimiya-yi Sa&#39;adat.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">Al-Ghazali gives Ihsan its most complete systematic map: three levels corresponding to three levels of Islam. Level 1: Islam &#8212; outward compliance with the pillars. Level 2: Iman &#8212; inward belief accompanying the outward acts. Level 3: Ihsan &#8212; doing everything with the full awareness of Allah&#39;s presence and with the intention of giving the best you are capable of, because that is what the One who sees deserves. His unique contribution: Ihsan is not restricted to worship. Every act of every category &#8212; professional, social, domestic, artistic &#8212; has a level of Ihsan and a level below it. The Ihya is structured around the question: how is Ihsan expressed in worship, in social interaction, in character, in the knowledge of the heart?</div>
+    <div class="sc-finding-ur ur-blk">الغزالی نے احسان کا سب سے مکمل منظم نقشہ دیا: تین سطحیں &#8212; اسلام (ظاہری اطاعت)، ایمان (اندرونی یقین)، احسان (اللہ کی موجودگی کے شعور کے ساتھ بہترین دینا)۔ احسان عبادت تک محدود نہیں &#8212; ہر کام میں۔ احیاء اس سوال پر: عبادت، سماجی، کردار، علمِ دل میں احسان کیسے ظاہر ہوتا ہے؟</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْإِحْسَانُ أَنْ تَعْبُدَ اللَّهَ فِي كُلِّ شَيْءٍ كَأَنَّكَ تَرَاهُ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Ihsan is that you worship Allah in everything as if you see Him.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;احسان یہ ہے کہ ہر چیز میں اللہ کی عبادت اس طرح کرو جیسے تم اسے دیکھ رہے ہو۔&raquo;</div>
+    <div class="sc-quote-src">Ihya Ulum al-Din, Book on the Wonders of the Heart</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Extends Ihsan from worship into every domain of human activity &#8212; work, relationship, conversation, craftsmanship. The Ihya is the longest sustained demonstration of this: showing how Ihsan applies to eating, sleeping, earning money, marriage, travel, knowledge. This is the most practically comprehensive treatment of Ihsan in the tradition and prevents its reduction to a spiritual state that only applies in prayer.</div>
+    <div class="sc-contrib-ur ur-blk">احسان کو عبادت سے ہر دائرے تک پھیلاتے ہیں &#8212; کام، تعلق، گفتگو، فن۔ احیاء طویل ترین عملی مظاہرہ: کھانا، نیند، کمائی، نکاح، سفر، علم میں احسان۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-ghazali"></span></div>
+        <textarea class="note-ta" id="note-i3-ghazali" placeholder="Al-Ghazali: Ihsan in everything as if you see Him. Name one domain &#8212; not worship, but something ordinary &#8212; where you currently do what is adequate rather than what is excellent. What would Ihsan look like there?" oninput="autoSave('i3-ghazali',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-i-atailla">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-atailla')">
+    <div class="sc-num">05</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Ata&#39;illah al-Iskandari</div>
+      <div class="sc-name-ur ur-blk">ابن عطاء اللہ الاسکندری</div>
+      <div class="sc-dates">1259&#8211;1309 CE &middot; Alexandria / Cairo &middot; Shadhili order</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Hikam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Third master of the Shadhili order. Author of Al-Hikam.</div>
+      <div class="bio-txt-ur ur-blk">شاذلی سلسلے کے تیسرے مرشد۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Hikam; Miftah al-Falah; Al-Tanwir.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">Ibn Ata&#39;illah&#39;s contribution to Ihsan is the one that most naturally emerges from his Hikam approach: Ihsan arises when you stop managing your relationship with Allah and allow Him to manage it. His most powerful Hikam on this: &#39;Your eagerness to perform a deed when the Lord has not given you permission to proceed is evidence that your ego is not dead.&#39; True Ihsan does not push its way into the scene &#8212; it arises from a heart that is in its proper place, at the proper time, for the proper reason. The Muhsin does not decide to be excellent; they are excellent because their heart is truly present in the act, which only happens when the act is genuinely for Allah and not for the self&#39;s satisfaction.</div>
+    <div class="sc-finding-ur ur-blk">ابن عطاء اللہ کا تعاون: احسان اس وقت اٹھتا ہے جب آپ اللہ کے ساتھ تعلق کو خود نہیں چلاتے، اسے چلانے دیتے ہیں۔ حکمت: جب رب نے اجازت نہیں دی تب عمل کی جلدی &#8212; نفس ابھی نہیں مرا۔ محسن اچھا کرنے کا فیصلہ نہیں کرتا &#8212; اچھا ہوتا ہے کیونکہ دل موجود ہے اور وہ اللہ کے لیے ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">حِرْصُكَ عَلَى الْعَمَلِ وَلَمْ يُؤْذَنْ لَكَ فِيهِ دَلِيلٌ عَلَى أَنَّ نَفْسَكَ لَمْ تَمُتْ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Your eagerness to perform a deed when permission has not been given to you is evidence that your ego has not yet died.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;اذن نہ ملنے پر عمل کی جلدی &#8212; اس بات کی دلیل کہ ابھی نفس نہیں مرا۔&raquo;</div>
+    <div class="sc-quote-src">Al-Hikam al-Ata&#39;iyyah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Introduces the distinction between Ihsan as a decision (I will now act with excellence) and Ihsan as a natural expression (this is what arises from a heart that is truly oriented). The Muhsin does not decide to be a Muhsin &#8212; they are one because their heart has been sufficiently prepared by Taqwa, Zuhd, and Muraqabah. This is the culmination of the five-concept sequence: all four previous concepts prepare the ground from which Ihsan naturally flowers.</div>
+    <div class="sc-contrib-ur ur-blk">احسان کے دو تصور: فیصلہ (اب عمدہ کروں گا) اور قدرتی اظہار (تیار دل سے خود اٹھتا ہے)۔ محسن بننے کا فیصلہ نہیں کرتا &#8212; ہے &#8212; کیونکہ تقویٰ، زہد، مراقبہ نے زمین تیار کی۔ پانچوں تصورات کا اختتام۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-atailla"></span></div>
+        <textarea class="note-ta" id="note-i3-atailla" placeholder="Ibn Ata&#39;illah: your eagerness to act when not given permission shows the ego has not died. Can you recall a recent &#39;excellent&#39; act that was more about your eagerness to perform excellence than about the act itself being needed?" oninput="autoSave('i3-atailla',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-i-ibnqayyim">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-ibnqayyim')">
+    <div class="sc-num">06</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn al-Qayyim al-Jawziyya</div>
+      <div class="sc-name-ur ur-blk">ابن قیم الجوزیہ</div>
+      <div class="sc-dates">1292&#8211;1350 CE &middot; Damascus &middot; Quran-anchored tradition</div>
+    </div>
+    <div class="sc-badge en-blk">Rigorous</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">The doctor of hearts. Engaged Sufi concepts with both appreciation and critique.</div>
+      <div class="bio-txt-ur ur-blk">دلوں کے طبیب۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Wabil al-Sayyib; Madarij al-Salikin; Kitab al-Ruh.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">Ibn al-Qayyim&#39;s greatest contribution to the understanding of Ihsan comes through his reading of the Jibreel hadith as a complete cosmological statement. The two clauses &#8212; worship as if you see Him / knowing He sees you &#8212; describe two different spiritual stations that together cover all of the possible relationships between the servant and Allah in worship. His contribution: Ihsan is not the addition of a quality to acts &#8212; it is the transformation of the actor. The person of Ihsan does not do the same acts better; they become a different kind of person doing those acts. And the test: Ihsan is visible in the quality of what is produced even when no one is watching. The act done privately with Ihsan and the act done publicly with Ihsan are identical in quality &#8212; because the witness is always the same One.</div>
+    <div class="sc-finding-ur ur-blk">ابن قیم کا سب سے بڑا تعاون: حدیثِ جبریل کو مکمل کائناتی بیان کے طور پر پڑھتے ہیں۔ دو شقیں: تمام ممکنہ بندہ-اللہ تعلقات کا احاطہ۔ احسان اعمال میں معیار نہیں &#8212; عامل کی تبدیلی ہے۔ محسن وہی کام بہتر نہیں کرتا &#8212; وہ ایک مختلف قسم کا انسان بن جاتا ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْإِحْسَانُ لَيْسَ إِضَافَةَ صِفَةٍ إِلَى الْأَعْمَالِ &#8212; بَلْ هُوَ تَحَوُّلُ الْفَاعِلِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Ihsan is not the addition of a quality to deeds &#8212; it is the transformation of the one who acts.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;احسان اعمال میں کوئی صفت کا اضافہ نہیں &#8212; بلکہ عامل کی تبدیلی ہے۔&raquo;</div>
+    <div class="sc-quote-src">Madarij al-Salikin, station of Ihsan</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most important clarification of what Ihsan actually is: not a technique applied to existing acts but a transformation of the person who acts. This explains why Ihsan cannot be taught as a skill and why the five-concept sequence is necessary. You do not add Ihsan to a life; you become someone for whom Ihsan is natural. His public-private test &#8212; Ihsan in private and in public are identical &#8212; is the most useful daily diagnostic.</div>
+    <div class="sc-contrib-ur ur-blk">سب سے اہم وضاحت: احسان تکنیک نہیں جو موجودہ اعمال پر لگائیں &#8212; عامل کی تبدیلی۔ سکھایا نہیں جا سکتا۔ پانچوں تصورات کا سلسلہ ضروری ہے۔ نجی-عوامی امتحان: روزمرہ کا سب سے مفید تشخیص۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-ibnqayyim"></span></div>
+        <textarea class="note-ta" id="note-i3-ibnqayyim" placeholder="Ibn al-Qayyim: Ihsan is transformation of the actor, not improvement of the act. Test: is the quality of what you do in private the same as in public? Where is the gap &#8212; and what does that gap reveal?" oninput="autoSave('i3-ibnqayyim',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-i-ibnarabi">
+  <div class="sc-hdr" onclick="toggleCard('sc-i-ibnarabi')">
+    <div class="sc-num">07</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Arabi</div>
+      <div class="sc-name-ur ur-blk">ابن عربی</div>
+      <div class="sc-dates">1165&#8211;1240 CE &middot; Murcia / Damascus &middot; Metaphysical school</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Shaykh al-Akbar</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in al-Andalus. Settled in Damascus. Most contested figure in the tradition.</div>
+      <div class="bio-txt-ur ur-blk">اندلس میں پیدا، دمشق میں انتقال۔ سب سے متنازع۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Futuhat al-Makkiyya (37 vols.); Fusus al-Hikam.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Ihsan</div>
+    <div class="sc-finding en-blk">For Ibn Arabi, Ihsan at its culmination is not the servant acting beautifully toward Allah &#8212; it is the Real acting through the servant with the quality of Its own Beauty (Husn). His reading of the H-S-N root: beauty is a divine attribute, and the Muhsin is the one through whom divine beauty flows into created action. The servant becomes a channel of divine self-disclosure (tajalli). This is not the servant pretending to see Allah and acting accordingly &#8212; it is the servant becoming transparent enough for Allah&#39;s own Ihsan to be visible in the action. &#39;Is the reward of Ihsan anything but Ihsan?&#39; (55:60) &#8212; in his reading, the Ihsan in the action and the Ihsan in the reward are both divine, and both are manifestations of the same reality.</div>
+    <div class="sc-finding-ur ur-blk">ابن عربی کے لیے: انتہا میں احسان بندہ اللہ کی طرف خوبصورتی سے عمل نہیں کرتا &#8212; بلکہ حق بندے کے ذریعے اپنی خوبصورتی (حسن) کا عمل کرتا ہے۔ محسن وہ ہے جس سے الٰہی حسن مخلوق عمل میں بہتا ہے۔ بندہ تجلی کا ذریعہ۔ ہل جزاء الاحسان الا الاحسان: دونوں الٰہی۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْإِحْسَانُ الْحَقِيقِيُّ هُوَ إِحْسَانُ الْحَقِّ مِنْ خِلَالِ الْعَبْدِ لَا إِحْسَانُ الْعَبْدِ لِلْحَقِّ</div>
+    <div class="sc-quote-en en-blk">&ldquo;True Ihsan is the Ihsan of the Real through the servant &#8212; not the servant&#39;s Ihsan toward the Real.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;حقیقی احسان حق کا احسان بندے کے ذریعے ہے &#8212; بندے کا حق کی طرف احسان نہیں۔&raquo;</div>
+    <div class="sc-quote-src">Al-Futuhat al-Makkiyya</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most radical reframing of Ihsan: the servant is not the agent of excellence but the channel through which divine excellence flows. This either reveals the deepest truth about where Ihsan actually comes from &#8212; all beauty is ultimately divine &#8212; or it removes the servant&#39;s responsibility for Ihsan by making them a passive channel rather than an active Muhsin. The Divergence section addresses this tension with the broader tradition&#39;s insistence on the servant&#39;s active responsibility.</div>
+    <div class="sc-contrib-ur ur-blk">احسان کی سب سے بنیادی بازتشکیل: بندہ عمدگی کا فاعل نہیں بلکہ الٰہی عمدگی کا ذریعہ۔ یا گہری ترین سچائی &#8212; یا بندے کی ذمہ داری کا خاتمہ۔ اختلاف کے حصے میں۔</div>
+    <div class="sc-controversy"><strong>Note on Controversy:</strong> Ibn Arabi&#39;s Wahdat al-Wujud framework remains the most contested position in Islamic intellectual history. Ibn al-Qayyim &#8212; in this same list &#8212; considered aspects of it incompatible with sound Tawhid. Neither endorsement nor dismissal: engage the insight, hold the theological concern, and let the Divergence section address the tension directly.</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-i3-ibnarabi"></span></div>
+        <textarea class="note-ta" id="note-i3-ibnarabi" placeholder="Ibn Arabi: true Ihsan is the Real&#39;s Ihsan through the servant. Does this feel like liberation from ego-Ihsan or like a removal of your responsibility to be excellent? What does your honest answer reveal?" oninput="autoSave('i3-ibnarabi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap">
+  <div class="div-hdr">
+    <div class="div-hdr-ar">الاختلاف</div>
+    <div class="div-hdr-en en-blk">Divergence &#8212; Three Live Disagreements on Ihsan</div>
+    <div class="div-hdr-desc en-blk">Three unresolved debates on the nature, source, and destination of Ihsan. State your position on each &#8212; date it.</div>
+    <div class="div-hdr-desc ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">احسان کی ماہیت، ماخذ اور منزل پر تین حل نہ ہونے والی بحثیں۔ پوزیشن بیان کریں، تاریخ لکھیں۔</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 01</div>
+    <div class="div-q en-blk">Is Ihsan something you do (excellent action) or something you become (a transformed person)?</div>
+    <div class="div-q-ur ur-blk">احسان وہ ہے جو آپ کرتے ہیں (عمدہ عمل) یا وہ جو آپ بنتے ہیں (تبدیل شدہ انسان)؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Ghazali &middot; General understanding</div><div class="div-view en-blk">Ihsan is a quality you bring to actions &#8212; the awareness and excellence you consciously apply. You can choose to pray with Ihsan, to earn with Ihsan, to speak with Ihsan. This makes Ihsan accessible and actionable. You do not need to be a fully transformed person to begin bringing Ihsan to specific acts.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn al-Qayyim &middot; Ibn Ata&#39;illah</div><div class="div-view en-blk">Ihsan is the transformation of the person &#8212; it cannot be applied to acts from the outside in. A person who is not a Muhsin cannot do Ihsan &#8212; they can do acts that look like Ihsan. True Ihsan arises naturally from a heart that has been prepared by Taqwa, Zuhd, and Muraqabah. The five-concept sequence is not advice; it is the only path.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">The Quran commands Ihsan directly (16:90 &#8212; Allah commands Ihsan) &#8212; supporting the action-view: it is commanded of everyone, including beginners. But 2:195 (Allah loves the Muhsineen) describes a person &#8212; not an act. And 29:69 (those who strive for Us &#8212; We guide them &#8212; Allah is with the Muhsineen) describes the Muhsin as someone who has become, not just someone who has acted. Both are Quranic. The honest position: begin with Ihsan as action; cultivate Ihsan as becoming.</div></div>
+    <div class="div-verdict en-blk">Both are true at different stages. Begin by bringing deliberate excellence to specific acts &#8212; this is accessible and commanded. But know that the destination is becoming a Muhsin, not just doing Ihsan. The five-concept sequence prepares the ground for that becoming. The test: does your Ihsan require effort (still doing) or is it natural (beginning to become)?</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 02</div>
+    <div class="div-q en-blk">Can Ihsan be sustained &#8212; or is it always in flashes?</div>
+    <div class="div-q-ur ur-blk">کیا احسان مستمر رہ سکتا ہے &#8212; یا ہمیشہ لمحوں میں آتا ہے؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Muhasibi &middot; Al-Ghazali</div><div class="div-view en-blk">Ihsan is always in degrees and always imperfect in this life. Even the Muhsin has moments of heedlessness. The nafs is not fully subdued in this life. The practice of Ihsan is the consistent effort to return &#8212; to re-establish the quality of attention when it has slipped. Ihsan sustained is the aspiration; Ihsan frequently renewed is the honest description of the best practitioners.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Junayd &middot; Ibn Arabi</div><div class="div-view en-blk">At the highest station, Ihsan becomes the natural posture &#8212; not effortful moments of excellence but the permanent quality of the person who has been completely transformed. For al-Junayd: after baqa (return from fana), the servant lives in Ihsan naturally. For Ibn Arabi: the fully realised servant is a continuous channel of divine Ihsan &#8212; it does not fluctuate because it is not theirs to sustain.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">The Quran commands Ihsan consistently &#8212; ittaqu Allaha ma istata&#39;tum (as much as you are able, 64:16) &#8212; implying it is always a work in progress. Haqqa tuqatihi (3:102) &#8212; as is His due &#8212; sets an infinite standard. The Quran does not describe a station where Ihsan becomes unnecessary. Al-Ghazali and Ibn al-Qayyim&#39;s position (always in degrees, always deepening) has the strongest Quranic support.</div></div>
+    <div class="div-verdict en-blk">Ihsan is always in degrees and always deepening in this life &#8212; there is no station where effort becomes unnecessary. The Quranic standard (as is His due) is infinite. The best practitioners have Ihsan more frequently and more naturally &#8212; but not perfectly or continuously. This is not discouraging; it is honest. The question is not &#39;do I have continuous Ihsan?&#39; but &#39;is my Ihsan deepening?&#39;</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 03</div>
+    <div class="div-q en-blk">Is the Muhsin the agent of Ihsan &#8212; or the channel through whom divine Ihsan flows?</div>
+    <div class="div-q-ur ur-blk">محسن احسان کا فاعل ہے &#8212; یا وہ ذریعہ جس سے الٰہی احسان بہتا ہے؟</div>
+    <div class="div-pos-row"><div class="div-scholars">All scholars except Ibn Arabi</div><div class="div-view en-blk">The Muhsin is the responsible agent of Ihsan. They are commanded to act with excellence (16:90); they are rewarded for it (53:31, 55:60); Allah loves them (2:195). The abd-rabb relationship is permanent: the servant acts, Allah sees, judges, and responds. The servant is not a passive channel &#8212; they are an active, responsible, praiseworthy person whose effort and sincerity are the preconditions of Ihsan.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn Arabi</div><div class="div-view en-blk">The servant&#39;s becoming transparent enough for divine excellence to flow through them is itself their Ihsan. The agent is the Real; the channel is the servant. This does not remove responsibility &#8212; becoming the channel is the work. But the quality of what flows is divine, not earned.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">The Quran consistently addresses the servant as the agent: wa ahsinu (16:90) &#8212; and do Ihsan, directed at the servant; alladhina ahsanu (53:31) &#8212; those who did Ihsan, describing the servant&#39;s action; Allahu yuhibbu al-muhsineen (2:195) &#8212; Allah loves the Muhsineen, meaning their Ihsan is theirs and is loved. The Quran does not support the view that the servant is a passive channel. The servant is consistently the responsible actor. Ibn al-Qayyim&#39;s position has the strongest Quranic grounding.</div></div>
+    <div class="div-verdict en-blk">The Muhsin is the responsible agent. The Quran addresses Ihsan as a command to the servant, not as a description of something happening through them. Ibn Arabi&#39;s insight &#8212; that all beauty is ultimately divine &#8212; is theologically true at one level (24:35 &#8212; Allah is the light of the heavens and earth) but does not remove the servant&#39;s responsibility. Both can be held: the servant is responsible AND the quality of Ihsan is ultimately from Allah. The abd-rabb distinction is permanent.</div>
+  </div>
+  <div class="div-pos-box">
+    <div class="div-pos-lbl en-blk">Your Personal Position &#8212; Ihsan Stage 3</div>
+    <div class="div-pos-lbl ur-blk" style="font-family:var(--font-ar)">آپ کی ذاتی پوزیشن &#8212; احسان مرحلہ ۳</div>
+    <p class="en-blk" style="font-size:12.5px;color:var(--text2);line-height:1.85;margin:0 0 12px">You have now completed all five concepts. This is the final synthesis. State your position on each divergence &#8212; and date it.</p>
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Position (dated) &#8212; and where I am in the five-concept journey</span><span class="ur-blk">میری پوزیشن (بتاریخ) &#8212; اور پانچوں تصورات کے سفر میں کہاں ہوں</span><span class="nsv" id="sv-i3-pos"></span></div>
+      <textarea class="note-ta" id="note-i3-pos" style="min-height:140px" placeholder="(1) Doing or becoming: where am I honestly? (2) Can Ihsan sustain &#8212; or is it always in flashes for me? (3) Agent or channel: what does my experience say? And: looking at all five concepts &#8212; Dhikr, Taqwa, Zuhd, Muraqabah, Ihsan &#8212; which has the strongest grip and which is the weakest? Date: " oninput="autoSave('i3-pos',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div id="toast"></div>
+
+
+
+<div class="file-bottom-nav">
+  <a href="muraqabah.html" class="file-nav-link">← Muraqabah</a>
+  <a href="index.html" class="file-nav-home">☰ Index</a>
+  <span></span>
+</div>
+
+<script>
+function toggleCard(id){
+  var el=document.getElementById(id);
+  if(el){el.classList.toggle('open');}
+}
+function autoSave(key,val){
+  localStorage.setItem('ss_'+key,val);
+  var sv=document.getElementById('sv-'+key);
+  if(sv){sv.textContent='✦';sv.style.color='var(--teal)';}
+}
+function loadNotes(){
+  document.querySelectorAll('textarea.note-ta').forEach(function(ta){
+    var k='ss_'+ta.id.replace('note-','');
+    var v=localStorage.getItem(k);
+    if(v){ta.value=v;}
+  });
+  document.querySelectorAll('.nsv').forEach(function(sv){
+    var k='ss_'+sv.id.replace('sv-','');
+    if(localStorage.getItem(k)){sv.textContent='✦';sv.style.color='var(--teal)';}
+  });
+}
+function setLang(lang){
+  localStorage.setItem('ss_lang',lang);
+  if(lang==='ur'){
+    document.body.classList.add('ur-mode');
+  } else {
+    document.body.classList.remove('ur-mode');
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.style.opacity=(btn.getAttribute('data-lang-btn')===lang)?'1':'0.45';
+  });
+}
+window.addEventListener('DOMContentLoaded',function(){
+  loadNotes();
+  var lang=localStorage.getItem('ss_lang')||'en';
+  setLang(lang);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Muraqabah — Spiritual Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg0:#04070D;--bg1:#080E1C;--bg2:#0C1528;--bg3:#111E35;--bg4:#162440;
+  --gold:#C9A84C;--gold2:#E2C97A;--gold3:#F5E9C0;
+  --golddim:rgba(201,168,76,.08);--goldbdr:rgba(201,168,76,.18);--goldglow:rgba(201,168,76,.22);
+  --teal:#2FB89A;--tealdim:rgba(47,184,154,.08);--tealbdr:rgba(47,184,154,.22);
+  --blue:#7AABF0;--bluedim:rgba(122,171,240,.08);--bluebdr:rgba(122,171,240,.22);
+  --amber:#E0A030;--amberdim:rgba(224,160,48,.08);--amberbdr:rgba(224,160,48,.22);
+  --purple:#A87FD0;--purpledim:rgba(168,127,208,.08);--purplebdr:rgba(168,127,208,.22);
+  --text:#D4CBB8;--text2:#8A9BB0;--text3:#4A5B70;
+  --border:rgba(201,168,76,.10);--border2:rgba(201,168,76,.05);
+  --font-head:'Cinzel',serif;--font-body:'Lora',serif;--font-arab:'Noto Naskh Arabic',serif;--font-ar:'Noto Naskh Arabic',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 800px 500px at 20% 10%,rgba(201,168,76,.025),transparent 60%),
+             radial-gradient(ellipse 600px 400px at 80% 80%,rgba(47,184,154,.02),transparent 60%);}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:90;background:rgba(4,7,13,.97);border-bottom:1px solid var(--border2);backdrop-filter:blur(20px);padding:0 22px;height:56px;display:flex;align-items:center;gap:14px}
+.hdr-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.3)}
+.hdr-titles{flex:1}
+.hdr-title{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase}
+.hdr-sub{font-family:var(--font-head);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--goldbdr);border-radius:20px;padding:3px}
+.lt{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 10px;border-radius:16px;cursor:pointer;transition:all .2s;color:var(--text3);user-select:none}
+.lt.on{background:var(--gold);color:#000;font-weight:700}
+.back-link{font-family:var(--font-head);font-size:8.5px;letter-spacing:.8px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:6px;transition:all .15s;text-transform:uppercase;flex-shrink:0}
+.back-link:hover{color:var(--gold2);border-color:var(--goldbdr)}
+
+/* PAGE */
+.page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:24px 18px 60px}
+
+/* CONCEPT TABS */
+.concept-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cn-btn{font-family:var(--font-head);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:8px;border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.cn-btn:hover{border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn.on{background:var(--golddim);border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn .ar{font-family:var(--font-arab);font-size:14px;letter-spacing:0;display:block;margin-top:2px}
+.cn-badge{display:inline-block;font-size:7px;padding:1px 5px;border-radius:4px;margin-left:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);vertical-align:middle}
+.cn-badge.pending{background:var(--amberdim);border-color:var(--amberbdr);color:var(--amber)}
+
+/* SECTION */
+.concept-section{display:none}
+.concept-section.active{display:block}
+
+/* SECTION HEADER */
+.sec-hdr{text-align:center;padding:20px 0 28px;border-bottom:1px solid var(--border2);margin-bottom:28px}
+.sec-hdr-ar{font-family:var(--font-arab);font-size:52px;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.25);line-height:1.2;margin-bottom:8px}
+.sec-hdr-en{font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase}
+.sec-hdr-ur{font-family:var(--font-arab);font-size:20px;color:var(--gold2);margin-top:4px}
+.sec-hdr-root{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--text2);margin-top:10px;text-transform:uppercase}
+.sec-hdr-rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+.sec-hdr-intro{font-size:13px;color:var(--text2);line-height:1.85;max-width:600px;margin:0 auto;font-style:italic}
+
+/* ROOT ANALYSIS BOX */
+.root-analysis{background:var(--bg2);border:1px solid var(--goldbdr);border-radius:12px;padding:20px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+.root-analysis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ra-label{font-family:var(--font-head);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ra-label::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ra-root{font-family:var(--font-arab);font-size:30px;color:var(--gold2);direction:rtl;margin-bottom:12px}
+.ra-letters{display:flex;gap:10px;flex-direction:row-reverse;margin-bottom:14px}
+.ra-letter{background:rgba(201,168,76,.06);border:1px solid var(--goldbdr);border-radius:8px;padding:8px 14px;text-align:center}
+.ra-letter-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold2);display:block}
+.ra-letter-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:4px;display:block}
+.ra-meaning{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.ra-meaning-ur{font-family:var(--font-arab);font-size:14px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:12px}
+.ra-forms{display:flex;gap:8px;flex-wrap:wrap}
+.ra-form{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;text-align:center}
+.ra-form-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl}
+.ra-form-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:2px}
+.ra-count{font-family:var(--font-head);font-size:9px;color:var(--teal);margin-top:12px;letter-spacing:.5px}
+
+/* ERA DIVIDER */
+.era-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px}
+.era-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.era-early{background:var(--amber)}
+.era-middle{background:var(--gold)}
+.era-late{background:var(--teal)}
+.era-madani{background:var(--blue)}
+.era-label{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.era-label-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2)}
+.era-line{flex:1;height:1px;background:var(--border2)}
+.era-count{font-family:var(--font-head);font-size:8px;color:var(--text3);flex-shrink:0}
+
+/* AYAH CARD */
+.ayah-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.ayah-card.open{border-color:var(--goldbdr)}
+.ayah-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;user-select:none}
+.rev-badge{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;padding:3px 8px;border-radius:5px;flex-shrink:0;text-transform:uppercase}
+.rev-early{background:var(--amberdim);border:1px solid var(--amberbdr);color:var(--amber)}
+.rev-middle{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+.rev-late{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.rev-madani{background:var(--bluedim);border:1px solid var(--bluebdr);color:var(--blue)}
+.card-ref{font-family:var(--font-head);font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0}
+.card-preview{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.card-chevron{color:var(--text3);font-size:16px;transition:transform .25s;flex-shrink:0}
+.ayah-card.open .card-chevron{transform:rotate(90deg);color:var(--gold)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border2)}
+.ayah-card.open .card-body{display:block}
+
+/* ARABIC */
+.ayah-arabic{font-family:var(--font-arab);font-size:clamp(20px,3.5vw,28px);color:var(--gold2);direction:rtl;text-align:right;line-height:2.2;padding:18px 0 12px;text-shadow:0 0 20px rgba(201,168,76,.1);border-bottom:1px solid var(--border2);margin-bottom:12px}
+.ayah-tr-en{font-size:13px;color:var(--text);font-style:italic;line-height:1.85;margin-bottom:6px;border-left:3px solid var(--goldbdr);padding:8px 14px;border-radius:0 6px 6px 0;background:rgba(201,168,76,.03)}
+.ayah-tr-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;border-right:3px solid var(--goldbdr);padding:8px 14px 8px 8px;border-radius:6px 0 0 6px;background:rgba(201,168,76,.03);margin-bottom:6px}
+.ayah-ref-line{font-family:var(--font-head);font-size:9px;color:var(--gold);letter-spacing:.8px;margin-bottom:14px}
+
+/* BOXES */
+.ctx-box{background:rgba(0,0,0,.2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:12px}
+.ctx-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.ctx-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--amber);margin-bottom:5px}
+.ctx-txt{font-size:12px;color:var(--text2);line-height:1.75}
+.ctx-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2}
+
+.root-box{background:rgba(201,168,76,.04);border:1px solid var(--goldbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.root-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.root-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--gold);margin-bottom:7px}
+.root-wd{font-family:var(--font-arab);font-size:19px;color:var(--gold2);direction:rtl;display:inline-block;margin-left:8px}
+.root-fm{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl}
+.root-mn{font-size:12px;color:var(--text2);line-height:1.7;margin-top:5px}
+.root-mn-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-top:5px}
+
+.uniq-box{background:var(--tealdim);border:1px solid var(--tealbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.uniq-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.uniq-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--teal);margin-bottom:5px}
+.uniq-txt{font-size:12.5px;color:var(--text);line-height:1.75}
+.uniq-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text);direction:rtl;text-align:right;line-height:2}
+
+.sunnah-box{background:var(--purpledim);border:1px solid var(--purplebdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.sun-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.sun-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--purple);margin-bottom:8px}
+.sun-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-en{font-size:12px;color:var(--text2);font-style:italic;line-height:1.7;margin-bottom:5px}
+.sun-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+.grade{display:inline-block;font-family:var(--font-head);font-size:7.5px;padding:2px 7px;border-radius:4px;margin-left:6px}
+.g-sahih{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.g-hasan{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+
+/* NOTES */
+.notes-sec{margin-top:14px;border-top:1px solid var(--border2);padding-top:12px}
+.notes-hdr{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notes-hdr::after{content:'';flex:1;height:1px;background:var(--border2)}
+.note-f{margin-bottom:7px}
+.note-lbl{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nsv{font-family:var(--font-head);font-size:7px;letter-spacing:.3px;color:var(--text3);margin-left:auto;transition:color .3s}
+.nsv.flash{color:var(--teal)}
+.note-ta{width:100%;min-height:78px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:7px;outline:none;padding:10px 12px;font-family:var(--font-body);font-size:12.5px;color:var(--text);line-height:1.75;resize:vertical;transition:border-color .2s}
+.note-ta:focus{border-color:var(--goldbdr)}
+.note-ta::placeholder{color:var(--text3);font-style:italic;font-size:11.5px}
+.note-ta-ur{font-family:var(--font-arab);font-size:14px;direction:rtl;text-align:right}
+
+/* STANDALONE HADITH */
+.sh-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;margin-bottom:10px}
+.sh-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sh-lbl::after{content:'';flex:1;height:1px;background:var(--border2)}
+.sh-ar{font-family:var(--font-arab);font-size:clamp(15px,3vw,19px);color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:9px;padding:10px 14px;background:rgba(201,168,76,.04);border-radius:7px}
+.sh-en{font-size:12.5px;color:var(--text);font-style:italic;line-height:1.8;margin-bottom:7px}
+.sh-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;margin-bottom:7px}
+.sh-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+
+/* PENDING */
+.pending{background:var(--bg2);border:1px dashed var(--amberbdr);border-radius:12px;padding:24px 20px;margin-top:20px;text-align:center}
+.pending-icon{font-size:28px;margin-bottom:10px}
+.pending-title{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--text2);line-height:1.75;max-width:600px;margin:0 auto}
+
+/* ── Language toggle — body class approach ─────── */
+.en-blk{display:block}
+.ur-blk{display:none}
+.en-inl{display:inline}
+.ur-inl{display:none}
+body.ur-mode .en-blk{display:none}
+body.ur-mode .ur-blk{display:block}
+body.ur-mode .en-inl{display:none}
+body.ur-mode .ur-inl{display:inline}
+body.ur-mode span.ur-blk{display:inline}
+body.ur-mode span.en-blk{display:none}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:rgba(12,21,40,.98);border:1px solid var(--goldbdr);border-radius:8px;padding:9px 20px;font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--gold2);z-index:300;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .page{padding:18px 12px 60px}
+  .ra-letters{gap:6px}
+  .ra-letter{padding:6px 10px}
+  .ayah-arabic{font-size:clamp(18px,5vw,24px)}
+}
+
+.file-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg1);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;gap:8px;}
+.file-nav-link{font-family:var(--font-head);font-size:11px;letter-spacing:.5px;color:var(--gold2);text-decoration:none;padding:6px 10px;border:1px solid var(--goldbdr);border-radius:6px;white-space:nowrap;}
+.file-nav-link:hover{background:var(--golddim);}
+.file-nav-home{font-family:var(--font-head);font-size:10px;letter-spacing:.8px;color:var(--text2);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;}
+.file-nav-home:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-nav-center{display:flex;align-items:center;gap:8px;}
+.lang-btn{font-size:11px;font-family:var(--font-head);letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text2);padding:4px 8px;cursor:pointer;transition:opacity .2s;}
+.lang-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 20px 48px;border-top:1px solid var(--border);margin-top:40px;}
+.stage3-hdr{margin:40px 0 24px;text-align:center;}.stage3-hdr-ar{font-family:var(--font-ar);font-size:22px;color:var(--purple);margin-bottom:4px;}.stage3-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;}.stage3-hdr-rule{width:50px;height:1px;background:var(--purplebdr);margin:12px auto;}.stage3-intro{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;max-width:640px;margin:0 auto 16px;}.scholar-card{border:1px solid var(--purplebdr);border-radius:10px;margin-bottom:14px;overflow:hidden;background:rgba(168,127,208,.03);}.scholar-card .card-body{display:none;padding:20px;border-top:1px solid var(--purplebdr);}.scholar-card.open .card-body{display:block;}.sc-hdr{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;transition:background .15s;}.sc-hdr:hover{background:var(--purpledim);}.sc-num{font-family:var(--font-head);font-size:11px;color:var(--purple);min-width:22px;opacity:.7;}.sc-hdr-main{flex:1;}.sc-name-en{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.3px;}.sc-name-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);}.sc-dates{font-family:var(--font-body);font-size:11px;color:var(--text3);margin-top:2px;font-style:italic;}.sc-badge{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 8px;border-radius:4px;border:1px solid var(--purplebdr);color:var(--purple);text-transform:uppercase;white-space:nowrap;flex-shrink:0;}.sc-chevron{font-size:18px;color:var(--purple);opacity:.6;transition:transform .2s;}.scholar-card.open .sc-chevron{transform:rotate(90deg);}.bio-box summary{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--purple);text-transform:uppercase;cursor:pointer;padding:8px 0;border-bottom:1px solid var(--purplebdr);margin-bottom:12px;display:block;list-style:none;}.bio-box summary::-webkit-details-marker{display:none;}.bio-box summary::before{content:"+ ";}.details[open] summary::before,.bio-box details[open] summary::before{content:"- ";}.bio-txt{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:10px;}.bio-txt-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2.1;direction:rtl;text-align:right;margin-bottom:10px;}.bio-works{font-family:var(--font-head);font-size:10px;color:var(--text3);line-height:1.8;margin-bottom:4px;}.sc-sec{font-family:var(--font-head);font-size:9px;letter-spacing:1.2px;color:var(--purple);text-transform:uppercase;margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--purplebdr);}.sc-finding{font-family:var(--font-body);font-size:13.5px;color:var(--text);line-height:1.9;margin-bottom:6px;}.sc-finding-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);line-height:2.1;direction:rtl;text-align:right;margin-bottom:14px;}.sc-quote-ar{font-family:var(--font-ar);font-size:17px;color:var(--gold);line-height:2;text-align:right;direction:rtl;margin:12px 0 8px;padding:12px;background:var(--golddim);border-right:3px solid var(--gold);border-radius:0 6px 6px 0;}.sc-quote-en{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;font-style:italic;margin-bottom:4px;}.sc-quote-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;margin-bottom:6px;}.sc-quote-src{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:.3px;margin-bottom:14px;}.sc-contrib{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:6px;}.sc-contrib-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;}.sc-controversy{font-family:var(--font-body);font-size:12px;color:var(--amber);line-height:1.85;padding:10px 12px;background:var(--amberdim);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;margin-top:14px;}.div-wrap{border:1px solid var(--goldbdr);border-radius:10px;margin-top:32px;overflow:hidden;}.div-hdr{background:var(--golddim);padding:18px 20px;border-bottom:1px solid var(--goldbdr);}.div-hdr-ar{font-family:var(--font-ar);font-size:20px;color:var(--gold);margin-bottom:4px;}.div-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;}.div-hdr-desc{font-family:var(--font-body);font-size:12px;color:var(--text2);line-height:1.85;margin-top:8px;}.div-point{padding:20px;border-bottom:1px solid var(--goldbdr);}.div-num{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}.div-q{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.2px;margin-bottom:14px;line-height:1.5;}.div-q-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:14px;}.div-pos-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}.div-scholars{font-family:var(--font-head);font-size:9px;color:var(--purple);letter-spacing:.3px;min-width:160px;padding-top:3px;flex-shrink:0;}.div-view{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;}.div-ground{background:var(--bg2);border-radius:6px;padding:12px;margin:12px 0;}.div-ground-lbl{font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;}.div-ground-txt{font-family:var(--font-body);font-size:12.5px;color:var(--text2);line-height:1.85;}.div-verdict{font-family:var(--font-body);font-size:13px;color:var(--text);line-height:1.85;font-style:italic;border-left:2px solid var(--teal);padding-left:10px;margin-top:4px;}.div-pos-box{padding:20px;background:var(--bg2);}.div-pos-lbl{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<div class="file-topbar">
+  <a href="zuhd.html" class="file-nav-link">← Zuhd</a>
+  <div class="file-nav-center">
+    <a href="index.html" class="file-nav-home">☰ Index</a>
+    <button class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang-btn="ur" onclick="setLang('ur')">اردو</button>
+  </div>
+  <a href="ihsan.html" class="file-nav-link">Ihsan →</a>
+</div>
+
+<div class="concept-section active" id="sec-muraqabah">
+<div class="sec-hdr">
+  <div class="sec-hdr-ar">مُرَاقَبَة</div>
+  <div class="sec-hdr-en en-blk">Muraqabah — Awareness of the Divine Gaze</div>
+  <div class="sec-hdr-ur ur-blk">مراقبہ — الٰہی نظر کا شعور</div>
+  <div class="sec-hdr-rule"></div>
+  <div class="sec-hdr-root en-blk">Root: ر — ق — ب · 12 key ayat in revelation order · 7 authenticated hadith</div>
+  <div class="sec-hdr-root ur-blk">جڑ: ر — ق — ب · ترتیبِ نزول میں ۱۲ اہم آیات · ۷ مستند احادیث</div>
+  <div class="sec-hdr-intro en-blk">Dhikr is you remembering Allah. Zuhd is the emptying of the heart from its false attachments. Muraqabah is the realisation that He has been watching you the entire time. The Quran builds this awareness systematically — beginning from the very first revelation, where the question about divine sight appears before any command, any story, any doctrine. By the Madani period, that awareness has expanded into one of the most precise descriptions of divine omnipresence in any scripture. Read these ayat in order. The argument is cumulative.</div>
+  <div class="sec-hdr-intro ur-blk">ذکر: آپ اللہ کو یاد کرتے ہیں۔ زہد: دل کو جھوٹی وابستگیوں سے خالی کرنا۔ مراقبہ: وہ ادراک کہ وہ پورے وقت دیکھ رہا تھا۔ قرآن یہ شعور پہلی وحی سے منظم طریقے سے بناتا ہے — جہاں الٰہی نظر کا سوال کسی حکم، کسی قصے، کسی عقیدے سے پہلے آتا ہے۔ مدنی دور تک یہ شعور الٰہی ہمہ حاضری کی درست ترین قرآنی تصویر بن جاتا ہے۔</div>
+</div>
+
+<div class="root-analysis">
+  <div class="ra-label"><span class="en-blk">Root Word Analysis — ر ق ب</span><span class="ur-blk">جڑ کا تجزیہ — ر ق ب</span></div>
+  <div class="ra-root">رَقَبَ · الرَّقِيب · مُرَاقَبَة · رَقِيبٌ عَتِيدٌ · الْمِرْصَاد</div>
+  <div class="ra-letters">
+    <div class="ra-letter"><span class="ra-letter-ar">ر</span><span class="ra-letter-en">R</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ق</span><span class="ra-letter-en">Q</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ب</span><span class="ra-letter-en">B</span></div>
+  </div>
+  <div class="ra-meaning en-blk">The root R-Q-B carries a core meaning of watchful vigilance — the sustained, attentive gaze of one who watches carefully. From it: Raqabah (the neck — the part you extend to see from a distance); Marqab (a watchtower); Al-Raqib (the Ever-Watchful — one of the divine names). The word Muraqabah itself is grammatically Form III (Mufaala) — and Form III in Arabic is the form of <strong style="color:var(--gold2)">mutual or reciprocal action</strong>. Raaqaba means: each watches the other. Muraqabah therefore is not passive surveillance — it is a relational practice: <strong style="color:var(--teal)">you direct your awareness toward Allah in watchful consciousness; He has always been watching you.</strong> The discipline is not acquiring something new — it is becoming aware of something that was always true. The Quran uses the name Al-Raqib directly in 4:1 and 33:52. In 50:18, the specific form Raqibun Ateed — a prepared, ready watcher — describes the constant state of recording. But the most important structural note: the first revelation (96:14) places the question of divine seeing before any command. Muraqabah is not a later addition to Islam — it is present from the first word.</div>
+  <div class="ra-meaning ur-blk">جڑ ر-ق-ب کا مرکزی معنی: چوکس نظر — وہ توجہ کے ساتھ دیکھنا جو دور سے ہو۔ اس سے: رقبہ (گردن — آگے بڑھا کر دیکھنے والا حصہ)؛ مرقب (مینار)؛ الرقیب (ہمیشہ دیکھنے والا — الٰہی نام)۔ مراقبہ گرامری طور پر باب مفاعلہ ہے — جو باہمی عمل کا باب ہے۔ <strong style="color:var(--gold2)">مراقبہ: آپ اللہ کی طرف متوجہ ہیں؛ وہ ہمیشہ آپ کی طرف متوجہ تھا۔</strong> یہ کچھ نیا حاصل کرنا نہیں — کچھ ایسا محسوس کرنا ہے جو ہمیشہ سے سچ تھا۔</div>
+  <div class="ra-forms">
+    <div class="ra-form"><div class="ra-form-ar">الرَّقِيب</div><div class="ra-form-en en-blk">Al-Raqib — The Ever-Watchful (divine name)</div><div class="ra-form-en ur-blk">الرقیب — ہمیشہ دیکھنے والا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">رَقِيبٌ عَتِيدٌ</div><div class="ra-form-en en-blk">A prepared, ever-present watcher (50:18)</div><div class="ra-form-en ur-blk">تیار رہنے والا نگہبان</div></div>
+    <div class="ra-form"><div class="ra-form-ar">مُرَاقَبَة</div><div class="ra-form-en en-blk">The reciprocal practice of watchful awareness</div><div class="ra-form-en ur-blk">باہمی نگاہ کی مشق</div></div>
+    <div class="ra-form"><div class="ra-form-ar">الْمِرْصَاد</div><div class="ra-form-en en-blk">The watchtower — the place of vigilant watching (89:14)</div><div class="ra-form-en ur-blk">مینار — چوکسی کی جگہ</div></div>
+    <div class="ra-form"><div class="ra-form-ar">حَافِظٌ</div><div class="ra-form-en en-blk">Guardian — related concept (86:4)</div><div class="ra-form-en ur-blk">نگہبان</div></div>
+  </div>
+  <div class="ra-count en-blk">✦ Root R-Q-B appears ~25 times in the Quran in various forms · Al-Raqib appears as a divine name in 4:1 and 33:52 · The cluster of related divine watching vocabulary (Shahid, Basir, Alim, Khabir, Raqib) appears throughout — each adding a dimension of how Allah knows and sees</div>
+  <div class="ra-count ur-blk">✦ جڑ ر-ق-ب تقریباً ۲۵ بار · الرقیب بطور الٰہی نام ۴:۱ اور ۳۳:۵۲ میں · متعلقہ الٰہی علم کے الفاظ (شہید، بصیر، علیم، خبیر، رقیب) پورے قرآن میں — ہر ایک الٰہی دیکھنے کا ایک پہلو</div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-early"></div>
+  <div class="era-label en-blk">Early Makki · 610–615 CE · The First Declarations</div>
+  <div class="era-label-ur ur-blk">ابتدائی مکی · پہلے اعلانات</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">2 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-m-96-14">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-96-14')">
+    <span class="rev-badge rev-early en-blk">Rev. #1</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #1</span>
+    <span class="card-ref">Al-Alaq 96:14</span>
+    <span class="card-preview">أَلَمْ يَعْلَم بِأَنَّ اللَّهَ يَرَىٰ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">أَلَمْ يَعْلَم بِأَنَّ اللَّهَ يَرَىٰ</div>
+    <div class="ayah-tr-en en-blk">"Does he not know that Allah sees?"</div>
+    <div class="ayah-tr-ur ur-blk">«کیا اسے معلوم نہیں کہ اللہ دیکھتا ہے؟»</div>
+    <div class="ayah-ref-line">Al-Alaq 96:14</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — From the First Revelation</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — پہلی وحی سے</div>
+      <div class="ctx-txt en-blk">Al-Alaq 96:1-5 is the first revelation. This ayah is in the same surah — its completion. The first revelation introduced Iqra (Read — the command to knowledge) and established Allah as the Creator and Teacher. 96:14 appears in response to Abu Jahl's threat to prevent the Prophet ﷺ from praying. The Quran's response is a question — not a command, not a condemnation — but a question addressed to the oppressor: Does he not know that Allah sees? This is Muraqabah's foundational statement: present from the first surah, embedded in the first moment of revelation, offered as a question rather than a doctrine. The awareness of divine sight is assumed to be already present — it only needs to be recovered.</div>
+      <div class="ctx-txt-ur ur-blk">الاعلیٰ ۹۶:۱-۵ پہلی وحی ہے۔ یہ آیت اسی سورت کی تکمیل میں ہے۔ ابو جہل کی دھمکی کے جواب میں — قرآن کا جواب سوال ہے: کیا اسے معلوم نہیں کہ اللہ دیکھتا ہے؟ مراقبہ کا بنیادی بیان: پہلی سورت میں، پہلی وحی کے لمحے میں، ڈاکٹرائن نہیں — سوال۔ الٰہی نظر کا شعور پہلے سے موجود سمجھا جاتا ہے — صرف یاد دلانا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">يَرَىٰ</span> <span class="root-fm">ر-أ-ي · Yara — He sees, ongoing present tense</span>
+      <div class="root-mn en-blk">From R-A-Y: to see. Yara: He sees — present tense, ongoing, uninterrupted seeing. Not He saw, not He will see — He sees, now, continuously. The imperfect verb in Arabic denotes an ongoing action. Allah's seeing is not an event that begins and ends — it is a continuous state. This is why Muraqabah is an ongoing practice: you are always within a gaze that never stops. The question form — Alam ya'lam — is devastating in its simplicity: the knowledge is available; the only question is whether it operates in the person's awareness.</div>
+      <div class="root-mn-ur ur-blk">ر-أ-ی — دیکھنا۔ یری: وہ دیکھتا ہے — حال مستمر، جاری، غیرمنقطع۔ یہ ماضی یا مستقبل نہیں — حال۔ عربی مضارع جاری عمل بتاتا ہے۔ اللہ کا دیکھنا کوئی واقعہ نہیں جو شروع اور ختم ہو — مستقل حال ہے۔ اس لیے مراقبہ مستقل مشق ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most important single fact about Muraqabah in the Quran: this question appears in the first surah ever revealed. Before commands, before stories, before theology — the awareness of divine sight is there. This means Muraqabah is not something you build toward after mastering other concepts. It is the foundation from which everything else in Islam begins. The Quran's opening move is to remind you that you are seen.</div>
+      <div class="uniq-txt-ur ur-blk">مراقبہ کے بارے میں قرآن کا سب سے اہم واحد حقیقت: یہ سوال پہلی نازل شدہ سورت میں ہے۔ احکام سے پہلے، قصوں سے پہلے، عقیدے سے پہلے — الٰہی نظر کا شعور موجود ہے۔ مراقبہ کوئی بعد کی چیز نہیں جو دوسرے تصورات مکمل کر کے حاصل ہو۔ یہ بنیاد ہے جس سے اسلام شروع ہوتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-96-14-my"></span></div>
+        <textarea class="note-ta" id="note-m-96-14-my" placeholder="The first surah contains this question: Does he not know that Allah sees? Do you know — in a way that operates in your daily actions — that Allah sees?" oninput="autoSave('m-96-14-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-96-14-after"></span></div>
+        <textarea class="note-ta" id="note-m-96-14-after" placeholder="What changed after deeper study?" oninput="autoSave('m-96-14-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-89-14">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-89-14')">
+    <span class="rev-badge rev-early en-blk">Rev. #10</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #10</span>
+    <span class="card-ref">Al-Fajr 89:14</span>
+    <span class="card-preview">إِنَّ رَبَّكَ لَبِالْمِرْصَادِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّ رَبَّكَ لَبِالْمِرْصَادِ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, your Lord is ever in ambush — at the watchtower."</div>
+    <div class="ayah-tr-ur ur-blk">«بیشک تمہارا رب گھات میں ہے۔»</div>
+    <div class="ayah-ref-line">Al-Fajr 89:14</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Fajr — the 10th surah — just preceded by accounts of civilizations destroyed by Allah: Ad, Thamud, Pharaoh. All of them transgressed the limits. All of them thought they were beyond sight or consequence. The ayah arrives as the explanation: inna rabbaka la-bil-mirsad. Your Lord is at the watchtower — He was watching the entire time. The Mirsad is not a warning for the future alone — it is the announcement of what was always already the case. The nations that were destroyed were not destroyed by surprise. The watching never stopped.</div>
+      <div class="ctx-txt-ur ur-blk">الفجر — دسویں سورت — پہلے عاد، ثمود، فرعون کے قصے جن کو اللہ نے ہلاک کیا۔ سب نے حدود پار کیں۔ سب نے سمجھا کہ وہ نظر اور نتیجے سے پرے ہیں۔ یہ آیت وضاحت ہے: تمہارا رب مرصاد پر تھا۔ وہ پورے وقت دیکھتا رہا — نگاہ کبھی نہیں رکی۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْمِرْصَادِ</span> <span class="root-fm">ر-ص-د · Al-Mirsad — the watchtower, the station of vigilant watching</span>
+      <div class="root-mn en-blk">R-S-D: to lie in wait, to watch with intent. Al-Mirsad: the watchtower — the elevated position from which everything below is visible. The metaphor is precise: a watchtower sees without being seen; it commands a view of all directions; nothing passes unobserved. Labil-mirsad: He is at the watchtower — with the lam of emphasis (la-), and the ba' of presence (bil-). Two particles of emphasis together: He is most certainly, without question, at the position of complete watching. This is the strongest grammatical emphasis the Quran can place on a statement.</div>
+      <div class="root-mn-ur ur-blk">ر-ص-د — گھات میں بیٹھنا، ارادے کے ساتھ دیکھنا۔ المرصاد: مینار — اوپر کی جگہ جہاں سے سب نظر آئے۔ مینار دیکھتا ہے بغیر دیکھے جائے۔ لبالمرصاد: دو تاکیدی حروف ساتھ — لام تاکید اور باء حضور — قرآن کی سب سے زور دار گرامری تاکید۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most emphatic single statement of divine watchfulness in the Quran — two particles of emphasis, the Mirsad metaphor, placed immediately after accounts of civilizations destroyed. Muraqabah is not just spiritual comfort — it is also the grounding of accountability. The nations thought they were unwatched. They were wrong. This ayah insists, with the maximum grammatical force available, that the watching never stops. For the practicing believer, this is not a threat — it is the most stabilising truth possible: the same watching that holds the wrongdoer to account also holds the faithful person's smallest effort in view.</div>
+      <div class="uniq-txt-ur ur-blk">قرآن میں الٰہی نگرانی کا سب سے زور دار بیان — دو تاکیدی حروف، مرصاد کی استعاراتی تصویر، تباہ شدہ قوموں کے قصوں کے فوری بعد۔ مراقبہ صرف روحانی تسلی نہیں — احتساب کی بنیاد ہے۔ وہ قومیں بے نگرانی سمجھتی تھیں — غلط تھیں۔ مومن کے لیے یہ دھمکی نہیں — سب سے استحکام بخش سچائی: وہی نظر جو غلط کار کو پکڑتی ہے، مومن کی چھوٹی سی کوشش بھی دیکھتی ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-89-14-my"></span></div>
+        <textarea class="note-ta" id="note-m-89-14-my" placeholder="Inna rabbaka la-bil-mirsad. Two particles of maximum emphasis. Where in your life do you act as if the watching has paused?" oninput="autoSave('m-89-14-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-89-14-after"></span></div>
+        <textarea class="note-ta" id="note-m-89-14-after" placeholder="What changed after deeper study?" oninput="autoSave('m-89-14-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-middle"></div>
+  <div class="era-label en-blk">Middle Makki · 615–622 CE · The Depth and Detail</div>
+  <div class="era-label-ur ur-blk">وسطی مکی · گہرائی اور تفصیل</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">5 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-m-50-16">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-50-16')">
+    <span class="rev-badge rev-middle en-blk">Rev. #34</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #34</span>
+    <span class="card-ref">Qaf 50:16</span>
+    <span class="card-preview">وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَلَقَدْ خَلَقْنَا الْإِنسَانَ وَنَعْلَمُ مَا تُوَسْوِسُ بِهِ نَفْسُهُ ۖ وَنَحْنُ أَقْرَبُ إِلَيْهِ مِنْ حَبْلِ الْوَرِيدِ</div>
+    <div class="ayah-tr-en en-blk">"And We have created man and We know what his soul whispers to him — and We are closer to him than his jugular vein."</div>
+    <div class="ayah-tr-ur ur-blk">«اور ہم نے انسان کو پیدا کیا اور ہم جانتے ہیں جو اس کا نفس اسے وسوسہ دیتا ہے — اور ہم اس کی شہ رگ سے بھی زیادہ قریب ہیں۔»</div>
+    <div class="ayah-ref-line">Qaf 50:16</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Qaf — the 34th surah. The opening of Qaf (50:1-15) addresses those who denied resurrection as impossible. Allah's response begins not with argument but with the statement of His knowledge: We created man and We know what his nafs whispers to him. This is followed immediately by the proximity statement. The sequence matters: knowledge of creation → knowledge of the innermost whisper → proximity beyond what any physical closeness can describe. Muraqabah here is not the awareness of being watched from a distance — it is the awareness of a presence more intimate than the self's own interior.</div>
+      <div class="ctx-txt-ur ur-blk">قاف — ۳۴ویں سورت۔ آغاز (۵۰:۱-۱۵): منکرین بعث کو جواب۔ اللہ کا جواب دلیل سے نہیں — علم کے بیان سے: ہم نے انسان کو پیدا کیا اور جانتے ہیں جو نفس وسوسہ دیتا ہے۔ پھر قرب: جڑ یہاں نہیں دور سے دیکھنا — بلکہ خود نفس کے اندر سے بھی قریب تر موجودگی کا شعور۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَقْرَبُ</span> <span class="root-fm">ق-ر-ب · Aqrab — closer, nearer (superlative form)</span>
+      <div class="root-mn en-blk">Q-R-B: to be near, to approach. Aqrab: the superlative — closer than, nearer than. Habl al-wareed: the jugular vein — the artery that carries blood from the heart to the brain; if severed, consciousness ceases immediately. The Quran chose the closest physical thing to consciousness — the vein that sustains life — and said: We are closer than that. This is not a metaphor of emotional closeness. It is a statement about a mode of presence that precedes physical description. Muraqabah practiced at this level is not imagining Allah watching from outside — it is the awareness that the distance is zero.</div>
+      <div class="root-mn-ur ur-blk">ق-ر-ب — قریب ہونا۔ اقرب: اسم تفضیل — زیادہ قریب۔ حبل الوریدعروق/شریان جو خون دل سے دماغ لے جاتا ہے — اگر کٹ جائے شعور فوراً ختم۔ قرآن نے شعور کے سب سے قریبی جسمانی چیز لی اور کہا: ہم اس سے بھی قریب۔ مراقبہ کی اس سطح پر: باہر سے دیکھنا نہیں — فاصلہ صفر ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The interior dimension of Muraqabah. The previous ayat established that Allah sees (96:14) and watches with total vigilance (89:14). This ayah goes further: He knows what your nafs whispers to you — the pre-verbal thought, the inner suggestion, before it becomes conscious speech. And He is closer than the vein that sustains your consciousness. Muraqabah is not about a God watching from above — it is the awareness of a presence more intimate than your own self-awareness. The whisper of the nafs is the most private thing a human has. Allah knows it before you do.</div>
+      <div class="uniq-txt-ur ur-blk">مراقبہ کا اندرونی پہلو۔ پچھلی آیات: اللہ دیکھتا ہے، مکمل چوکسی سے۔ یہ آیت آگے جاتی ہے: وہ جانتا ہے جو نفس وسوسہ دیتا ہے — قبل از لفظ خیال، جو ابھی شعوری نہیں ہوا۔ اور وہ اس رگ سے قریب ہے جو شعور برقرار رکھتی ہے۔ نفس کا وسوسہ انسان کی سب سے نجی چیز — اللہ اسے آپ سے پہلے جانتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-50-16-my"></span></div>
+        <textarea class="note-ta" id="note-m-50-16-my" placeholder="He knows what your nafs whispers to you. What does your nafs whisper most consistently — what pre-verbal suggestion comes to you often — that you have not examined in light of this ayah?" oninput="autoSave('m-50-16-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-50-16-after"></span></div>
+        <textarea class="note-ta" id="note-m-50-16-after" placeholder="What changed after deeper study?" oninput="autoSave('m-50-16-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-50-18">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-50-18')">
+    <span class="rev-badge rev-middle en-blk">Rev. #34</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #34</span>
+    <span class="card-ref">Qaf 50:17-18</span>
+    <span class="card-preview">مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِذْ يَتَلَقَّى الْمُتَلَقِّيَانِ عَنِ الْيَمِينِ وَعَنِ الشِّمَالِ قَعِيدٌ ۞ مَّا يَلْفِظُ مِن قَوْلٍ إِلَّا لَدَيْهِ رَقِيبٌ عَتِيدٌ</div>
+    <div class="ayah-tr-en en-blk">"When the two receivers receive — seated on the right and on the left. Not a word does he utter but there is with him a watcher, ever-present and ready."</div>
+    <div class="ayah-tr-ur ur-blk">«جب دو قبول کرنے والے قبول کرتے ہیں — دائیں طرف اور بائیں طرف بیٹھے ہوئے۔ کوئی لفظ منہ سے نہیں نکالتا مگر اس کے پاس ایک تیار رہنے والا نگہبان ہوتا ہے۔»</div>
+    <div class="ayah-ref-line">Qaf 50:17-18</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Same surah as 50:16 — the argument moves from interior knowledge (Allah knows the whisper of the nafs) to exterior recording (every word uttered is recorded by a watcher, ready and present). The two Mutalaqqiyan — the two receiving angels — one to the right, one to the left. Not a single word escapes the scope of Raqib Ateed. This is the Quran's most explicit statement that Muraqabah extends to speech: thought whispers are known (50:16); spoken words are recorded (50:18). Nothing is outside the scope of divine awareness.</div>
+      <div class="ctx-txt-ur ur-blk">اسی سورت میں — استدلال اندرونی علم (نفس کا وسوسہ) سے ظاہری ریکارڈ تک۔ دو متلقیان — دو فرشتے دائیں اور بائیں۔ ایک بھی لفظ رقیب عتید سے نہیں بچتا۔ خیال معلوم (۵۰:۱۶)؛ لفظ مکتوب (۵۰:۱۸)۔ کچھ بھی دائرہ علم سے باہر نہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah — The Key Term of Muraqabah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ — مراقبہ کی اہم اصطلاح</div>
+      <span class="root-wd">رَقِيبٌ عَتِيدٌ</span> <span class="root-fm">ر-ق-ب · Raqib — watcher · ع-ت-د · Ateed — prepared, ever-present, at the ready</span>
+      <div class="root-mn en-blk">Raqib from R-Q-B: the watcher. Ateed from A-T-D: ready, prepared, positioned and waiting — the one who does not need to be summoned because they are already there. Raqibun Ateed: not an occasional recorder but a watcher who is always already positioned. Every lafz (utterance — from the root of throwing out, projecting) is received by one already ready. The verb Yalfidhu: to utter, to throw out a sound. Even the smallest projected sound — not just formal speech but any utterance — is within scope. This ayah is the specific Quranic grounding for the tradition of Muraqabah of speech.</div>
+      <div class="root-mn-ur ur-blk">رقیب — دیکھنے والا۔ عتید — ع-ت-د — تیار، موجود، پہلے سے جگہ پر — بلانے کی ضرورت نہیں کیونکہ پہلے سے ہے۔ رقیبٌ عتید: وقتاً فوقتاً نہیں — ہمیشہ تیار نگہبان۔ یلفظ: لفظ نکالنا — چھوٹی سے چھوٹی آواز بھی دائرے میں۔ مراقبہ کلام کی قرآنی بنیاد۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The only ayah where the explicit term Raqib — the Quranic root of Muraqabah — appears describing the recording of human deeds. The sequence within Qaf is architecturally precise: whisper of the nafs known (50:16), words recorded by Raqib Ateed (50:18), then (50:19-22) the certainty of death and the Day when the veil is removed. Muraqabah is preparation for the moment when what was always recorded becomes visible. The watcher has always been there — the Day of Judgement is when the record is opened.</div>
+      <div class="uniq-txt-ur ur-blk">واحد آیت جہاں صریح لفظ رقیب — مراقبہ کی قرآنی جڑ — انسانی اعمال کی ریکارڈنگ کے لیے آتا ہے۔ قاف کی ترکیب: نفس کا وسوسہ معلوم (۵۰:۱۶)، الفاظ رقیب عتید کے پاس (۵۰:۱۸)، پھر موت اور وہ دن جب پردہ ہٹے (۵۰:۱۹-۲۲)۔ مراقبہ اس لمحے کی تیاری ہے جب جو ہمیشہ مکتوب تھا وہ نظر آئے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-50-18-my"></span></div>
+        <textarea class="note-ta" id="note-m-50-18-my" placeholder="Not a word uttered but Raqib Ateed is there. If you reviewed the record of your speech from the past week — what would you most want to have said differently, knowing it was all recorded?" oninput="autoSave('m-50-18-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-50-18-after"></span></div>
+        <textarea class="note-ta" id="note-m-50-18-after" placeholder="What changed after deeper study?" oninput="autoSave('m-50-18-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-86-4">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-86-4')">
+    <span class="rev-badge rev-middle en-blk">Rev. #36</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #36</span>
+    <span class="card-ref">Al-Tariq 86:4</span>
+    <span class="card-preview">إِن كُلُّ نَفْسٍ لَّمَّا عَلَيْهَا حَافِظٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِن كُلُّ نَفْسٍ لَّمَّا عَلَيْهَا حَافِظٌ</div>
+    <div class="ayah-tr-en en-blk">"There is no soul but that over it is a guardian."</div>
+    <div class="ayah-tr-ur ur-blk">«کوئی نفس نہیں مگر اس پر ایک نگہبان ہے۔»</div>
+    <div class="ayah-ref-line">Al-Tariq 86:4</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Tariq — the 36th surah — opens with a cosmic oath: by the sky and the Tariq (the piercing star that appears at night when all is dark). The surah's opening question: what is the Tariq? A light that penetrates the darkness. Then this ayah: every single nafs has a Hafidh over it. The cosmic image (a star piercing the night) is paired with the intimate image (every nafs, individually, guarded). The scope moves from the astronomical to the interior in one surah. No nafs is unattended — the word Kullu (every, all) leaves no exception.</div>
+      <div class="ctx-txt-ur ur-blk">الطارق — ۳۶ویں سورت — آسمان اور طارق کی قسم سے کھلتی ہے: وہ ستارہ جو رات کی تاریکی میں روشن ہوتا ہے۔ سوال: طارق کیا ہے؟ وہ روشنی جو اندھیرے کو چیرتی ہے۔ پھر یہ آیت: ہر نفس پر ایک حافظ۔ کوئی نفس بے نگران نہیں — کل کوئی استثنا نہیں چھوڑتا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">حَافِظٌ</span> <span class="root-fm">ح-ف-ظ · Hafidh — guardian, preserver, one who keeps watch</span>
+      <div class="root-mn en-blk">H-F-Z: to preserve, to guard, to keep watch, to memorize. Al-Hafiz is one of the divine names. Huffaz: those who have memorized the Quran — they preserve it. Hafidh over the nafs: a guardian specifically assigned. This is a different word from Raqib (watcher) — Hafidh carries the connotation of preserving and protecting, not only observing. The soul is not merely watched; it is guarded. Muraqabah at this level includes the awareness that the divine attention over you has a protective dimension — not just recording but preserving.</div>
+      <div class="root-mn-ur ur-blk">ح-ف-ظ — حفاظت کرنا، یاد رکھنا، نگرانی کرنا۔ الحفیظ الٰہی نام۔ حفاظ: حافظینِ قرآن۔ نفس پر حافظ: ایک مقررہ نگہبان۔ رقیب سے مختلف: حافظ میں حفاظت اور بچاؤ کا مفہوم — صرف ریکارڈ نہیں۔ مراقبہ کی یہ سطح: الٰہی توجہ صرف نگرانی نہیں — حفاظت بھی ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The universal scope with no exceptions: kullu nafsin — every nafs, without qualification. And the Hafidh — not merely a recorder but a guardian. Muraqabah is not only the awareness that your deeds are recorded and your words heard. It is the awareness that you are guarded. The divine attention over the human soul is both observing and protective. This reframes Muraqabah from a practice of self-policing under surveillance to the awareness of living under the care of a guardian who is always present.</div>
+      <div class="uniq-txt-ur ur-blk">کوئی استثنا نہیں: کل نفسٍ — بغیر کسی شرط۔ اور حافظ — محض ریکارڈر نہیں بلکہ نگہبان۔ مراقبہ صرف نگرانی میں اعمال کی خودنگرانی نہیں — اس شعور کے ساتھ جینا کہ آپ ہمیشہ موجود نگہبان کی پناہ میں ہیں۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-86-4-my"></span></div>
+        <textarea class="note-ta" id="note-m-86-4-my" placeholder="Every nafs has a guardian. Does the awareness that you are guarded — not only observed — change how Muraqabah feels to you?" oninput="autoSave('m-86-4-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-86-4-after"></span></div>
+        <textarea class="note-ta" id="note-m-86-4-after" placeholder="What changed after deeper study?" oninput="autoSave('m-86-4-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-40-19">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-40-19')">
+    <span class="rev-badge rev-middle en-blk">Rev. #60</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #60</span>
+    <span class="card-ref">Ghafir 40:19</span>
+    <span class="card-preview">يَعْلَمُ خَائِنَةَ الْأَعْيُنِ وَمَا تُخْفِي الصُّدُورُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَعْلَمُ خَائِنَةَ الْأَعْيُنِ وَمَا تُخْفِي الصُّدُورُ</div>
+    <div class="ayah-tr-en en-blk">"He knows the treachery of the eyes and what the chests conceal."</div>
+    <div class="ayah-tr-ur ur-blk">«وہ آنکھوں کی خیانت کو اور جو سینے چھپاتے ہیں اسے جانتا ہے۔»</div>
+    <div class="ayah-ref-line">Ghafir 40:19</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Ghafir — the 60th surah. The surah opens with the divine names Al-Ghafir (the Forgiver), Al-Qabir (the Acceptor of repentance), and continues through a long discourse on divine power and human accountability. This ayah appears in the context of a believer from Pharaoh's household concealing his faith. The divine knowledge penetrates not only visible deeds but the most subtle movement: the glance of the eye directed where it should not go, and what the Sadr holds in secret. This is the anatomy of Muraqabah: from the most external (the glance) to the most internal (the Sadr's contents).</div>
+      <div class="ctx-txt-ur ur-blk">غافر — ۶۰ویں سورت۔ فرعون کے گھر کے مومن کا ایمان چھپانے کے سیاق میں۔ الٰہی علم نہ صرف ظاہری اعمال — بلکہ سب سے لطیف حرکت بھی: آنکھ کی خیانت اور صدر کے راز۔ مراقبہ کی تشریح: ظاہر سے (نگاہ) باطن تک (صدر کا مواد)۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">خَائِنَةَ الْأَعْيُنِ</span> <span class="root-fm">خ-و-ن · Kha'inah — treachery, betrayal · أَعْيُن — the eyes</span>
+      <div class="root-mn en-blk">Kh-W-N: to betray, to be unfaithful, to break trust. Kha'inah: the act of treachery. The eyes commit Khaynah when they glance where they should not — the forbidden look, the envious gaze, the covetous glance. The Quran calls this Khaynah — not a small slip but a betrayal of the trust. And Allah knows it. Combined with ma tukhfi al-sudur (what the chests conceal): the full range is covered — the betrayal that happens in the movement of the eye, and the secret that never even reaches the eye but sits in the Sadr. Nothing is private from Allah's knowledge.</div>
+      <div class="root-mn-ur ur-blk">خ-و-ن — خیانت کرنا، بے وفائی کرنا۔ خائنۃ: خیانت کا عمل۔ آنکھیں خیانت کرتی ہیں جب وہاں دیکھیں جہاں نہیں دیکھنا — ممنوع نظر، حسد کی نگاہ، لالچی نظر۔ قرآن اسے خیانت کہتا ہے۔ اور صدر کا راز: پوری حد — آنکھ کی خیانت سے صدر کے راز تک۔ اللہ کے علم سے کچھ نجی نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most precise anatomical statement of what Muraqabah covers: the glance of the eye (the most external, fastest movement of the body) and the concealed contents of the Sadr (the most internal, most deliberately hidden). If both extremes are within divine knowledge, everything between them is as well. This ayah makes Muraqabah total — not a practice for formal worship contexts but a continuous awareness that every movement, at every scale, is known. It also names the glance as Kha'inah — a weighty word. Muraqabah of the gaze is not optional refinement; it is guarding against betrayal.</div>
+      <div class="uniq-txt-ur ur-blk">مراقبہ جو چیزوں کا احاطہ کرتا ہے اس کا سب سے درست تشریحی بیان: آنکھ کی نگاہ (سب سے ظاہری، تیز ترین جسمانی حرکت) اور صدر کا چھپا مواد (سب سے اندرونی)۔ اگر دونوں انتہائیں الٰہی علم میں ہیں تو درمیان سب کچھ بھی۔ نگاہ کا نام خائنۃ — بھاری لفظ۔ نگاہ کا مراقبہ اختیاری نہیں — خیانت سے بچاؤ ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-40-19-my"></span></div>
+        <textarea class="note-ta" id="note-m-40-19-my" placeholder="The treachery of the eyes — the glance where it should not go. What does your gaze betray? Where do your eyes go when you are not consciously directing them?" oninput="autoSave('m-40-19-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-40-19-after"></span></div>
+        <textarea class="note-ta" id="note-m-40-19-after" placeholder="What changed after deeper study?" oninput="autoSave('m-40-19-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-67-13">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-67-13')">
+    <span class="rev-badge rev-middle en-blk">Rev. #77</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #77</span>
+    <span class="card-ref">Al-Mulk 67:13-14</span>
+    <span class="card-preview">أَلَا يَعْلَمُ مَنْ خَلَقَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَأَسِرُّوا قَوْلَكُمْ أَوِ اجْهَرُوا بِهِ ۖ إِنَّهُ عَلِيمٌ بِذَاتِ الصُّدُورِ ۞ أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ اللَّطِيفُ الْخَبِيرُ</div>
+    <div class="ayah-tr-en en-blk">"And whether you conceal your speech or speak it openly — He is Knowing of what is within the chests. Does He who created not know? And He is the Subtle, the Aware."</div>
+    <div class="ayah-tr-ur ur-blk">«اور تم اپنی بات چھپاؤ یا ظاہر کرو — وہ سینوں کے مواد کو خوب جانتا ہے۔ کیا جس نے بنایا وہ نہ جانے؟ اور وہ باریک بین، باخبر ہے۔»</div>
+    <div class="ayah-ref-line">Al-Mulk 67:13-14</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Mulk — the 77th surah — is widely recited and recommended for nightly recitation. The surah establishes Allah's sovereignty over all creation and the reality of accountability. This ayah addresses the futility of concealment: whether you conceal your speech or make it public, the contents of the Sudur (plural of Sadr — chests) are already known. Then the argument turns rational: Ala ya'lamu man khalaqa — does He who created not know? The creator knows the creation more intimately than any observer from outside could. He did not observe you from a distance; He made you.</div>
+      <div class="ctx-txt-ur ur-blk">الملک — ۷۷ویں سورت — رات کو پڑھنے کی سنت۔ چھپانے کی بے فائدگی: بات چھپاؤ یا ظاہر کرو — سینوں کا مواد پہلے سے معلوم۔ پھر عقلی استدلال: الا یعلم من خلق — کیا خالق نہ جانے؟ اس نے آپ کو دور سے نہیں دیکھا — بنایا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">اللَّطِيفُ الْخَبِيرُ</span> <span class="root-fm">ل-ط-ف · Al-Latif — the Subtle, penetrating the finest detail · خ-ب-ر · Al-Khabir — the Fully Aware, through inner experience</span>
+      <div class="root-mn en-blk">Al-Latif (L-T-F): subtle, fine, penetrating — the one whose knowledge reaches the finest point, the most delicate matter, what is too small for ordinary perception. Al-Khabir (Kh-B-R): the one with inner, experiential knowledge — not only theoretical knowing but knowing from within. Together: the knowledge that reaches into the smallest recess (Latif) and knows it from the inside (Khabir). This is the divine name-pair that closes the Muraqabah argument: the one who watches is not a distant observer. He is subtle beyond perception and aware from within.</div>
+      <div class="root-mn-ur ur-blk">اللطیف (ل-ط-ف): باریک، لطیف — جس کا علم باریک ترین نکتے تک پہنچے۔ الخبیر (خ-ب-ر): اندرونی تجربے سے جاننے والا — نظری نہیں، اندر سے۔ ملاکر: باریک ترین حصے تک پہنچنے والا علم (لطیف) اور اندر سے جاننے والا (خبیر)۔ دور کا مشاہدہ نہیں — لطیف اور خبیر ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The rational argument for Muraqabah: Ala ya'lamu man khalaqa. Does He who created not know? This is the Quran making Muraqabah a matter of logic, not only of faith. If you accept that Allah created you — created the nafs, the Sadr, the Qalb, the machinery of thought — then the knowledge of what happens inside it follows necessarily. The pair of divine names that closes this argument — Al-Latif, Al-Khabir — specifies the mode of knowledge: penetrating the finest detail from within. Muraqabah is grounded in the nature of who Allah is, not only in a divine decree to watch.</div>
+      <div class="uniq-txt-ur ur-blk">مراقبہ کا عقلی استدلال: الا یعلم من خلق۔ قرآن مراقبہ کو ایمان کے ساتھ منطق کا بھی معاملہ بناتا ہے۔ اگر آپ مانتے ہیں کہ اللہ نے آپ کو بنایا — نفس، صدر، قلب — تو اس کا جو ہوتا ہے اس کا علم ضروری لازم ہے۔ اللطیف الخبیر — اندر سے باریک ترین نکتے تک۔ مراقبہ الٰہی حکم سے نہیں — اللہ کی ذات کی نوعیت سے ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-67-13-my"></span></div>
+        <textarea class="note-ta" id="note-m-67-13-my" placeholder="Does He who created not know? If the rational argument for Muraqabah is simply that the Creator knows what He made — does that change how you hold this practice?" oninput="autoSave('m-67-13-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-67-13-after"></span></div>
+        <textarea class="note-ta" id="note-m-67-13-after" placeholder="What changed after deeper study?" oninput="autoSave('m-67-13-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-madani"></div>
+  <div class="era-label en-blk">Madani · 622–632 CE · The Completion</div>
+  <div class="era-label-ur ur-blk">مدنی · تکمیل</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">5 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-m-4-1">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-4-1')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">An-Nisa 4:1</span>
+    <span class="card-preview">إِنَّ اللَّهَ كَانَ عَلَيْكُمْ رَقِيبًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا النَّاسُ اتَّقُوا رَبَّكُمُ الَّذِي خَلَقَكُم مِّن نَّفْسٍ وَاحِدَةٍ ... وَاتَّقُوا اللَّهَ الَّذِي تَسَاءَلُونَ بِهِ وَالْأَرْحَامَ ۚ إِنَّ اللَّهَ كَانَ عَلَيْكُمْ رَقِيبًا</div>
+    <div class="ayah-tr-en en-blk">"O people — have Taqwa of your Lord who created you from a single soul... And have Taqwa of Allah in whose name you ask of one another, and of the wombs. Indeed, Allah is ever over you a Watcher — Raqiban."</div>
+    <div class="ayah-tr-ur ur-blk">«اے لوگو اپنے رب سے ڈرو جس نے تمہیں ایک نفس سے پیدا کیا... اور اللہ سے ڈرو جس کے نام پر تم ایک دوسرے سے مانگتے ہو اور رشتوں کو توڑنے سے بھی ڈرو۔ بیشک اللہ تم پر نگہبان ہے۔»</div>
+    <div class="ayah-ref-line">An-Nisa 4:1</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — Al-Raqib as Divine Name</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — الٰہی نام کے طور پر الرقیب</div>
+      <div class="ctx-txt en-blk">An-Nisa is a Madani surah addressed to a Muslim society now dealing with the full complexity of social life — inheritance, marriage, orphans, rights, communal bonds. The surah opens with this comprehensive command: have Taqwa, honour the bonds of kinship, honour those whose rights you hold. The closing statement of the ayah grounds all of this in Muraqabah: inna Allaha kana alaykum Raqiba. The name Al-Raqib appears directly — used as a descriptor for Allah in relation to human social behaviour. In the Makki period, Muraqabah covered personal interior states. In Madani revelation, it extends to social relationships and communal obligations.</div>
+      <div class="ctx-txt-ur ur-blk">النساء — مدنی سورت، مسلم معاشرے کے مکمل سماجی پیچیدگیوں کے لیے۔ سورت کا آغاز: تقویٰ، رشتے، حقوق۔ آیت کا اختتام: ان اللہ کان علیکم رقیبا — الرقیب براہِ راست الٰہی نام۔ مکی دور میں مراقبہ: ذاتی اندرونی حالات۔ مدنی: سماجی تعلقات اور فرائض تک توسیع۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah — The Divine Name Al-Raqib</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ — الٰہی نام الرقیب</div>
+      <span class="root-wd">رَقِيبًا</span> <span class="root-fm">ر-ق-ب · Raqiba — Watcher (here as divine predicate, used as one of the Asma al-Husna)</span>
+      <div class="root-mn en-blk">The same root as Muraqabah — R-Q-B — now used as a direct divine name. Kana alaykum Raqiba: He has been and remains a Watcher over you. Kana: the perfect tense used for a state that was always the case and continues. Was and is a Watcher — not He started watching. The divine watching is primordial, not responsive. It did not begin when you became aware of it. This is the culminating Madani statement: the divine name Al-Raqib confirms that Muraqabah is not a human practice borrowed from experience — it is the recognition of a divine attribute that was always already true.</div>
+      <div class="root-mn-ur ur-blk">وہی جڑ ر-ق-ب — اب براہِ راست الٰہی نام۔ کان علیکم رقیبا: کان — ماضی کمال جو جاری حال ہے — ہمیشہ سے اور اب بھی ناظر۔ الٰہی نگاہ اوّلی ہے، ردّعمل نہیں — آپ کے شعور سے پہلے شروع نہیں ہوئی۔ الرقیب الٰہی صفت ہے — انسانی مشق تجربے سے نہیں ہے بلکہ اس صفت کی پہچان ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Al-Raqib as a divine name — appearing in the context of social obligations. Muraqabah in the Makki surahs was the awareness of being watched in your personal interior. Here it is the ground of social ethics: honour the bonds between people because Allah is Al-Raqib over those bonds. Muraqabah is not only a private spiritual discipline — it is the foundation of why you treat other people correctly. The same divine watching that covers your inner life covers your behaviour toward every person whose right you hold.</div>
+      <div class="uniq-txt-ur ur-blk">الرقیب الٰہی نام — سماجی فرائض کے سیاق میں۔ مکی مراقبہ: اپنے اندرونی حال کی نگرانی۔ یہاں: سماجی اخلاق کی بنیاد — رشتے نبھاؤ کیونکہ اللہ ان پر الرقیب ہے۔ مراقبہ صرف نجی روحانی مشق نہیں — وجہ ہے کہ آپ دوسروں کے ساتھ درست سلوک کریں۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-4-1-my"></span></div>
+        <textarea class="note-ta" id="note-m-4-1-my" placeholder="Allah is Al-Raqib over your bonds with people — your family, your relationships, those whose rights you hold. Where in your relationships is your Muraqabah weakest?" oninput="autoSave('m-4-1-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-4-1-after"></span></div>
+        <textarea class="note-ta" id="note-m-4-1-after" placeholder="What changed after deeper study?" oninput="autoSave('m-4-1-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-2-115">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-2-115')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Baqarah 2:115</span>
+    <span class="card-preview">فَأَيْنَمَا تُوَلُّوا فَثَمَّ وَجْهُ اللَّهِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَلِلَّهِ الْمَشْرِقُ وَالْمَغْرِبُ ۚ فَأَيْنَمَا تُوَلُّوا فَثَمَّ وَجْهُ اللَّهِ ۚ إِنَّ اللَّهَ وَاسِعٌ عَلِيمٌ</div>
+    <div class="ayah-tr-en en-blk">"And to Allah belongs the east and the west — so wherever you turn, there is the Face of Allah. Indeed, Allah is All-Encompassing, All-Knowing."</div>
+    <div class="ayah-tr-ur ur-blk">«اور مشرق و مغرب اللہ ہی کے ہیں — تم جہاں بھی منہ پھیرو وہاں اللہ کا چہرہ ہے۔ بیشک اللہ وسیع اور جاننے والا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:115</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Baqarah — revealed after the change of Qiblah from Jerusalem to Makkah. Some Muslims prayed in a direction different from the new Qiblah out of uncertainty. This ayah encompasses that situation while establishing a principle that goes beyond it: wherever you turn — Fa-aynamā tuwallū — there is the Wajh (Face, Presence) of Allah. The Wajh of Allah is not located at the Ka'bah or Jerusalem. The Ka'bah is the direction for the physical act of Salah — not the location of Allah. East and west both belong to Him; every direction contains His presence. Muraqabah has no geographical exception.</div>
+      <div class="ctx-txt-ur ur-blk">البقرہ — تبدیلی قبلہ کے بعد نازل۔ بعض مسلمان نئے قبلے کے بارے میں غیریقینی تھے۔ یہ آیت ایک اصول قائم کرتی ہے: جہاں بھی منہ پھیرو — اللہ کا وجہ وہاں ہے۔ اللہ کعبہ یا بیت المقدس میں نہیں — وہ ہمہ حاضر ہے۔ مراقبہ کی کوئی جغرافیائی استثنا نہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">وَجْهُ اللَّهِ</span> <span class="root-fm">و-ج-ه · Wajh — Face, Presence, Countenance</span>
+      <div class="root-mn en-blk">W-J-H: face, direction, presence. Wajh Allah — the Face of Allah is the Quranic expression for the divine presence and countenance. It is used in 2:272, 18:28 (those who seek His Wajh), 30:38-39, and here — not as a literal face requiring spatial location, but as the divine presence that cannot be escaped or circumscribed. Wherever you turn — any direction, any moment, any context — that presence is there. The spatial omnipresence of the Wajh makes Muraqabah impossible to restrict to formal worship contexts. There is no moment when you are not in the presence of Allah.</div>
+      <div class="root-mn-ur ur-blk">و-ج-ه — چہرہ، رخ، موجودگی۔ وجہ اللہ — الٰہی حضور کا قرآنی اظہار۔ حرفی چہرہ نہیں جس کے لیے مکانی محل درکار — وہ الٰہی حضور جسے گھیرا نہیں جا سکتا۔ جہاں بھی منہ پھیرو — وہ حضور وہاں ہے۔ وجہ کی مکانی ہمہ حاضری مراقبہ کو رسمی عبادت تک محدود نہیں کرتی۔ کوئی لمحہ نہیں جب آپ اللہ کے حضور میں نہ ہوں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The spatial dimension of Muraqabah: there is no direction, no location, no context in which the Wajh of Allah is absent. Wherever you turn — including when you turn away from a direction of worship, including in places you consider private, including in moments you consider secular — there is the Face of Allah. Muraqabah does not apply only during Salah, in the masjid, or while reciting Quran. It applies in every direction. The ayah closes with Wasi'un Alimun: All-Encompassing (no space outside it) and All-Knowing (full knowledge within it).</div>
+      <div class="uniq-txt-ur ur-blk">مراقبہ کا مکانی پہلو: کوئی سمت، کوئی جگہ، کوئی سیاق نہیں جہاں اللہ کا وجہ غیر حاضر ہو۔ جہاں بھی منہ پھیرو — نجی جگہ میں بھی، دنیاوی لمحے میں بھی — اللہ کا چہرہ وہاں ہے۔ مراقبہ صرف نماز، مسجد یا قرآن میں نہیں — ہر سمت۔ واسعٌ علیم: ہمہ گیر (باہر کچھ نہیں) اور ہمہ دان (اندر مکمل علم)۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-2-115-my"></span></div>
+        <textarea class="note-ta" id="note-m-2-115-my" placeholder="Wherever you turn — there is the Face of Allah. In which contexts in your life do you act as if the Wajh of Allah is not present? What makes those contexts feel different?" oninput="autoSave('m-2-115-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-2-115-after"></span></div>
+        <textarea class="note-ta" id="note-m-2-115-after" placeholder="What changed after deeper study?" oninput="autoSave('m-2-115-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-2-284">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-2-284')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Baqarah 2:284</span>
+    <span class="card-preview">وَإِن تُبْدُوا مَا فِي أَنفُسِكُمْ أَوْ تُخْفُوهُ يُحَاسِبْكُم بِهِ اللَّهُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">لِّلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ وَإِن تُبْدُوا مَا فِي أَنفُسِكُمْ أَوْ تُخْفُوهُ يُحَاسِبْكُم بِهِ اللَّهُ ۖ فَيَغْفِرُ لِمَن يَشَاءُ وَيُعَذِّبُ مَن يَشَاءُ ۗ وَاللَّهُ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ</div>
+    <div class="ayah-tr-en en-blk">"To Allah belongs whatever is in the heavens and whatever is in the earth. Whether you show what is within yourselves or conceal it, Allah will bring you to account for it. Then He forgives whom He wills and punishes whom He wills — and Allah is over all things Capable."</div>
+    <div class="ayah-tr-ur ur-blk">«اللہ ہی کا ہے جو آسمانوں اور زمین میں ہے۔ چاہے تم جو اپنے نفسوں میں ہے ظاہر کرو یا چھپاؤ — اللہ اس پر تم سے حساب لے گا۔ پھر جسے چاہے معاف کرے اور جسے چاہے عذاب دے — اللہ ہر چیز پر قادر ہے۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:284</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Baqarah — this ayah comes near the surah's close, which is also the close of the longest surah in the Quran. The surah ends with a comprehensive statement of divine ownership (everything in the heavens and earth), followed by the accountability statement, and then the famous closing ayat (2:285-286) which the Prophet ﷺ described as the closing of Surah Al-Baqarah sent with him on the night of Miraj. When the companions heard this ayah — about being accountable for what they conceal in themselves — they came to the Prophet ﷺ in distress. The Prophet ﷺ told them: say Sami'na wa Ata'na. This ayah was later understood in light of 2:286 (Allah does not burden a soul beyond its capacity) — Allah accounts for what is consciously held and acted upon, not for passing thoughts.</div>
+      <div class="ctx-txt-ur ur-blk">البقرہ — سورت کے اختتام کے قریب۔ الٰہی ملکیت کا جامع بیان، پھر احتساب، پھر مشہور اختتامی آیات (۲:۲۸۵-۲۸۶)۔ صحابہ یہ آیت سن کر پریشان ہوئے — آپ ﷺ نے فرمایا: سمعنا واطعنا۔ بعد میں ۲:۲۸۶ (نفس پر طاقت سے زیادہ بوجھ نہیں) کی روشنی میں سمجھا: جو شعوری طور پر رکھے اور کرے اس کا حساب — گزرتے خیالات کا نہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">يُحَاسِبْكُم</span> <span class="root-fm">ح-س-ب · Yuhasibkum — He will bring you to account (Form III — mutual reckoning)</span>
+      <div class="root-mn en-blk">H-S-B: to count, to reckon, to bring to account. Hasaba: to calculate. Al-Hasib: one of the divine names — the Reckoner. Yuhasibkum: Form III — the form of mutual action — He will reckon with you, bring you to a reckoning. The same root gives Muhasaba — the practice of self-accounting that Al-Muhasibi (the self-accountant) made central to his teaching on Muraqabah. This ayah is the Quranic basis for Muhasaba: if Allah will bring you to account for what you show and conceal, the rational response is to do that accounting yourself first — before He does.</div>
+      <div class="root-mn-ur ur-blk">ح-س-ب — گننا، حساب کرنا۔ الحسیب الٰہی نام۔ یحاسبکم: باب مفاعلہ — باہمی حساب۔ اسی سے محاسبہ — المحاسبی کی تعلیم کا مرکز۔ یہ آیت محاسبہ کی قرآنی بنیاد: اگر اللہ ظاہر اور پوشیدہ کا حساب لے گا تو عقل مند جواب یہ ہے کہ پہلے خود حساب کرو۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The accountability dimension of Muraqabah: being watched means being accountable. What you show and conceal are both within the reckoning — not as a threat but as a statement of the completeness of divine knowledge. The Quranic correction through 2:286 (no soul is burdened beyond its capacity) prevents this from becoming a teaching of spiritual paralysis. And the closing: Allah forgives whom He wills. Muraqabah is not the terrifying awareness of inevitable punishment — it is the awareness of complete accountability combined with the knowledge that the same Allah who sees everything is also the One who forgives.</div>
+      <div class="uniq-txt-ur ur-blk">مراقبہ کا احتسابی پہلو: دیکھنا احتساب کا مطلب رکھتا ہے۔ ظاہر اور پوشیدہ دونوں حساب میں — دھمکی نہیں، الٰہی علم کی مکملیت کا بیان۔ ۲:۲۸۶ سے اصلاح: روحانی فالج نہیں۔ اختتام: اللہ جسے چاہے معاف کرے۔ مراقبہ ناگزیر سزا کا خوف نہیں — مکمل احتساب کا شعور، اس علم کے ساتھ کہ وہی جو سب دیکھتا ہے معاف بھی کرتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-2-284-my"></span></div>
+        <textarea class="note-ta" id="note-m-2-284-my" placeholder="Whether you show or conceal what is in yourselves — Allah will bring you to account. What do you conceal in yourself — not from people but from your own honest accounting — that this ayah brings forward?" oninput="autoSave('m-2-284-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-2-284-after"></span></div>
+        <textarea class="note-ta" id="note-m-2-284-after" placeholder="What changed after deeper study?" oninput="autoSave('m-2-284-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-57-4">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-57-4')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Hadid 57:4</span>
+    <span class="card-preview">وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">هُوَ الَّذِي خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ فِي سِتَّةِ أَيَّامٍ ثُمَّ اسْتَوَىٰ عَلَى الْعَرْشِ ۚ يَعْلَمُ مَا يَلِجُ فِي الْأَرْضِ وَمَا يَخْرُجُ مِنْهَا وَمَا يَنزِلُ مِنَ السَّمَاءِ وَمَا يَعْرُجُ فِيهَا ۖ وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ ۚ وَاللَّهُ بِمَا تَعْمَلُونَ بَصِيرٌ</div>
+    <div class="ayah-tr-en en-blk">"He is the One who created the heavens and the earth in six days, then settled upon the Throne. He knows what enters the earth and what comes out of it, and what descends from the sky and what ascends into it. And He is with you wherever you are — and Allah is Seeing of what you do."</div>
+    <div class="ayah-tr-ur ur-blk">«وہی ہے جس نے آسمانوں اور زمین کو چھ دنوں میں پیدا کیا پھر عرش پر مستوی ہوا۔ جانتا ہے جو زمین میں داخل ہوتا ہے اور جو اس سے نکلتا ہے، اور جو آسمان سے اترتا ہے اور جو اس میں چڑھتا ہے۔ اور وہ تمہارے ساتھ ہے جہاں بھی تم ہو — اور اللہ تمہارے اعمال دیکھنے والا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Hadid 57:4</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Hadid — the same surah that gave us the five-stage definition of dunya (57:20). The surah begins by establishing divine majesty and omniscience on a cosmic scale: creation of heavens and earth, the Throne, knowledge of everything that enters or leaves the earth, everything that ascends or descends. From this cosmic frame comes the intimate: wa huwa ma'akum ayna ma kuntum — and He is with you wherever you are. The cosmic statement of divine omniscience (He knows every movement in creation) leads directly to the relational statement of Ma'iyya: He is with you. Muraqabah is grounded in a divine presence that is both cosmically total and personally immediate.</div>
+      <div class="ctx-txt-ur ur-blk">الحدید — وہی سورت جس نے دنیا کی پانچ مراحل کی تعریف دی۔ آغاز: کائناتی جلال — آسمان، زمین، عرش، ہر حرکت کا علم۔ اس کائناتی بیان سے نجی: وہو معکم اینما کنتم — وہ تمہارے ساتھ ہے جہاں بھی ہو۔ کائناتی ہمہ دانی (ہر حرکت جانتا ہے) سے معیت: وہ ساتھ ہے۔ مراقبہ: کائناتی اور ذاتی ایک ساتھ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">مَعَكُمْ</span> <span class="root-fm">م-ع · Ma'a — with, in company with, alongside</span>
+      <div class="root-mn en-blk">Ma'a: the preposition of togetherness, companionship, accompanying. Wa huwa ma'akum: and He is with you — not merely watching from outside but present in company. This is the Ma'iyya (divine togetherness) concept — one of the deepest expressions of divine presence in the Quran. The 2:115 ayah said the Wajh of Allah is wherever you turn. This ayah says He Himself is with you wherever you are. The movement from Muraqabah (watching) to Ma'iyya (accompaniment) is the deepening of the same truth.</div>
+      <div class="root-mn-ur ur-blk">مع — ساتھ ہونا، معیت، رفاقت۔ وهو معکم: وہ تمہارے ساتھ ہے — باہر سے نہیں بلکہ رفاقت میں موجود۔ معیتِ الٰہی: ۲:۱۱۵ نے کہا وجہ اللہ ہر سمت — یہ آیت کہتی ہے وہ خود ساتھ ہے۔ نگرانی (مراقبہ) سے رفاقت (معیت) — ایک ہی حقیقت کی گہرائی۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The shift from watching to companionship: Muraqabah begins as the awareness that Allah sees. This ayah moves to Ma'iyya: He is with you. The difference matters spiritually. A watcher can be distant. A companion is present alongside you. This is why the tradition identifies Muraqabah as a path toward Uns (intimate companionship with Allah) — the practice of awareness of being watched gradually transforms into the experience of divine companionship. Wa Allahu bima ta'maluna Baseer: Allah is Seeing of what you do — the Seeing is simultaneous with the companionship. The one who is with you is also seeing everything you do.</div>
+      <div class="uniq-txt-ur ur-blk">نگرانی سے رفاقت: مراقبہ اس شعور سے شروع ہوتا ہے کہ اللہ دیکھتا ہے۔ یہ آیت معیت تک: وہ ساتھ ہے۔ فرق روحانی طور پر اہم: ناظر دور ہو سکتا ہے — رفیق ساتھ ہے۔ اس لیے روایت کہتی ہے مراقبہ انس تک لے جاتا ہے۔ نگرانی کا شعور آہستہ الٰہی رفاقت کا تجربہ بنتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-57-4-my"></span></div>
+        <textarea class="note-ta" id="note-m-57-4-my" placeholder="He is with you wherever you are. Not watching from outside — with you as a companion. Does this distinction between being watched and being accompanied change the feeling of Muraqabah for you?" oninput="autoSave('m-57-4-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-57-4-after"></span></div>
+        <textarea class="note-ta" id="note-m-57-4-after" placeholder="What changed after deeper study?" oninput="autoSave('m-57-4-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-58-7">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-58-7')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Mujadila 58:7</span>
+    <span class="card-preview">مَا يَكُونُ مِن نَّجْوَىٰ ثَلَاثَةٍ إِلَّا هُوَ رَابِعُهُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">أَلَمْ تَرَ أَنَّ اللَّهَ يَعْلَمُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۖ مَا يَكُونُ مِن نَّجْوَىٰ ثَلَاثَةٍ إِلَّا هُوَ رَابِعُهُمْ وَلَا خَمْسَةٍ إِلَّا هُوَ سَادِسُهُمْ وَلَا أَدْنَىٰ مِن ذَٰلِكَ وَلَا أَكْثَرَ إِلَّا هُوَ مَعَهُمْ أَيْنَ مَا كَانُوا</div>
+    <div class="ayah-tr-en en-blk">"Have you not considered that Allah knows what is in the heavens and what is on the earth? There is no private conversation of three but He is the fourth, nor of five but He is the sixth — nor of less than that or more, but He is with them wherever they are."</div>
+    <div class="ayah-tr-ur ur-blk">«کیا تم نے غور نہیں کیا کہ اللہ جانتا ہے جو آسمانوں اور زمین میں ہے؟ تین کی کوئی سرگوشی نہیں مگر وہ ان کا چوتھا ہے، اور نہ پانچ کی مگر وہ ان کا چھٹا — اور نہ اس سے کم اور نہ زیادہ مگر وہ ان کے ساتھ ہے جہاں بھی وہ ہوں۔»</div>
+    <div class="ayah-ref-line">Al-Mujadila 58:7</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Mujadila — revealed in response to secret consultations (Najwa) that some hypocrites held to undermine the Muslims and spread anxiety. The Quran addresses this by establishing the futility of any secret conversation: not three, not five — nor any number less or greater — has a private conversation to which Allah is not present as the additional member. The Najwa of the hypocrites was exposed before it was spoken. The Quran uses the most intimate human context — private conversation — to make the most total statement of divine presence. No closed room, no whispered exchange, no coded communication is outside the presence of Allah.</div>
+      <div class="ctx-txt-ur ur-blk">المجادلہ — منافقین کی خفیہ سرگوشیوں کے جواب میں نازل۔ کوئی نجوی نہیں جس میں اللہ موجود نہ ہو۔ تین ہوں یا پانچ — کم یا زیادہ — وہ اضافی رکن ہے۔ سب سے نجی انسانی سیاق — خفیہ گفتگو — میں سب سے جامع بیانِ حضور۔ کوئی بند کمرہ، کوئی سرگوشی، کوئی خفیہ اشارہ اللہ کی موجودگی سے باہر نہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">نَّجْوَى</span> <span class="root-fm">ن-ج-و · Najwa — private conversation, secret counsel</span>
+      <div class="root-mn en-blk">N-J-W: to save, to be high, to speak in secret. Najwa: private conversation — speech deliberately kept from others. The Quran takes the most guarded human context — deliberate private communication between two or more people — and says: He is the fourth, or the sixth, or the additional member regardless of number. This is the Quran's most detailed specification of divine omnipresence in human social contexts. The word Adna (less) covers conversations of two. The word Akthar (more) covers gatherings of any size. No configuration is outside it. The ayah closes: wherever they are — ayna ma kanu — no location provides privacy from divine presence.</div>
+      <div class="root-mn-ur ur-blk">ن-ج-و — نجات، اونچائی، خفیہ گفتگو۔ نجوی: جان بوجھ کر دوسروں سے چھپائی بات۔ قرآن نے سب سے محفوظ انسانی سیاق — جان بوجھ کر نجی گفتگو — لیا اور کہا: وہ چوتھا یا چھٹا رکن ہے۔ ادنیٰ (کم) دو کی گفتگو — اکثر (زیادہ) کسی بھی تعداد کا اجتماع۔ کوئی ترکیب باہر نہیں۔ جہاں بھی ہوں — کوئی جگہ الٰہی حضور سے نجی نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Completion of the Muraqabah Framework</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے — مراقبہ کے ڈھانچے کی تکمیل</div>
+      <div class="uniq-txt en-blk">The most comprehensive and detailed statement of divine omnipresence in human social life. The Quran named specific numbers (three, five), then said: nor any number less or more — systematically closing every possible exception. Private thought is known (50:16). Spoken words are recorded (50:18). Visible deeds are seen (96:14). And now: the most private human communication — Najwa — is entered by divine presence. No dimension of human life is outside the scope of Muraqabah. The argument that began in the first revelation (Does he not know that Allah sees?) reaches its most thorough Madani completion here.</div>
+      <div class="uniq-txt-ur ur-blk">انسانی سماجی زندگی میں الٰہی ہمہ حاضری کا سب سے جامع اور تفصیلی بیان۔ قرآن نے مخصوص اعداد (تین، پانچ) بتائے پھر کہا: نہ اس سے کم نہ زیادہ — ہر ممکنہ استثنا بند۔ نجی خیال معلوم (۵۰:۱۶)۔ لفظ مکتوب (۵۰:۱۸)۔ ظاہری اعمال مرئی (۹۶:۱۴)۔ اور اب: سب سے نجی گفتگو — نجوی — میں الٰہی حضور۔ پہلی وحی (کیا وہ نہیں جانتا اللہ دیکھتا ہے) سے شروع ہونے والا استدلال یہاں تکمیل پاتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-58-7-my"></span></div>
+        <textarea class="note-ta" id="note-m-58-7-my" placeholder="No private conversation of three but He is the fourth. Think of your most private conversations — with a close friend, with yourself in your mind. Does knowing He is the additional member change what you say or think?" oninput="autoSave('m-58-7-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-58-7-after"></span></div>
+        <textarea class="note-ta" id="note-m-58-7-after" placeholder="What changed after deeper study?" oninput="autoSave('m-58-7-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-16-128">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-16-128')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">An-Nahl 16:128</span>
+    <span class="card-preview">إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوا وَّالَّذِينَ هُم مُّحْسِنُونَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوا وَّالَّذِينَ هُم مُّحْسِنُونَ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, Allah is with those who have Taqwa and those who are Muhsinoon."</div>
+    <div class="ayah-tr-ur ur-blk">«بیشک اللہ ان کے ساتھ ہے جو تقویٰ رکھتے ہیں اور جو احسان کرتے ہیں۔»</div>
+    <div class="ayah-ref-line">An-Nahl 16:128</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Bridge Ayah</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — سیتو آیت</div>
+      <div class="ctx-txt en-blk">An-Nahl — revealed near the end of the Makki period, closing a passage on calling to Allah with wisdom and beautiful argument (16:125-127). This ayah is the bridge between all five concepts in the study: Taqwa (guarding the heart) produces Muraqabah (awareness of being with Allah), which produces Ihsan (acting with beautiful excellence), which earns the special Maiyya — the divine with-ness stated here. The divine companionship in 57:4 is general for all. Here it is specific: with those of Taqwa and those who are Muhsin. Muraqabah is not the end of the path — it is the middle passage that opens into Ihsan.</div>
+      <div class="ctx-txt-ur ur-blk">النحل — مکی دور کے اواخر۔ یہ آیت پانچوں تصورات کا سیتو ہے: تقویٰ (دل کی حفاظت) → مراقبہ (اللہ کے ساتھ ہونے کا شعور) → احسان (اس شعور سے خوبصورتی سے عمل) → خاص معیت۔ ۵۷:۴ کی معیت عام تھی۔ یہاں خاص: تقویٰ والوں اور محسنین کے ساتھ۔ مراقبہ منزل نہیں — درمیانی راستہ جو احسان تک کھلتا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">مُّحْسِنُونَ</span> <span class="root-fm">ح-س-ن · Muhsinoon — those who practise Ihsan, those who act with beautiful excellence</span>
+      <div class="root-mn en-blk">H-S-N: beauty, excellence, the perfection of doing. Muhsin: the one who practises Ihsan — doing every act with the awareness that Allah sees, and therefore doing it as beautifully as possible. The Muhsin does not merely obey — they excel, because they know the Witness of their action is the One who deserves the finest. This is the direct Quranic link between Muraqabah and Ihsan. The Maiyya (divine with-ness) is simultaneously the reward of Ihsan and its fuel: you act beautifully because He is with you, and He is with you because you act beautifully.</div>
+      <div class="root-mn-ur ur-blk">ح-س-ن — خوبصورتی، کمال۔ محسن: وہ جو احسان کرے — ہر کام اس شعور کے ساتھ کہ اللہ دیکھتا ہے، اس لیے ممکنہ خوبصورتی سے۔ مراقبہ اور احسان کا براہِ راست قرآنی ربط۔ معیت احسان کا ثمر بھی ہے اور ایندھن بھی: خوبصورتی سے کرتے ہو کیونکہ وہ ساتھ ہے، اور ساتھ ہے کیونکہ خوبصورتی سے کرتے ہو۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — All Five Concepts Visible in One Ayah</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے — ایک آیت میں پانچوں تصورات</div>
+      <div class="uniq-txt en-blk">This is the one ayah where all five concepts of this study become visible simultaneously: Taqwa (ittaqaw — those who have guarded themselves), Muraqabah (ma'a — Allah is with them, the fruit of sustained awareness of His presence), Ihsan (muhsinoon — those who act with excellence because of that awareness), and implicitly Dhikr (the remembrance that keeps the awareness alive) and Zuhd (the non-attachment that clears the heart for that awareness). From this single ayah, the entire architecture of the five-concept study is visible. Muraqabah is the hinge.</div>
+      <div class="uniq-txt-ur ur-blk">یہ وہ ایک آیت ہے جہاں پانچوں تصورات بیک وقت نظر آتے ہیں: تقویٰ (اتقوا)، مراقبہ (معیت — شعور کا ثمر)، احسان (محسنون)، ذکر (ضمنی — شعور کو زندہ رکھتا ہے)، زہد (ضمنی — دل صاف کرتا ہے)۔ اس ایک آیت سے پانچوں تصورات کا پورا ڈھانچہ نظر آتا ہے۔ مراقبہ قلاب ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-16-128-my"></span></div>
+        <textarea class="note-ta" id="note-m-16-128-my" placeholder="Allah is with those of Taqwa and those who are Muhsin. Right now, which are you closer to — a person of Taqwa, Muraqabah, or Ihsan? What would the next step look like?" oninput="autoSave('m-16-128-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-16-128-after"></span></div>
+        <textarea class="note-ta" id="note-m-16-128-after" placeholder="What changed after deeper study?" oninput="autoSave('m-16-128-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-m-33-52">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-m-33-52')">
+    <span class="rev-badge rev-madani en-blk">Madani — Late</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی — اواخر</span>
+    <span class="card-ref">Al-Ahzab 33:52</span>
+    <span class="card-preview">وَكَانَ اللَّهُ عَلَىٰ كُلِّ شَيْءٍ رَّقِيبًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَكَانَ اللَّهُ عَلَىٰ كُلِّ شَيْءٍ رَّقِيبًا</div>
+    <div class="ayah-tr-en en-blk">"And Allah has ever been Watcher over all things."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اللہ ہر چیز پر ہمیشہ سے نگراں ہے — رقیبًا۔»</div>
+    <div class="ayah-ref-line">Al-Ahzab 33:52</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Quranic Closure on Raqib</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — رقیب پر قرآنی اختتام</div>
+      <div class="ctx-txt en-blk">Al-Ahzab — one of the late Madani surahs, dealing with the most sensitive social laws and boundaries. This ayah closes a passage setting limits. Its final word is the divine name Raqib — but now with total scope: Wa kana Allahu ala kulli shay'in Raqiba. In 4:1 the Raqib was over people (alaykum). Here: over all things (ala kulli shay'in). Kana: has always been — before the revelation, before creation, before time as we know it. The scope is absolute and the duration is eternal. This is the Quran's closing statement on the divine name Raqib.</div>
+      <div class="ctx-txt-ur ur-blk">الاحزاب — مدنی اواخر، نازک ترین سماجی احکام۔ یہ آیت حدود طے کرنے والی عبارت بند کرتی ہے۔ آخری لفظ: رقیبًا — لیکن اب مکمل دائرے کے ساتھ۔ ۴:۱ میں علیکم (لوگوں پر)۔ یہاں: کل شیء پر۔ کان: ہمیشہ سے — وحی سے پہلے، خلق سے پہلے۔ دائرہ مطلق، دورانیہ ابدی۔ رقیب پر قرآن کا اختتامی بیان۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah — The Final Explicit Use of R-Q-B</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ — ر-ق-ب کا آخری صریح استعمال</div>
+      <span class="root-wd">رَّقِيبًا</span> <span class="root-fm">ر-ق-ب · Raqiba — the Watcher, final Quranic statement of the divine name</span>
+      <div class="root-mn en-blk">Raqib — the explicit R-Q-B root, the name from which Muraqabah takes its name. The Quran opened Muraqabah with the question: does he not know Allah sees? (96:14 — the first surah). It closes the explicit use of Raqib here: Allah has ever been Raqib over all things. The arc is complete. The earliest revelation and the late Madani say the same thing. What was always true at the beginning remains true without limit at the end. Muraqabah is not a practice you begin — it is a reality you recover awareness of.</div>
+      <div class="root-mn-ur ur-blk">رقیب — ر-ق-ب، وہ جڑ جس سے مراقبہ کا نام ہے۔ قرآن نے ۹۶:۱۴ (پہلی سورت) سے کھولا: کیا نہیں جانتا اللہ دیکھتا ہے؟ یہاں بند: اللہ ہر چیز پر ہمیشہ سے رقیب۔ قوس مکمل۔ ابتدائی اور اواخرِ مدنی وحی ایک بات کہتی ہے۔ جو ہمیشہ سے سچ تھا وہ آخر تک بلا حد سچ رہا۔ مراقبہ وہ عمل نہیں جو آپ شروع کرتے ہیں — وہ حقیقت ہے جس کی آگاہی واپس لاتے ہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Complete Arc</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے — مکمل قوس</div>
+      <div class="uniq-txt en-blk">The scope is now total: not just over you, not just over people, not just over this moment — over all things, always. This completes the Muraqabah argument. From the first surah (does he not know Allah sees?) through the jugular vein (50:16 — closer than you imagined), through the divine companionship (57:4 — He is with you wherever you are), through the bridge (16:128 — specifically with those of Taqwa and Ihsan), to this: Raqib over all things, always. The practice of Muraqabah is simply the sustained refusal to forget what this sequence of ayat makes plain.</div>
+      <div class="uniq-txt-ur ur-blk">دائرہ اب کل: نہ صرف آپ پر، نہ صرف لوگوں پر، نہ صرف اس لمحے — ہر چیز پر، ہمیشہ۔ مراقبہ کا استدلال مکمل۔ پہلی سورت سے (۹۶:۱۴) شہ رگ تک (۵۰:۱۶) معیت تک (۵۷:۴) سیتو تک (۱۶:۱۲۸) یہاں تک: ہر چیز پر رقیب، ہمیشہ۔ مراقبہ کی مشق: جو یہ آیات کہتی ہیں اسے بھولنے سے مستمر انکار۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-m-33-52-my"></span></div>
+        <textarea class="note-ta" id="note-m-33-52-my" placeholder="Raqib over all things, always — the arc is complete. After studying all the Muraqabah ayat, what single thing has shifted most in how you see your relationship with Allah?" oninput="autoSave('m-33-52-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-m-33-52-after"></span></div>
+        <textarea class="note-ta" id="note-m-33-52-after" placeholder="What changed after deeper study?" oninput="autoSave('m-33-52-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider" style="margin-top:32px">
+  <div class="era-dot" style="background:var(--purple)"></div>
+  <div class="era-label en-blk">Sunnah on Muraqabah — Authenticated Hadith Only</div>
+  <div class="era-label-ur ur-blk">مراقبہ پر سنت — صرف مستند احادیث</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Definition — Worship Allah as Though You See Him</span><span class="ur-blk">تعریف — اللہ کی عبادت ایسے کرو جیسے اسے دیکھ رہے ہو</span></div>
+  <div class="sh-ar">أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ فَإِنْ لَمْ تَكُنْ تَرَاهُ فَإِنَّهُ يَرَاكَ</div>
+  <div class="sh-en en-blk">"Ihsan is that you worship Allah as though you see Him. And if you do not see Him — know that He sees you." (From the Hadith of Jibreel, when he asked the Prophet ﷺ to define Ihsan.) This hadith will be explored in full in the Ihsan section. Its second half — fa-innahu yaraka — is the Sunnah's definition of Muraqabah: if the highest level (worshipping as though you see Him) is not yet your state, then at minimum, know that He sees you. Muraqabah is the foundation upon which Ihsan is built.</div>
+  <div class="sh-ur ur-blk">«احسان یہ ہے کہ تم اللہ کی عبادت اس طرح کرو جیسے اسے دیکھ رہے ہو — اگر تم اسے نہیں دیکھتے تو (جانو کہ) وہ تمہیں دیکھ رہا ہے۔» (حدیثِ جبریل — جب آپ علیہ السلام نے احسان کی تعریف دریافت کی۔) یہ حدیث احسان کے باب میں مکمل آئے گی۔ اس کا دوسرا حصہ — فانہ یراک — مراقبہ کی سنّی تعریف ہے: اعلیٰ سطح اگر ابھی نہیں — تو کم از کم جانو کہ وہ دیکھتا ہے۔</div>
+  <div class="sh-src">Sahih Bukhari 50, Sahih Muslim 8 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Guard Allah and He Will Guard You</span><span class="ur-blk">اللہ کی حفاظت کرو، وہ تمہاری حفاظت کرے گا</span></div>
+  <div class="sh-ar">احْفَظِ اللَّهَ يَحْفَظْكَ ، احْفَظِ اللَّهَ تَجِدْهُ تُجَاهَكَ ... وَاعْلَمْ أَنَّ مَا أَصَابَكَ لَمْ يَكُنْ لِيُخْطِئَكَ وَمَا أَخْطَأَكَ لَمْ يَكُنْ لِيُصِيبَكَ</div>
+  <div class="sh-en en-blk">"Guard Allah's rights and He will guard you. Guard His rights and you will find Him before you... Know that what has reached you could not have missed you, and what has missed you could not have reached you." (Ibn Abbas — the full hadith continues: know Allah in prosperity and He will know you in hardship.)</div>
+  <div class="sh-ur ur-blk">«اللہ کی حفاظت کرو وہ تمہاری حفاظت کرے گا۔ اللہ کی حفاظت کرو تم اسے اپنے سامنے پاؤ گے... جانو کہ جو تمہیں پہنچا وہ چوکنے والا نہ تھا اور جو چوکا وہ پہنچنے والا نہ تھا۔»</div>
+  <div class="sh-src">Tirmidhi 2516 — Sahih al-Albani <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Allah Looks at the Hearts — Not the Forms</span><span class="ur-blk">اللہ دلوں کو دیکھتا ہے — صورتوں کو نہیں</span></div>
+  <div class="sh-ar">إِنَّ اللَّهَ لَا يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ</div>
+  <div class="sh-en en-blk">"Indeed, Allah does not look at your forms or your wealth — but He looks at your hearts and your deeds."</div>
+  <div class="sh-ur ur-blk">«بیشک اللہ تمہاری صورتوں اور مالوں کو نہیں دیکھتا — بلکہ تمہارے دلوں اور اعمال کو دیکھتا ہے۔»</div>
+  <div class="sh-src">Sahih Muslim 2564 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">I Am as My Servant Thinks of Me — Hadith Qudsi</span><span class="ur-blk">میں اپنے بندے کے گمان کے پاس ہوں — حدیث قدسی</span></div>
+  <div class="sh-ar">أَنَا عِنْدَ ظَنِّ عَبْدِي بِي وَأَنَا مَعَهُ إِذَا ذَكَرَنِي</div>
+  <div class="sh-en en-blk">"I am as My servant thinks of Me. And I am with him when he remembers Me." (Allah says in a Hadith Qudsi. The full hadith continues: if he remembers Me in himself, I remember him in Myself; if he remembers Me in a gathering, I remember him in a better gathering than his.)</div>
+  <div class="sh-ur ur-blk">«میں اپنے بندے کے گمان کے پاس ہوں۔ اور میں اس کے ساتھ ہوں جب وہ مجھے یاد کرتا ہے۔» (حدیث قدسی۔ آگے: اگر مجھے اپنے نفس میں یاد کرے تو میں اسے اپنے نفس میں یاد کرتا ہوں — کسی جماعت میں یاد کرے تو اس سے بہتر میں یاد کرتا ہوں۔)</div>
+  <div class="sh-src">Sahih Bukhari 7405, Sahih Muslim 2675 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Fear Allah Wherever You Are</span><span class="ur-blk">جہاں بھی ہو اللہ سے ڈرو</span></div>
+  <div class="sh-ar">اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ وَأَتْبِعِ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا وَخَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ</div>
+  <div class="sh-en en-blk">"Have Taqwa of Allah wherever you are. And follow an evil deed with a good one — it will erase it. And treat people with excellent character."</div>
+  <div class="sh-ur ur-blk">«جہاں بھی ہو اللہ سے ڈرو۔ اور برے کام کے بعد نیک کام کرو — وہ اسے مٹا دے گا۔ اور لوگوں کے ساتھ اچھے اخلاق سے پیش آؤ۔»</div>
+  <div class="sh-src">Tirmidhi 1987 — Hasan Sahih <span class="grade grade-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Pray the Prayer of One Who Is Bidding Farewell</span><span class="ur-blk">اس طرح نماز پڑھو جیسے الوداعی نماز ہو</span></div>
+  <div class="sh-ar">إِذَا قُمْتَ فِي صَلَاتِكَ فَصَلِّ صَلَاةَ مُوَدِّعٍ</div>
+  <div class="sh-en en-blk">"When you stand for your prayer, pray the prayer of one who is bidding farewell." (In some narrations: "...and do not say anything that will require an apology.")</div>
+  <div class="sh-ur ur-blk">«جب تم نماز کے لیے کھڑے ہو تو الوداع کرنے والے کی نماز پڑھو۔» (بعض روایات میں: «اور کوئی ایسی بات نہ کرو جس پر معذرت کرنی پڑے۔»)</div>
+  <div class="sh-src">Ibn Majah 4171 — Hasan (Ibn Hajar) <span class="grade grade-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Heart Between Two Fingers of the Most Merciful</span><span class="ur-blk">دل رحمان کی دو انگلیوں کے درمیان</span></div>
+  <div class="sh-ar">إِنَّ قُلُوبَ بَنِي آدَمَ كُلَّهَا بَيْنَ إِصْبَعَيْنِ مِنْ أَصَابِعِ الرَّحْمَنِ كَقَلْبٍ وَاحِدٍ يُصَرِّفُهُ حَيْثُ يَشَاءُ</div>
+  <div class="sh-en en-blk">"The hearts of all the sons of Adam are between two fingers of the Most Merciful — as one heart — He turns them however He wills." (The Prophet ﷺ used to say: O Turner of the hearts, keep my heart firm upon Your religion.)</div>
+  <div class="sh-ur ur-blk">«آدم کے سب بیٹوں کے دل رحمٰن کی دو انگلیوں کے درمیان ہیں — ایک دل کی طرح — وہ انہیں جیسے چاہے پھیرتا ہے۔» (آپ ﷺ دعا فرماتے: اے دلوں کو پھیرنے والے میرے دل کو اپنے دین پر ثابت رکھ۔)</div>
+  <div class="sh-src">Sahih Muslim 2654 <span class="grade grade-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card" style="border-color:var(--goldbdr);background:rgba(201,168,76,.04)">
+  <div class="sh-lbl"><span class="en-blk">Connected Concepts — What Muraqabah Produces and Enables</span><span class="ur-blk">متعلقہ تصورات — مراقبہ کیا پیدا کرتا اور ممکن بناتا ہے</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;line-height:1.85;color:var(--text)"><strong style="color:var(--gold2)">Haya (Modesty/Shame)</strong> — The natural consequence of genuine Muraqabah. If you truly know Allah sees — the gaze, the thought, the private word — Haya follows. Not social embarrassment but Haya toward Allah: the modesty of one who is in the presence of One who deserves complete reverence. Haya min Allah is different from Haya min al-Nas (from people). The hadith: "Be shy toward Allah as He deserves to be given shyness" — this is Muraqabah producing its fruit.<br><br><strong style="color:var(--gold2)">Ikhlas (Sincerity)</strong> — Muraqabah destroys the root of Riya (showing off). If Allah sees everything — the public deed and the private intention — then performing for human eyes while concealing a different intention becomes impossible to maintain. Muraqabah is the natural cure for Riya because it makes the audience of your actions clear: Allah is the first and primary witness.<br><br><strong style="color:var(--gold2)">Ihsan (Excellence)</strong> — The next concept in this study. The Hadith of Jibril defines Ihsan as worshipping Allah as though you see Him. Muraqabah (knowing He sees you) is the floor; Ihsan (worshipping as though you see Him) is the ceiling. One is awareness of His watching; the other is the transformation of that awareness into constant excellence. Muraqabah practiced consistently leads to Ihsan.</div>
+  <div class="sh-ur ur-blk" style="font-style:normal;line-height:2;color:var(--text);direction:rtl;text-align:right"><strong style="color:var(--gold2)">حیا</strong> — سچے مراقبہ کا فطری نتیجہ۔ اگر واقعی معلوم ہو کہ اللہ دیکھتا ہے — نگاہ، خیال، نجی لفظ — تو حیا آتی ہے۔ سماجی شرمندگی نہیں — اللہ سے حیا: وہ شخص جو اس کی موجودگی میں ہو جو مکمل تعظیم کا مستحق ہے۔<br><br><strong style="color:var(--gold2)">اخلاص</strong> — مراقبہ ریاء کی جڑ کاٹتا ہے۔ اگر اللہ سب دیکھتا ہے — ظاہری عمل اور اندرونی نیت — تو لوگوں کے لیے کرتے ہوئے چھپانا ناممکن ہے۔<br><br><strong style="color:var(--gold2)">احسان</strong> — اگلا تصور۔ مراقبہ فرش ہے (وہ دیکھتا ہے)؛ احسان چھت (جیسے تم دیکھ رہے ہو)۔ مسلسل مراقبہ احسان کی طرف لے جاتا ہے۔</div>
+</div>
+
+<div class="sh-card" style="margin-top:20px">
+  <div class="sh-lbl"><span class="en-blk">Your Personal Understanding of Muraqabah</span><span class="ur-blk">مراقبہ کے بارے میں آپ کا ذاتی فہم</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;color:var(--text2);font-size:13px;line-height:1.8">After studying all 12 ayat — from the first revelation's question (Does he not know that Allah sees?) to the Madani completion (no private conversation of three but He is the fourth) — write what has actually shifted in how you understand being watched. Not what you believe in theory, but what changed in how you feel when you are alone. The Quran moved from seeing (96:14) to proximity (50:16) to recording (50:18) to companionship (57:4) to the most private conversation (58:7). Where in that progression are you?</div>
+  <div class="sh-ur ur-blk" style="font-size:14px;color:var(--text2);line-height:2;direction:rtl;text-align:right">تمام ۱۲ آیات کے مطالعے کے بعد — پہلی وحی کے سوال سے مدنی تکمیل تک — لکھیں کہ نگرانی کے بارے میں سمجھ میں واقعی کیا بدلا۔ نظریے میں نہیں — جب اکیلے ہوں تو کیسا محسوس ہوتا ہے۔ قرآن دیکھنے سے قربت تک، ریکارڈ سے رفاقت تک، نجی گفتگو تک گیا۔ آپ اس سفر میں کہاں ہیں؟</div>
+  <div class="notes-sec" style="border-top:none;padding-top:8px">
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Synthesis of Muraqabah</span><span class="ur-blk">مراقبہ پر میرا خلاصہ</span><span class="nsv" id="sv-m-synth"></span></div>
+      <textarea class="note-ta" id="note-m-synth" style="min-height:120px" placeholder="Write your personal understanding of Muraqabah after studying all these ayat. Has it shifted from awareness of being watched to something else — presence, companionship, intimacy? Where does your practice of Muraqabah actually begin and end in your daily life?" oninput="autoSave('m-synth',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+
+<div class="stage3-hdr">
+  <div class="stage3-hdr-ar">الصوفية على المراقبة</div>
+  <div class="stage3-hdr-en en-blk">Sufi Tradition on Muraqabah &#8212; Seven Scholars</div>
+  <div class="stage3-hdr-rule"></div>
+</div>
+<p class="stage3-intro en-blk">Seven scholars in chronological order &#8212; each separately. The Divergence section addresses the three live debates.</p>
+<p class="stage3-intro ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">سات علماء تاریخی ترتیب میں &#8212; ہر ایک الگ۔</p>
+
+<div class="scholar-card" id="sc-m-basri">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-basri')">
+    <div class="sc-num">01</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Hasan al-Basri</div>
+      <div class="sc-name-ur ur-blk">حسن بصری</div>
+      <div class="sc-dates">642&#8211;728 CE &middot; Basra &middot; Companion-generation bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Prologue</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in Medina, met over 70 Companions. The foundational voice of the early spiritual tradition.</div>
+      <div class="bio-txt-ur ur-blk">مدینہ میں پیدا، ۷۰ سے زیادہ صحابہ سے ملاقات۔ ابتدائی روحانی روایت کی بنیادی آواز۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Preserved in Hilyat al-Awliya and Sifat al-Safwa.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">Hasan al-Basri&#39;s entire life was an embodiment of Muraqabah &#8212; he lived under constant awareness of being watched. His most powerful teaching: &#39;Be with Allah as if there is no creation; be with creation as if you have no self.&#39; This is not advice to ignore the world but to be fully present in two registers simultaneously &#8212; fully conscious of Allah in every moment, fully present in every human engagement, but without the self as mediator claiming credit or status. He never described Muraqabah as a technique but as a state that the serious person simply inhabits.</div>
+    <div class="sc-finding-ur ur-blk">حسن بصری کی پوری زندگی مراقبہ کا مجسمہ تھی &#8212; مشاہدے کی مستمر آگاہی میں۔ اہم تعلیم: اللہ کے ساتھ ایسے رہو جیسے مخلوق نہ ہو؛ مخلوق کے ساتھ ایسے کہ کوئی نفس نہ ہو۔ دونوں میں بیک وقت مکمل موجودگی &#8212; بغیر نفس کے بیچ میں۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">كُنْ مَعَ اللَّهِ كَأَنَّهُ لَا خَلْقَ &#8212; وَكُنْ مَعَ الْخَلْقِ كَأَنَّهُ لَا نَفْسَ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Be with Allah as though there is no creation &#8212; and be with creation as though there is no self.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;اللہ کے ساتھ ایسے رہو جیسے مخلوق نہ ہو &#8212; اور مخلوق کے ساتھ ایسے کہ کوئی نفس نہ ہو۔&raquo;</div>
+    <div class="sc-quote-src">Preserved in Hilyat al-Awliya (Abu Nuaym)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Sets the experiential standard of Muraqabah before any technical framework existed &#8212; and makes it relational, not methodological. Muraqabah is not something you practice at set times; it is the quality of awareness you bring to every moment with Allah and with people simultaneously. His formulation also prevents the common misunderstanding that Muraqabah means withdrawal from creation.</div>
+    <div class="sc-contrib-ur ur-blk">تمام تکنیکی ڈھانچوں سے پہلے مراقبہ کا تجرباتی معیار قائم کرتے ہیں &#8212; اور اسے تعلقاتی بناتے ہیں، طریقہ کارانہ نہیں۔ غلط فہمی دور: مراقبہ مخلوق سے انزوا نہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-basri"></span></div>
+        <textarea class="note-ta" id="note-m3-basri" placeholder="Hasan al-Basri: be with Allah as though there is no creation, with creation as though there is no self. What would your next conversation look like if you actually inhabited both of these simultaneously?" oninput="autoSave('m3-basri',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-m-muhasibi">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-muhasibi')">
+    <div class="sc-num">02</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Muhasibi</div>
+      <div class="sc-name-ur ur-blk">الحارث المحاسبی</div>
+      <div class="sc-dates">781&#8211;857 CE &middot; Baghdad &middot; Psychological school</div>
+    </div>
+    <div class="sc-badge en-blk">Psychology</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">First to systematically apply psychology to spiritual states.</div>
+      <div class="bio-txt-ur ur-blk">روحانی کیفیات پر منظم نفسیاتی تجزیہ کرنے والے پہلے مفکر۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ri&#39;aya li-Huquq Allah; Muhasabat al-Nufus.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">Al-Muhasibi is the scholar who first gave Muraqabah its psychological anatomy. His insight: Muraqabah is not a single act of &#39;watching yourself&#39; &#8212; it is a three-stage practice. Before the act: muraqabah of the intention &#8212; what is actually motivating this? During the act: muraqabah of the attention &#8212; is the nafs still present in its proper orientation? After the act: muhasabah &#8212; what actually happened? This three-stage structure prevents Muraqabah from being reduced to a vague feeling of being watched and makes it into a precise diagnostic tool for the interior life.</div>
+    <div class="sc-finding-ur ur-blk">المحاسبی نے مراقبہ کو پہلی بار نفسیاتی ساخت دی۔ تین مراحل: عمل سے پہلے &#8212; نیت کا مراقبہ؛ دوران &#8212; توجہ کا؛ بعد &#8212; محاسبہ۔ یہ ڈھانچہ مراقبہ کو مبہم احساس سے باطنی زندگی کا درست تشخیصی آلہ بناتا ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْمُرَاقَبَةُ قَبْلَ الْعَمَلِ &#8212; وَالْمُحَاسَبَةُ بَعْدَهُ &#8212; وَالرَّقَابَةُ فِيهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Muraqabah is before the act &#8212; and muhasabah is after it &#8212; and watchfulness is within it.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;مراقبہ عمل سے پہلے &#8212; محاسبہ بعد میں &#8212; اور نگرانی اس کے دوران۔&raquo;</div>
+    <div class="sc-quote-src">Ri&#39;aya li-Huquq Allah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Creates the complete temporal structure of Muraqabah &#8212; before, during, and after &#8212; that transforms it from a passive state into an active discipline. Without this structure, Muraqabah is vague. With it, every act has three moments of accountability. This is the most practically usable framework for Muraqabah in daily life.</div>
+    <div class="sc-contrib-ur ur-blk">مراقبہ کی مکمل زمانی ساخت: پہلے، دوران، بعد &#8212; غیرفعّال کیفیت سے فعّال نظم۔ ہر عمل میں جوابدہی کے تین لمحات۔ روزمرہ زندگی میں سب سے عملاً قابلِ استعمال ڈھانچہ۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-muhasibi"></span></div>
+        <textarea class="note-ta" id="note-m3-muhasibi" placeholder="Al-Muhasibi&#39;s three stages: before (intention), during (attention), after (accounting). Take one act from your day yesterday and apply all three. What do you find?" oninput="autoSave('m3-muhasibi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-m-junayd">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-junayd')">
+    <div class="sc-num">03</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Junayd al-Baghdadi</div>
+      <div class="sc-name-ur ur-blk">الجنید البغدادی</div>
+      <div class="sc-dates">830&#8211;910 CE &middot; Baghdad &middot; Technical school</div>
+    </div>
+    <div class="sc-badge en-blk">Sayyid al-Taifa</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Master of the Baghdad school. Created the technical vocabulary of inner states.</div>
+      <div class="bio-txt-ur ur-blk">بغداد مدرسے کے امام۔ باطنی کیفیات کی تکنیکی زبان کے خالق۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Rasa&#39;il; in Tabaqat al-Sufiyya and Hilyat al-Awliya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">Al-Junayd&#39;s most precise definition of Muraqabah: &#39;It is that you know in every moment that Allah knows you.&#39; The brevity is deliberate &#8212; this is not a practice you add to your day but a permanent orientation that changes the quality of every moment. His technical contribution: Muraqabah is the prerequisite of fana &#8212; you cannot lose the self in the Divine if you have not first become fully conscious of the Divine&#39;s complete awareness of you. And after fana, when baqa returns, Muraqabah returns too &#8212; but now it is the natural posture of the servant who knows what the interior experience has confirmed.</div>
+    <div class="sc-finding-ur ur-blk">الجنید کی صحیح ترین تعریف: مراقبہ یہ ہے کہ ہر لمحے جانو کہ اللہ تمہیں جانتا ہے۔ اختصار جان بوجھ کر &#8212; اضافی مشق نہیں بلکہ مستمر رخ۔ تکنیکی تعاون: مراقبہ فنا کی شرط ہے؛ اور بقا کے بعد مراقبہ قدرتی کیفیت بن جاتی ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْمُرَاقَبَةُ أَنْ تَعْلَمَ فِي كُلِّ لَحْظَةٍ أَنَّ اللَّهَ يَعْلَمُكَ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Muraqabah is that you know in every moment that Allah knows you.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;مراقبہ یہ ہے کہ ہر لمحے جانو کہ اللہ تمہیں جانتا ہے۔&raquo;</div>
+    <div class="sc-quote-src">Tabaqat al-Sufiyya (al-Sulami)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most minimal and complete definition of Muraqabah in the tradition. &#39;You know that He knows you&#39; &#8212; not that you watch yourself, not that you feel watched, but that you know the knowing is happening. This is epistemological Muraqabah: a certainty about what is already true, not an effort to create what is not yet there. It also connects Muraqabah to Ihsan: the Jibreel definition (worship as if you see Him &#8212; if you cannot see Him, He sees you) is exactly what al-Junayd is describing.</div>
+    <div class="sc-contrib-ur ur-blk">روایت میں مراقبہ کی سب سے کم اور مکمل تعریف۔ آپ جانتے ہیں کہ وہ جانتا ہے &#8212; اپنے آپ کو دیکھنا نہیں، نظر آنا محسوس کرنا نہیں &#8212; بلکہ جاننا کہ یہ جاننا ہو رہا ہے۔ معرفتی مراقبہ۔ احسان کی حدیثِ جبریل سے ربط۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-junayd"></span></div>
+        <textarea class="note-ta" id="note-m3-junayd" placeholder="Al-Junayd: in every moment, you know that Allah knows you. Right now &#8212; is this knowledge present or theoretical? What changes when it becomes present rather than theoretical?" oninput="autoSave('m3-junayd',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-m-ghazali">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-ghazali')">
+    <div class="sc-num">04</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Ghazali</div>
+      <div class="sc-name-ur ur-blk">ابوحامد الغزالی</div>
+      <div class="sc-dates">1058&#8211;1111 CE &middot; Tus / Baghdad &middot; Systematic bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Hujjat al-Islam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Abandoned his position at 37. Spent years in solitary practice. The Ihya is the most comprehensive treatment of the interior life.</div>
+      <div class="bio-txt-ur ur-blk">۳۷ سال میں بحران، خلوت۔ احیاء: باطنی زندگی کا سب سے جامع علاج۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ihya Ulum al-Din; Minhaj al-Abidin; Kimiya-yi Sa&#39;adat.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">Al-Ghazali gives Muraqabah its most complete systematic treatment across three dimensions. First: Muraqabah of the heart &#8212; watching what enters and occupies it (thoughts, intentions, attachments). Second: Muraqabah of the limbs &#8212; are the actions matching the interior orientation? Third: Muraqabah of time &#8212; is this moment being spent in what is genuinely best? His unique contribution: most people practice Muraqabah only of their actions (am I doing what is required?). Complete Muraqabah requires watching the thoughts before the actions and the time before the thoughts. The moment you become aware of a wrong intention is the moment of Muraqabah &#8212; before the action has occurred.</div>
+    <div class="sc-finding-ur ur-blk">الغزالی تین جہتوں میں مراقبہ کا جامع نظام: (۱) دل کا مراقبہ &#8212; کیا داخل ہوتا ہے۔ (۲) اعضاء کا &#8212; کیا اعمال اندرونی رخ سے میل کھاتے ہیں؟ (۳) وقت کا &#8212; یہ لمحہ بہترین میں صرف ہو رہا ہے؟ اکثر لوگ صرف اعمال کا مراقبہ کرتے ہیں۔ مکمل مراقبہ: اعمال سے پہلے خیال، خیال سے پہلے وقت۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْمُرَاقَبَةُ ثَلَاثَةٌ &#8212; مُرَاقَبَةُ الْقَلْبِ وَمُرَاقَبَةُ الْجَوَارِحِ وَمُرَاقَبَةُ الْأَوْقَاتِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Muraqabah is three things &#8212; Muraqabah of the heart, Muraqabah of the limbs, and Muraqabah of time.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;مراقبہ تین ہے &#8212; دل کا مراقبہ، اعضاء کا اور اوقات کا۔&raquo;</div>
+    <div class="sc-quote-src">Ihya Ulum al-Din, Kitab al-Muraqabah wa al-Muhasabah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Expands Muraqabah into a complete framework covering all three domains where human life unfolds: the interior (heart), the exterior (limbs), and the dimension of time. Most treatments of Muraqabah address only one. Al-Ghazali&#39;s three-part framework makes it comprehensive. His addition of time-Muraqabah is the most original &#8212; the question &#39;is this moment being used well?&#39; is a form of awareness that prevents the slow accumulation of wasted time without any dramatic single error.</div>
+    <div class="sc-contrib-ur ur-blk">مراقبہ کو تین دائروں میں جامع بناتے ہیں: اندر (دل)، باہر (اعضاء)، وقت۔ اکثر علاج صرف ایک دائرہ۔ وقت کا مراقبہ سب سے اصیل &#8212; یہ لمحہ بہترین میں صرف ہو رہا ہے؟</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-ghazali"></span></div>
+        <textarea class="note-ta" id="note-m3-ghazali" placeholder="Al-Ghazali&#39;s three Muraqabahs &#8212; heart, limbs, time. Which of these three is most absent from your current practice? What would it look like to add it today?" oninput="autoSave('m3-ghazali',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-m-atailla">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-atailla')">
+    <div class="sc-num">05</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Ata&#39;illah al-Iskandari</div>
+      <div class="sc-name-ur ur-blk">ابن عطاء اللہ الاسکندری</div>
+      <div class="sc-dates">1259&#8211;1309 CE &middot; Alexandria / Cairo &middot; Shadhili order</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Hikam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Third master of the Shadhili order. Author of Al-Hikam and Miftah al-Falah.</div>
+      <div class="bio-txt-ur ur-blk">شاذلی سلسلے کے تیسرے مرشد۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Hikam; Miftah al-Falah; Al-Tanwir fi Isqat al-Tadbir.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">Ibn Ata&#39;illah&#39;s most important Hikam on Muraqabah shifts the focus from technique to gift: &#39;How can the heart not be illuminated when it witnesses the Lights of the Lord in everything it encounters?&#39; His frame: Muraqabah is not primarily about watching yourself &#8212; it is about learning to see what is actually there. The person who truly has Muraqabah does not experience it as surveillance but as perpetual encounter with the Real. Every created thing, rightly seen, is a window through which the Real is glimpsed. This transforms Muraqabah from a spiritual discipline into a spiritual sense &#8212; like a sixth faculty of perception.</div>
+    <div class="sc-finding-ur ur-blk">ابن عطاء اللہ کا اہم ترین تعاون: مراقبہ کو تکنیک سے تحفے کی طرف موڑتے ہیں۔ دل کیسے روشن نہ ہو جب ہر جگہ رب کی روشنیاں گواہی دیتی ہیں؟ مراقبہ خود کو دیکھنا نہیں &#8212; جو اصل میں ہے اسے دیکھنا سیکھنا ہے۔ جو واقعی مراقبہ رکھتا ہے نگرانی نہیں &#8212; حق سے مستمر ملاقات محسوس کرتا ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">كَيْفَ لَا يُنِيرُ الْقَلْبُ وَهُوَ يَشْهَدُ أَنْوَارَ الرَّبِّ فِي كُلِّ شَيْءٍ يُلَاقِيهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;How can the heart not be illuminated when it witnesses the lights of the Lord in everything it encounters?&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;دل کیسے روشن نہ ہو جب ہر چیز میں جو ملتی ہے رب کی روشنیاں گواہی دیتی ہیں؟&raquo;</div>
+    <div class="sc-quote-src">Al-Hikam al-Ata&#39;iyyah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Transforms Muraqabah from a practice of self-watching into a practice of seeing &#8212; specifically, learning to see the Divine presence in every encounter. This is the most beautiful description of what advanced Muraqabah actually feels like: not surveillance but illumination. It also connects Muraqabah directly to Zuhd: when you see the Real in everything, the created thing loses its hold without any effort at detachment.</div>
+    <div class="sc-contrib-ur ur-blk">مراقبہ کو خود دیکھنے سے دیکھنے کی مشق میں بدلتے ہیں &#8212; ہر ملاقات میں الٰہی موجودگی دیکھنا۔ مراقبہ کیسا محسوس ہوتا ہے کا سب سے خوبصورت بیان: نگرانی نہیں &#8212; روشنی۔ اور زہد سے ربط: حق کو ہر جگہ دیکھو تو مخلوق کی پکڑ بغیر کسی کوشش کے ڈھیلی پڑ جاتی ہے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-atailla"></span></div>
+        <textarea class="note-ta" id="note-m3-atailla" placeholder="Ibn Ata&#39;illah: the heart witnesses the lights of the Lord in everything it encounters. The last thing you looked at &#8212; can you look at it again as a window rather than a wall? What shifts?" oninput="autoSave('m3-atailla',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-m-ibnqayyim">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-ibnqayyim')">
+    <div class="sc-num">06</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn al-Qayyim al-Jawziyya</div>
+      <div class="sc-name-ur ur-blk">ابن قیم الجوزیہ</div>
+      <div class="sc-dates">1292&#8211;1350 CE &middot; Damascus &middot; Quran-anchored tradition</div>
+    </div>
+    <div class="sc-badge en-blk">Rigorous</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">The doctor of hearts. Engaged Sufi concepts with both appreciation and rigorous critique.</div>
+      <div class="bio-txt-ur ur-blk">دلوں کے طبیب۔ صوفی تصورات سے قدردانی اور تنقید۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Wabil al-Sayyib; Madarij al-Salikin; Kitab al-Ruh.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">Ibn al-Qayyim&#39;s analysis of Muraqabah is anchored in the Jibreel hadith &#8212; the definition of Ihsan (worship as if you see Allah; if not, He sees you) &#8212; which he reads as the complete description of Muraqabah. His contribution: Muraqabah has two modes corresponding to the two clauses of the hadith. First mode: Ka-annaka tarahu &#8212; you worship as if you see Him. This is the Muraqabah of Mushahada &#8212; the highest state where the servant is as if actively perceiving the Divine. Second mode: fa-innahu yaraka &#8212; if you do not see Him, know He sees you. This is the Muraqabah of Muaqaba &#8212; the awareness that is maintained through knowledge rather than direct perception. Most people live in mode two; the first is the destination.</div>
+    <div class="sc-finding-ur ur-blk">ابن قیم کا تجزیہ حدیثِ جبریل میں لنگر انداز &#8212; احسان کی تعریف مراقبہ کی مکمل تفصیل ہے۔ دو طریقے: (۱) کأنک تراہ &#8212; مشاہدے کا مراقبہ؛ (۲) فانہ یراک &#8212; علم کے ذریعے مراقبہ۔ اکثر لوگ دوسرے میں؛ پہلا منزل ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْمُرَاقَبَةُ نَوْعَانِ &#8212; مُرَاقَبَةُ الْمُشَاهَدَةِ وَمُرَاقَبَةُ الْمُعَاقَبَةِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Muraqabah is of two kinds &#8212; the Muraqabah of witnessing and the Muraqabah of watchful awareness.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;مراقبہ دو قسم کا &#8212; مشاہدے کا مراقبہ اور معاقبے کا مراقبہ۔&raquo;</div>
+    <div class="sc-quote-src">Madarij al-Salikin, station of Muraqabah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Provides the clearest practical map of Muraqabah for the ordinary person. Mode two (knowledge-based Muraqabah) is accessible to everyone; mode one (witnessing-Muraqabah) is the destination of spiritual effort. This prevents the discouragement that comes from comparing oneself with descriptions of the highest states &#8212; you are not required to be in mode one to have genuine Muraqabah. Mode two is real, valid, and the path to mode one.</div>
+    <div class="sc-contrib-ur ur-blk">عام انسان کے لیے مراقبہ کا واضح ترین عملی نقشہ۔ طریقہ دوم (علم پر مبنی) سب کے لیے قابلِ رسائی؛ اول (مشاہدہ) روحانی کوشش کی منزل۔ مایوسی دور: اول مقام ضروری نہیں ابھی &#8212; دوم حقیقی، درست، اول کا راستہ۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-ibnqayyim"></span></div>
+        <textarea class="note-ta" id="note-m3-ibnqayyim" placeholder="Ibn al-Qayyim: two modes &#8212; witnessing (as if you see Him) and knowledge-based (knowing He sees you). Which mode describes your current Muraqabah most honestly? What would move you from the second toward the first?" oninput="autoSave('m3-ibnqayyim',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-m-ibnarabi">
+  <div class="sc-hdr" onclick="toggleCard('sc-m-ibnarabi')">
+    <div class="sc-num">07</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Arabi</div>
+      <div class="sc-name-ur ur-blk">ابن عربی</div>
+      <div class="sc-dates">1165&#8211;1240 CE &middot; Murcia / Damascus &middot; Metaphysical school</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Shaykh al-Akbar</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in al-Andalus. Settled in Damascus. Largest body of work in Islamic intellectual history. Most contested figure.</div>
+      <div class="bio-txt-ur ur-blk">اندلس میں پیدا، دمشق میں انتقال۔ سب سے متنازع شخصیت۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Futuhat al-Makkiyya (37 vols.); Fusus al-Hikam.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Muraqabah</div>
+    <div class="sc-finding en-blk">For Ibn Arabi, Muraqabah at its deepest is not about the servant watching the Lord or the Lord watching the servant &#8212; it is about the Real watching Itself through the servant&#39;s awareness. This is the Wahdat al-Wujud reframing: when the servant&#39;s awareness becomes pure, it becomes transparent &#8212; the Divine sees through it as through clear glass. Muraqabah, in this reading, is not an act the servant performs but a state in which the servant&#39;s separateness dissolves enough to allow the Real&#39;s own self-witnessing to become apparent. His reading of 50:16 (closer than the jugular vein) and 58:7 (present in all conversations) as ontological statements rather than spatial ones is particularly powerful.</div>
+    <div class="sc-finding-ur ur-blk">ابن عربی کے لیے گہرا ترین مراقبہ: بندہ رب کو نہیں دیکھتا نہ رب بندے کو &#8212; بلکہ حق بندے کی آگاہی کے ذریعے خود کو دیکھتا ہے۔ جب بندے کی آگاہی خالص ہو، شفاف ہو جائے &#8212; حق صاف شیشے سے دیکھتا ہے۔ ۵۰:۱۶ اور ۵۸:۷ کو مکانی نہیں &#8212; وجودی بیانات کے طور پر۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الْمُرَاقَبَةُ الْحَقِيقِيَّةُ أَنْ يَرَى الْحَقُّ نَفْسَهُ بِعَيْنِ الْعَبْدِ لَا أَنْ يَرَى الْعَبْدُ رَبَّهُ</div>
+    <div class="sc-quote-en en-blk">&ldquo;True Muraqabah is that the Real sees Itself through the servant&#39;s eye &#8212; not that the servant sees his Lord.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;حقیقی مراقبہ یہ ہے کہ حق بندے کی آنکھ سے اپنے آپ کو دیکھے &#8212; نہ یہ کہ بندہ اپنے رب کو دیکھے۔&raquo;</div>
+    <div class="sc-quote-src">Al-Futuhat al-Makkiyya, Chapter on Muraqabah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most radical reframing of the watcher-watched relationship. Every other scholar asks: how does the servant watch, or how does the servant know they are watched? Ibn Arabi inverts both: the Real is the watcher, and the servant&#39;s Muraqabah is the act of becoming transparent enough for that watching to occur unobstructed. This either opens the deepest understanding of why Muraqabah matters &#8212; it is participation in the Real&#39;s own self-knowledge &#8212; or it dissolves the abd-rabb distinction in a way that Ibn al-Qayyim&#39;s framework guards against.</div>
+    <div class="sc-contrib-ur ur-blk">نگراں-مشاہدہ تعلق کی سب سے بنیادی بازتشکیل۔ ہر اور عالم: بندہ کیسے دیکھے یا کیسے جانے کہ دیکھا جا رہا ہے؟ ابن عربی دونوں الٹتے ہیں: حق نگراں ہے، بندے کا مراقبہ شفاف ہونے کا عمل۔ یا گہری ترین سمجھ &#8212; یا عبد-رب امتیاز کو مٹانا۔</div>
+    <div class="sc-controversy"><strong>Note on Controversy:</strong> Ibn Arabi&#39;s Wahdat al-Wujud framework remains the most contested position in Islamic intellectual history. Ibn al-Qayyim &#8212; in this same list &#8212; considered aspects of it incompatible with sound Tawhid. Neither endorsement nor dismissal: engage the insight, hold the theological concern, and let the Divergence section address the tension directly.</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-m3-ibnarabi"></span></div>
+        <textarea class="note-ta" id="note-m3-ibnarabi" placeholder="Ibn Arabi: true Muraqabah is the Real seeing Itself through the servant&#39;s eye. Does this open or close something for you? If it opens: what? If it closes: what is being guarded?" oninput="autoSave('m3-ibnarabi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap">
+  <div class="div-hdr">
+    <div class="div-hdr-ar">الاختلاف</div>
+    <div class="div-hdr-en en-blk">Divergence &#8212; Three Live Disagreements on Muraqabah</div>
+    <div class="div-hdr-desc en-blk">Three unresolved debates. State your position on each &#8212; date it.</div>
+    <div class="div-hdr-desc ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">تین حل نہ ہونے والی بحثیں۔ پوزیشن بیان کریں، تاریخ لکھیں۔</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 01</div>
+    <div class="div-q en-blk">Is Muraqabah a technique you practice &#8212; or a permanent state of awareness?</div>
+    <div class="div-q-ur ur-blk">مراقبہ ایک مشق ہے جو کرتے ہیں &#8212; یا آگاہی کی مستمر کیفیت؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Muhasibi &middot; Al-Ghazali</div><div class="div-view en-blk">Muraqabah is a practice with structure &#8212; before, during, after. You build it deliberately through consistent self-examination. It begins as technique and, with sustained practice, becomes a state. Most people need the technique before they can inhabit the state.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Junayd &middot; Hasan al-Basri</div><div class="div-view en-blk">Muraqabah is a permanent orientation, not a practice session. &#39;In every moment, you know that He knows you.&#39; It cannot be scheduled or timed. The person who does Muraqabah for twenty minutes and then stops has not understood what Muraqabah is.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn Arabi</div><div class="div-view en-blk">At the deepest level, Muraqabah is not something you do or a state you inhabit &#8212; it is what is always already happening when the veil of the separate self is thin enough. The Real is always watching Itself; Muraqabah is the name for when that watching becomes visible in the servant&#39;s experience.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">50:16 (closer than the jugular vein) and 58:7 (present in every gathering) describe a permanent divine reality, not a scheduled practice. This supports the al-Junayd position: Muraqabah is the awareness of what is permanently true. But 2:235 (know that He knows &#8212; so guard yourself) implies a responsive, active practice. Both are present in the Quran. Al-Muhasibi&#39;s structured approach is the accessible starting point; al-Junayd&#39;s permanent-state is the destination.</div></div>
+    <div class="div-verdict en-blk">Begin with al-Muhasibi&#39;s structure (before, during, after). Aim for al-Junayd&#39;s permanent orientation. The technique is scaffolding &#8212; necessary to build the structure, removed once the structure stands. The test: does your Muraqabah stop when the formal practice session ends? If so, it has not yet become a state.</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 02</div>
+    <div class="div-q en-blk">Does Muraqabah produce fear (of being watched) or intimacy (of being accompanied)?</div>
+    <div class="div-q-ur ur-blk">مراقبہ خوف پیدا کرتا ہے (نگرانی کا) یا قربت (ہمراہی کا)؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Hasan al-Basri &middot; Early tradition</div><div class="div-view en-blk">Awareness of being watched by Allah produces reverence and caution &#8212; which includes an element of fear. This fear is healthy: it prevents the nafs from becoming bold in transgression. A Muraqabah that produces no cautiousness has not yet reached the heart.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn Ata&#39;illah &middot; Al-Junayd</div><div class="div-view en-blk">Advanced Muraqabah produces intimacy, not fear. The servant who is truly in Allah&#39;s presence does not experience surveillance but accompaniment &#8212; ma&#39;iyya (57:4). The light of the Lord in everything (Ibn Ata&#39;illah) is not threatening; it is illuminating. Fear may be the beginning; intimacy is the destination.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">86:4 (Hafiz over every soul &#8212; guardian, not just observer) supports intimacy. 96:14 (does he not know Allah sees &#8212; spoken to the oppressor) supports fear. 57:4 (with you wherever you are) and 16:128 (with those of Taqwa and Ihsan) support intimacy specifically for those who have cultivated the relationship. Both are present; the emotional register of Muraqabah changes as it deepens.</div></div>
+    <div class="div-verdict en-blk">Fear is the beginning and remains healthy as a check. Intimacy is the destination and the sign that Muraqabah has reached the heart. A Muraqabah that remains purely fear-based after years of practice has not developed. A Muraqabah that claims intimacy without any healthy reverence has become sentimental. Both must be present; their proportion shifts as the practice deepens.</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 03</div>
+    <div class="div-q en-blk">In Muraqabah &#8212; who is watching whom? Is the subject-object distinction maintained?</div>
+    <div class="div-q-ur ur-blk">مراقبہ میں کون کسے دیکھتا ہے؟ کیا فاعل-مفعول کا امتیاز برقرار رہتا ہے؟</div>
+    <div class="div-pos-row"><div class="div-scholars">All scholars except Ibn Arabi</div><div class="div-view en-blk">The servant (abd) watches the Self and knows they are watched by Allah. The servant remains the servant; Allah remains the Lord. Muraqabah is the awareness of this relationship &#8212; it does not collapse the relationship. The abd-rabb distinction is permanent and is precisely what makes Muraqabah meaningful.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn Arabi</div><div class="div-view en-blk">At the deepest level, the Real is watching Itself through the servant. The servant&#39;s separateness is not absolute &#8212; it is a level of description. True Muraqabah is the becoming-transparent of the servant&#39;s awareness, allowing the Real&#39;s own self-witnessing to occur through it.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">The Quran consistently uses the language of abd (servant) and Rabb (Lord) &#8212; a relationship that is never dissolved. 4:1 &#8212; Allah has been Raqib over you &#8212; maintains the distinction: He watches, you are watched. The subject-object structure of Muraqabah is preserved in every Quranic statement about it. Ibn al-Qayyim&#39;s two-mode framework (mushahada and muaqaba) maintains the distinction at all levels. Ibn Arabi&#39;s position has no direct Quranic support and presses against the consistent Quranic language of the permanent abd-rabb relationship.</div></div>
+    <div class="div-verdict en-blk">The abd-rabb distinction is maintained in Muraqabah at all levels. The Quran is consistent on this. The experience of deep Muraqabah may feel as though the self has dissolved &#8212; this is a valid psychological description of an overwhelming state, not an ontological fact about the relationship. Ibn al-Qayyim&#39;s framework (mode one and mode two, both maintaining the distinction) has the strongest Quranic grounding.</div>
+  </div>
+  <div class="div-pos-box">
+    <div class="div-pos-lbl en-blk">Your Personal Position &#8212; Muraqabah Stage 3</div>
+    <div class="div-pos-lbl ur-blk" style="font-family:var(--font-ar)">آپ کی ذاتی پوزیشن &#8212; مراقبہ مرحلہ ۳</div>
+    <p class="en-blk" style="font-size:12.5px;color:var(--text2);line-height:1.85;margin:0 0 12px">Seven scholars, three divergences. State your position on each &#8212; date it.</p>
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Position (dated)</span><span class="ur-blk">میری پوزیشن (بتاریخ)</span><span class="nsv" id="sv-m3-pos"></span></div>
+      <textarea class="note-ta" id="note-m3-pos" style="min-height:120px" placeholder="(1) Technique or permanent state: where am I and what is the gap? (2) Fear or intimacy: which describes my current Muraqabah? (3) Subject-object: does Ibn Arabi open or close something here? Date: " oninput="autoSave('m3-pos',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="file-bottom-nav">
+  <a href="zuhd.html" class="file-nav-link">← Zuhd</a>
+  <a href="index.html" class="file-nav-home">☰ Index</a>
+  <a href="ihsan.html" class="file-nav-link">Ihsan →</a>
+</div>
+
+<script>
+function toggleCard(id){
+  var el=document.getElementById(id);
+  if(el){el.classList.toggle('open');}
+}
+function autoSave(key,val){
+  localStorage.setItem('ss_'+key,val);
+  var sv=document.getElementById('sv-'+key);
+  if(sv){sv.textContent='✦';sv.style.color='var(--teal)';}
+}
+function loadNotes(){
+  document.querySelectorAll('textarea.note-ta').forEach(function(ta){
+    var k='ss_'+ta.id.replace('note-','');
+    var v=localStorage.getItem(k);
+    if(v){ta.value=v;}
+  });
+  document.querySelectorAll('.nsv').forEach(function(sv){
+    var k='ss_'+sv.id.replace('sv-','');
+    if(localStorage.getItem(k)){sv.textContent='✦';sv.style.color='var(--teal)';}
+  });
+}
+function setLang(lang){
+  localStorage.setItem('ss_lang',lang);
+  if(lang==='ur'){
+    document.body.classList.add('ur-mode');
+  } else {
+    document.body.classList.remove('ur-mode');
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.style.opacity=(btn.getAttribute('data-lang-btn')===lang)?'1':'0.45';
+  });
+}
+window.addEventListener('DOMContentLoaded',function(){
+  loadNotes();
+  var lang=localStorage.getItem('ss_lang')||'en';
+  setLang(lang);
+});
+</script>
+</body>
+</html>

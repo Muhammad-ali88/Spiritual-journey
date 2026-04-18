@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taqwa — Spiritual Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg0:#04070D;--bg1:#080E1C;--bg2:#0C1528;--bg3:#111E35;--bg4:#162440;
+  --gold:#C9A84C;--gold2:#E2C97A;--gold3:#F5E9C0;
+  --golddim:rgba(201,168,76,.08);--goldbdr:rgba(201,168,76,.18);--goldglow:rgba(201,168,76,.22);
+  --teal:#2FB89A;--tealdim:rgba(47,184,154,.08);--tealbdr:rgba(47,184,154,.22);
+  --blue:#7AABF0;--bluedim:rgba(122,171,240,.08);--bluebdr:rgba(122,171,240,.22);
+  --amber:#E0A030;--amberdim:rgba(224,160,48,.08);--amberbdr:rgba(224,160,48,.22);
+  --purple:#A87FD0;--purpledim:rgba(168,127,208,.08);--purplebdr:rgba(168,127,208,.22);
+  --text:#D4CBB8;--text2:#8A9BB0;--text3:#4A5B70;
+  --border:rgba(201,168,76,.10);--border2:rgba(201,168,76,.05);
+  --font-head:'Cinzel',serif;--font-body:'Lora',serif;--font-arab:'Noto Naskh Arabic',serif;--font-ar:'Noto Naskh Arabic',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 800px 500px at 20% 10%,rgba(201,168,76,.025),transparent 60%),
+             radial-gradient(ellipse 600px 400px at 80% 80%,rgba(47,184,154,.02),transparent 60%);}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:90;background:rgba(4,7,13,.97);border-bottom:1px solid var(--border2);backdrop-filter:blur(20px);padding:0 22px;height:56px;display:flex;align-items:center;gap:14px}
+.hdr-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.3)}
+.hdr-titles{flex:1}
+.hdr-title{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase}
+.hdr-sub{font-family:var(--font-head);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--goldbdr);border-radius:20px;padding:3px}
+.lt{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 10px;border-radius:16px;cursor:pointer;transition:all .2s;color:var(--text3);user-select:none}
+.lt.on{background:var(--gold);color:#000;font-weight:700}
+.back-link{font-family:var(--font-head);font-size:8.5px;letter-spacing:.8px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:6px;transition:all .15s;text-transform:uppercase;flex-shrink:0}
+.back-link:hover{color:var(--gold2);border-color:var(--goldbdr)}
+
+/* PAGE */
+.page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:24px 18px 60px}
+
+/* CONCEPT TABS */
+.concept-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cn-btn{font-family:var(--font-head);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:8px;border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.cn-btn:hover{border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn.on{background:var(--golddim);border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn .ar{font-family:var(--font-arab);font-size:14px;letter-spacing:0;display:block;margin-top:2px}
+.cn-badge{display:inline-block;font-size:7px;padding:1px 5px;border-radius:4px;margin-left:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);vertical-align:middle}
+.cn-badge.pending{background:var(--amberdim);border-color:var(--amberbdr);color:var(--amber)}
+
+/* SECTION */
+.concept-section{display:none}
+.concept-section.active{display:block}
+
+/* SECTION HEADER */
+.sec-hdr{text-align:center;padding:20px 0 28px;border-bottom:1px solid var(--border2);margin-bottom:28px}
+.sec-hdr-ar{font-family:var(--font-arab);font-size:52px;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.25);line-height:1.2;margin-bottom:8px}
+.sec-hdr-en{font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase}
+.sec-hdr-ur{font-family:var(--font-arab);font-size:20px;color:var(--gold2);margin-top:4px}
+.sec-hdr-root{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--text2);margin-top:10px;text-transform:uppercase}
+.sec-hdr-rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+.sec-hdr-intro{font-size:13px;color:var(--text2);line-height:1.85;max-width:600px;margin:0 auto;font-style:italic}
+
+/* ROOT ANALYSIS BOX */
+.root-analysis{background:var(--bg2);border:1px solid var(--goldbdr);border-radius:12px;padding:20px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+.root-analysis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ra-label{font-family:var(--font-head);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ra-label::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ra-root{font-family:var(--font-arab);font-size:30px;color:var(--gold2);direction:rtl;margin-bottom:12px}
+.ra-letters{display:flex;gap:10px;flex-direction:row-reverse;margin-bottom:14px}
+.ra-letter{background:rgba(201,168,76,.06);border:1px solid var(--goldbdr);border-radius:8px;padding:8px 14px;text-align:center}
+.ra-letter-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold2);display:block}
+.ra-letter-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:4px;display:block}
+.ra-meaning{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.ra-meaning-ur{font-family:var(--font-arab);font-size:14px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:12px}
+.ra-forms{display:flex;gap:8px;flex-wrap:wrap}
+.ra-form{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;text-align:center}
+.ra-form-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl}
+.ra-form-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:2px}
+.ra-count{font-family:var(--font-head);font-size:9px;color:var(--teal);margin-top:12px;letter-spacing:.5px}
+
+/* ERA DIVIDER */
+.era-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px}
+.era-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.era-early{background:var(--amber)}
+.era-middle{background:var(--gold)}
+.era-late{background:var(--teal)}
+.era-madani{background:var(--blue)}
+.era-label{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.era-label-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2)}
+.era-line{flex:1;height:1px;background:var(--border2)}
+.era-count{font-family:var(--font-head);font-size:8px;color:var(--text3);flex-shrink:0}
+
+/* AYAH CARD */
+.ayah-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.ayah-card.open{border-color:var(--goldbdr)}
+.ayah-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;user-select:none}
+.rev-badge{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;padding:3px 8px;border-radius:5px;flex-shrink:0;text-transform:uppercase}
+.rev-early{background:var(--amberdim);border:1px solid var(--amberbdr);color:var(--amber)}
+.rev-middle{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+.rev-late{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.rev-madani{background:var(--bluedim);border:1px solid var(--bluebdr);color:var(--blue)}
+.card-ref{font-family:var(--font-head);font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0}
+.card-preview{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.card-chevron{color:var(--text3);font-size:16px;transition:transform .25s;flex-shrink:0}
+.ayah-card.open .card-chevron{transform:rotate(90deg);color:var(--gold)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border2)}
+.ayah-card.open .card-body{display:block}
+
+/* ARABIC */
+.ayah-arabic{font-family:var(--font-arab);font-size:clamp(20px,3.5vw,28px);color:var(--gold2);direction:rtl;text-align:right;line-height:2.2;padding:18px 0 12px;text-shadow:0 0 20px rgba(201,168,76,.1);border-bottom:1px solid var(--border2);margin-bottom:12px}
+.ayah-tr-en{font-size:13px;color:var(--text);font-style:italic;line-height:1.85;margin-bottom:6px;border-left:3px solid var(--goldbdr);padding:8px 14px;border-radius:0 6px 6px 0;background:rgba(201,168,76,.03)}
+.ayah-tr-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;border-right:3px solid var(--goldbdr);padding:8px 14px 8px 8px;border-radius:6px 0 0 6px;background:rgba(201,168,76,.03);margin-bottom:6px}
+.ayah-ref-line{font-family:var(--font-head);font-size:9px;color:var(--gold);letter-spacing:.8px;margin-bottom:14px}
+
+/* BOXES */
+.ctx-box{background:rgba(0,0,0,.2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:12px}
+.ctx-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.ctx-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--amber);margin-bottom:5px}
+.ctx-txt{font-size:12px;color:var(--text2);line-height:1.75}
+.ctx-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2}
+
+.root-box{background:rgba(201,168,76,.04);border:1px solid var(--goldbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.root-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.root-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--gold);margin-bottom:7px}
+.root-wd{font-family:var(--font-arab);font-size:19px;color:var(--gold2);direction:rtl;display:inline-block;margin-left:8px}
+.root-fm{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl}
+.root-mn{font-size:12px;color:var(--text2);line-height:1.7;margin-top:5px}
+.root-mn-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-top:5px}
+
+.uniq-box{background:var(--tealdim);border:1px solid var(--tealbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.uniq-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.uniq-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--teal);margin-bottom:5px}
+.uniq-txt{font-size:12.5px;color:var(--text);line-height:1.75}
+.uniq-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text);direction:rtl;text-align:right;line-height:2}
+
+.sunnah-box{background:var(--purpledim);border:1px solid var(--purplebdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.sun-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.sun-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--purple);margin-bottom:8px}
+.sun-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-en{font-size:12px;color:var(--text2);font-style:italic;line-height:1.7;margin-bottom:5px}
+.sun-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+.grade{display:inline-block;font-family:var(--font-head);font-size:7.5px;padding:2px 7px;border-radius:4px;margin-left:6px}
+.g-sahih{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.g-hasan{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+
+/* NOTES */
+.notes-sec{margin-top:14px;border-top:1px solid var(--border2);padding-top:12px}
+.notes-hdr{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notes-hdr::after{content:'';flex:1;height:1px;background:var(--border2)}
+.note-f{margin-bottom:7px}
+.note-lbl{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nsv{font-family:var(--font-head);font-size:7px;letter-spacing:.3px;color:var(--text3);margin-left:auto;transition:color .3s}
+.nsv.flash{color:var(--teal)}
+.note-ta{width:100%;min-height:78px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:7px;outline:none;padding:10px 12px;font-family:var(--font-body);font-size:12.5px;color:var(--text);line-height:1.75;resize:vertical;transition:border-color .2s}
+.note-ta:focus{border-color:var(--goldbdr)}
+.note-ta::placeholder{color:var(--text3);font-style:italic;font-size:11.5px}
+.note-ta-ur{font-family:var(--font-arab);font-size:14px;direction:rtl;text-align:right}
+
+/* STANDALONE HADITH */
+.sh-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;margin-bottom:10px}
+.sh-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sh-lbl::after{content:'';flex:1;height:1px;background:var(--border2)}
+.sh-ar{font-family:var(--font-arab);font-size:clamp(15px,3vw,19px);color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:9px;padding:10px 14px;background:rgba(201,168,76,.04);border-radius:7px}
+.sh-en{font-size:12.5px;color:var(--text);font-style:italic;line-height:1.8;margin-bottom:7px}
+.sh-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;margin-bottom:7px}
+.sh-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+
+/* PENDING */
+.pending{background:var(--bg2);border:1px dashed var(--amberbdr);border-radius:12px;padding:24px 20px;margin-top:20px;text-align:center}
+.pending-icon{font-size:28px;margin-bottom:10px}
+.pending-title{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--text2);line-height:1.75;max-width:600px;margin:0 auto}
+
+/* ── Language toggle — body class approach ─────── */
+.en-blk{display:block}
+.ur-blk{display:none}
+.en-inl{display:inline}
+.ur-inl{display:none}
+body.ur-mode .en-blk{display:none}
+body.ur-mode .ur-blk{display:block}
+body.ur-mode .en-inl{display:none}
+body.ur-mode .ur-inl{display:inline}
+body.ur-mode span.ur-blk{display:inline}
+body.ur-mode span.en-blk{display:none}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:rgba(12,21,40,.98);border:1px solid var(--goldbdr);border-radius:8px;padding:9px 20px;font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--gold2);z-index:300;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .page{padding:18px 12px 60px}
+  .ra-letters{gap:6px}
+  .ra-letter{padding:6px 10px}
+  .ayah-arabic{font-size:clamp(18px,5vw,24px)}
+}
+
+.file-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg1);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;gap:8px;}
+.file-nav-link{font-family:var(--font-head);font-size:11px;letter-spacing:.5px;color:var(--gold2);text-decoration:none;padding:6px 10px;border:1px solid var(--goldbdr);border-radius:6px;white-space:nowrap;}
+.file-nav-link:hover{background:var(--golddim);}
+.file-nav-home{font-family:var(--font-head);font-size:10px;letter-spacing:.8px;color:var(--text2);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;}
+.file-nav-home:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-nav-center{display:flex;align-items:center;gap:8px;}
+.lang-btn{font-size:11px;font-family:var(--font-head);letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text2);padding:4px 8px;cursor:pointer;transition:opacity .2s;}
+.lang-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 20px 48px;border-top:1px solid var(--border);margin-top:40px;}
+
+.stage3-hdr{margin:40px 0 24px;text-align:center;}
+.stage3-hdr-ar{font-family:var(--font-ar);font-size:22px;color:var(--purple);margin-bottom:4px;}
+.stage3-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;}
+.stage3-hdr-rule{width:50px;height:1px;background:var(--purplebdr);margin:12px auto;}
+.stage3-intro{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;max-width:640px;margin:0 auto 16px;}
+.scholar-card{border:1px solid var(--purplebdr);border-radius:10px;margin-bottom:14px;overflow:hidden;background:rgba(168,127,208,.03);}
+.scholar-card .card-body{display:none;padding:20px;border-top:1px solid var(--purplebdr);}
+.scholar-card.open .card-body{display:block;}
+.sc-hdr{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;transition:background .15s;}
+.sc-hdr:hover{background:var(--purpledim);}
+.sc-num{font-family:var(--font-head);font-size:11px;color:var(--purple);min-width:22px;opacity:.7;}
+.sc-hdr-main{flex:1;}
+.sc-name-en{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.3px;}
+.sc-name-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);}
+.sc-dates{font-family:var(--font-body);font-size:11px;color:var(--text3);margin-top:2px;font-style:italic;}
+.sc-badge{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 8px;border-radius:4px;border:1px solid var(--purplebdr);color:var(--purple);text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.sc-chevron{font-size:18px;color:var(--purple);opacity:.6;transition:transform .2s;}
+.scholar-card.open .sc-chevron{transform:rotate(90deg);}
+.bio-box summary{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--purple);text-transform:uppercase;cursor:pointer;padding:8px 0;border-bottom:1px solid var(--purplebdr);margin-bottom:12px;display:block;list-style:none;}
+.bio-box summary::-webkit-details-marker{display:none;}
+.bio-box summary::before{content:"+ ";}
+details[open] summary::before{content:"- ";}
+.bio-txt{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:10px;}
+.bio-txt-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2.1;direction:rtl;text-align:right;margin-bottom:10px;}
+.bio-works{font-family:var(--font-head);font-size:10px;letter-spacing:.3px;color:var(--text3);line-height:1.8;margin-bottom:4px;}
+.sc-sec{font-family:var(--font-head);font-size:9px;letter-spacing:1.2px;color:var(--purple);text-transform:uppercase;margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--purplebdr);}
+.sc-finding{font-family:var(--font-body);font-size:13.5px;color:var(--text);line-height:1.9;margin-bottom:6px;}
+.sc-finding-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);line-height:2.1;direction:rtl;text-align:right;margin-bottom:14px;}
+.sc-quote-ar{font-family:var(--font-ar);font-size:17px;color:var(--gold);line-height:2;text-align:right;direction:rtl;margin:12px 0 8px;padding:12px;background:var(--golddim);border-right:3px solid var(--gold);border-radius:0 6px 6px 0;}
+.sc-quote-en{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;font-style:italic;margin-bottom:4px;}
+.sc-quote-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;margin-bottom:6px;}
+.sc-quote-src{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:.3px;margin-bottom:14px;}
+.sc-contrib{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:6px;}
+.sc-contrib-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;}
+.sc-controversy{font-family:var(--font-body);font-size:12px;color:var(--amber);line-height:1.85;padding:10px 12px;background:var(--amberdim);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;margin-top:14px;}
+.div-wrap{border:1px solid var(--goldbdr);border-radius:10px;margin-top:32px;overflow:hidden;}
+.div-hdr{background:var(--golddim);padding:18px 20px;border-bottom:1px solid var(--goldbdr);}
+.div-hdr-ar{font-family:var(--font-ar);font-size:20px;color:var(--gold);margin-bottom:4px;}
+.div-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;}
+.div-hdr-desc{font-family:var(--font-body);font-size:12px;color:var(--text2);line-height:1.85;margin-top:8px;}
+.div-point{padding:20px;border-bottom:1px solid var(--goldbdr);}
+.div-num{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.div-q{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.2px;margin-bottom:14px;line-height:1.5;}
+.div-q-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:14px;}
+.div-pos-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.div-scholars{font-family:var(--font-head);font-size:9px;color:var(--purple);letter-spacing:.3px;min-width:160px;padding-top:3px;flex-shrink:0;}
+.div-view{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;}
+.div-ground{background:var(--bg2);border-radius:6px;padding:12px;margin:12px 0;}
+.div-ground-lbl{font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;}
+.div-ground-txt{font-family:var(--font-body);font-size:12.5px;color:var(--text2);line-height:1.85;}
+.div-verdict{font-family:var(--font-body);font-size:13px;color:var(--text);line-height:1.85;font-style:italic;border-left:2px solid var(--teal);padding-left:10px;margin-top:4px;}
+.div-pos-box{padding:20px;background:var(--bg2);}
+.div-pos-lbl{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<div class="file-topbar">
+  <a href="dhikr.html" class="file-nav-link">← Dhikr</a>
+  <div class="file-nav-center">
+    <a href="index.html" class="file-nav-home">☰ Index</a>
+    <button class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang-btn="ur" onclick="setLang('ur')">اردو</button>
+  </div>
+  <a href="zuhd.html" class="file-nav-link">Zuhd →</a>
+</div>
+
+<div class="concept-section active" id="sec-taqwa">
+
+<div class="sec-hdr">
+  <div class="sec-hdr-ar">تَقْوَى</div>
+  <div class="sec-hdr-en en-blk">Taqwa — The Shield</div>
+  <div class="sec-hdr-ur ur-blk">تقویٰ — ڈھال</div>
+  <div class="sec-hdr-rule"></div>
+  <div class="sec-hdr-root en-blk">Root: و — ق — ي · Appears 250+ times · 14 key ayat in revelation order</div>
+  <div class="sec-hdr-root ur-blk">جڑ: و — ق — ی · ۲۵۰ سے زیادہ بار · ترتیبِ نزول میں ۱۴ اہم آیات</div>
+  <div class="sec-hdr-intro en-blk">W-Q-Y: to shield, to protect, to guard. The Muttaqi is the one who carries a shield between himself and Allah's displeasure — through conscious awareness in every act. The most frequently commanded quality in the entire Quran. These ayat trace how Taqwa develops from its earliest appearance — where it is first attributed to Allah Himself — through to the final command at the end of revelation.</div>
+  <div class="sec-hdr-intro ur-blk">و-ق-ی: ڈھال اٹھانا، بچانا، حفاظت کرنا۔ متقی وہ ہے جو ہر عمل میں شعور کی ڈھال اٹھاتا ہے۔ پورے قرآن میں سب سے زیادہ حکم دی گئی صفت۔ یہ آیات تقویٰ کی ترقی ترتیبِ نزول میں بتاتی ہیں — پہلی ظاہری سے آخری وحی تک۔</div>
+</div>
+
+<div class="root-analysis">
+  <div class="ra-label"><span class="en-blk">Root Word Analysis — و ق ي</span><span class="ur-blk">جڑ کا تجزیہ — و ق ی</span></div>
+  <div class="ra-root">وَقَى · يَقِي · اتَّقَى · تَقْوَى · مُتَّقِي · تُقَاة</div>
+  <div class="ra-letters">
+    <div class="ra-letter"><span class="ra-letter-ar">و</span><span class="ra-letter-en">W</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ق</span><span class="ra-letter-en">Q</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ي</span><span class="ra-letter-en">Y</span></div>
+  </div>
+  <div class="ra-meaning en-blk">The root W-Q-Y means to shield, to protect, to guard against harm. The Muttaqi is one who places a shield (wiqaya) between himself and what would harm him — specifically Allah's displeasure. This is not passive fear but an <strong style="color:var(--gold2)">active, deliberate act</strong> of carrying protection. Ittaqa — the most common verb form — uses the iftacala pattern: taking an action consciously for yourself. You actively place the shield. Taqwa is not something that happens to you — it is something you carry.</div>
+  <div class="ra-meaning ur-blk">جڑ و-ق-ی: ڈھال اٹھانا، بچانا، نقصان سے حفاظت کرنا۔ متقی وہ جو اپنے اور اللہ کی ناراضگی کے درمیان ڈھال رکھتا ہے۔ غیرفعّال خوف نہیں — <strong style="color:var(--gold2)">فعّال، ارادی عمل</strong>۔ اتّقیٰ — افتعل کا وزن — جان بوجھ کر اپنے لیے عمل۔ تقویٰ آپ کے ساتھ ہوتا نہیں — آپ اسے اٹھاتے ہیں۔</div>
+  <div class="ra-forms">
+    <div class="ra-form"><div class="ra-form-ar">تَقْوَى</div><div class="ra-form-en en-blk">The state of shielding</div><div class="ra-form-en ur-blk">ڈھال کی کیفیت</div></div>
+    <div class="ra-form"><div class="ra-form-ar">اتَّقَىٰ</div><div class="ra-form-en en-blk">He adopted the shield</div><div class="ra-form-en ur-blk">اس نے ڈھال اٹھائی</div></div>
+    <div class="ra-form"><div class="ra-form-ar">مُتَّقِي</div><div class="ra-form-en en-blk">One who carries it</div><div class="ra-form-en ur-blk">ڈھال اٹھانے والا</div></div>
+    <div class="ra-form"><div class="ra-form-ar">تُقَاة</div><div class="ra-form-en en-blk">Its full due (3:102)</div><div class="ra-form-en ur-blk">اس کا پورا حق</div></div>
+    <div class="ra-form"><div class="ra-form-ar">وِقَايَة</div><div class="ra-form-en en-blk">Protection / shield</div><div class="ra-form-en ur-blk">حفاظت / ڈھال</div></div>
+    <div class="ra-form"><div class="ra-form-ar">أَتْقَى</div><div class="ra-form-en en-blk">Most Taqwa — superlative</div><div class="ra-form-en ur-blk">سب سے زیادہ تقویٰ والا</div></div>
+  </div>
+  <div class="ra-count en-blk">✦ Root appears 250+ times — the single most frequently commanded quality in the Quran. The Quran opens addressing the Muttaqeen (2:2) and closes with a Taqwa command (2:281). The entire Book is framed by Taqwa.</div>
+  <div class="ra-count ur-blk">✦ جڑ ۲۵۰ سے زیادہ بار — قرآن میں سب سے زیادہ حکم دی گئی صفت۔ قرآن متقین کو مخاطب کرتے کھلتا (۲:۲) اور تقویٰ کے حکم پر بند ہوتا ہے (۲:۲۸۱)۔</div>
+</div>
+
+
+<div class="era-divider">
+  <div class="era-dot era-early"></div>
+  <div class="era-label en-blk">Early Makki · 610–615 CE</div>
+  <div class="era-label-ur ur-blk">ابتدائی مکی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-t-74-56">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-74-56')">
+    <span class="rev-badge rev-early en-blk">Rev. #4</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #4</span>
+    <span class="card-ref">Al-Muddaththir 74:56</span>
+    <span class="card-preview">وَهُوَ أَهْلُ التَّقْوَىٰ وَأَهْلُ الْمَغْفِرَةِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَا يَذْكُرُونَ إِلَّا أَن يَشَاءَ اللَّهُ ۚ هُوَ أَهْلُ التَّقْوَىٰ وَأَهْلُ الْمَغْفِرَةِ</div>
+    <div class="ayah-tr-en en-blk">"They will not remember except that Allah wills — He is worthy of Taqwa and worthy of forgiveness."</div>
+    <div class="ayah-tr-ur ur-blk">«وہ یاد نہیں کرتے مگر جب اللہ چاہے — وہی تقویٰ کا اہل ہے اور وہی مغفرت کا اہل۔»</div>
+    <div class="ayah-ref-line">Al-Muddaththir 74:56</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">One of the earliest surahs — 4th revealed. The only place in the entire Quran where Taqwa is attributed to Allah Himself. Not a command to humans — a declaration about Allah's nature. He is Ahlul-Taqwa: the One who is worthy of all reverence and awe. This reorients the entire concept before it begins as a human quality. Taqwa is first about who Allah IS, not only about what humans should do.</div>
+      <div class="ctx-txt-ur ur-blk">ابتدائی ترین سورتوں میں — چوتھی نازل۔ قرآن کی واحد جگہ جہاں تقویٰ اللہ کی طرف منسوب ہے۔ وہ اہلِ تقویٰ ہے — تقویٰ کا مستحق۔ تقویٰ پہلے اللہ کی صفت ہے، پھر انسان کا عمل۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَهْلُ التَّقْوَىٰ</span> <span class="root-fm">و-ق-ي · Worthy of Taqwa</span>
+      <div class="root-mn en-blk">Ahl: people of, those worthy of, those who belong to. Ahlul-Taqwa: the one to whom Taqwa belongs — who deserves to be guarded against, who deserves all reverence. Root W-Q-Y: to shield, to protect. Taqwa begins with Allah's right to be reverenced — not with human fear management.</div>
+      <div class="root-mn-ur ur-blk">اہل: جو اس کے مستحق ہیں۔ اہلِ تقویٰ: جسے تقویٰ کا حق ہے۔ و-ق-ی — ڈھال اٹھانا۔ تقویٰ اللہ کے حق سے شروع ہوتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Taqwa is first attributed to Allah — He is worthy of it. Before commanding humans to have Taqwa, the Quran establishes that Allah deserves it. This makes Taqwa not primarily about fear but about giving Allah what He is due: complete reverence.</div>
+      <div class="uniq-txt-ur ur-blk">تقویٰ پہلے اللہ کی طرف منسوب — وہ اس کا مستحق ہے۔ تقویٰ خوف کے بارے میں نہیں — اللہ کو اس کا حق دینے کے بارے میں ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-74-56-my"></span></div>
+        <textarea class="note-ta" id="note-t-74-56-my" placeholder="Allah is Ahlul-Taqwa — worthy of Taqwa. Does your understanding of Taqwa change when you see it first attributed to Allah Himself, before it is commanded of you?" oninput="autoSave('t-74-56-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-74-56-after"></span></div>
+        <textarea class="note-ta" id="note-t-74-56-after" placeholder="What changed after tafseer?" oninput="autoSave('t-74-56-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-92-5">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-92-5')">
+    <span class="rev-badge rev-early en-blk">Rev. #9</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #9</span>
+    <span class="card-ref">Al-Layl 92:5-7</span>
+    <span class="card-preview">فَأَمَّا مَنْ أَعْطَىٰ وَاتَّقَىٰ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">فَأَمَّا مَنْ أَعْطَىٰ وَاتَّقَىٰ ۞ وَصَدَّقَ بِالْحُسْنَىٰ ۞ فَسَنُيَسِّرُهُ لِلْيُسْرَىٰ</div>
+    <div class="ayah-tr-en en-blk">"As for he who gives and has Taqwa, and believes in the best reward — We will ease him toward ease."</div>
+    <div class="ayah-tr-ur ur-blk">«جس نے دیا اور تقویٰ اختیار کیا، اور بہترین جزا کی تصدیق کی — ہم اسے آسانی کی طرف سہولت دیں گے۔»</div>
+    <div class="ayah-ref-line">Al-Layl 92:5-7</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Layl — 9th surah revealed. Three paired conditions lead to ease: giving (A'ta) + Taqwa (Ittaqa) + belief in the best outcome (Saddaqa bil-husna). Nuyassiru: We will ease the path. Taqwa paired with generosity is the combination that opens divine ease. Not Taqwa alone — Taqwa with giving. The earliest Quranic statement of Taqwa's worldly consequence.</div>
+      <div class="ctx-txt-ur ur-blk">الیل — نویں سورت۔ تین شرائط: دینا + تقویٰ + بہترین نتیجے کا یقین → آسانی۔ تقویٰ + سخاوت = الٰہی تسہیل۔ تقویٰ کے دنیوی نتیجے کا ابتدائی ترین قرآنی بیان۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">وَاتَّقَىٰ</span> <span class="root-fm">و-ق-ي · He actively adopted the shield</span>
+      <div class="root-mn en-blk">Ittaqa — he adopted Taqwa, he took it as his shield. The verb form iftacala — taking an action deliberately for yourself. You actively place the shield. Not passive God-consciousness but a conscious choice to carry awareness of Allah in every act — including giving.</div>
+      <div class="root-mn-ur ur-blk">اتّقیٰ — اس نے تقویٰ اپنایا۔ فعل افتعل — اپنے لیے جان بوجھ کر عمل۔ تقویٰ فعّال انتخاب ہے — غیرفعّال احساس نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Taqwa produces ease — the earliest statement of its worldly consequence, paired with giving. The combination unlocks divine facilitation. Taqwa is not only about the Akhirah — it opens paths in this life.</div>
+      <div class="uniq-txt-ur ur-blk">تقویٰ آسانی پیدا کرتا ہے — دنیوی نتیجے کا ابتدائی بیان۔ دینے کے ساتھ مل کر الٰہی تسہیل کھلتی ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-92-5-my"></span></div>
+        <textarea class="note-ta" id="note-t-92-5-my" placeholder="Giving + Taqwa = ease. Is there a connection in your own experience between generosity and things becoming easier?" oninput="autoSave('t-92-5-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-92-5-after"></span></div>
+        <textarea class="note-ta" id="note-t-92-5-after" placeholder="What changed?" oninput="autoSave('t-92-5-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-87-10">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-87-10')">
+    <span class="rev-badge rev-early en-blk">Rev. #8</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #8</span>
+    <span class="card-ref">Al-Ala 87:10</span>
+    <span class="card-preview">وَمَا يَذَّكَّرُ إِلَّا مَن يَخْشَىٰ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَا يَذَّكَّرُ إِلَّا مَن يَخْشَىٰ</div>
+    <div class="ayah-tr-en en-blk">"And none will be reminded except he who has Khashya."</div>
+    <div class="ayah-tr-ur ur-blk">«اور یاد صرف وہی کرے گا جو خشیہ رکھتا ہو۔»</div>
+    <div class="ayah-ref-line">Al-Ala 87:10</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Ala is the 8th surah — the same surah that opens with the first Dhikr command (87:1: Sabbih). This ayah closes it: only the one who has Khashya will take heed. Khashya is deeper than Khawf — it is the awe of the one who knows. A scholar fears differently from an ignorant person. This is the direct Quranic link between Taqwa and Dhikr: Taqwa is the prerequisite that makes Dhikr land in the heart.</div>
+      <div class="ctx-txt-ur ur-blk">الاعلیٰ — آٹھویں سورت — وہی سورت جو پہلے ذکر کے حکم (۸۷:۱) سے کھلتی ہے۔ یہ آیت اسے بند کرتی ہے: صرف خشیہ والا یاد کرے گا۔ خشیہ علم سے اٹھنے والا رعب — تقویٰ اور ذکر کا سیدھا تعلق۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">يَخْشَىٰ</span> <span class="root-fm">خ-ش-ي · Khashya — awe arising from knowledge</span>
+      <div class="root-mn en-blk">Khashya from Kh-Sh-Y: the specific fear arising from knowledge of who Allah is. The Quran distinguishes Khawf (general fear) from Khashya (awe-fear from knowledge). "Only those of His servants who have knowledge fear Allah" (35:28) — same root. Khashya is Taqwa at its deepest — when knowledge of Allah produces complete reverence.</div>
+      <div class="root-mn-ur ur-blk">خشیہ — خ-ش-ی — علم سے اٹھنے والا رعب۔ خوف اور خشیہ میں فرق: «اللہ سے اس کے بندوں میں وہی ڈرتے ہیں جو علم رکھتے ہیں» (۳۵:۲۸)۔ خشیہ: تقویٰ کی گہری ترین سطح۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Taqwa as Khashya is the prerequisite for Dhikr to be received. The same surah opens with the first Dhikr command and closes with this — creating a frame: glorify His Name (87:1)... only the one with Khashya truly receives the reminder (87:10). Taqwa opens the heart to Dhikr.</div>
+      <div class="uniq-txt-ur ur-blk">تقویٰ (خشیہ) ذکر کی شرط ہے۔ پہلے ذکر کا حکم (۸۷:۱)... صرف خشیہ والا یاد کرے گا (۸۷:۱۰)۔ تقویٰ دل کو ذکر کے لیے کھولتا ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-87-10-my"></span></div>
+        <textarea class="note-ta" id="note-t-87-10-my" placeholder="Only the one with Khashya receives the reminder — does your Dhikr feel different when you are in a state of genuine reverence versus when you are distracted?" oninput="autoSave('t-87-10-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-87-10-after"></span></div>
+        <textarea class="note-ta" id="note-t-87-10-after" placeholder="What changed?" oninput="autoSave('t-87-10-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider">
+  <div class="era-dot era-middle"></div>
+  <div class="era-label en-blk">Middle Makki · 615–620 CE</div>
+  <div class="era-label-ur ur-blk">وسطی مکی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-t-20-132">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-20-132')">
+    <span class="rev-badge rev-middle en-blk">Rev. #45</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #45</span>
+    <span class="card-ref">Ta-Ha 20:132</span>
+    <span class="card-preview">وَالْعَاقِبَةُ لِلتَّقْوَىٰ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَأْمُرْ أَهْلَكَ بِالصَّلَاةِ وَاصْطَبِرْ عَلَيْهَا ۖ لَا نَسْأَلُكَ رِزْقًا ۖ نَّحْنُ نَرْزُقُكَ ۗ وَالْعَاقِبَةُ لِلتَّقْوَىٰ</div>
+    <div class="ayah-tr-en en-blk">"And command your family to prayer and be steadfast in it. We do not ask you for provision — We provide for you. And the final outcome belongs to Taqwa."</div>
+    <div class="ayah-tr-ur ur-blk">«اپنے گھر والوں کو نماز کا حکم دیں اور اس پر ثابت رہیں۔ ہم آپ سے رزق نہیں مانگتے — ہم آپ کو رزق دیتے ہیں۔ اور انجام تقویٰ والوں کا ہے۔»</div>
+    <div class="ayah-ref-line">Ta-Ha 20:132</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Same surah as 20:14 (Salah is for dhikr). The most comprehensive promise in the Quran: Wal-aqibatu lil-taqwa. The final outcome belongs to Taqwa — not to wealth, strategy, connections, or strength. Whatever happens in the middle — difficulty, loss, delay, apparent defeat — the last chapter is written for Taqwa. Also: We provide for you — the rizq anxiety is answered directly before the promise.</div>
+      <div class="ctx-txt-ur ur-blk">وہی سورت جس میں ۲۰:۱۴ ہے۔ قرآن کا سب سے جامع وعدہ: وَالْعَاقِبَةُ لِلتَّقْوَىٰ۔ آخری نتیجہ تقویٰ کا۔ درمیان میں جو بھی ہو — آخری باب تقویٰ کے لیے لکھا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْعَاقِبَةُ</span> <span class="root-fm">ع-ق-ب · The final outcome / last consequence</span>
+      <div class="root-mn en-blk">Al-Aqibah from A-Q-B: the heel, what comes after, the final consequence. What follows everything else. Al-aqibatu lil-taqwa: the final chapter belongs to Taqwa. Whatever happens between now and the end — the last page is guaranteed for the Muttaqi.</div>
+      <div class="root-mn-ur ur-blk">العاقبہ — ع-ق-ب — ایڑی، جو پیچھے آئے، آخری نتیجہ۔ آخری باب تقویٰ کا۔ ابھی سے آخر تک درمیان میں جو بھی ہو — آخری صفحہ متقی کے لیے یقینی ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The final outcome belongs to Taqwa — the most complete Quranic promise about the long game. Whatever the middle looks like, the end is guaranteed for the Muttaqi. Also paired with: We provide for you — the rizq anxiety is answered before the promise arrives.</div>
+      <div class="uniq-txt-ur ur-blk">انجام تقویٰ کا — قرآن کا سب سے جامع وعدہ۔ طویل سفر میں: درمیان جو بھی، اختتام مقرر۔ رزق کی فکر کا جواب بھی ساتھ۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-20-132-my"></span></div>
+        <textarea class="note-ta" id="note-t-20-132-my" placeholder=""The final outcome belongs to Taqwa" — do you actually believe this in your current situation? What does it mean for how you make decisions today?" oninput="autoSave('t-20-132-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-20-132-after"></span></div>
+        <textarea class="note-ta" id="note-t-20-132-after" placeholder="What changed?" oninput="autoSave('t-20-132-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-39-10">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-39-10')">
+    <span class="rev-badge rev-middle en-blk">Rev. #59</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #59</span>
+    <span class="card-ref">Az-Zumar 39:10</span>
+    <span class="card-preview">إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">قُلْ يَا عِبَادِ الَّذِينَ آمَنُوا اتَّقُوا رَبَّكُمْ ۚ لِلَّذِينَ أَحْسَنُوا فِي هَٰذِهِ الدُّنْيَا حَسَنَةٌ ۗ وَأَرْضُ اللَّهِ وَاسِعَةٌ ۗ إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ</div>
+    <div class="ayah-tr-en en-blk">"Say: O My servants who believe — have Taqwa of your Lord. For those who do Ihsan in this world, there is good. And Allah's earth is vast. Indeed the patient will be given their reward without account."</div>
+    <div class="ayah-tr-ur ur-blk">«کہو: اے میرے بندو جو ایمان لائے — اپنے رب سے تقویٰ اختیار کرو۔ جنہوں نے اس دنیا میں احسان کیا ان کے لیے خیر ہے۔ اللہ کی زمین وسیع ہے۔ بے شک صابروں کو بے حساب اجر دیا جائے گا۔»</div>
+    <div class="ayah-ref-line">Az-Zumar 39:10</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">A single ayah linking four of the greatest concepts: Taqwa → Ihsan → Sabr → infinite reward. The sequence is deliberate. Taqwa produces consciousness that leads to Ihsan (excellence in action). Ihsan in difficulty requires Sabr (patience). Sabr receives reward Bi-ghayri hisab — beyond calculation. The most complete single-ayah map of the spiritual path.</div>
+      <div class="ctx-txt-ur ur-blk">ایک آیت میں چار عظیم تصورات: تقویٰ → احسان → صبر → بے حساب اجر۔ تقویٰ وہ شعور پیدا کرتا ہے جو احسان کی طرف لے جاتا ہے۔ احسان مشکل میں صبر مانگتا ہے۔ صبر بے حساب اجر پاتا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">بِغَيْرِ حِسَابٍ</span> <span class="root-fm">ح-س-ب · Without account — beyond calculation</span>
+      <div class="root-mn en-blk">Bi-ghayri hisab — without calculation, beyond measure. Every other reward in the Quran is specified: ten times, seven hundred times. The reward of Sabr alone is stated as without calculation — infinity. This ayah places Taqwa at the start of a chain that ends in the uncountable.</div>
+      <div class="root-mn-ur ur-blk">بغیر حساب — بے حد، ناقابلِ پیمائش۔ قرآن کا ہر اجر مقرر — دس گنا، سات سو گنا۔ صبر کا اجر اکیلا بے حساب — لامحدود۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Taqwa → Ihsan → Sabr → infinite reward. The complete spiritual chain in one ayah. Taqwa is not the destination — it is the starting point of a path that ends beyond calculation. Also: "Allah's earth is vast" — Taqwa-based migration (internal or external) is always possible.</div>
+      <div class="uniq-txt-ur ur-blk">تقویٰ → احسان → صبر → بے حساب اجر۔ مکمل روحانی سلسلہ ایک آیت میں۔ تقویٰ منزل نہیں — آغاز ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-39-10-my"></span></div>
+        <textarea class="note-ta" id="note-t-39-10-my" placeholder="Taqwa leads to Ihsan leads to Sabr leads to infinite reward — where are you in this chain right now?" oninput="autoSave('t-39-10-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-39-10-after"></span></div>
+        <textarea class="note-ta" id="note-t-39-10-after" placeholder="What changed?" oninput="autoSave('t-39-10-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="era-divider">
+  <div class="era-dot era-madani"></div>
+  <div class="era-label en-blk">Madani · 622–632 CE</div>
+  <div class="era-label-ur ur-blk">مدنی</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="ayah-card" id="card-t-2-2">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-2-2')">
+    <span class="rev-badge rev-madani en-blk">Rev. #87</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #87</span>
+    <span class="card-ref">Al-Baqarah 2:2</span>
+    <span class="card-preview">هُدًى لِّلْمُتَّقِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ</div>
+    <div class="ayah-tr-en en-blk">"This is the Book about which there is no doubt — guidance for the Muttaqeen."</div>
+    <div class="ayah-tr-ur ur-blk">«یہ وہ کتاب ہے جس میں کوئی شک نہیں — ہدایت ہے تقویٰ والوں کے لیے۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:2</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The second ayah of the Quran — first full Madani statement after Al-Fatiha. The Quran immediately identifies who its guidance is for: the Muttaqeen. Not all people — the Muttaqeen. This raises the question every reader must face: am I among those for whom this guidance is intended? Taqwa is the condition for receiving what the Book contains. The Book is open to all; it gives its guidance to those who carry the shield.</div>
+      <div class="ctx-txt-ur ur-blk">قرآن کی دوسری آیت — پہلا مدنی بیان۔ قرآن فوری اعلان کرتا ہے: ہدایت متقین کے لیے۔ سوال: کیا میں ان میں ہوں؟ تقویٰ قرآن کی ہدایت وصول کرنے کی شرط ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لِّلْمُتَّقِينَ</span> <span class="root-fm">و-ق-ي · Those who carry the shield</span>
+      <div class="root-mn en-blk">Al-Muttaqoon: plural of Muttaqi — those who have taken Taqwa as their quality. W-Q-Y: to shield, protect. The Muttaqi is the one who has placed a shield between himself and Allah's displeasure through conscious awareness in every act. The Quran is guidance specifically for this person.</div>
+      <div class="root-mn-ur ur-blk">المتقون: تقویٰ اختیار کرنے والوں کی جمع۔ و-ق-ی — ڈھال۔ متقی: وہ جس نے ہر عمل میں شعور کی ڈھال اٹھائی۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The Quran identifies its own audience: the Muttaqeen. Guidance flows to those who carry Taqwa. Taqwa is the condition for reception — not exclusion but a description of how the heart receives. The Quran is available to all; it penetrates those who carry the shield.</div>
+      <div class="uniq-txt-ur ur-blk">قرآن اپنا مخاطب بتاتا ہے: متقین۔ تقویٰ ہدایت وصول کرنے کی شرط ہے — اخراج نہیں، استقبال کی شرط۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-2-2-my"></span></div>
+        <textarea class="note-ta" id="note-t-2-2-my" placeholder="The Quran is guidance for the Muttaqeen — does your reading of the Quran feel like guidance landing? What is the difference between reading with Taqwa and without it?" oninput="autoSave('t-2-2-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-2-2-after"></span></div>
+        <textarea class="note-ta" id="note-t-2-2-after" placeholder="What changed?" oninput="autoSave('t-2-2-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-2-183">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-2-183')">
+    <span class="rev-badge rev-madani en-blk">Rev. #87</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #87</span>
+    <span class="card-ref">Al-Baqarah 2:183</span>
+    <span class="card-preview">لَعَلَّكُمْ تَتَّقُونَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — fasting has been prescribed for you as it was prescribed for those before you — so that you may attain Taqwa."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — روزہ تم پر فرض کیا گیا جیسا تم سے پہلے لوگوں پر فرض ہوا — تاکہ تم تقویٰ اختیار کرو۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:183</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The purpose of Ramadan fasting stated explicitly: La'allakum tattaqoon — so that you may attain Taqwa. Not health, not willpower training, not solidarity — Taqwa. Same pattern as 20:14: Salah is established for dhikr. Every major pillar of Islam has Taqwa or dhikr as its stated purpose. They are all vehicles for the same destination.</div>
+      <div class="ctx-txt-ur ur-blk">روزے کا مقصد صریح: لعلکم تتقون۔ صحت نہیں، قوتِ ارادی نہیں — تقویٰ۔ نماز ذکر کے لیے (۲۰:۱۴)؛ روزہ تقویٰ کے لیے۔ تمام ارکان ایک ہی منزل کے وسائل۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تَتَّقُونَ</span> <span class="root-fm">و-ق-ي · So that you may carry the shield</span>
+      <div class="root-mn en-blk">Tattaqoon — you may attain Taqwa, you may come to carry the shield. La'alla: so that, in order that — purpose. The mechanism: fasting trains the nafs to choose what Allah wills over what the body desires — which is precisely what Taqwa requires in all other contexts too.</div>
+      <div class="root-mn-ur ur-blk">تتقون — تقویٰ حاصل کرو۔ لعل: تاکہ، مقصد۔ روزہ نفس کو تربیت دیتا ہے: اللہ کی چاہت کو جسم کی خواہش پر ترجیح — یہی تقویٰ ہر جگہ مانگتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The purpose of Ramadan is Taqwa — stated explicitly. This connects fasting to the same goal as Salah (20:14). Every major pillar has the same destination. They are not separate disciplines — they are all one path.</div>
+      <div class="uniq-txt-ur ur-blk">روزے کا مقصد تقویٰ — صریح۔ نماز کی طرح (۲۰:۱۴)۔ تمام ارکان کی ایک منزل — الگ الگ نہیں، ایک راستہ۔</div>
+    </div>
+    
+    <div class="sunnah-box">
+      <div class="sun-lbl en-blk">Connected Sunnah</div>
+      <div class="sun-lbl ur-blk">متعلقہ سنت</div>
+      <div class="sun-ar">مَنْ لَمْ يَدَعْ قَوْلَ الزُّورِ وَالْعَمَلَ بِهِ فَلَيْسَ لِلَّهِ حَاجَةٌ فِي أَنْ يَدَعَ طَعَامَهُ وَشَرَابَهُ</div>
+      <div class="sun-en en-blk">"Whoever does not abandon false speech and acting upon it — Allah has no need of his abandoning food and drink."</div>
+      <div class="sun-ur ur-blk">«جو جھوٹ بولنا اور اس پر عمل کرنا نہ چھوڑے — اللہ کو اس کا کھانا پینا چھوڑنے کی کوئی ضرورت نہیں۔»</div>
+      <div class="sun-src">Sahih Bukhari 1903 <span class="grade g-sahih">✦ Sahih</span></div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-2-183-my"></span></div>
+        <textarea class="note-ta" id="note-t-2-183-my" placeholder="Fasting is prescribed FOR Taqwa. Does your Ramadan feel like it produces Taqwa? What is the difference between a fast that produces Taqwa and one that does not?" oninput="autoSave('t-2-183-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-2-183-after"></span></div>
+        <textarea class="note-ta" id="note-t-2-183-after" placeholder="What changed?" oninput="autoSave('t-2-183-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-2-197">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-2-197')">
+    <span class="rev-badge rev-madani en-blk">Rev. #87</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #87</span>
+    <span class="card-ref">Al-Baqarah 2:197</span>
+    <span class="card-preview">وَتَزَوَّدُوا فَإِنَّ خَيْرَ الزَّادِ التَّقْوَىٰ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">الْحَجُّ أَشْهُرٌ مَّعْلُومَاتٌ ۚ فَمَن فَرَضَ فِيهِنَّ الْحَجَّ فَلَا رَفَثَ وَلَا فُسُوقَ وَلَا جِدَالَ فِي الْحَجِّ ۗ وَتَزَوَّدُوا فَإِنَّ خَيْرَ الزَّادِ التَّقْوَىٰ</div>
+    <div class="ayah-tr-en en-blk">"Hajj is in well-known months. Whoever commits to Hajj therein — no intimacy, no wickedness, no quarreling. And take provision — for the best provision is Taqwa."</div>
+    <div class="ayah-tr-ur ur-blk">«حج معلوم مہینوں میں ہے۔ جو حج کا ارادہ کرے — نہ اختلاط، نہ فسق، نہ جھگڑا۔ اور زادِ راہ لے لو — بہترین زادِ راہ تقویٰ ہے۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:197</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">In the context of Hajj preparation — take provision for the journey. Then the most famous single Taqwa statement: Fa-inna khayral-zadi al-taqwa. The best provision is Taqwa. Not money, food, or strength — Taqwa. The journey of Hajj is an image of the journey of life. Both require provision. Both have one essential provision that cannot be replaced: Taqwa.</div>
+      <div class="ctx-txt-ur ur-blk">حج کی تیاری کے سیاق میں۔ پھر سب سے مشہور بیان: فان خیر الزاد التقویٰ۔ بہترین توشہ تقویٰ ہے۔ حج کا سفر زندگی کا عکس — دونوں کا اصل زادِ راہ: تقویٰ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الزَّادِ</span> <span class="root-fm">ز-و-د · Provision for a journey</span>
+      <div class="root-mn en-blk">Al-Zad: provision, supplies for a journey — what you carry. The Quran places Taqwa as the best provision, meaning everything else is secondary. You can travel with little else if you carry Taqwa. You cannot complete the journey properly without it, regardless of what else you carry.</div>
+      <div class="root-mn-ur ur-blk">الزاد — سفر کا توشہ۔ تقویٰ بہترین — باقی سب ثانوی۔ تقویٰ کے ساتھ کم میں سفر؛ تقویٰ کے بغیر کچھ بھی کافی نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The best provision for any journey is Taqwa. Hajj is the image; life is the journey. Material provision is necessary but insufficient. Taqwa is the provision whose absence cannot be compensated by anything else.</div>
+      <div class="uniq-txt-ur ur-blk">ہر سفر کا بہترین توشہ تقویٰ۔ حج استعارہ؛ زندگی سفر۔ مادی سامان ضروری لیکن ناکافی — تقویٰ کی جگہ کوئی نہیں لے سکتا۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-2-197-my"></span></div>
+        <textarea class="note-ta" id="note-t-2-197-my" placeholder=""The best provision is Taqwa" — what provision are you actually relying on for your journey right now? Is Taqwa among them?" oninput="autoSave('t-2-197-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-2-197-after"></span></div>
+        <textarea class="note-ta" id="note-t-2-197-after" placeholder="What changed?" oninput="autoSave('t-2-197-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-3-102">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-3-102')">
+    <span class="rev-badge rev-madani en-blk">Rev. #89</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #89</span>
+    <span class="card-ref">Aal Imran 3:102</span>
+    <span class="card-preview">اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ حَقَّ تُقَاتِهِ وَلَا تَمُوتُنَّ إِلَّا وَأَنتُم مُّسْلِمُونَ</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — have Taqwa of Allah as He truly deserves, and do not die except as Muslims."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — اللہ سے ڈرو جیسا اس سے ڈرنے کا حق ہے، اور نہ مرنا مگر مسلمان ہو کر۔»</div>
+    <div class="ayah-ref-line">Aal Imran 3:102</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Haqqa tuqatihi — as He truly deserves. The highest Taqwa demand in the Quran. Ibn Masud (RA) said: this means to obey Him without disobeying, to remember Him without forgetting, and to be grateful without being ungrateful. Three dimensions: obedience, remembrance, gratitude. Then the ultimate frame: do not die except as Muslims. The entire call of Islam compressed into one ayah: live in Taqwa, die in Islam.</div>
+      <div class="ctx-txt-ur ur-blk">حق تقاتہ — جیسا حق ہے۔ بلند ترین تقویٰ کا مطالبہ۔ ابن مسعود: اطاعت بغیر نافرمانی، ذکر بغیر بھولے، شکر بغیر ناشکری۔ تین جہتیں۔ اسلام کی پوری دعوت مختصر: تقویٰ میں جیو، مسلمان مرو۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">حَقَّ تُقَاتِهِ</span> <span class="root-fm">ح-ق-ق · As He truly deserves — full due</span>
+      <div class="root-mn en-blk">Haqqa tuqatihi: the haqq (true right, full due) of His Taqwa. Haqq: truth, right, what is truly owed. This is Taqwa at its fullest — not the minimum, not a portion, but what He truly deserves. Scholars say this is a call to strive toward the ideal; 64:16 (as much as you are able) provides the merciful realistic frame.</div>
+      <div class="root-mn-ur ur-blk">حق تقاتہ — اس کے تقویٰ کا پورا حق۔ حق: سچ، جو واقعی واجب ہے۔ زیادہ سے زیادہ تقویٰ۔ ۶۴:۱۶ (جتنا طاقت ہو) رحمت کا فریم دیتی ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The highest Taqwa demand — as He truly deserves. Ibn Masud's definition: three dimensions in one. And then: do not die except as Muslims — Taqwa maintained until the last breath. Paired with 64:16, these two ayat define both the ideal and the mercy.</div>
+      <div class="uniq-txt-ur ur-blk">بلند ترین مطالبہ۔ ابن مسعود: تین جہتیں ایک ساتھ۔ اختتام تک تقویٰ — ۶۴:۱۶ کے ساتھ: آئیڈیل اور رحمت دونوں۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-3-102-my"></span></div>
+        <textarea class="note-ta" id="note-t-3-102-my" placeholder="Taqwa as He deserves — obedience without disobedience, remembrance without forgetting, gratitude without ingratitude. Which of these three is hardest for you right now?" oninput="autoSave('t-3-102-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-3-102-after"></span></div>
+        <textarea class="note-ta" id="note-t-3-102-after" placeholder="What changed?" oninput="autoSave('t-3-102-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-8-29">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-8-29')">
+    <span class="rev-badge rev-madani en-blk">Rev. #88</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #88</span>
+    <span class="card-ref">Al-Anfal 8:29</span>
+    <span class="card-preview">يَجْعَل لَّكُمْ فُرْقَانًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا إِن تَتَّقُوا اللَّهَ يَجْعَل لَّكُمْ فُرْقَانًا وَيُكَفِّرْ عَنكُمْ سَيِّئَاتِكُمْ وَيَغْفِرْ لَكُمْ</div>
+    <div class="ayah-tr-en en-blk">"O you who believe — if you have Taqwa of Allah, He will give you Furqan, will remove your misdeeds, and forgive you."</div>
+    <div class="ayah-tr-ur ur-blk">«اے ایمان والو — اگر تم اللہ سے تقویٰ اختیار کرو تو وہ تمہیں فرقان دے گا، تمہاری برائیاں مٹائے گا، اور تمہیں معاف کرے گا۔»</div>
+    <div class="ayah-ref-line">Al-Anfal 8:29</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Furqan — the criterion, the ability to distinguish truth from falsehood, real from illusion. This is one of the names of the Quran. Taqwa produces Furqan — the internal compass that makes you able to tell what is true. The person with genuine Taqwa does not only know the rules — they develop a faculty for recognising truth. Three gifts from one condition: Furqan, removal of misdeeds, forgiveness.</div>
+      <div class="ctx-txt-ur ur-blk">فرقان — معیار، حق اور باطل میں فرق۔ قرآن کا ایک نام۔ تقویٰ فرقان پیدا کرتا ہے — اندرونی کمپاس۔ تین عطیے ایک شرط سے: فرقان، مٹانا، مغفرت۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">فُرْقَانًا</span> <span class="root-fm">ف-ر-ق · Criterion — the dividing faculty</span>
+      <div class="root-mn en-blk">Furqan from F-R-Q: to separate, distinguish. Taqwa gives you the dividing faculty — you see through illusions, recognise what is real. Taqwa and Furqan form a circle: Taqwa opens you to the Quran (2:2); the Quran gives Furqan; Furqan deepens Taqwa.</div>
+      <div class="root-mn-ur ur-blk">فرقان — ف-ر-ق — الگ کرنا۔ تقویٰ تمیز دیتا ہے۔ دائرہ: تقویٰ قرآن کھولتا ہے (۲:۲)؛ قرآن فرقان دیتا ہے؛ فرقان تقویٰ گہرا کرتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Taqwa gives Furqan — the internal criterion for distinguishing truth from falsehood. Beyond knowing rules: the faculty of recognising truth. Three gifts in one condition — Furqan, removal of misdeeds, forgiveness.</div>
+      <div class="uniq-txt-ur ur-blk">تقویٰ فرقان دیتا ہے — قواعد سے آگے، حق پہچاننے کی صلاحیت۔ تین عطیے ایک شرط سے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-8-29-my"></span></div>
+        <textarea class="note-ta" id="note-t-8-29-my" placeholder="Taqwa gives Furqan — the ability to distinguish truth from falsehood. Do you notice a difference in your clarity of judgment when you are in a state of Taqwa versus when you are distracted or heedless?" oninput="autoSave('t-8-29-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-8-29-after"></span></div>
+        <textarea class="note-ta" id="note-t-8-29-after" placeholder="What changed?" oninput="autoSave('t-8-29-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-49-13">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-49-13')">
+    <span class="rev-badge rev-madani en-blk">Rev. #106</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #106</span>
+    <span class="card-ref">Al-Hujurat 49:13</span>
+    <span class="card-preview">إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ</div>
+    <div class="ayah-tr-en en-blk">"O mankind — We created you from a male and a female and made you peoples and tribes so that you may know one another. Indeed the most noble of you in the sight of Allah is the most Taqwa."</div>
+    <div class="ayah-tr-ur ur-blk">«اے لوگو — ہم نے تمہیں مرد اور عورت سے پیدا کیا اور قوموں اور قبیلوں میں بنایا تاکہ تم ایک دوسرے کو پہچانو۔ بے شک اللہ کے نزدیک تم میں سب سے معزز وہ ہے جو سب سے زیادہ تقویٰ والا ہے۔»</div>
+    <div class="ayah-ref-line">Al-Hujurat 49:13</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The most revolutionary social statement in the Quran. All human hierarchies — race, tribe, wealth, lineage — replaced with one criterion: Atqakum. Revealed during the Conquest of Makkah when Bilal (RA) — a former slave — gave the adhan from the top of the Kaaba. The person standing at the highest point of the holiest place was defined by Taqwa, not lineage.</div>
+      <div class="ctx-txt-ur ur-blk">قرآن کا سب سے انقلابی سماجی بیان۔ تمام درجہ بندیاں ایک معیار سے بدل دی گئیں: اتقاکم۔ فتحِ مکہ میں نازل — بلال (RA) کعبے کی چھت پر اذان دے رہے تھے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَتْقَاكُمْ</span> <span class="root-fm">و-ق-ي · The most Taqwa among you — superlative</span>
+      <div class="root-mn en-blk">Atqakum: superlative of Muttaqi — the most Taqwa-possessing among you. The only measure of nobility before Allah. Not the most wealthy, educated, connected, or eloquent — the most Taqwa. Every human hierarchy is explicitly overridden.</div>
+      <div class="root-mn-ur ur-blk">اتقاکم: متقی کی صفتِ عالی — سب سے زیادہ تقویٰ والا۔ اللہ کے نزدیک عزت کا واحد معیار۔ دولت، تعلیم، خاندان — سب اس سے ماتحت۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The only criterion of nobility before Allah is Taqwa. All other hierarchies explicitly dissolved. Announced at the greatest moment of victory — when a former slave gave the adhan from the top of the Kaaba. Taqwa does not respect lineage.</div>
+      <div class="uniq-txt-ur ur-blk">اللہ کے نزدیک واحد معیار: تقویٰ۔ تمام درجہ بندیاں ختم۔ سب سے بڑی فتح کے لمحے میں — سابق غلام کعبے پر۔</div>
+    </div>
+    
+    <div class="sunnah-box">
+      <div class="sun-lbl en-blk">Connected Sunnah</div>
+      <div class="sun-lbl ur-blk">متعلقہ سنت</div>
+      <div class="sun-ar">لَيْسَ لِعَرَبِيٍّ فَضْلٌ عَلَى عَجَمِيٍّ إِلَّا بِالتَّقْوَى</div>
+      <div class="sun-en en-blk">"No Arab has superiority over a non-Arab except through Taqwa."</div>
+      <div class="sun-ur ur-blk">«کسی عرب کو عجمی پر کوئی فضیلت نہیں مگر تقویٰ سے۔»</div>
+      <div class="sun-src">Musnad Ahmad — Farewell Sermon · Sahih <span class="grade g-sahih">✦ Sahih</span></div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-49-13-my"></span></div>
+        <textarea class="note-ta" id="note-t-49-13-my" placeholder="The only measure of nobility is Taqwa — does this change how you see yourself relative to others? Who do you instinctively consider noble?" oninput="autoSave('t-49-13-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-49-13-after"></span></div>
+        <textarea class="note-ta" id="note-t-49-13-after" placeholder="What changed?" oninput="autoSave('t-49-13-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-65-2">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-65-2')">
+    <span class="rev-badge rev-madani en-blk">Rev. #99</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #99</span>
+    <span class="card-ref">At-Talaq 65:2-3</span>
+    <span class="card-preview">وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا ۞ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ۚ وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ</div>
+    <div class="ayah-tr-en en-blk">"And whoever has Taqwa of Allah — He will make a way out for him, and provide from where he did not expect. And whoever relies upon Allah — He is sufficient for him."</div>
+    <div class="ayah-tr-ur ur-blk">«اور جو اللہ سے تقویٰ اختیار کرے — وہ اس کے لیے راستہ نکالے گا۔ اور اسے وہاں سے رزق دے گا جہاں سے اسے گمان بھی نہ ہو۔ اور جو اللہ پر توکل کرے — تو وہی اس کے لیے کافی ہے۔»</div>
+    <div class="ayah-ref-line">At-Talaq 65:2-3</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The most complete worldly promise for Taqwa in the entire Quran. Three guarantees: (1) Makhraj — a way out from every difficulty. (2) Rizq min haythu la yahtasib — provision from where he did not expect. (3) Fa-huwa hasbuhu — Allah alone is sufficient. Revealed in the context of divorce — one of the most painful human situations. The promise applies in the hardest circumstances, not only the easy ones.</div>
+      <div class="ctx-txt-ur ur-blk">پوری قرآن میں تقویٰ کے دنیوی نتیجے کا سب سے مکمل وعدہ۔ تین ضمانتیں: مخرج، رزقِ غیبی، الٰہی کفایت۔ طلاق کے سیاق میں — مشکل ترین انسانی حالت میں وعدہ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">مَخْرَجًا</span> <span class="root-fm">خ-ر-ج · A way out — exit from difficulty</span>
+      <div class="root-mn en-blk">Makhraj from Kh-R-J: to exit, come out. Allah guarantees the Muttaqi a way out from every difficulty. Not: He will prevent difficulty — He will provide the exit. The difficulty may come; the makhraj is guaranteed. The Quranic answer to situations that seem to have no exit.</div>
+      <div class="root-mn-ur ur-blk">مخرج — خ-ر-ج — نکلنا۔ ہر مشکل سے نکلنے کا راستہ ضمانت۔ مشکل آ سکتی ہے؛ مخرج یقینی ہے۔ بے راستہ حالات کا قرآنی جواب۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most complete worldly promise: way out + unexpected provision + divine sufficiency. Three guarantees covering every category of need in difficulty. Revealed in the hardest human situation — the promise is for hard times, not easy ones.</div>
+      <div class="uniq-txt-ur ur-blk">سب سے مکمل دنیوی وعدہ: مخرج + غیبی رزق + الٰہی کفایت۔ مشکل ترین حالت میں وعدہ — آسانی میں نہیں۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-65-2-my"></span></div>
+        <textarea class="note-ta" id="note-t-65-2-my" placeholder=""He will make a way out and provide from where you did not expect" — have you experienced this? What were the circumstances?" oninput="autoSave('t-65-2-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-65-2-after"></span></div>
+        <textarea class="note-ta" id="note-t-65-2-after" placeholder="What changed?" oninput="autoSave('t-65-2-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-64-16">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-64-16')">
+    <span class="rev-badge rev-madani en-blk">Rev. #108</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #108</span>
+    <span class="card-ref">At-Taghabun 64:16</span>
+    <span class="card-preview">فَاتَّقُوا اللَّهَ مَا اسْتَطَعْتُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">فَاتَّقُوا اللَّهَ مَا اسْتَطَعْتُمْ وَاسْمَعُوا وَأَطِيعُوا وَأَنفِقُوا خَيْرًا لِّأَنفُسِكُمْ</div>
+    <div class="ayah-tr-en en-blk">"Have Taqwa of Allah as much as you are able, and listen and obey and spend — it is better for your souls."</div>
+    <div class="ayah-tr-ur ur-blk">«اللہ سے تقویٰ اختیار کرو جتنا تم سے ہو سکے، اور سنو اور اطاعت کرو اور خرچ کرو — یہ تمہارے اپنے لیے بہتر ہے۔»</div>
+    <div class="ayah-ref-line">At-Taghabun 64:16</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The merciful qualification of 3:102 (as He deserves). There: the ideal. Here: as much as you are able. Scholars reconcile: 3:102 is the standard to aim toward; 64:16 is the divine mercy. Together: aim for the highest — and know that as much as you sincerely can is accepted. No one achieves perfect Taqwa. The command to try — Ma istata'tum — remains for the entire life.</div>
+      <div class="ctx-txt-ur ur-blk">۳:۱۰۲ (جیسا حق ہے) کی رحیمانہ تکمیل۔ وہاں: آئیڈیل۔ یہاں: جتنا ہو سکے۔ دونوں ساتھ: بلند ترین کی طرف سعی، جتنا خلوص سے ہو — قبول۔ کامل تقویٰ کوئی نہیں پاتا۔ کوشش کا حکم ہمیشہ۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">مَا اسْتَطَعْتُمْ</span> <span class="root-fm">ط-و-ع · As much as you are able — sincere maximum</span>
+      <div class="root-mn en-blk">Mastata'tum: as much as is within your capacity. Istata'a: the maximum of one's ability. The merciful realistic frame. Allah does not demand what is beyond capacity — He demands the sincere maximum. This applies to every act of worship and Taqwa throughout the entire life.</div>
+      <div class="root-mn-ur ur-blk">ما استطعتم — جتنی طاقت ہو۔ اللہ طاقت سے زیادہ نہیں مانگتا — مخلصانہ زیادہ سے زیادہ مانگتا ہے۔ زندگی بھر یہی حکم۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The merciful qualification — Taqwa as much as you are able. Resolves the tension with 3:102: aim for the highest, do as much as you sincerely can. No one achieves perfect Taqwa — the command to try remains for the entire life. Allah does not ask for what is beyond you.</div>
+      <div class="uniq-txt-ur ur-blk">رحیمانہ تکمیل: جتنا ہو سکے۔ ۳:۱۰۲ کے ساتھ توازن: کامل نہیں، مخلصانہ کوشش — پوری زندگی۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-64-16-my"></span></div>
+        <textarea class="note-ta" id="note-t-64-16-my" placeholder=""As much as you are able" — the mercy of the command. What does your sincere maximum look like right now, honestly?" oninput="autoSave('t-64-16-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-64-16-after"></span></div>
+        <textarea class="note-ta" id="note-t-64-16-after" placeholder="What changed?" oninput="autoSave('t-64-16-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ayah-card" id="card-t-2-281">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-t-2-281')">
+    <span class="rev-badge rev-madani en-blk">Rev. #87</span>
+    <span class="rev-badge rev-madani ur-blk">ترتیب #87</span>
+    <span class="card-ref">Al-Baqarah 2:281</span>
+    <span class="card-preview">وَاتَّقُوا يَوْمًا تُرْجَعُونَ فِيهِ إِلَى اللَّهِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاتَّقُوا يَوْمًا تُرْجَعُونَ فِيهِ إِلَى اللَّهِ ۖ ثُمَّ تُوَفَّىٰ كُلُّ نَفْسٍ مَّا كَسَبَتْ وَهُمْ لَا يُظْلَمُونَ</div>
+    <div class="ayah-tr-en en-blk">"And fear a Day when you will be returned to Allah. Then every soul will be fully compensated for what it earned — and they will not be wronged."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اس دن سے ڈرو جب تم اللہ کی طرف لوٹائے جاؤ گے۔ پھر ہر نفس کو اس کی کمائی پوری دی جائے گی اور ان پر ظلم نہیں کیا جائے گا۔»</div>
+    <div class="ayah-ref-line">Al-Baqarah 2:281</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Scholars consider this among the last ayat revealed to the Prophet ﷺ. If so, the final message of the Quran ends with a Taqwa command: fear the Day of Return. The Quran begins (2:2) by addressing the Muttaqeen and ends (2:281) with a Taqwa command. The entire Book is framed by Taqwa. Every soul receives exactly what it earned — perfectly, without injustice. Taqwa is the preparation for that accounting.</div>
+      <div class="ctx-txt-ur ur-blk">آخری آیات میں سے — قرآن کے آخری الفاظ۔ قرآن متقین کو مخاطب کرتے شروع (۲:۲) اور تقویٰ کے حکم پر ختم (۲:۲۸۱)۔ پوری کتاب تقویٰ کے فریم میں۔ ہر نفس کا حساب کامل اور بے ظلم — تقویٰ تیاری ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تُرْجَعُونَ</span> <span class="root-fm">ر-ج-ع · You will be returned — the inevitable return</span>
+      <div class="root-mn en-blk">Turja'oon — you will be returned, sent back. Passive: you do not choose when or how. The return is coming. The nafs al-mutma'inna is welcomed back (89:28); here the reminder: return is inevitable. Taqwa is the preparation for what happens when you arrive.</div>
+      <div class="root-mn-ur ur-blk">ترجعون — لوٹائے جاؤ گے۔ مجہول: تم نہیں چنتے۔ واپسی یقینی۔ نفسِ مطمئنہ (۸۹:۲۸) کی واپسی خوشآمدید؛ یہاں: یاد دہانی۔ تقویٰ تیاری ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Among the last ayat revealed — the final Taqwa command. The Quran begins addressing Muttaqeen (2:2) and ends with a Taqwa command (2:281). The entire Book framed by Taqwa. Every soul receives exactly what it earned — without injustice. Taqwa is the preparation for that perfect accounting.</div>
+      <div class="uniq-txt-ur ur-blk">آخری آیات — آخری تقویٰ کا حکم۔ قرآن کا فریم: تقویٰ سے شروع، تقویٰ پر ختم۔ کامل اور بے ظلم حساب — تقویٰ تیاری ہے۔</div>
+    </div>
+    
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-t-2-281-my"></span></div>
+        <textarea class="note-ta" id="note-t-2-281-my" placeholder="One of the last ayat revealed — the final command is Taqwa. Every soul receives exactly what it earned. What does this mean for how you are living right now?" oninput="autoSave('t-2-281-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-t-2-281-after"></span></div>
+        <textarea class="note-ta" id="note-t-2-281-after" placeholder="What changed?" oninput="autoSave('t-2-281-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider" style="margin-top:32px">
+  <div class="era-dot" style="background:var(--purple)"></div>
+  <div class="era-label en-blk">Sunnah on Taqwa — Authenticated Hadith</div>
+  <div class="era-label-ur ur-blk">تقویٰ پر سنت — مستند احادیث</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Taqwa Is Here — The Heart</span><span class="ur-blk">تقویٰ یہاں ہے — دل میں</span></div>
+  <div class="sh-ar">التَّقْوَى هَاهُنَا، وَأَشَارَ إِلَى صَدْرِهِ ثَلَاثَ مَرَّاتٍ</div>
+  <div class="sh-en en-blk">"Taqwa is here — and he pointed to his chest three times."</div>
+  <div class="sh-ur ur-blk">«تقویٰ یہاں ہے — اور آپ نے تین بار اپنے سینے کی طرف اشارہ کیا۔»</div>
+  <div class="sh-src">Sahih Muslim 2564 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Fear Allah Wherever You Are</span><span class="ur-blk">جہاں بھی ہو اللہ سے ڈرو</span></div>
+  <div class="sh-ar">اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ وَأَتْبِعِ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا وَخَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ</div>
+  <div class="sh-en en-blk">"Fear Allah wherever you are, follow a bad deed with a good one and it will erase it, and deal with people with good character."</div>
+  <div class="sh-ur ur-blk">«جہاں بھی ہو اللہ سے ڈرو، برائی کے بعد نیکی کرو وہ مٹا دے گی، اور لوگوں سے اچھے اخلاق سے پیش آؤ۔»</div>
+  <div class="sh-src">Tirmidhi 1987 — Hasan Sahih <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Umar and Ubayy — The Thorny Path Definition</span><span class="ur-blk">عمر اور ابی — کانٹوں کا راستہ</span></div>
+  <div class="sh-ar">قَالَ عُمَرُ لِأُبَيٍّ: مَا التَّقْوَى؟ قَالَ: أَمَا سَلَكْتَ طَرِيقًا ذَا شَوْكٍ؟ قَالَ: بَلَى. قَالَ: فَمَا صَنَعْتَ؟ قَالَ: شَمَّرْتُ وَاجْتَهَدْتُ. قَالَ: فَتِلْكَ التَّقْوَى.</div>
+  <div class="sh-en en-blk">Umar (RA) asked Ubayy ibn Ka'b: "What is Taqwa?" He said: "Have you ever walked a thorny path?" He said: "Yes." He said: "What did you do?" He said: "I gathered my garment and exerted effort." He said: "That is Taqwa."</div>
+  <div class="sh-ur ur-blk">عمر نے ابی سے پوچھا: «تقویٰ کیا ہے؟» کہا: «کبھی کانٹوں والے راستے پر چلے ہو؟» کہا: «ہاں۔» «کیا کیا؟» کہا: «کپڑا سمیٹا اور کوشش کی۔» کہا: «یہی تقویٰ ہے۔»</div>
+  <div class="sh-src">Classical — Ibn Rajab, Jami al-Ulum · widely transmitted <span class="grade g-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Taqwa Protects — The Root Meaning Confirmed</span><span class="ur-blk">تقویٰ بچاتا ہے — جڑ کا معنی</span></div>
+  <div class="sh-ar">مَنِ اتَّقَى اللَّهَ وَقَاهُ اللَّهُ</div>
+  <div class="sh-en en-blk">"Whoever has Taqwa of Allah — Allah protects him."</div>
+  <div class="sh-ur ur-blk">«جس نے اللہ سے تقویٰ اختیار کیا — اللہ نے اسے بچا لیا۔»</div>
+  <div class="sh-src">Classical — Ibn al-Qayyim, Madarij al-Salikin <span class="grade g-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Protect Yourself From the Fire — Even With Half a Date</span><span class="ur-blk">آگ سے بچو — آدھی کھجور سے بھی</span></div>
+  <div class="sh-ar">اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ</div>
+  <div class="sh-en en-blk">"Protect yourselves from the Fire — even with half a date."</div>
+  <div class="sh-ur ur-blk">«آگ سے بچو — چاہے کھجور کے ایک ٹکڑے سے ہی کیوں نہ ہو۔»</div>
+  <div class="sh-src">Sahih Bukhari 1417, Muslim 1016 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Most Noble Is Most Taqwa — Farewell Sermon</span><span class="ur-blk">معزز وہ جو زیادہ تقویٰ والا — خطبہ حجة الوداع</span></div>
+  <div class="sh-ar">إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ</div>
+  <div class="sh-en en-blk">"Indeed the most noble of you before Allah is the one with most Taqwa."</div>
+  <div class="sh-ur ur-blk">«بے شک اللہ کے نزدیک تم میں سب سے معزز وہ ہے جو سب سے زیادہ تقویٰ والا ہے۔»</div>
+  <div class="sh-src">Sahih Bukhari 4849 — Farewell Sermon <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Allah Prescribed Ihsan in All Things</span><span class="ur-blk">اللہ نے ہر چیز میں احسان فرض کیا</span></div>
+  <div class="sh-ar">إِنَّ اللَّهَ كَتَبَ الْإِحْسَانَ عَلَى كُلِّ شَيْءٍ</div>
+  <div class="sh-en en-blk">"Indeed Allah has prescribed Ihsan in all things."</div>
+  <div class="sh-ur ur-blk">«بے شک اللہ نے ہر چیز میں احسان فرض کیا ہے۔»</div>
+  <div class="sh-src">Sahih Muslim 1955 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+
+<div class="era-divider" style="margin-top:32px">
+  <div class="era-dot" style="background:var(--gold)"></div>
+  <div class="era-label en-blk">Synthesis — After All Ayat</div>
+  <div class="era-label-ur ur-blk">خلاصہ — تمام آیات کے بعد</div>
+  <div class="era-line"></div>
+</div>
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Your Personal Understanding of Taqwa</span><span class="ur-blk">تقویٰ کے بارے میں آپ کا ذاتی فہم</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;color:var(--text2);font-size:13px;line-height:1.8">After studying all 14 ayat — write your own understanding of Taqwa. Not a definition copied from a book. A personal statement: what does Taqwa demand of you specifically, in your life right now? What has changed in how you understand it after going through the Quran in revelation order?</div>
+  <div class="sh-ur ur-blk" style="font-size:14px;color:var(--text2);line-height:2;direction:rtl;text-align:right">تمام ۱۴ آیات کے مطالعے کے بعد — تقویٰ کے بارے میں اپنا فہم لکھیں۔ کتاب سے نقل کردہ تعریف نہیں — ذاتی بیان: تقویٰ آپ سے خاص طور پر، آپ کی زندگی میں ابھی کیا مانگتا ہے؟</div>
+  <div class="notes-sec" style="border-top:none;padding-top:8px">
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Synthesis of Taqwa</span><span class="ur-blk">تقویٰ پر میرا خلاصہ</span><span class="nsv" id="sv-taqwa-synth"></span></div>
+      <textarea class="note-ta" id="note-taqwa-synth" style="min-height:120px" placeholder="Write your personal understanding of Taqwa after studying all these ayat — in any language, in your own voice." oninput="autoSave('taqwa-synth',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+
+<div class="stage3-hdr">
+  <div class="stage3-hdr-ar">الصوفية على التقوى</div>
+  <div class="stage3-hdr-en en-blk">Sufi Tradition on Taqwa &#8212; Seven Scholars</div>
+  <div class="stage3-hdr-rule"></div>
+</div>
+<p class="stage3-intro en-blk">Seven scholars in chronological order &#8212; each separately. Their disagreements matter as much as their agreements. The Divergence section draws out the three live debates that remain unresolved after twelve centuries.</p>
+<p class="stage3-intro ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">سات علماء تاریخی ترتیب میں &#8212; ہر ایک الگ۔ اختلافات اتفاقات جتنے اہم۔ اختلاف کے حصے میں وہ تین زندہ بحثیں جو بارہ صدیوں بعد بھی حل نہیں۔</p>
+
+<div class="scholar-card" id="sc-t-basri">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-basri')">
+    <div class="sc-num">01</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Hasan al-Basri</div>
+      <div class="sc-name-ur ur-blk">حسن بصری</div>
+      <div class="sc-dates">642&#8211;728 CE &middot; Basra &middot; Companion-generation bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Prologue</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in Medina, son of a freed Persian slave. Met over 70 Companions including Uthman, Ali, and Anas ibn Malik &#8212; a living bridge to the prophetic generation. Settled in Basra where he became the most authoritative voice of his era. His sermons on Taqwa and the fear of Allah were so powerful that listeners would faint. Left no written works; his teachings were preserved by students across generations.</div>
+      <div class="bio-txt-ur ur-blk">مدینہ میں پیدا۔ ۷۰ سے زیادہ صحابہ سے ملاقات۔ بصرہ میں اپنے دور کی سب سے بااثر آواز۔ تقویٰ اور خوفِ الٰہی پر ان کے خطبے اتنے طاقتور تھے کہ سامعین بیہوش ہو جاتے۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> No written works; preserved in Abu Nuaym&#39;s Hilyat al-Awliya, Ibn al-Jawzi&#39;s Sifat al-Safwa, al-Tirmidhi&#39;s collection.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">Taqwa for Hasan al-Basri is inseparable from khawf &#8212; fear of Allah. But his fear is not the paralysing fear of punishment; it is the fear that arises from loving someone so great that you are terrified of disappointing them. His sharpest insight: the person with genuine Taqwa fears their good deeds being rejected more than the sinful person fears their sins. This is because Taqwa sees what the nafs cannot &#8212; that every good deed is potentially corrupted by hidden motives, and that the standard being measured against is Allah&#39;s, not the community&#39;s.</div>
+    <div class="sc-finding-ur ur-blk">حسن بصری کے لیے تقویٰ خوف سے الگ نہیں &#8212; لیکن یہ خوف کسی بڑے کو مایوس کرنے کا خوف ہے، سزا کا نہیں۔ تیز ترین نکتہ: تقویٰ والا اپنی نیکیوں کے رد ہونے سے اتنا ڈرتا ہے جتنا گنہگار گناہوں سے نہیں ڈرتا &#8212; کیونکہ تقویٰ جانتا ہے کہ ہر نیکی میں پوشیدہ خرابی ہو سکتی ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">كَانُوا يَخَافُونَ عَلَى حَسَنَاتِهِمْ مَا لَا تَخَافُونَ عَلَى سَيِّئَاتِكُمْ</div>
+    <div class="sc-quote-en en-blk">&ldquo;They feared for their good deeds what you do not fear for your sins.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;وہ اپنی نیکیوں کے بارے میں اتنا ڈرتے تھے جتنا تم اپنے گناہوں کے بارے میں نہیں ڈرتے۔&raquo;</div>
+    <div class="sc-quote-src">Preserved in Hilyat al-Awliya (Abu Nuaym al-Isbahani) &#8212; spoken of the Companions</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Establishes the emotional depth of Taqwa: it is not satisfied with avoiding the obvious. Genuine Taqwa extends to the quality of good deeds themselves &#8212; are they sincere? Are they free of hidden Riya? This standard is what separates Taqwa as a spiritual state from Taqwa as mere outward compliance. He also makes Taqwa inseparable from khashya &#8212; the specific fear that arises from knowing who Allah is.</div>
+    <div class="sc-contrib-ur ur-blk">تقویٰ کی جذباتی گہرائی قائم کرتے ہیں: ظاہری پرہیز سے مطمئن نہیں۔ اصل تقویٰ نیکیوں کی معیار تک پہنچتا ہے &#8212; خالص ہیں؟ پوشیدہ ریا سے پاک ہیں؟ یہ معیار تقویٰ کو روحانی کیفیت اور ظاہری اطاعت میں تفریق کرتا ہے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-basri"></span></div>
+        <textarea class="note-ta" id="note-t3-basri" placeholder="Hasan al-Basri: they feared for their good deeds what you do not fear for your sins. Honestly &#8212; when did you last examine a good deed for hidden corruption, not just count it as done?" oninput="autoSave('t3-basri',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-t-muhasibi">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-muhasibi')">
+    <div class="sc-num">02</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Muhasibi</div>
+      <div class="sc-name-ur ur-blk">الحارث المحاسبی</div>
+      <div class="sc-dates">781&#8211;857 CE &middot; Baghdad &middot; Psychological school</div>
+    </div>
+    <div class="sc-badge en-blk">Psychology</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Full name: Harith ibn Asad al-Muhasibi. The first Islamic thinker to systematically apply psychological analysis to spiritual states. His name &#8212; the one who holds the nafs to account &#8212; is his entire program. Student of the Basran tradition, lived in Baghdad. Influenced al-Junayd and, through him, the entire subsequent Sufi tradition. His Ri&#39;aya li-Huquq Allah is the first systematic manual of the inner life in Islam.</div>
+      <div class="bio-txt-ur ur-blk">پورا نام: حارث بن اسد المحاسبی۔ نام ہی پورا پروگرام ہے۔ روحانی کیفیات پر نفسیاتی تجزیہ کرنے والے پہلے مفکر۔ الجنید پر براہِ راست اثر۔ الری‍عایۃ: اسلام میں باطنی زندگی کا پہلا منظم دستی۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ri&#39;aya li-Huquq Allah (Observance of Allah&#39;s Rights); Muhasabat al-Nufus; Al-Wasaya; Sharh al-Marifah.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">Al-Muhasibi&#39;s foundational insight on Taqwa: you cannot guard what you have not first examined. The heart is the seat of Taqwa &#8212; it is where heedlessness lives, where intentions form, where the first movement toward or away from Allah occurs. Without muhasabah (honest self-accounting before, during, and after every act), Taqwa degenerates into performance. The person who has performed Taqwa for years without inner examination may be further from it than they started &#8212; because the nafs has colonised even the appearance of Taqwa.</div>
+    <div class="sc-finding-ur ur-blk">المحاسبی کی بنیادی بصیرت: جو جانچا نہ ہو اسے نہیں بچا سکتے۔ دل تقویٰ کی جگہ ہے۔ محاسبہ کے بغیر تقویٰ نمائش میں بدل جاتی ہے۔ سالوں ظاہری تقویٰ کرنے والا ابتداء سے دور ہو سکتا ہے &#8212; کیونکہ نفس نے تقویٰ کی ظاہری شکل پر قبضہ کر لیا۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">التَّقْوَى هِيَ أَنْ لَا يَرَى الْعَبْدُ نَفْسَهُ أَهْلًا لِلتَّقْوَى</div>
+    <div class="sc-quote-en en-blk">&ldquo;Taqwa is that the servant does not see himself as someone worthy of Taqwa.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;تقویٰ یہ ہے کہ بندہ خود کو تقویٰ کا اہل نہ سمجھے۔&raquo;</div>
+    <div class="sc-quote-src">Ri&#39;aya li-Huquq Allah; attributed in Hilyat al-Awliya</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Introduces the paradox at the heart of Taqwa: the person who thinks they have it has likely lost it. This is not false modesty &#8212; it is a structural insight about how the nafs operates. Genuine Taqwa produces humility about one&#39;s own Taqwa. The person who says &#39;I have Taqwa&#39; has already allowed the nafs to appropriate the claim. Al-Muhasibi&#39;s gift: making Taqwa a living practice of examination rather than a status one achieves and keeps.</div>
+    <div class="sc-contrib-ur ur-blk">تقویٰ کے مرکز میں تضاد: جو سمجھتا ہے اس کے پاس ہے شاید کھو بیٹھا ہو۔ جھوٹا انکسار نہیں &#8212; نفس کے کام کرنے کے بارے میں ساختی بصیرت۔ تقویٰ کا دعویٰ نفس کی تخصیص ہے۔ المحاسبی کا تحفہ: تقویٰ کو جانچ کا زندہ عمل بنانا۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-muhasibi"></span></div>
+        <textarea class="note-ta" id="note-t3-muhasibi" placeholder="Al-Muhasibi: Taqwa is that the servant does not see himself worthy of Taqwa. How does this land? Is there a way in which your sense of having Taqwa has itself become an obstacle?" oninput="autoSave('t3-muhasibi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-t-junayd">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-junayd')">
+    <div class="sc-num">03</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Junayd al-Baghdadi</div>
+      <div class="sc-name-ur ur-blk">الجنید البغدادی</div>
+      <div class="sc-dates">830&#8211;910 CE &middot; Baghdad &middot; Technical school</div>
+    </div>
+    <div class="sc-badge en-blk">Sayyid al-Taifa</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">The undisputed master of the Baghdad school. Worked as a glass merchant by day, taught in the evenings. Insisted that all Sufi knowledge must be anchored in Quran and Sunnah. His technical vocabulary for inner states &#8212; hal, maqam, fana, baqa &#8212; became the standard language of the tradition.</div>
+      <div class="bio-txt-ur ur-blk">بغداد مدرسے کے بے تکرار امام۔ دن کو شیشے کا کاروبار، شام کو تعلیم۔ اصول: قرآن اور سنت کی بنیاد لازم۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Rasa&#39;il (Letters); sayings in Tabaqat al-Sufiyya (al-Sulami) and Hilyat al-Awliya (Abu Nuaym).</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">Al-Junayd&#39;s defining statement on Taqwa: &#39;Taqwa is that you do not mix with creation what you have with the Creator.&#39; This is the most precise technical definition in the tradition. It means: the intimacy, the orientation, the quality of attention you bring to your relationship with Allah &#8212; do not allow the same quality to be given to anything created. This does not mean withdrawing from creation; it means maintaining a distinction in the quality of inner orientation. Everything in creation receives its due &#8212; but Allah receives what nothing else receives.</div>
+    <div class="sc-finding-ur ur-blk">الجنید کا تعریفی بیان: تقویٰ یہ ہے کہ مخلوق کے ساتھ وہ نہ ملاؤ جو خالق کے ساتھ ہے۔ اندرونی توجہ کی وہ کیفیت جو اللہ کے ساتھ ہے &#8212; مخلوق کو نہ دو۔ مخلوق سے کنارہ نہیں &#8212; اندرونی رخ کی تمیز۔ ہر چیز کو اس کا حق ملے &#8212; لیکن جو صرف اللہ کا ہے وہ اسی کا رہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">التَّقْوَى أَنْ لَا تُخَالِطَ بِمَا بَيْنَكَ وَبَيْنَ الْخَلْقِ مَا بَيْنَكَ وَبَيْنَ الْحَقِّ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Taqwa is that you do not mix with what is between you and creation what is between you and the Real.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;تقویٰ یہ ہے کہ مخلوق کے ساتھ جو ہے اسے حق کے ساتھ جو ہے اس میں نہ ملاؤ۔&raquo;</div>
+    <div class="sc-quote-src">Preserved in Tabaqat al-Sufiyya (al-Sulami al-Nisaburi) and Hilyat al-Awliya</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most technically precise definition of Taqwa in the tradition &#8212; and the one that makes it an inner orientation rather than an outward compliance. Every other scholar describes Taqwa as guarding, fearing, or examining. Al-Junayd describes it as a quality of attention &#8212; what you give exclusively to Allah must remain exclusively His. This reframes Taqwa from a set of prohibitions into a positive interior state: the protection of a relationship.</div>
+    <div class="sc-contrib-ur ur-blk">روایت میں تقویٰ کی سب سے تکنیکی صحیح تعریف &#8212; ظاہری اطاعت سے زیادہ اندرونی رخ۔ دوسرے علماء: تقویٰ محافظت، خوف، جانچ ہے۔ الجنید: توجہ کا معیار &#8212; جو اللہ کو ملتا ہے وہ اسی کا رہے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-junayd"></span></div>
+        <textarea class="note-ta" id="note-t3-junayd" placeholder="Al-Junayd: do not give to creation what belongs to the Creator. In practice &#8212; can you name something in your life where the quality of attention you give it rivals what you give Allah? What would it mean to correct that?" oninput="autoSave('t3-junayd',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-t-ghazali">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-ghazali')">
+    <div class="sc-num">04</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Ghazali</div>
+      <div class="sc-name-ur ur-blk">ابوحامد الغزالی</div>
+      <div class="sc-dates">1058&#8211;1111 CE &middot; Tus / Baghdad / Nishapur &middot; Systematic bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Hujjat al-Islam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">The highest-ranking scholar of the Abbasid world who abandoned everything at 37 following a spiritual crisis. Spent years in solitude across Syria, Jerusalem, Mecca, and Medina. The Ihya Ulum al-Din &#8212; written from that experience &#8212; gives Taqwa its most complete systematic treatment: placed at the intersection of Islamic law, spiritual psychology, and direct experience.</div>
+      <div class="bio-txt-ur ur-blk">طوس میں پیدا۔ ۳۷ سال میں روحانی بحران۔ شام، بیت المقدس، مکہ، مدینہ میں خلوت۔ احیاء: تقویٰ کو شریعت، نفسیات اور تجربے کے سنگم پر رکھتا ہے۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ihya Ulum al-Din (4 vols.); Minhaj al-Abidin; Kimiya-yi Sa&#39;adat; Al-Munqidh min al-Dalal.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">Al-Ghazali systematises Taqwa into four ascending levels. Level 1: Taqwa from shirk &#8212; protecting the Tawhid of belief. Level 2: Taqwa from bidah &#8212; guarding the soundness of practice. Level 3: Taqwa from major and minor sins &#8212; the standard understood by the public. Level 4: Taqwa of the heart from everything other than Allah &#8212; the Taqwa of the awliya. Most people operate at level 3 and call it Taqwa. The tradition&#39;s highest standard is level 4: guarding the heart from any attachment, any hope, any fear directed at other than Allah.</div>
+    <div class="sc-finding-ur ur-blk">الغزالی تقویٰ کو چار چڑھتی سطحوں میں: (۱) شرک سے تقویٰ، (۲) بدعت سے، (۳) گناہوں سے &#8212; عوامی معیار، (۴) اللہ کے سوا کسی چیز سے دل کی تقویٰ &#8212; اولیاء کی تقویٰ۔ اکثر لوگ سطح ۳ پر اور تقویٰ سمجھتے ہیں۔ اعلیٰ ترین معیار: دل کو اللہ کے علاوہ ہر وابستگی، امید، خوف سے محفوظ رکھنا۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">التَّقْوَى دَرَجَاتٌ &#8212; أَعْلَاهَا تَقْوَى الْقَلْبِ عَمَّا سِوَى اللَّهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Taqwa has degrees &#8212; the highest of them is the Taqwa of the heart from everything other than Allah.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;تقویٰ کے درجے ہیں &#8212; ان میں اعلیٰ ترین: اللہ کے سوا ہر چیز سے دل کی تقویٰ۔&raquo;</div>
+    <div class="sc-quote-src">Ihya Ulum al-Din, Kitab Sharh Aja&#39;ib al-Qalb (Book on the Wonders of the Heart)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The four-level framework permanently prevents the confusion between legalistic Taqwa (avoiding major sins) and spiritual Taqwa (the heart&#39;s complete orientation toward Allah). Al-Ghazali does not abolish the lower levels &#8212; he insists they are necessary foundations. But he shows that stopping at level 3 is stopping before the destination. This framework explains why someone can be outwardly compliant and inwardly far from Allah &#8212; and why someone else can be visibly less compliant and yet be spiritually closer.</div>
+    <div class="sc-contrib-ur ur-blk">چار سطحی ڈھانچہ قانونی تقویٰ (گناہ چھوڑنا) اور روحانی تقویٰ (دل کا مکمل رخ) کا مستقل امتیاز قائم کرتا ہے۔ نچلی سطحیں ضروری بنیاد &#8212; لیکن سطح ۳ پر رکنا منزل سے پہلے رکنا ہے۔ ظاہراً فرمانبردار مگر اندر سے دور &#8212; یا ظاہراً کم مگر اندر سے قریب۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-ghazali"></span></div>
+        <textarea class="note-ta" id="note-t3-ghazali" placeholder="Al-Ghazali&#39;s four levels: (1) from shirk, (2) from bidah, (3) from sins &#8212; where most people stop &#8212; (4) the heart from everything other than Allah. Which level honestly describes where you are? What would it take to move one level deeper?" oninput="autoSave('t3-ghazali',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-t-atailla">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-atailla')">
+    <div class="sc-num">05</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Ata&#39;illah al-Iskandari</div>
+      <div class="sc-name-ur ur-blk">ابن عطاء اللہ الاسکندری</div>
+      <div class="sc-dates">1259&#8211;1309 CE &middot; Alexandria / Cairo &middot; Shadhili order</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Hikam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Third master of the Shadhili order. Maliki jurist before his encounter with the Shadhili path. Author of Al-Hikam &#8212; 264 aphorisms that became the most memorised spiritual text in Islam. The only scholar who debated Ibn Taymiyya publicly and reportedly earned his respect. Author of Miftah al-Falah, dedicated entirely to dhikr.</div>
+      <div class="bio-txt-ur ur-blk">شاذلی سلسلے کے تیسرے مرشد۔ مالکی فقیہ پہلے۔ الحکم: ۲۶۴ حکمتیں۔ ابن تیمیہ سے مناظرہ۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Hikam al-Ata&#39;iyyah; Miftah al-Falah; Al-Tanwir fi Isqat al-Tadbir; Lata&#39;if al-Minan.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">Ibn Ata&#39;illah locates Taqwa not primarily in the avoidance of sins but in the understanding of Allah&#39;s total presence. His Hikam approach: the person who truly understands who Allah is finds Taqwa arising naturally &#8212; not as a discipline imposed from outside but as the natural behaviour of one who sees clearly. His most important contribution: Taqwa without illumination of the heart becomes a prison; Taqwa with illumination becomes a garden. The discipline of guarding and the light of understanding must go together &#8212; one without the other is either dry compliance or formless experience.</div>
+    <div class="sc-finding-ur ur-blk">ابن عطاء اللہ تقویٰ کو گناہوں کے ترک سے نہیں &#8212; اللہ کی مکمل موجودگی کی سمجھ سے جوڑتے ہیں۔ جو واقعی جانتا ہے اس میں تقویٰ قدرتی طور پر اٹھتی ہے &#8212; باہر سے نہیں، اندر سے۔ روشنی کے بغیر تقویٰ قید خانہ؛ روشنی کے ساتھ باغ۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">كَيْفَ يُضِيءُ قَلْبٌ صُوَرُ الْأَكْوَانِ مُنْطَبِعَةٌ فِي مِرْآتِهِ &#8212; أَمْ كَيْفَ يَرْحَلُ إِلَى اللَّهِ وَهُوَ مُكَبَّلٌ بِشَهَوَاتِهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;How can the heart be illuminated when the images of created things are reflected in its mirror? Or how can it journey to Allah while shackled by its passions?&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;دل کیسے روشن ہو جب مخلوقات کی تصاویر اس کے آئینے میں نقش ہوں؟ یا اللہ کی طرف کیسے سفر کرے جب شہوات کی زنجیریں پہنے ہو؟&raquo;</div>
+    <div class="sc-quote-src">Al-Hikam al-Ata&#39;iyyah, Aphorism on the heart&#39;s illumination</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Places Taqwa within the full picture of the spiritual journey: it is not the destination but the necessary clearing of the way. You cannot journey to Allah while the mirror of the heart reflects everything other than Allah. Taqwa is the polishing that makes the journey possible. But &#8212; crucially &#8212; the polishing is for the sake of the journey, not as an end in itself. This connects Taqwa to Muraqabah (the heart&#39;s clear seeing) and to Ihsan (acting from that clear sight) &#8212; the full five-concept architecture is visible in a single Hikma.</div>
+    <div class="sc-contrib-ur ur-blk">تقویٰ کو روحانی سفر کی مکمل تصویر میں رکھتے ہیں: منزل نہیں &#8212; راستہ صاف کرنا۔ دل کا آئینہ اللہ کے سوا سب کچھ دکھائے &#8212; سفر ممکن نہیں۔ تقویٰ وہ صیقل جو سفر ممکن بناتی ہے۔ اور صیقل سفر کے لیے &#8212; خود غایت نہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-atailla"></span></div>
+        <textarea class="note-ta" id="note-t3-atailla" placeholder="Ibn Ata&#39;illah: how can the heart journey to Allah while shackled by its passions? Name one passion &#8212; not a sin, a passion &#8212; that is currently the heaviest shackle on your heart&#39;s journey." oninput="autoSave('t3-atailla',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-t-ibnqayyim">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-ibnqayyim')">
+    <div class="sc-num">06</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn al-Qayyim al-Jawziyya</div>
+      <div class="sc-name-ur ur-blk">ابن قیم الجوزیہ</div>
+      <div class="sc-dates">1292&#8211;1350 CE &middot; Damascus &middot; Quran-anchored tradition</div>
+    </div>
+    <div class="sc-badge en-blk">Rigorous</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Student and companion of Ibn Taymiyya. Imprisoned alongside him in the Damascus Citadel. The doctor of hearts of the tradition: spiritually profound, the most gifted poet among classical scholars, and uniquely capable of engaging Sufi concepts with both genuine appreciation and rigorous critique. His Madarij al-Salikin is the greatest spiritual taxonomy in Islamic literature.</div>
+      <div class="bio-txt-ur ur-blk">ابن تیمیہ کے شاگرد اور ہمسفر۔ دمشق قلعے میں قید۔ روایت کے دلوں کے طبیب &#8212; گہری روحانیت، بہترین شاعر، صوفی تصورات سے قدردانی اور تنقید دونوں۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Madarij al-Salikin (Levels of the Wayfarers &#8212; greatest spiritual taxonomy); Al-Wabil al-Sayyib; Rawdat al-Muhibbin; Zad al-Ma&#39;ad; Kitab al-Ruh.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">Ibn al-Qayyim&#39;s most complete analysis: Taqwa requires three things simultaneously &#8212; knowledge of what to guard against, firm intention to guard, and consistent action in guarding. Any one alone is insufficient. Knowledge without intention is information. Intention without action is wishful thinking. Action without knowledge is misdirected effort. His sharpest point on the heart-limbs question: the heart&#39;s Taqwa naturally generates the limbs&#39; Taqwa &#8212; but the limbs&#39; practices (prayer, fasting, restraint) also deepen the heart&#39;s Taqwa. The relationship is bidirectional. Whoever waits for the heart to be pure before acting will never act; whoever acts without attending to the heart will eventually burn out.</div>
+    <div class="sc-finding-ur ur-blk">ابن قیم کا مکمل تجزیہ: تقویٰ کے لیے تین چیزیں بیک وقت &#8212; علم (کس سے بچنا ہے)، ارادہ (بچنے کی) اور عمل (مستقل)۔ اکیلا کوئی کافی نہیں۔ اہم ترین: دل کی تقویٰ اعضاء کی تقویٰ پیدا کرتی ہے &#8212; لیکن اعضاء کی مشق (نماز، روزہ) بھی دل کی تقویٰ گہری کرتی ہے۔ دو طرفہ تعلق۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">التَّقْوَى وِقَايَةٌ &#8212; وَلَا وِقَايَةَ إِلَّا بِالْعِلْمِ وَالْإِرَادَةِ وَالْعَمَلِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Taqwa is a protective shield &#8212; and there is no shield except through knowledge, intention, and action.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;تقویٰ ایک ڈھال ہے &#8212; اور کوئی ڈھال نہیں مگر علم، ارادے اور عمل سے۔&raquo;</div>
+    <div class="sc-quote-src">Madarij al-Salikin, station of Taqwa</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most complete practical framework for Taqwa in the tradition. By identifying the three necessary components &#8212; knowledge, intention, action &#8212; he makes Taqwa diagnosable: if your Taqwa is failing, you can identify which component is weak. He also resolves the heart-limbs debate by showing it is bidirectional: you cannot use &#39;my heart is not ready&#39; as a reason to delay action, nor can you rely on action alone to purify the heart. Both must be cultivated simultaneously, each feeding the other.</div>
+    <div class="sc-contrib-ur ur-blk">روایت میں تقویٰ کا سب سے مکمل عملی ڈھانچہ۔ تین اجزاء: علم، ارادہ، عمل &#8212; تقویٰ قابلِ تشخیص بنتی ہے۔ دل-اعضاء بحث حل: دو طرفہ، بیک وقت۔ دل تیار نہ ہونے کا بہانہ عمل روکنے کے لیے نہیں &#8212; اور اعمال اکیلے دل صاف نہیں کریں گے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-ibnqayyim"></span></div>
+        <textarea class="note-ta" id="note-t3-ibnqayyim" placeholder="Ibn al-Qayyim: Taqwa requires knowledge, intention, and action &#8212; simultaneously. Which of the three is currently weakest in your Taqwa? And what does the bidirectional heart-limbs relationship mean for how you would address that weakness?" oninput="autoSave('t3-ibnqayyim',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-t-ibnarabi">
+  <div class="sc-hdr" onclick="toggleCard('sc-t-ibnarabi')">
+    <div class="sc-num">07</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Arabi</div>
+      <div class="sc-name-ur ur-blk">ابن عربی</div>
+      <div class="sc-dates">1165&#8211;1240 CE &middot; Murcia / Damascus &middot; Metaphysical school</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Shaykh al-Akbar</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in Murcia, al-Andalus. Met Ibn Rushd in Cordoba as a young man. Traveled through North Africa, Egypt, the Hijaz, and Anatolia before settling in Damascus. Produced the largest body of written work in Islamic intellectual history. The most contested figure in the tradition: revered as al-Shaykh al-Akbar by one lineage; considered theologically problematic by Ibn Taymiyya and Ibn al-Qayyim.</div>
+      <div class="bio-txt-ur ur-blk">مرسیہ اندلس میں پیدا۔ دمشق میں انتقال۔ اسلامی فکری تاریخ کا سب سے بڑا تحریری ذخیرہ۔ ایک روایت میں الشیخ الاکبر؛ ابن تیمیہ اور ابن قیم کے نزدیک الٰہیاتی مسئلہ۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Futuhat al-Makkiyya (37 vols.); Fusus al-Hikam; Tarjuman al-Ashwaq; Al-Tajalliyat al-Ilahiyya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Taqwa</div>
+    <div class="sc-finding en-blk">For Ibn Arabi, Taqwa in its deepest sense is not primarily about avoiding what Allah has forbidden &#8212; it is about the servant&#39;s recognition of their own station (maqam) before Allah. The word Taqwa (from W-Q-Y, protection) signals: you are protected by knowing your true relationship to Allah &#8212; which is one of total dependence and non-existence before His existence. The person who truly sees this has natural Taqwa not because they fear punishment but because transgression becomes ontologically incoherent &#8212; like a drop of water trying to oppose the ocean it is part of.</div>
+    <div class="sc-finding-ur ur-blk">ابن عربی کے لیے تقویٰ بنیادی طور پر ممنوعہ سے پرہیز نہیں &#8212; بندے کی اپنے مقام کی پہچان ہے۔ تقویٰ (و-ق-ی: حفاظت): اللہ کے ساتھ اپنے تعلق کو جاننے سے محفوظ رہنا &#8212; مکمل انحصار اور اس کے وجود کے سامنے اپنے وجود کا نہ ہونا۔ جو یہ دیکھتا ہے اس میں تقویٰ قدرتی &#8212; سزا کے خوف سے نہیں بلکہ خلاف ورزی وجودی طور پر بے معنی ہو جاتی ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">التَّقْوَى الْحَقِيقِيَّةُ هِيَ الْعِلْمُ بِاللَّهِ &#8212; فَمَنْ عَرَفَهُ حَقَّ مَعْرِفَتِهِ اتَّقَاهُ حَقَّ تُقَاتِهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;True Taqwa is knowledge of Allah &#8212; whoever knows Him with true knowledge has Taqwa of Him with true Taqwa.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;حقیقی تقویٰ اللہ کی معرفت ہے &#8212; جو اسے حق معرفت سے جانے اس کی حق تقاتہ سے تقویٰ رکھتا ہے۔&raquo;</div>
+    <div class="sc-quote-src">Al-Futuhat al-Makkiyya, on the station of Taqwa</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Grounds Taqwa in gnosis (marifah) rather than in fear or discipline alone. This is the most radical reframing: if true Taqwa is true knowledge of Allah, then the person who has not reached marifah has only the form of Taqwa, not its reality. This creates a tension with Ibn al-Qayyim&#39;s framework (knowledge + intention + action) &#8212; Ibn Arabi&#39;s &#39;knowledge&#39; is not learned knowledge but experiential recognition. The divergence section addresses whether this distinction is valid or whether it dissolves the practical meaning of Taqwa.</div>
+    <div class="sc-contrib-ur ur-blk">تقویٰ کو خوف یا نظم کے بجائے معرفت پر استوار کرتے ہیں۔ سب سے بنیادی بازتشکیل: اگر تقویٰ معرفت ہے تو جو معرفت تک نہیں پہنچا اس کے پاس تقویٰ کی شکل ہے، حقیقت نہیں۔ ابن قیم کے ڈھانچے سے تضاد &#8212; اختلاف کے حصے میں۔</div>
+    <div class="sc-controversy"><strong>Note on Controversy:</strong> Ibn Arabi&#39;s grounding of Taqwa in marifah rather than discipline creates a real tension with the Quranic and Sunnah evidence that Taqwa is commanded of everyone, including those far from marifah. Ibn al-Qayyim would argue that making Taqwa conditional on an advanced spiritual station removes it from ordinary believers. Both the insight and the tension are genuine. The Divergence section addresses this directly.</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-t3-ibnarabi"></span></div>
+        <textarea class="note-ta" id="note-t3-ibnarabi" placeholder="Ibn Arabi: true Taqwa is true knowledge of Allah. If so, can someone who does not yet have marifah truly have Taqwa &#8212; or only its outward form? What does your own experience say?" oninput="autoSave('t3-ibnarabi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap">
+  <div class="div-hdr">
+    <div class="div-hdr-ar">الاختلاف</div>
+    <div class="div-hdr-en en-blk">Divergence &#8212; Three Live Disagreements on Taqwa</div>
+    <div class="div-hdr-desc en-blk">Three disagreements that have shaped how Muslims understand Taqwa for twelve centuries. None is fully resolved. State your position on each &#8212; and date it.</div>
+    <div class="div-hdr-desc ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">تین اختلافات جنہوں نے بارہ صدیوں سے تقویٰ کو سمجھنے کا طریقہ شکل دیا۔ کوئی مکمل حل نہیں ہوا۔ تاریخ کے ساتھ پوزیشن بیان کریں۔</div>
+  </div>
+
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 01</div>
+    <div class="div-q en-blk">Is Taqwa primarily khawf (fear) or shuhud (awareness of Allah&#39;s presence)?</div>
+    <div class="div-q-ur ur-blk">تقویٰ بنیادی طور پر خوف ہے یا شہود &#8212; اللہ کی موجودگی کا احساس؟</div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Hasan al-Basri &middot; Ibn al-Qayyim</div>
+      <div class="div-view en-blk">Fear (khawf) is the engine of Taqwa &#8212; not fear of punishment alone, but the fear that comes from knowing who Allah is and how far short we fall. Without this emotional drive, Taqwa becomes theoretical. Ibn al-Qayyim adds: both khawf (fear) and raja (hope) are necessary fuels; Taqwa driven by khawf alone produces paralysis; raja alone produces complacency.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Junayd &middot; Ibn Ata&#39;illah</div>
+      <div class="div-view en-blk">The highest Taqwa is not fear-driven but presence-driven. The person who truly sees that Allah is always watching does not need fear as a separate motivation &#8212; Taqwa arises naturally from the awareness itself. Fear is a beginner&#39;s fuel; shuhud is the advanced state where Taqwa becomes effortless.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Ibn Arabi</div>
+      <div class="div-view en-blk">Taqwa rooted in marifah transcends both fear and presence-awareness. The person of complete gnosis is not moved by fear of punishment because punishment presupposes a separation they no longer experience. Their Taqwa is ontological &#8212; the natural expression of what they know about the relationship between Creator and creature.</div>
+    </div>
+    <div class="div-ground">
+      <div class="div-ground-lbl en-blk">Quranic Grounding</div>
+      <div class="div-ground-txt en-blk">The Quran uses both: 3:102 commands Taqwa as active guarding (ittaqu); 87:10 says only those with khashya (fear-awe) will benefit from reminder; 9:119 commands being with the truthful &#8212; suggesting company drives Taqwa; 58:9 says Taqwa of Allah and His Messenger is the standard. The Quran does not restrict Taqwa to a single motivational source. Both fear and awareness have Quranic grounding. Neither alone is complete.</div>
+    </div>
+    <div class="div-verdict en-blk">Fear (khawf) is the necessary starting engine &#8212; the Quran addresses people before they have marifah, and Hasan al-Basri&#39;s standard is the most honest entry point. Presence-awareness (shuhud) is the advanced state Taqwa aims to produce. Ibn Arabi&#39;s marifah-grounding, while profound, risks removing Taqwa from those who most need it. The practical position: begin with khawf, cultivate Muraqabah, allow shuhud to develop. Do not claim the higher state as a reason to bypass the lower.</div>
+  </div>
+
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 02</div>
+    <div class="div-q en-blk">Does Taqwa flow heart &#8594; limbs, or limbs &#8594; heart, or both simultaneously?</div>
+    <div class="div-q-ur ur-blk">تقویٰ دل سے اعضاء کی طرف بہتی ہے یا اعضاء سے دل کی طرف &#8212; یا دونوں بیک وقت؟</div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Muhasibi &middot; Al-Ghazali</div>
+      <div class="div-view en-blk">The heart is primary. Taqwa of the limbs without Taqwa of the heart is compliance without transformation. You can appear Muttaqi in every outward act and be completely empty inside &#8212; the nafs has learned to perform Taqwa while being no more guarded than before. The heart must be the source; outward acts are its natural expression when it is genuine.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Ibn al-Qayyim</div>
+      <div class="div-view en-blk">Both directions simultaneously. The heart&#39;s Taqwa generates limb-Taqwa naturally. But the limbs&#39; practices &#8212; prayer, fasting, lowering the gaze &#8212; also deepen the heart&#39;s Taqwa. Whoever waits for the heart to be pure before acting will never act. Whoever acts outwardly without attending to the heart will eventually exhaust themselves. Both must be cultivated at the same time, each feeding the other.</div>
+    </div>
+    <div class="div-ground">
+      <div class="div-ground-lbl en-blk">Quranic Grounding</div>
+      <div class="div-ground-txt en-blk">22:37 &#8212; it is not the flesh or blood of sacrificial animals that reaches Allah, but the Taqwa from you &#8212; clearly heart-primary. But 2:183 &#8212; fasting is prescribed so that you may have Taqwa &#8212; shows outward practice producing interior Taqwa. The Quran supports both directions. Ibn al-Qayyim&#39;s bidirectional reading has the strongest combined textual grounding.</div>
+    </div>
+    <div class="div-verdict en-blk">Ibn al-Qayyim&#39;s position is the most complete: bidirectional and simultaneous. The heart-only position risks becoming an excuse for inaction (&#39;I&#39;ll act when my heart is ready&#39;). The limbs-only position risks producing mechanical compliance. The honest practice: act with the limbs from whatever Taqwa you currently have, while simultaneously attending to the heart&#39;s condition. Neither waits for the other.</div>
+  </div>
+
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 03</div>
+    <div class="div-q en-blk">Can Taqwa be completed in this life &#8212; or is it always incomplete?</div>
+    <div class="div-q-ur ur-blk">کیا تقویٰ اس دنیا میں مکمل ہو سکتی ہے &#8212; یا ہمیشہ ناقص رہتی ہے؟</div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Ghazali &middot; Ibn al-Qayyim</div>
+      <div class="div-view en-blk">Taqwa has degrees and the highest degree &#8212; guarding the heart from everything other than Allah &#8212; is never fully reached in this life. It is a lifelong discipline that deepens but never completes. The Quranic command ittaqu Allaha haqqa tuqatihi (3:102) &#8212; have Taqwa of Allah as is His due &#8212; sets an infinite standard that can only be approached, never reached.</div>
+    </div>
+    <div class="div-pos-row">
+      <div class="div-scholars">Al-Junayd &middot; Ibn Arabi</div>
+      <div class="div-view en-blk">At the highest station of nearness to Allah, Taqwa as a separate practice dissolves into something larger &#8212; it becomes the servant&#39;s natural state rather than a discipline they maintain. Al-Junayd: the highest maqam is where guarding becomes effortless. Ibn Arabi: at complete marifah, the separation that Taqwa guards against is no longer experienced.</div>
+    </div>
+    <div class="div-ground">
+      <div class="div-ground-lbl en-blk">Quranic Grounding</div>
+      <div class="div-ground-txt en-blk">3:102 sets an infinite standard (haqqa tuqatihi &#8212; as is His due). 64:16 immediately modifies it: fa-ittaqu Allaha ma istata&#39;tum &#8212; have Taqwa of Allah as much as you are able. The two ayat together establish that the standard is infinite but the requirement is proportional to capacity. This supports the Al-Ghazali/Ibn al-Qayyim position: always incomplete, always deepening, always required. The Quranic evidence does not support the view that Taqwa completes and dissolves at any station.</div>
+    </div>
+    <div class="div-verdict en-blk">Taqwa is never finished in this life. 3:102 and 64:16 together: the standard is infinite (as is His due) and the requirement is proportional (as much as you are able) &#8212; meaning you are always both falling short and required to give more. Al-Ghazali and Ibn al-Qayyim have the strongest Quranic grounding here. The view that Taqwa dissolves at a high station has no clear textual support and risks providing a justification for reduced vigilance.</div>
+  </div>
+
+  <div class="div-pos-box">
+    <div class="div-pos-lbl en-blk">Your Personal Position &#8212; Taqwa Stage 3</div>
+    <div class="div-pos-lbl ur-blk" style="font-family:var(--font-ar)">آپ کی ذاتی پوزیشن &#8212; تقویٰ مرحلہ ۳</div>
+    <p class="en-blk" style="font-size:12.5px;color:var(--text2);line-height:1.85;margin:0 0 12px">After seven scholars and three divergence points: state your current position on each. Date it.</p>
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Position on the Three Divergences (dated)</span><span class="ur-blk">تین اختلافات پر میری پوزیشن (بتاریخ)</span><span class="nsv" id="sv-t3-pos"></span></div>
+      <textarea class="note-ta" id="note-t3-pos" style="min-height:120px" placeholder="(1) Fear vs presence-awareness: my current understanding and why. (2) Heart-first vs limbs-first vs both: which resonates most with my actual experience? (3) Can Taqwa complete? Where am I on this? Date: " oninput="autoSave('t3-pos',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<div class="file-bottom-nav">
+  <a href="dhikr.html" class="file-nav-link">← Dhikr</a>
+  <a href="index.html" class="file-nav-home">☰ Index</a>
+  <a href="zuhd.html" class="file-nav-link">Zuhd →</a>
+</div>
+
+<script>
+function toggleCard(id){
+  var el=document.getElementById(id);
+  if(el){el.classList.toggle('open');}
+}
+function autoSave(key,val){
+  localStorage.setItem('ss_'+key,val);
+  var sv=document.getElementById('sv-'+key);
+  if(sv){sv.textContent='✦';sv.style.color='var(--teal)';}
+}
+function loadNotes(){
+  document.querySelectorAll('textarea.note-ta').forEach(function(ta){
+    var k='ss_'+ta.id.replace('note-','');
+    var v=localStorage.getItem(k);
+    if(v){ta.value=v;}
+  });
+  document.querySelectorAll('.nsv').forEach(function(sv){
+    var k='ss_'+sv.id.replace('sv-','');
+    if(localStorage.getItem(k)){sv.textContent='✦';sv.style.color='var(--teal)';}
+  });
+}
+function setLang(lang){
+  localStorage.setItem('ss_lang',lang);
+  if(lang==='ur'){
+    document.body.classList.add('ur-mode');
+  } else {
+    document.body.classList.remove('ur-mode');
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.style.opacity=(btn.getAttribute('data-lang-btn')===lang)?'1':'0.45';
+  });
+}
+window.addEventListener('DOMContentLoaded',function(){
+  loadNotes();
+  var lang=localStorage.getItem('ss_lang')||'en';
+  setLang(lang);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spiritual Study — Personal Study Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg0:#04070D;--bg1:#080E1C;--bg2:#0C1528;--bg3:#111E35;--bg4:#162440;
+  --gold:#C9A84C;--gold2:#E2C97A;--gold3:#F5E9C0;
+  --golddim:rgba(201,168,76,.08);--goldbdr:rgba(201,168,76,.18);--goldglow:rgba(201,168,76,.22);
+  --teal:#2FB89A;--tealdim:rgba(47,184,154,.08);--tealbdr:rgba(47,184,154,.22);
+  --blue:#7AABF0;--bluedim:rgba(122,171,240,.08);--bluebdr:rgba(122,171,240,.22);
+  --amber:#E0A030;--amberdim:rgba(224,160,48,.08);--amberbdr:rgba(224,160,48,.22);
+  --purple:#A87FD0;--purpledim:rgba(168,127,208,.08);--purplebdr:rgba(168,127,208,.22);
+  --text:#D4CBB8;--text2:#8A9BB0;--text3:#4A5B70;
+  --border:rgba(201,168,76,.10);--border2:rgba(201,168,76,.05);
+  --font-head:'Cinzel',serif;--font-body:'Lora',serif;--font-arab:'Noto Naskh Arabic',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 800px 500px at 20% 10%,rgba(201,168,76,.025),transparent 60%),
+             radial-gradient(ellipse 600px 400px at 80% 80%,rgba(47,184,154,.02),transparent 60%);}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:90;background:rgba(4,7,13,.97);border-bottom:1px solid var(--border2);backdrop-filter:blur(20px);padding:0 22px;height:56px;display:flex;align-items:center;gap:14px}
+.hdr-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.3)}
+.hdr-titles{flex:1}
+.hdr-title{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase}
+.hdr-sub{font-family:var(--font-head);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--goldbdr);border-radius:20px;padding:3px}
+.lt{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 10px;border-radius:16px;cursor:pointer;transition:all .2s;color:var(--text3);user-select:none}
+.lt.on{background:var(--gold);color:#000;font-weight:700}
+.back-link{font-family:var(--font-head);font-size:8.5px;letter-spacing:.8px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:6px;transition:all .15s;text-transform:uppercase;flex-shrink:0}
+.back-link:hover{color:var(--gold2);border-color:var(--goldbdr)}
+
+/* PAGE */
+.page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:24px 18px 60px}
+
+/* CONCEPT TABS */
+.concept-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cn-btn{font-family:var(--font-head);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:8px;border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.cn-btn:hover{border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn.on{background:var(--golddim);border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn .ar{font-family:var(--font-arab);font-size:14px;letter-spacing:0;display:block;margin-top:2px}
+.cn-badge{display:inline-block;font-size:7px;padding:1px 5px;border-radius:4px;margin-left:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);vertical-align:middle}
+.cn-badge.pending{background:var(--amberdim);border-color:var(--amberbdr);color:var(--amber)}
+
+/* SECTION */
+.concept-section{display:none}
+.concept-section.active{display:block}
+
+/* SECTION HEADER */
+.sec-hdr{text-align:center;padding:20px 0 28px;border-bottom:1px solid var(--border2);margin-bottom:28px}
+.sec-hdr-ar{font-family:var(--font-arab);font-size:52px;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.25);line-height:1.2;margin-bottom:8px}
+.sec-hdr-en{font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase}
+.sec-hdr-ur{font-family:var(--font-arab);font-size:20px;color:var(--gold2);margin-top:4px}
+.sec-hdr-root{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--text2);margin-top:10px;text-transform:uppercase}
+.sec-hdr-rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+.sec-hdr-intro{font-size:13px;color:var(--text2);line-height:1.85;max-width:600px;margin:0 auto;font-style:italic}
+
+/* ROOT ANALYSIS BOX */
+.root-analysis{background:var(--bg2);border:1px solid var(--goldbdr);border-radius:12px;padding:20px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+.root-analysis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ra-label{font-family:var(--font-head);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ra-label::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ra-root{font-family:var(--font-arab);font-size:30px;color:var(--gold2);direction:rtl;margin-bottom:12px}
+.ra-letters{display:flex;gap:10px;flex-direction:row-reverse;margin-bottom:14px}
+.ra-letter{background:rgba(201,168,76,.06);border:1px solid var(--goldbdr);border-radius:8px;padding:8px 14px;text-align:center}
+.ra-letter-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold2);display:block}
+.ra-letter-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:4px;display:block}
+.ra-meaning{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.ra-meaning-ur{font-family:var(--font-arab);font-size:14px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:12px}
+.ra-forms{display:flex;gap:8px;flex-wrap:wrap}
+.ra-form{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;text-align:center}
+.ra-form-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl}
+.ra-form-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:2px}
+.ra-count{font-family:var(--font-head);font-size:9px;color:var(--teal);margin-top:12px;letter-spacing:.5px}
+
+/* ERA DIVIDER */
+.era-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px}
+.era-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.era-early{background:var(--amber)}
+.era-middle{background:var(--gold)}
+.era-late{background:var(--teal)}
+.era-madani{background:var(--blue)}
+.era-label{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.era-label-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2)}
+.era-line{flex:1;height:1px;background:var(--border2)}
+.era-count{font-family:var(--font-head);font-size:8px;color:var(--text3);flex-shrink:0}
+
+/* AYAH CARD */
+.ayah-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.ayah-card.open{border-color:var(--goldbdr)}
+.ayah-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;user-select:none}
+.rev-badge{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;padding:3px 8px;border-radius:5px;flex-shrink:0;text-transform:uppercase}
+.rev-early{background:var(--amberdim);border:1px solid var(--amberbdr);color:var(--amber)}
+.rev-middle{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+.rev-late{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.rev-madani{background:var(--bluedim);border:1px solid var(--bluebdr);color:var(--blue)}
+.card-ref{font-family:var(--font-head);font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0}
+.card-preview{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.card-chevron{color:var(--text3);font-size:16px;transition:transform .25s;flex-shrink:0}
+.ayah-card.open .card-chevron{transform:rotate(90deg);color:var(--gold)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border2)}
+.ayah-card.open .card-body{display:block}
+
+/* ARABIC */
+.ayah-arabic{font-family:var(--font-arab);font-size:clamp(20px,3.5vw,28px);color:var(--gold2);direction:rtl;text-align:right;line-height:2.2;padding:18px 0 12px;text-shadow:0 0 20px rgba(201,168,76,.1);border-bottom:1px solid var(--border2);margin-bottom:12px}
+.ayah-tr-en{font-size:13px;color:var(--text);font-style:italic;line-height:1.85;margin-bottom:6px;border-left:3px solid var(--goldbdr);padding:8px 14px;border-radius:0 6px 6px 0;background:rgba(201,168,76,.03)}
+.ayah-tr-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;border-right:3px solid var(--goldbdr);padding:8px 14px 8px 8px;border-radius:6px 0 0 6px;background:rgba(201,168,76,.03);margin-bottom:6px}
+.ayah-ref-line{font-family:var(--font-head);font-size:9px;color:var(--gold);letter-spacing:.8px;margin-bottom:14px}
+
+/* BOXES */
+.ctx-box{background:rgba(0,0,0,.2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:12px}
+.ctx-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.ctx-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--amber);margin-bottom:5px}
+.ctx-txt{font-size:12px;color:var(--text2);line-height:1.75}
+.ctx-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2}
+
+.root-box{background:rgba(201,168,76,.04);border:1px solid var(--goldbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.root-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.root-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--gold);margin-bottom:7px}
+.root-wd{font-family:var(--font-arab);font-size:19px;color:var(--gold2);direction:rtl;display:inline-block;margin-left:8px}
+.root-fm{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl}
+.root-mn{font-size:12px;color:var(--text2);line-height:1.7;margin-top:5px}
+.root-mn-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-top:5px}
+
+.uniq-box{background:var(--tealdim);border:1px solid var(--tealbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.uniq-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.uniq-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--teal);margin-bottom:5px}
+.uniq-txt{font-size:12.5px;color:var(--text);line-height:1.75}
+.uniq-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text);direction:rtl;text-align:right;line-height:2}
+
+.sunnah-box{background:var(--purpledim);border:1px solid var(--purplebdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.sun-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.sun-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--purple);margin-bottom:8px}
+.sun-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-en{font-size:12px;color:var(--text2);font-style:italic;line-height:1.7;margin-bottom:5px}
+.sun-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+.grade{display:inline-block;font-family:var(--font-head);font-size:7.5px;padding:2px 7px;border-radius:4px;margin-left:6px}
+.g-sahih{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.g-hasan{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+
+/* NOTES */
+.notes-sec{margin-top:14px;border-top:1px solid var(--border2);padding-top:12px}
+.notes-hdr{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notes-hdr::after{content:'';flex:1;height:1px;background:var(--border2)}
+.note-f{margin-bottom:7px}
+.note-lbl{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nsv{font-family:var(--font-head);font-size:7px;letter-spacing:.3px;color:var(--text3);margin-left:auto;transition:color .3s}
+.nsv.flash{color:var(--teal)}
+.note-ta{width:100%;min-height:78px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:7px;outline:none;padding:10px 12px;font-family:var(--font-body);font-size:12.5px;color:var(--text);line-height:1.75;resize:vertical;transition:border-color .2s}
+.note-ta:focus{border-color:var(--goldbdr)}
+.note-ta::placeholder{color:var(--text3);font-style:italic;font-size:11.5px}
+.note-ta-ur{font-family:var(--font-arab);font-size:14px;direction:rtl;text-align:right}
+
+/* STANDALONE HADITH */
+.sh-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;margin-bottom:10px}
+.sh-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sh-lbl::after{content:'';flex:1;height:1px;background:var(--border2)}
+.sh-ar{font-family:var(--font-arab);font-size:clamp(15px,3vw,19px);color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:9px;padding:10px 14px;background:rgba(201,168,76,.04);border-radius:7px}
+.sh-en{font-size:12.5px;color:var(--text);font-style:italic;line-height:1.8;margin-bottom:7px}
+.sh-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;margin-bottom:7px}
+.sh-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+
+/* PENDING */
+.pending{background:var(--bg2);border:1px dashed var(--amberbdr);border-radius:12px;padding:24px 20px;margin-top:20px;text-align:center}
+.pending-icon{font-size:28px;margin-bottom:10px}
+.pending-title{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--text2);line-height:1.75;max-width:600px;margin:0 auto}
+
+/* EN/UR MODE */
+.en-blk{display:block}.ur-blk{display:none}
+body.ur-mode .en-blk{display:none}
+body.ur-mode .ur-blk{display:block}
+.en-inl{display:inline}.ur-inl{display:none}
+body.ur-mode .en-inl{display:none}
+body.ur-mode .ur-inl{display:inline}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:rgba(12,21,40,.98);border:1px solid var(--goldbdr);border-radius:8px;padding:9px 20px;font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--gold2);z-index:300;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .page{padding:18px 12px 60px}
+  .ra-letters{gap:6px}
+  .ra-letter{padding:6px 10px}
+  .ayah-arabic{font-size:clamp(18px,5vw,24px)}
+}
+
+
+.idx-wrap{max-width:700px;margin:0 auto;padding:20px 16px 60px;}
+.idx-hero{text-align:center;padding:48px 20px 32px;}
+.idx-hero-ar{font-family:var(--font-ar);font-size:36px;color:var(--gold);letter-spacing:2px;line-height:1.4;margin-bottom:8px;}
+.idx-hero-en{font-family:var(--font-head);font-size:13px;letter-spacing:2px;color:var(--text2);text-transform:uppercase;}
+.idx-hero-rule{width:60px;height:1px;background:var(--goldbdr);margin:20px auto;}
+.idx-hero-desc{font-family:var(--font-body);font-size:14px;color:var(--text2);line-height:1.9;max-width:480px;margin:0 auto;}
+.idx-topbar{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px 0;}
+.lang-btn{font-size:11px;font-family:var(--font-head);letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text2);padding:4px 8px;cursor:pointer;}
+.lang-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.concept-card{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px;text-decoration:none;display:block;transition:border-color .2s,transform .15s;}
+.concept-card:hover{border-color:var(--gold2);transform:translateY(-2px);}
+.cc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cc-ar{font-family:var(--font-ar);font-size:28px;color:var(--gold);line-height:1;}
+.cc-num{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:1px;}
+.cc-title{font-family:var(--font-head);font-size:16px;color:var(--gold2);letter-spacing:.5px;margin-bottom:2px;}
+.cc-sub{font-family:var(--font-body);font-size:12px;color:var(--text2);}
+.cc-sub-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);direction:rtl;}
+.cc-stats{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:.5px;margin:10px 0 8px;}
+.prog-bar-bg{height:3px;background:var(--bg2);border-radius:2px;overflow:hidden;}
+.prog-bar-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .4s;}
+.prog-label{font-family:var(--font-head);font-size:10px;color:var(--teal);letter-spacing:.5px;margin-top:5px;}
+.idx-tools{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-top:24px;}
+.idx-tools-title{font-family:var(--font-head);font-size:11px;letter-spacing:1px;color:var(--text2);text-transform:uppercase;margin-bottom:14px;}
+.tool-btn{font-family:var(--font-head);font-size:11px;letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text2);padding:8px 14px;cursor:pointer;margin-right:8px;margin-bottom:8px;}
+.tool-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.idx-footer{text-align:center;padding:32px 0 0;font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:1px;}
+
+</style>
+</head>
+<body>
+
+<div class="idx-topbar">
+  <button class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" data-lang-btn="ur" onclick="setLang('ur')">اردو</button>
+</div>
+
+<div class="idx-wrap">
+
+  <div class="idx-hero">
+    <div class="idx-hero-ar">الدراسة الروحية</div>
+    <div class="idx-hero-en en-blk">Personal Spiritual Study</div>
+    <div class="idx-hero-en ur-blk" style="font-family:var(--font-ar);font-size:14px">ذاتی روحانی مطالعہ</div>
+    <div class="idx-hero-rule"></div>
+    <div class="idx-hero-desc en-blk">Five concepts studied in sequence — each one preparing the ground for the next. Dhikr places Allah in awareness. Zuhd clears what would distort it. Taqwa guards it. Muraqabah deepens it. Ihsan is what you do from that ground.</div>
+    <div class="idx-hero-desc ur-blk" style="font-family:var(--font-ar);font-size:14px;direction:rtl">پانچ تصورات ترتیب سے — ہر ایک اگلے کی زمین تیار کرتا ہے۔ ذکر شعور میں رکھتا ہے۔ زہد صاف کرتا ہے۔ تقویٰ محفوظ کرتا ہے۔ مراقبہ گہرا کرتا ہے۔ احسان اس زمین سے آپ کا عمل ہے۔</div>
+  </div>
+
+  
+<a href="dhikr.html" class="concept-card">
+  <div class="cc-top">
+    <div>
+      <div class="cc-title en-blk">Dhikr</div>
+      <div class="cc-title ur-blk" style="font-family:var(--font-ar)">ذکر</div>
+      <div class="cc-sub en-blk">Remembrance</div>
+      <div class="cc-sub-ur ur-blk">یاد</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="cc-ar">ذِكْر</div>
+      <div class="cc-num">01 / 05</div>
+    </div>
+  </div>
+  <div class="cc-stats en-blk">19 Quranic ayat · 8 hadith</div>
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-dhikr" style="width:0%"></div></div>
+  <div class="prog-label" id="prog-dhikr">0 notes</div>
+</a>
+<a href="taqwa.html" class="concept-card">
+  <div class="cc-top">
+    <div>
+      <div class="cc-title en-blk">Taqwa</div>
+      <div class="cc-title ur-blk" style="font-family:var(--font-ar)">تقویٰ</div>
+      <div class="cc-sub en-blk">God-Consciousness</div>
+      <div class="cc-sub-ur ur-blk">خوفِ الٰہی</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="cc-ar">تَقْوَى</div>
+      <div class="cc-num">02 / 05</div>
+    </div>
+  </div>
+  <div class="cc-stats en-blk">14 Quranic ayat · 8 hadith</div>
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-taqwa" style="width:0%"></div></div>
+  <div class="prog-label" id="prog-taqwa">0 notes</div>
+</a>
+<a href="zuhd.html" class="concept-card">
+  <div class="cc-top">
+    <div>
+      <div class="cc-title en-blk">Zuhd</div>
+      <div class="cc-title ur-blk" style="font-family:var(--font-ar)">زہد</div>
+      <div class="cc-sub en-blk">Non-Attachment</div>
+      <div class="cc-sub-ur ur-blk">بے رغبتی</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="cc-ar">زُهْد</div>
+      <div class="cc-num">03 / 05</div>
+    </div>
+  </div>
+  <div class="cc-stats en-blk">18 Quranic ayat · 8 hadith</div>
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-zuhd" style="width:0%"></div></div>
+  <div class="prog-label" id="prog-zuhd">0 notes</div>
+</a>
+<a href="muraqabah.html" class="concept-card">
+  <div class="cc-top">
+    <div>
+      <div class="cc-title en-blk">Muraqabah</div>
+      <div class="cc-title ur-blk" style="font-family:var(--font-ar)">مراقبہ</div>
+      <div class="cc-sub en-blk">Awareness of Being Watched</div>
+      <div class="cc-sub-ur ur-blk">نگرانی</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="cc-ar">مُرَاقَبَة</div>
+      <div class="cc-num">04 / 05</div>
+    </div>
+  </div>
+  <div class="cc-stats en-blk">14 Quranic ayat · 7 hadith</div>
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-muraqabah" style="width:0%"></div></div>
+  <div class="prog-label" id="prog-muraqabah">0 notes</div>
+</a>
+<a href="ihsan.html" class="concept-card">
+  <div class="cc-top">
+    <div>
+      <div class="cc-title en-blk">Ihsan</div>
+      <div class="cc-title ur-blk" style="font-family:var(--font-ar)">احسان</div>
+      <div class="cc-sub en-blk">Beautiful Excellence</div>
+      <div class="cc-sub-ur ur-blk">اتقان</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="cc-ar">إِحْسَان</div>
+      <div class="cc-num">05 / 05</div>
+    </div>
+  </div>
+  <div class="cc-stats en-blk">14 Quranic ayat · 6 hadith</div>
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="bar-ihsan" style="width:0%"></div></div>
+  <div class="prog-label" id="prog-ihsan">0 notes</div>
+</a>
+
+  <div class="idx-tools">
+    <div class="idx-tools-title en-blk">Study Notes</div>
+    <div class="idx-tools-title ur-blk" style="font-family:var(--font-ar)">مطالعہ نوٹس</div>
+    <p class="en-blk" style="font-size:13px;color:var(--text2);line-height:1.8;margin:0 0 14px">Your notes are saved in this browser. Export them regularly to keep a backup — especially before clearing cache or switching devices.</p>
+    <p class="ur-blk" style="font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;margin:0 0 14px;direction:rtl">آپ کے نوٹس اس براؤزر میں محفوظ ہیں۔ کیش صاف کرنے یا ڈیوائس بدلنے سے پہلے ایکسپورٹ کریں۔</p>
+    <button class="tool-btn" onclick="exportNotes()">⬇ Export Notes (JSON)</button>
+    <button class="tool-btn" onclick="importNotes()">⬆ Import Notes</button>
+  </div>
+
+  <div class="idx-footer">
+    <div class="en-blk">Personal study tool · Not linked publicly · Stage 3 (Sufi Tradition) coming</div>
+    <div class="ur-blk" style="font-family:var(--font-ar)">ذاتی مطالعہ · مرحلہ ۳ آنے والا ہے</div>
+  </div>
+
+</div>
+
+<script>
+function getProgress(){
+  const prefixes={
+    dhikr:   {pattern:/^ss_[0-9]/, label:'Dhikr',     total:38},
+    taqwa:   {pattern:/^ss_t-/,    label:'Taqwa',      total:28},
+    zuhd:    {pattern:/^ss_z-/,    label:'Zuhd',       total:36},
+    muraqabah:{pattern:/^ss_m-/,   label:'Muraqabah',  total:28},
+    ihsan:   {pattern:/^ss_i-/,    label:'Ihsan',      total:28},
+  };
+  const result={};
+  for(let k in prefixes){result[k]=0;}
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i);
+    const val=localStorage.getItem(key);
+    if(!val||!val.trim())continue;
+    for(let k in prefixes){
+      if(prefixes[k].pattern.test(key)){result[k]++;break;}
+    }
+  }
+  return {counts:result,prefixes};
+}
+
+function updateProgress(){
+  const {counts,prefixes}=getProgress();
+  for(let k in prefixes){
+    const el=document.getElementById('prog-'+k);
+    const bar=document.getElementById('bar-'+k);
+    if(!el)continue;
+    const n=counts[k], t=prefixes[k].total;
+    const pct=Math.min(100,Math.round(n/t*100));
+    el.textContent=n+' / '+t+' notes';
+    if(bar)bar.style.width=pct+'%';
+  }
+}
+
+function exportNotes(){
+  const data={};
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k.startsWith('ss_'))data[k]=localStorage.getItem(k);
+  }
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='spiritual-study-notes-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+}
+
+function importNotes(){
+  const input=document.createElement('input');
+  input.type='file';input.accept='.json';
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        let count=0;
+        for(let k in data){if(k.startsWith('ss_')){localStorage.setItem(k,data[k]);count++;}}
+        alert(count+' notes restored successfully.');
+        updateProgress();
+      }catch(err){alert('Invalid file. Please select a notes export file.');}
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+function setLang(lang){
+  localStorage.setItem('ss_lang',lang);
+  document.querySelectorAll('.en-blk').forEach(function(el){
+    el.style.display=lang==='ur'?'none':'';
+  });
+  document.querySelectorAll('.ur-blk').forEach(function(el){
+    if(lang==='en'){
+      el.style.display='none';
+    } else {
+      el.style.display=el.tagName==='SPAN'?'inline':'block';
+    }
+  });
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.style.opacity=btn.dataset.langBtn===lang?'1':'0.45';
+  });
+});
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  updateProgress();
+  const lang=localStorage.getItem('ss_lang')||'en';
+  setLang(lang);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zuhd — Spiritual Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg0:#04070D;--bg1:#080E1C;--bg2:#0C1528;--bg3:#111E35;--bg4:#162440;
+  --gold:#C9A84C;--gold2:#E2C97A;--gold3:#F5E9C0;
+  --golddim:rgba(201,168,76,.08);--goldbdr:rgba(201,168,76,.18);--goldglow:rgba(201,168,76,.22);
+  --teal:#2FB89A;--tealdim:rgba(47,184,154,.08);--tealbdr:rgba(47,184,154,.22);
+  --blue:#7AABF0;--bluedim:rgba(122,171,240,.08);--bluebdr:rgba(122,171,240,.22);
+  --amber:#E0A030;--amberdim:rgba(224,160,48,.08);--amberbdr:rgba(224,160,48,.22);
+  --purple:#A87FD0;--purpledim:rgba(168,127,208,.08);--purplebdr:rgba(168,127,208,.22);
+  --text:#D4CBB8;--text2:#8A9BB0;--text3:#4A5B70;
+  --border:rgba(201,168,76,.10);--border2:rgba(201,168,76,.05);
+  --font-head:'Cinzel',serif;--font-body:'Lora',serif;--font-arab:'Noto Naskh Arabic',serif;--font-ar:'Noto Naskh Arabic',serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg0);color:var(--text);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg1)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 800px 500px at 20% 10%,rgba(201,168,76,.025),transparent 60%),
+             radial-gradient(ellipse 600px 400px at 80% 80%,rgba(47,184,154,.02),transparent 60%);}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:90;background:rgba(4,7,13,.97);border-bottom:1px solid var(--border2);backdrop-filter:blur(20px);padding:0 22px;height:56px;display:flex;align-items:center;gap:14px}
+.hdr-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold);text-shadow:0 0 20px rgba(201,168,76,.3)}
+.hdr-titles{flex:1}
+.hdr-title{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--gold2);text-transform:uppercase}
+.hdr-sub{font-family:var(--font-head);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.lang-toggle{display:flex;gap:2px;background:rgba(255,255,255,.04);border:1px solid var(--goldbdr);border-radius:20px;padding:3px}
+.lt{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 10px;border-radius:16px;cursor:pointer;transition:all .2s;color:var(--text3);user-select:none}
+.lt.on{background:var(--gold);color:#000;font-weight:700}
+.back-link{font-family:var(--font-head);font-size:8.5px;letter-spacing:.8px;color:var(--text3);text-decoration:none;padding:5px 10px;border:1px solid var(--border2);border-radius:6px;transition:all .15s;text-transform:uppercase;flex-shrink:0}
+.back-link:hover{color:var(--gold2);border-color:var(--goldbdr)}
+
+/* PAGE */
+.page{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:24px 18px 60px}
+
+/* CONCEPT TABS */
+.concept-nav{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.cn-btn{font-family:var(--font-head);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 16px;border-radius:8px;border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.03)}
+.cn-btn:hover{border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn.on{background:var(--golddim);border-color:var(--goldbdr);color:var(--gold2)}
+.cn-btn .ar{font-family:var(--font-arab);font-size:14px;letter-spacing:0;display:block;margin-top:2px}
+.cn-badge{display:inline-block;font-size:7px;padding:1px 5px;border-radius:4px;margin-left:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);vertical-align:middle}
+.cn-badge.pending{background:var(--amberdim);border-color:var(--amberbdr);color:var(--amber)}
+
+/* SECTION */
+.concept-section{display:none}
+.concept-section.active{display:block}
+
+/* SECTION HEADER */
+.sec-hdr{text-align:center;padding:20px 0 28px;border-bottom:1px solid var(--border2);margin-bottom:28px}
+.sec-hdr-ar{font-family:var(--font-arab);font-size:52px;color:var(--gold);text-shadow:0 0 30px rgba(201,168,76,.25);line-height:1.2;margin-bottom:8px}
+.sec-hdr-en{font-family:var(--font-head);font-size:18px;font-weight:700;color:#fff;letter-spacing:2px;text-transform:uppercase}
+.sec-hdr-ur{font-family:var(--font-arab);font-size:20px;color:var(--gold2);margin-top:4px}
+.sec-hdr-root{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--text2);margin-top:10px;text-transform:uppercase}
+.sec-hdr-rule{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+.sec-hdr-intro{font-size:13px;color:var(--text2);line-height:1.85;max-width:600px;margin:0 auto;font-style:italic}
+
+/* ROOT ANALYSIS BOX */
+.root-analysis{background:var(--bg2);border:1px solid var(--goldbdr);border-radius:12px;padding:20px 22px;margin-bottom:28px;position:relative;overflow:hidden}
+.root-analysis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ra-label{font-family:var(--font-head);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ra-label::after{content:'';flex:1;height:1px;background:var(--border2)}
+.ra-root{font-family:var(--font-arab);font-size:30px;color:var(--gold2);direction:rtl;margin-bottom:12px}
+.ra-letters{display:flex;gap:10px;flex-direction:row-reverse;margin-bottom:14px}
+.ra-letter{background:rgba(201,168,76,.06);border:1px solid var(--goldbdr);border-radius:8px;padding:8px 14px;text-align:center}
+.ra-letter-ar{font-family:var(--font-arab);font-size:22px;color:var(--gold2);display:block}
+.ra-letter-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:4px;display:block}
+.ra-meaning{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.ra-meaning-ur{font-family:var(--font-arab);font-size:14px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:12px}
+.ra-forms{display:flex;gap:8px;flex-wrap:wrap}
+.ra-form{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;text-align:center}
+.ra-form-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl}
+.ra-form-en{font-family:var(--font-head);font-size:8px;color:var(--text3);letter-spacing:.5px;margin-top:2px}
+.ra-count{font-family:var(--font-head);font-size:9px;color:var(--teal);margin-top:12px;letter-spacing:.5px}
+
+/* ERA DIVIDER */
+.era-divider{display:flex;align-items:center;gap:12px;margin:28px 0 16px}
+.era-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.era-early{background:var(--amber)}
+.era-middle{background:var(--gold)}
+.era-late{background:var(--teal)}
+.era-madani{background:var(--blue)}
+.era-label{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.era-label-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2)}
+.era-line{flex:1;height:1px;background:var(--border2)}
+.era-count{font-family:var(--font-head);font-size:8px;color:var(--text3);flex-shrink:0}
+
+/* AYAH CARD */
+.ayah-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.ayah-card.open{border-color:var(--goldbdr)}
+.ayah-card-hdr{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;user-select:none}
+.rev-badge{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;padding:3px 8px;border-radius:5px;flex-shrink:0;text-transform:uppercase}
+.rev-early{background:var(--amberdim);border:1px solid var(--amberbdr);color:var(--amber)}
+.rev-middle{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+.rev-late{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.rev-madani{background:var(--bluedim);border:1px solid var(--bluebdr);color:var(--blue)}
+.card-ref{font-family:var(--font-head);font-size:10px;color:var(--gold);font-weight:600;flex-shrink:0}
+.card-preview{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;flex:1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.75}
+.card-chevron{color:var(--text3);font-size:16px;transition:transform .25s;flex-shrink:0}
+.ayah-card.open .card-chevron{transform:rotate(90deg);color:var(--gold)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border2)}
+.ayah-card.open .card-body{display:block}
+
+/* ARABIC */
+.ayah-arabic{font-family:var(--font-arab);font-size:clamp(20px,3.5vw,28px);color:var(--gold2);direction:rtl;text-align:right;line-height:2.2;padding:18px 0 12px;text-shadow:0 0 20px rgba(201,168,76,.1);border-bottom:1px solid var(--border2);margin-bottom:12px}
+.ayah-tr-en{font-size:13px;color:var(--text);font-style:italic;line-height:1.85;margin-bottom:6px;border-left:3px solid var(--goldbdr);padding:8px 14px;border-radius:0 6px 6px 0;background:rgba(201,168,76,.03)}
+.ayah-tr-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;border-right:3px solid var(--goldbdr);padding:8px 14px 8px 8px;border-radius:6px 0 0 6px;background:rgba(201,168,76,.03);margin-bottom:6px}
+.ayah-ref-line{font-family:var(--font-head);font-size:9px;color:var(--gold);letter-spacing:.8px;margin-bottom:14px}
+
+/* BOXES */
+.ctx-box{background:rgba(0,0,0,.2);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:12px}
+.ctx-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.ctx-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--amber);margin-bottom:5px}
+.ctx-txt{font-size:12px;color:var(--text2);line-height:1.75}
+.ctx-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2}
+
+.root-box{background:rgba(201,168,76,.04);border:1px solid var(--goldbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.root-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.root-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--gold);margin-bottom:7px}
+.root-wd{font-family:var(--font-arab);font-size:19px;color:var(--gold2);direction:rtl;display:inline-block;margin-left:8px}
+.root-fm{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl}
+.root-mn{font-size:12px;color:var(--text2);line-height:1.7;margin-top:5px}
+.root-mn-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-top:5px}
+
+.uniq-box{background:var(--tealdim);border:1px solid var(--tealbdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.uniq-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
+.uniq-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--teal);margin-bottom:5px}
+.uniq-txt{font-size:12.5px;color:var(--text);line-height:1.75}
+.uniq-txt-ur{font-family:var(--font-arab);font-size:13px;color:var(--text);direction:rtl;text-align:right;line-height:2}
+
+.sunnah-box{background:var(--purpledim);border:1px solid var(--purplebdr);border-radius:8px;padding:11px 14px;margin-bottom:12px}
+.sun-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.sun-lbl-ur{font-family:var(--font-arab);font-size:11px;color:var(--purple);margin-bottom:8px}
+.sun-ar{font-family:var(--font-arab);font-size:16px;color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-en{font-size:12px;color:var(--text2);font-style:italic;line-height:1.7;margin-bottom:5px}
+.sun-ur{font-family:var(--font-arab);font-size:13px;color:var(--text2);direction:rtl;text-align:right;line-height:2;margin-bottom:5px}
+.sun-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+.grade{display:inline-block;font-family:var(--font-head);font-size:7.5px;padding:2px 7px;border-radius:4px;margin-left:6px}
+.g-sahih{background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal)}
+.g-hasan{background:var(--golddim);border:1px solid var(--goldbdr);color:var(--gold2)}
+
+/* NOTES */
+.notes-sec{margin-top:14px;border-top:1px solid var(--border2);padding-top:12px}
+.notes-hdr{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text2);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notes-hdr::after{content:'';flex:1;height:1px;background:var(--border2)}
+.note-f{margin-bottom:7px}
+.note-lbl{font-family:var(--font-head);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.nd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.nsv{font-family:var(--font-head);font-size:7px;letter-spacing:.3px;color:var(--text3);margin-left:auto;transition:color .3s}
+.nsv.flash{color:var(--teal)}
+.note-ta{width:100%;min-height:78px;background:rgba(255,255,255,.03);border:1px solid var(--border2);border-radius:7px;outline:none;padding:10px 12px;font-family:var(--font-body);font-size:12.5px;color:var(--text);line-height:1.75;resize:vertical;transition:border-color .2s}
+.note-ta:focus{border-color:var(--goldbdr)}
+.note-ta::placeholder{color:var(--text3);font-style:italic;font-size:11.5px}
+.note-ta-ur{font-family:var(--font-arab);font-size:14px;direction:rtl;text-align:right}
+
+/* STANDALONE HADITH */
+.sh-card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:18px 20px;margin-bottom:10px}
+.sh-lbl{font-family:var(--font-head);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sh-lbl::after{content:'';flex:1;height:1px;background:var(--border2)}
+.sh-ar{font-family:var(--font-arab);font-size:clamp(15px,3vw,19px);color:var(--gold2);direction:rtl;text-align:right;line-height:2;margin-bottom:9px;padding:10px 14px;background:rgba(201,168,76,.04);border-radius:7px}
+.sh-en{font-size:12.5px;color:var(--text);font-style:italic;line-height:1.8;margin-bottom:7px}
+.sh-ur{font-family:var(--font-arab);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:2;margin-bottom:7px}
+.sh-src{font-family:var(--font-head);font-size:8.5px;color:var(--purple);letter-spacing:.5px}
+
+/* PENDING */
+.pending{background:var(--bg2);border:1px dashed var(--amberbdr);border-radius:12px;padding:24px 20px;margin-top:20px;text-align:center}
+.pending-icon{font-size:28px;margin-bottom:10px}
+.pending-title{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.pending-desc{font-size:12px;color:var(--text2);line-height:1.75;max-width:600px;margin:0 auto}
+
+/* ── Language toggle — body class approach ─────── */
+.en-blk{display:block}
+.ur-blk{display:none}
+.en-inl{display:inline}
+.ur-inl{display:none}
+body.ur-mode .en-blk{display:none}
+body.ur-mode .ur-blk{display:block}
+body.ur-mode .en-inl{display:none}
+body.ur-mode .ur-inl{display:inline}
+body.ur-mode span.ur-blk{display:inline}
+body.ur-mode span.en-blk{display:none}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:rgba(12,21,40,.98);border:1px solid var(--goldbdr);border-radius:8px;padding:9px 20px;font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--gold2);z-index:300;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  .page{padding:18px 12px 60px}
+  .ra-letters{gap:6px}
+  .ra-letter{padding:6px 10px}
+  .ayah-arabic{font-size:clamp(18px,5vw,24px)}
+}
+
+.file-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg1);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;gap:8px;}
+.file-nav-link{font-family:var(--font-head);font-size:11px;letter-spacing:.5px;color:var(--gold2);text-decoration:none;padding:6px 10px;border:1px solid var(--goldbdr);border-radius:6px;white-space:nowrap;}
+.file-nav-link:hover{background:var(--golddim);}
+.file-nav-home{font-family:var(--font-head);font-size:10px;letter-spacing:.8px;color:var(--text2);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;}
+.file-nav-home:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-nav-center{display:flex;align-items:center;gap:8px;}
+.lang-btn{font-size:11px;font-family:var(--font-head);letter-spacing:.5px;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text2);padding:4px 8px;cursor:pointer;transition:opacity .2s;}
+.lang-btn:hover{border-color:var(--gold2);color:var(--gold2);}
+.file-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:32px 20px 48px;border-top:1px solid var(--border);margin-top:40px;}
+.stage3-hdr{margin:40px 0 24px;text-align:center;}.stage3-hdr-ar{font-family:var(--font-ar);font-size:22px;color:var(--purple);margin-bottom:4px;}.stage3-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;}.stage3-hdr-rule{width:50px;height:1px;background:var(--purplebdr);margin:12px auto;}.stage3-intro{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;max-width:640px;margin:0 auto 16px;}.scholar-card{border:1px solid var(--purplebdr);border-radius:10px;margin-bottom:14px;overflow:hidden;background:rgba(168,127,208,.03);}.scholar-card .card-body{display:none;padding:20px;border-top:1px solid var(--purplebdr);}.scholar-card.open .card-body{display:block;}.sc-hdr{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;transition:background .15s;}.sc-hdr:hover{background:var(--purpledim);}.sc-num{font-family:var(--font-head);font-size:11px;color:var(--purple);min-width:22px;opacity:.7;}.sc-hdr-main{flex:1;}.sc-name-en{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.3px;}.sc-name-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);}.sc-dates{font-family:var(--font-body);font-size:11px;color:var(--text3);margin-top:2px;font-style:italic;}.sc-badge{font-family:var(--font-head);font-size:9px;letter-spacing:.8px;padding:3px 8px;border-radius:4px;border:1px solid var(--purplebdr);color:var(--purple);text-transform:uppercase;white-space:nowrap;flex-shrink:0;}.sc-chevron{font-size:18px;color:var(--purple);opacity:.6;transition:transform .2s;}.scholar-card.open .sc-chevron{transform:rotate(90deg);}.bio-box summary{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--purple);text-transform:uppercase;cursor:pointer;padding:8px 0;border-bottom:1px solid var(--purplebdr);margin-bottom:12px;display:block;list-style:none;}.bio-box summary::-webkit-details-marker{display:none;}.bio-box summary::before{content:"+ ";}.details[open] summary::before,.bio-box details[open] summary::before{content:"- ";}.bio-txt{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:10px;}.bio-txt-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2.1;direction:rtl;text-align:right;margin-bottom:10px;}.bio-works{font-family:var(--font-head);font-size:10px;color:var(--text3);line-height:1.8;margin-bottom:4px;}.sc-sec{font-family:var(--font-head);font-size:9px;letter-spacing:1.2px;color:var(--purple);text-transform:uppercase;margin:18px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--purplebdr);}.sc-finding{font-family:var(--font-body);font-size:13.5px;color:var(--text);line-height:1.9;margin-bottom:6px;}.sc-finding-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);line-height:2.1;direction:rtl;text-align:right;margin-bottom:14px;}.sc-quote-ar{font-family:var(--font-ar);font-size:17px;color:var(--gold);line-height:2;text-align:right;direction:rtl;margin:12px 0 8px;padding:12px;background:var(--golddim);border-right:3px solid var(--gold);border-radius:0 6px 6px 0;}.sc-quote-en{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;font-style:italic;margin-bottom:4px;}.sc-quote-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;margin-bottom:6px;}.sc-quote-src{font-family:var(--font-head);font-size:10px;color:var(--text3);letter-spacing:.3px;margin-bottom:14px;}.sc-contrib{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:6px;}.sc-contrib-ur{font-family:var(--font-ar);font-size:13px;color:var(--text2);line-height:2;direction:rtl;text-align:right;}.sc-controversy{font-family:var(--font-body);font-size:12px;color:var(--amber);line-height:1.85;padding:10px 12px;background:var(--amberdim);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;margin-top:14px;}.div-wrap{border:1px solid var(--goldbdr);border-radius:10px;margin-top:32px;overflow:hidden;}.div-hdr{background:var(--golddim);padding:18px 20px;border-bottom:1px solid var(--goldbdr);}.div-hdr-ar{font-family:var(--font-ar);font-size:20px;color:var(--gold);margin-bottom:4px;}.div-hdr-en{font-family:var(--font-head);font-size:11px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;}.div-hdr-desc{font-family:var(--font-body);font-size:12px;color:var(--text2);line-height:1.85;margin-top:8px;}.div-point{padding:20px;border-bottom:1px solid var(--goldbdr);}.div-num{font-family:var(--font-head);font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}.div-q{font-family:var(--font-head);font-size:14px;color:var(--text);letter-spacing:.2px;margin-bottom:14px;line-height:1.5;}.div-q-ur{font-family:var(--font-ar);font-size:14px;color:var(--text);direction:rtl;text-align:right;line-height:1.9;margin-bottom:14px;}.div-pos-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}.div-scholars{font-family:var(--font-head);font-size:9px;color:var(--purple);letter-spacing:.3px;min-width:160px;padding-top:3px;flex-shrink:0;}.div-view{font-family:var(--font-body);font-size:13px;color:var(--text2);line-height:1.85;}.div-ground{background:var(--bg2);border-radius:6px;padding:12px;margin:12px 0;}.div-ground-lbl{font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--teal);text-transform:uppercase;margin-bottom:6px;}.div-ground-txt{font-family:var(--font-body);font-size:12.5px;color:var(--text2);line-height:1.85;}.div-verdict{font-family:var(--font-body);font-size:13px;color:var(--text);line-height:1.85;font-style:italic;border-left:2px solid var(--teal);padding-left:10px;margin-top:4px;}.div-pos-box{padding:20px;background:var(--bg2);}.div-pos-lbl{font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--gold2);text-transform:uppercase;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<div class="file-topbar">
+  <a href="taqwa.html" class="file-nav-link">← Taqwa</a>
+  <div class="file-nav-center">
+    <a href="index.html" class="file-nav-home">☰ Index</a>
+    <button class="lang-btn" data-lang-btn="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang-btn="ur" onclick="setLang('ur')">اردو</button>
+  </div>
+  <a href="muraqabah.html" class="file-nav-link">Muraqabah →</a>
+</div>
+
+<div class="concept-section active" id="sec-zuhd">
+<div class="sec-hdr">
+  <div class="sec-hdr-ar">الزُّهْد</div>
+  <div class="sec-hdr-en en-blk">Zuhd — Non-Attachment</div>
+  <div class="sec-hdr-ur ur-blk">زہد — بے رغبتی</div>
+  <div class="sec-hdr-rule"></div>
+  <div class="sec-hdr-root en-blk">Root: ز — ه — د · 18 key ayat in revelation order · 8 authenticated hadith</div>
+  <div class="sec-hdr-root ur-blk">جڑ: ز — ه — د · ترتیبِ نزول میں ۱۸ اہم آیات · ۸ مستند احادیث</div>
+  <div class="sec-hdr-intro en-blk">The Quran does not condemn the world — it correctly calibrates its value. Dunya (الدنيا — the near) is real and permitted; the error is treating the near as the greatest. Akhirah (الآخرة — the final) is greater and permanent. Zuhd is the discipline of not letting the near eclipse the greater. Read these ayat in revelation order — the Quran builds this argument systematically from the earliest revelations, then corrects any misreading of it. The corrective ayat are marked.</div>
+  <div class="sec-hdr-intro ur-blk">قرآن دنیا کی مذمت نہیں کرتا — اس کی قدروقیمت درست کرتا ہے۔ دنیا (قریب) حقیقی اور جائز ہے؛ غلطی اسے سب سے بڑا سمجھنا ہے۔ آخرت (آخری) عظیم تر اور دائمی ہے۔ زہد یہ نظم ہے کہ قریب کو عظیم تر پر غالب نہ آنے دیں۔ ترتیبِ نزول میں پڑھیں — قرآن یہ استدلال ابتدا سے بناتا ہے، پھر اس کی غلط فہمی کی اصلاح کرتا ہے۔</div>
+</div>
+
+<div class="root-analysis">
+  <div class="ra-label"><span class="en-blk">Root Word Analysis — ز ه د</span><span class="ur-blk">جڑ کا تجزیہ — ز ه د</span></div>
+  <div class="ra-root">زَهِدَ · الزُّهْد · زَاهِد · الزَّاهِدِينَ</div>
+  <div class="ra-letters">
+    <div class="ra-letter"><span class="ra-letter-ar">ز</span><span class="ra-letter-en">Z</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">ه</span><span class="ra-letter-en">H</span></div>
+    <div class="ra-letter"><span class="ra-letter-ar">د</span><span class="ra-letter-en">D</span></div>
+  </div>
+  <div class="ra-meaning en-blk">The root Z-H-D means to have little desire for, to be indifferent to, to regard as unworthy of pursuit. It carries the sense of deliberate disinterest — not ignorance of something, but a considered assessment that it is not worth grasping for. The root appears once explicitly in the Quran — and the context is decisive. In Yusuf 12:20, the brothers who sold Yusuf AS into slavery are described as <strong style="color:var(--gold2)">wa kanu fihi mina az-zahideen</strong> — they were of those who had Zuhd toward him. They were indifferent to something of immense, prophetic value because they could not perceive its worth. This single usage defines Zuhd by inversion: <strong style="color:var(--teal)">Zuhd is the correct response to something genuinely worthless. Applying it to something precious is the catastrophic error.</strong> The entire spiritual application of Zuhd rests on this: apply it correctly to the dunya — which truly is worth little — so you are never indifferent to what is actually precious.</div>
+  <div class="ra-meaning ur-blk">جڑ ز-ه-د کا مطلب: کم خواہش رکھنا، بے رغبت ہونا، کسی چیز کو حصول کے قابل نہ سمجھنا۔ یہ جڑ قرآن میں صرف ایک بار آتی ہے — اور سیاق فیصلہ کن ہے۔ یوسف ۱۲:۲۰ میں یوسف علیہ السلام کو بیچنے والے بھائیوں کو <strong style="color:var(--gold2)">وَكَانُوا فِيهِ مِنَ الزَّاهِدِينَ</strong> کہا گیا — وہ اس (یوسف) کے بارے میں زاہدین میں سے تھے۔ انہوں نے ایک نبوی شخصیت کے بارے میں زہد اختیار کیا کیونکہ وہ اس کی قدر نہ پہچان سکے۔ <strong style="color:var(--teal)">زہد کی درست تعریف: جو واقعی بے قدر ہے اس سے بے رغبتی — دنیا سے، نہ قیمتی چیز سے۔</strong></div>
+  <div class="ra-forms">
+    <div class="ra-form"><div class="ra-form-ar">زَاهِد</div><div class="ra-form-en en-blk">One who practices Zuhd</div><div class="ra-form-en ur-blk">زاہد</div></div>
+    <div class="ra-form"><div class="ra-form-ar">الزُّهْد</div><div class="ra-form-en en-blk">The practice / concept</div><div class="ra-form-en ur-blk">زہد کا تصور</div></div>
+    <div class="ra-form"><div class="ra-form-ar">زَاهِدُونَ</div><div class="ra-form-en en-blk">Those who practice it</div><div class="ra-form-en ur-blk">زہد والے</div></div>
+    <div class="ra-form"><div class="ra-form-ar">زَهَادَة</div><div class="ra-form-en en-blk">The act of renouncing</div><div class="ra-form-en ur-blk">ترکِ دنیا</div></div>
+  </div>
+  <div class="ra-count en-blk">✦ Root Z-H-D appears once explicitly (12:20) · The Quranic argument for detachment from dunya runs across 100+ ayat using related vocabulary: mata, lahw, laib, ghurur, ziynah, takathur</div>
+  <div class="ra-count ur-blk">✦ جڑ ز-ه-د صرف ایک بار (۱۲:۲۰) · دنیا سے انقطاع کا قرآنی استدلال ۱۰۰ سے زیادہ آیات میں: متاع، لہو، لعب، غرور، زینت، تکاثر</div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-early"></div>
+  <div class="era-label en-blk">Early Makki · 610–615 CE · The Diagnosis</div>
+  <div class="era-label-ur ur-blk">ابتدائی مکی · تشخیص</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">5 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-z-87-16">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-87-16')">
+    <span class="rev-badge rev-early en-blk">Rev. #8</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #8</span>
+    <span class="card-ref">Al-Ala 87:16-17</span>
+    <span class="card-preview">بَلْ تُؤْثِرُونَ الْحَيَاةَ الدُّنْيَا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">بَلْ تُؤْثِرُونَ الْحَيَاةَ الدُّنْيَا ۞ وَالْآخِرَةُ خَيْرٌ وَأَبْقَىٰ</div>
+    <div class="ayah-tr-en en-blk">"But you prefer the worldly life, while the Hereafter is better and more lasting."</div>
+    <div class="ayah-tr-ur ur-blk">«بلکہ تم دنیا کی زندگی کو ترجیح دیتے ہو — حالانکہ آخرت بہتر اور باقی رہنے والی ہے۔»</div>
+    <div class="ayah-ref-line">Al-Ala 87:16-17</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Ala is the 8th surah revealed — among the very first words of the Quran. From the beginning, Allah diagnoses the human condition with surgical precision: you prefer the near over the greater. This is not a condemnation of the world itself — it is a diagnosis of misplaced preference. The Quran opens its argument on Zuhd not with anger but with a statement of fact: you do this. Here is what is actually true.</div>
+      <div class="ctx-txt-ur ur-blk">الاعلیٰ — آٹھویں سورت — قرآن کے ابتدائی ترین الفاظ میں۔ پہلی وحی سے اللہ انسانی حال کی تشخیص کرتا ہے: تم قریب کو عظیم تر پر ترجیح دیتے ہو۔ یہ دنیا کی مذمت نہیں — غلط ترجیح کی تشخیص ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تُؤْثِرُونَ</span> <span class="root-fm">أ-ث-ر · To prefer, to give precedence to</span>
+      <div class="root-mn en-blk">From A-Th-R — to leave a trace, to prefer something above another. Ithar (59:9) is the same root used positively — preferring others over yourself. Here it is the negative: preferring the near (dunya) over the greater (akhirah). The root reveals that Zuhd is fundamentally about correct ordering of preference, not rejection of the world itself.</div>
+      <div class="root-mn-ur ur-blk">أ-ث-ر — نشان چھوڑنا، ترجیح دینا۔ ایثار (۵۹:۹) اسی جڑ سے — دوسروں کو خود پر ترجیح۔ یہاں منفی: دنیا کو آخرت پر ترجیح۔ جڑ بتاتی ہے کہ زہد ترجیح کی درست ترتیب ہے، مسترد کرنا نہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The first Quranic statement on Zuhd — and it is a diagnosis, not a command. The Quran does not begin by ordering you to detach. It begins by naming what you are doing. This makes Zuhd an act of honest self-recognition before it is anything else. Also the first explicit dunya-akhirah comparison: akhirah is Khayrun (better in quality) and Abqa (more lasting in duration). Both dimensions — quality and permanence — are addressed together.</div>
+      <div class="uniq-txt-ur ur-blk">زہد پر پہلا قرآنی بیان — اور یہ تشخیص ہے، حکم نہیں۔ قرآن ترک کا حکم دینے سے پہلے نام رکھتا ہے۔ پہلا صریح دنیا-آخرت موازنہ: آخرت خیرٌ (معیار میں بہتر) اور ابقیٰ (دوام میں زیادہ)۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-87-16-my"></span></div>
+        <textarea class="note-ta" id="note-z-87-16-my" placeholder="The Quran opens with a diagnosis: you prefer the near. Where specifically in your life do you see this operating right now?" oninput="autoSave('z-87-16-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-87-16-after"></span></div>
+        <textarea class="note-ta" id="note-z-87-16-after" placeholder="What changed after deeper study?" oninput="autoSave('z-87-16-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-89-20">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-89-20')">
+    <span class="rev-badge rev-early en-blk">Rev. #10</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #10</span>
+    <span class="card-ref">Al-Fajr 89:20</span>
+    <span class="card-preview">وَتُحِبُّونَ الْمَالَ حُبًّا جَمًّا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَتُحِبُّونَ الْمَالَ حُبًّا جَمًّا</div>
+    <div class="ayah-tr-en en-blk">"And you love wealth with intense, excessive love."</div>
+    <div class="ayah-tr-ur ur-blk">«اور تم مال سے بہت زیادہ محبت کرتے ہو۔»</div>
+    <div class="ayah-ref-line">Al-Fajr 89:20</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Fajr is the 10th surah. The previous ayat (89:15-19) describe how humans react to the two conditions Allah tests them with: when given abundance they say "my Lord has honoured me"; when constrained they say "my Lord has humiliated me." Both reactions are wrong. This ayah is the diagnosis beneath both wrong reactions: the root problem is intense love of wealth. The Quran is not saying love of wealth is surprising — it is naming it as the source of misguided responses to both ease and difficulty.</div>
+      <div class="ctx-txt-ur ur-blk">الفجر — دسویں سورت۔ پچھلی آیات (۸۹:۱۵-۱۹): وسعت ملے تو کہتا ہے رب نے عزت دی، تنگی میں کہتا ہے رب نے ذلیل کیا — دونوں غلط۔ یہ آیت دونوں غلطیوں کا سبب بتاتی ہے: مال کی شدید محبت۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">حُبًّا جَمًّا</span> <span class="root-fm">ح-ب-ب · Hubb — love · ج-م-م · Jamm — overflowing, intense</span>
+      <div class="root-mn en-blk">Hubb from H-B-B: deep attachment, love. Jamm from J-M-M: to overflow, to be copious, to pour out beyond bounds. The combination: love that overflows its proper boundaries. The Quran does not say love of wealth is forbidden — it says it overflows. Zuhd does not eliminate love; it returns love to its proper object and proper measure.</div>
+      <div class="root-mn-ur ur-blk">حب — گہری وابستگی۔ جمّ — بہنا، حد سے بڑھنا۔ ملاکر: وہ محبت جو حد سے نکل جائے۔ قرآن مال کی محبت کو حرام نہیں کہتا — کہتا ہے یہ بہہ جاتی ہے۔ زہد محبت ختم نہیں کرتا — اسے درست جگہ اور درست پیمانے پر لاتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The psychological root of attachment: Hubb Jamman — love that overflows. The earlier ayah diagnosed the wrong preference. This ayah identifies the emotional driver behind it. Zuhd is not about willpower against things — it is about redirecting an emotion that is already present and powerful. This is why Ibn al-Qayyim insists that Zuhd requires Raghbah (intense longing) toward akhirah — you redirect the overflow, you do not drain it.</div>
+      <div class="uniq-txt-ur ur-blk">وابستگی کی نفسیاتی جڑ: حبًّا جمًّا — بہتی ہوئی محبت۔ پچھلی آیت نے غلط ترجیح کی تشخیص کی — یہ آیت جذباتی محرک بتاتی ہے۔ اسی لیے ابن قیم کہتے ہیں: زہد کے لیے آخرت میں رغبتِ شدید چاہیے — محبت کو موڑو، خالی نہ کرو۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-89-20-my"></span></div>
+        <textarea class="note-ta" id="note-z-89-20-my" placeholder="Hubb Jamman — love that overflows its proper place. What does your love of wealth overflow into? What does it make you do or not do?" oninput="autoSave('z-89-20-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-89-20-after"></span></div>
+        <textarea class="note-ta" id="note-z-89-20-after" placeholder="What changed after deeper study?" oninput="autoSave('z-89-20-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-100-6">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-100-6')">
+    <span class="rev-badge rev-early en-blk">Rev. #14</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #14</span>
+    <span class="card-ref">Al-Adiyat 100:6-8</span>
+    <span class="card-preview">إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ ۞ وَإِنَّهُ عَلَىٰ ذَٰلِكَ لَشَهِيدٌ ۞ وَإِنَّهُ لِحُبِّ الْخَيْرِ لَشَدِيدٌ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, man is ungrateful to his Lord — and indeed, he is a witness to that — and indeed, in his love of wealth he is intense."</div>
+    <div class="ayah-tr-ur ur-blk">«بیشک انسان اپنے رب کا بڑا ناشکرا ہے — اور وہ خود اس پر گواہ ہے — اور وہ مال کی محبت میں بڑا سخت ہے۔»</div>
+    <div class="ayah-ref-line">Al-Adiyat 100:6-8</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Adiyat, the 14th surah, makes the connection between ingratitude and love of wealth explicitly. Kanood: the one who denies blessings, who forgets what he has been given. The devastating word: wa innahu ala dhalika la-shaheed — he himself is a witness to his own ingratitude. The capacity for self-knowledge exists; the problem is the love of wealth is Shadeed — so intense it overrides what the person already knows about themselves.</div>
+      <div class="ctx-txt-ur ur-blk">العادیات — ۱۴ویں سورت۔ کنود: نعمتوں کا انکاری۔ سب سے بھاری لفظ: وہ خود اس پر گواہ ہے۔ خودشناسی ہے — مگر مال کی محبت اتنی شدید ہے کہ جانتے ہوئے بھی نہیں بدلتا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لَشَدِيدٌ</span> <span class="root-fm">ش-د-د · Shadeed — intense, binding, severe</span>
+      <div class="root-mn en-blk">Shadeed from Sh-D-D: to bind tightly, to be intense, severe. The same root gives Shadd — to fasten. The love of Khayr (wealth/good) is described as binding — it ties the person. This is important: Zuhd is not merely an act of will; it is an act of untying. The person is bound by their love of wealth. Zuhd is the loosening of that binding so the heart can turn freely.</div>
+      <div class="root-mn-ur ur-blk">شدید — ش-د-د — باندھنا، سخت ہونا۔ خیر (مال/نعمت) کی محبت باندھتی ہے۔ زہد صرف ارادے کا عمل نہیں — کھولنے کا عمل ہے۔ دل کو آزاد کرنا تاکہ پلٹ سکے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Self-witness: the human being already knows his own ingratitude and his own intense love of wealth. Zuhd is not about gaining new information — the person is already a witness (shaheed) to their condition. It is about acting on what is already known. This connects to Al-Muhasibi's psychology: the problem is not ignorance but the soul's refusal to act on what it knows.</div>
+      <div class="uniq-txt-ur ur-blk">خود گواہی: انسان اپنی ناشکری اور مال کی محبت جانتا ہے۔ زہد نئی معلومات نہیں دیتا — جو پہلے سے معلوم ہے اس پر عمل کا مطالبہ کرتا ہے۔ المحاسبی کی نفسیات: مسئلہ جہل نہیں، جانتے ہوئے نہ کرنا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-100-6-my"></span></div>
+        <textarea class="note-ta" id="note-z-100-6-my" placeholder="You are already a witness to your own condition. What do you already know about your attachment to wealth that you have not acted on yet?" oninput="autoSave('z-100-6-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-100-6-after"></span></div>
+        <textarea class="note-ta" id="note-z-100-6-after" placeholder="What changed after deeper study?" oninput="autoSave('z-100-6-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-102-1">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-102-1')">
+    <span class="rev-badge rev-early en-blk">Rev. #16</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #16</span>
+    <span class="card-ref">Al-Takathur 102:1-8</span>
+    <span class="card-preview">أَلْهَاكُمُ التَّكَاثُرُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">أَلْهَاكُمُ التَّكَاثُرُ ۞ حَتَّىٰ زُرْتُمُ الْمَقَابِرَ ۞ كَلَّا سَوْفَ تَعْلَمُونَ ۞ ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ</div>
+    <div class="ayah-tr-en en-blk">"Distraction by multiplying has diverted you — until you visited the graves. No! You are going to know. Then no! You are going to know."</div>
+    <div class="ayah-tr-ur ur-blk">«کثرت کی چاہت نے تمہیں غافل کر دیا — یہاں تک کہ تم قبریں دیکھنے پہنچے۔ ہرگز نہیں — تم عنقریب جان لو گے۔ پھر ہرگز نہیں — تم عنقریب جان لو گے۔»</div>
+    <div class="ayah-ref-line">Al-Takathur 102:1-8</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Takathur — 16th surah. The complete mechanism of dunya's distraction in one word: Alhakum — it diverted you, it made you heedless. Takathur: the compulsion to multiply — more wealth, more children, more status, more of everything. The surah's devastating structure: kalla (No!) repeated twice — a double refusal. The knowledge you are avoiding will reach you regardless. The only question is when: before death, or at it.</div>
+      <div class="ctx-txt-ur ur-blk">التکاثر — ۱۶ویں سورت۔ دنیا کے غفلت میں ڈالنے کا مکمل طریقہ ایک لفظ میں: الھاکم — اس نے تمہیں غافل کر دیا۔ تکاثر: بڑھاتے رہنے کی مجبوری۔ دوہری کلّا — جو علم تم سے بچ رہے ہو وہ آئے گا ضرور۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَلْهَاكُمُ</span> <span class="root-fm">ل-ه-و · Lahw — diversion, heedlessness</span>
+      <div class="root-mn en-blk">From L-H-W: to be diverted, to become heedless through amusement. Alhakum: it diverted you — the causative form, meaning the Takathur itself is the active agent of diversion. This is the Quranic description of Ghaflah (heedlessness) in action: not a deliberate turning away from Allah, but a slow absorption into multiplying until death arrives as the first moment of clarity.</div>
+      <div class="root-mn-ur ur-blk">ل-ه-و — مشغول ہونا، غافل ہونا۔ الھاکم: تکاثر نے تمہیں غافل کیا — تکاثر خود فاعل ہے۔ غفلت کی قرآنی تصویر: جان بوجھ کر پھرنا نہیں — بڑھاتے رہنے میں ڈوبنا یہاں تک کہ موت پہلی بیداری لاتی ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The mechanism of distraction: Takathur operates not through one great temptation but through the compulsion to accumulate more. The person is not seduced by one dramatic thing — they are diverted by the unending process of multiplying. This is the most common modern form of attachment: not loving one thing intensely but being constantly occupied with getting more of everything. Zuhd is the interruption of that compulsion before the graves interrupt it permanently.</div>
+      <div class="uniq-txt-ur ur-blk">غفلت کا طریقہ: تکاثر ایک بڑے فتنے سے نہیں بلکہ بڑھاتے رہنے کی لت سے آتا ہے۔ وابستگی کی سب سے عام جدید شکل: ایک چیز سے شدید محبت نہیں بلکہ ہر چیز کا مزید حصول۔ زہد اس لت میں خلل ہے — قبریں مستقل خلل ڈالیں اس سے پہلے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-102-1-my"></span></div>
+        <textarea class="note-ta" id="note-z-102-1-my" placeholder="Takathur: the compulsion to multiply. Where in your life does the urge to accumulate more — more of anything — quietly consume your attention?" oninput="autoSave('z-102-1-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-102-1-after"></span></div>
+        <textarea class="note-ta" id="note-z-102-1-after" placeholder="What changed after deeper study?" oninput="autoSave('z-102-1-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-104-2">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-104-2')">
+    <span class="rev-badge rev-early en-blk">Rev. #32</span>
+    <span class="rev-badge rev-early ur-blk">ترتیب #32</span>
+    <span class="card-ref">Al-Humaza 104:2-3</span>
+    <span class="card-preview">الَّذِي جَمَعَ مَالًا وَعَدَّدَهُ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">الَّذِي جَمَعَ مَالًا وَعَدَّدَهُ ۞ يَحْسَبُ أَنَّ مَالَهُ أَخْلَدَهُ</div>
+    <div class="ayah-tr-en en-blk">"Who amasses wealth and counts it — he thinks that his wealth will make him immortal."</div>
+    <div class="ayah-tr-ur ur-blk">«جس نے مال جمع کیا اور اسے گنتا رہا — وہ سمجھتا ہے کہ اس کا مال اسے ہمیشہ رکھے گا۔»</div>
+    <div class="ayah-ref-line">Al-Humaza 104:2-3</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Humaza — 32nd surah. This ayah reaches the theological root of attachment: Yahsabu anna malahu akhladah — he thinks his wealth will grant him immortality. The accumulation and counting of wealth (addadahu) is not just greed — it is a confused response to mortality. Wealth is being used as a psychological defence against death. Zuhd, at this level, is the honest confrontation with mortality that wealth-accumulation is designed to avoid.</div>
+      <div class="ctx-txt-ur ur-blk">الھمزہ — ۳۲ویں سورت۔ وابستگی کی الٰہیاتی جڑ: یحسب ان مالہ اخلدہ — سمجھتا ہے مال اسے ہمیشگی دے گا۔ گنتے رہنا فقط لالچ نہیں — فنا کے خلاف نفسیاتی دفاع۔ زہد اس سطح پر موت کا صادقانہ سامنا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">أَخْلَدَهُ</span> <span class="root-fm">خ-ل-د · Khuld — immortality, eternal permanence</span>
+      <div class="root-mn en-blk">Kh-L-D: to be eternal, to remain permanently. Jannah al-Khuld is the garden of eternal abiding. Here the same root is inverted: the person believes wealth grants what only Allah can grant — permanence. This is the deepest theological dimension of attachment: it is a form of shirk in the nafs — attributing to a created thing a power that belongs to Allah alone.</div>
+      <div class="root-mn-ur ur-blk">خ-ل-د — ابدی، دائمی رہنا۔ جنت الخلد: دائمی قیام کی جنت۔ یہاں الٹا: مال وہ دے گا جو صرف اللہ دے سکتا ہے — بقا۔ وابستگی کی سب سے گہری الٰہیاتی جہت: نفس کا شرک — مخلوق کو وہ طاقت دینا جو صرف اللہ کی ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">Attachment to wealth reaches its root: a confused response to mortality. The person is not simply greedy — they are using wealth as a defence against death, as a claim on permanence. This is why Zuhd and Dhikr al-Mawt (remembrance of death) are inseparable in the tradition. You cannot loosen attachment to wealth without confronting the fear it is designed to answer. The Early Makki diagnosis is now complete: misplaced preference (87), overflowing love (89), binding intensity (100), compulsive accumulation (102), and the illusion of immortality (104).</div>
+      <div class="uniq-txt-ur ur-blk">مال سے وابستگی اپنی جڑ تک پہنچی: فنا کے خلاف مبہم دفاع۔ یہی وجہ ہے زہد اور ذکرِ موت ناقابلِ جدا ہیں۔ ابتدائی مکی تشخیص مکمل: غلط ترجیح (۸۷)، بہتی محبت (۸۹)، باندھنے والی شدت (۱۰۰)، لت (۱۰۲)، ہمیشگی کا وہم (۱۰۴)۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-104-2-my"></span></div>
+        <textarea class="note-ta" id="note-z-104-2-my" placeholder="He thinks his wealth will make him immortal. Is there anything you accumulate, count, or hold onto that is secretly serving as a defence against your own mortality?" oninput="autoSave('z-104-2-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-104-2-after"></span></div>
+        <textarea class="note-ta" id="note-z-104-2-after" placeholder="What changed after deeper study?" oninput="autoSave('z-104-2-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-middle"></div>
+  <div class="era-label en-blk">Middle Makki · 615–622 CE · The Framework and The Correction</div>
+  <div class="era-label-ur ur-blk">وسطی مکی · ڈھانچہ اور اصلاح</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">7 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-z-25-67" style="border-color:var(--tealbdr)">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-25-67')">
+    <span class="rev-badge rev-middle en-blk">Rev. #42</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #42</span>
+    <span class="card-ref">Al-Furqan 25:67</span>
+    <span style="font-family:var(--font-head);font-size:7px;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);text-transform:uppercase;flex-shrink:0">Quranic Correction</span>
+    <span class="card-preview">وَالَّذِينَ إِذَا أَنفَقُوا لَمْ يُسْرِفُوا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَالَّذِينَ إِذَا أَنفَقُوا لَمْ يُسْرِفُوا وَلَمْ يَقْتُرُوا وَكَانَ بَيْنَ ذَٰلِكَ قَوَامًا</div>
+    <div class="ayah-tr-en en-blk">"And those who, when they spend, are neither extravagant nor miserly, but hold a just balance between those extremes."</div>
+    <div class="ayah-tr-ur ur-blk">«اور وہ جو جب خرچ کریں تو نہ فضول خرچی کریں نہ کنجوسی — بلکہ دونوں کے درمیان اعتدال ہو۔»</div>
+    <div class="ayah-ref-line">Al-Furqan 25:67</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Quranic Correction</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — قرآنی اصلاح</div>
+      <div class="ctx-txt en-blk">Al-Furqan, the 42nd surah, describes the Ibad al-Rahman — the servants of the Most Merciful. This is a description of people who have mastered the dunya-akhirah balance. This ayah is the Quranic corrective to all the condemnation ayat that came before it. The Quran does not say: spend nothing. It says: spend, but with Qawam — an upright middle position. Zuhd in the Quran is not asceticism. This ayah prevents that misreading permanently.</div>
+      <div class="ctx-txt-ur ur-blk">الفرقان — ۴۲ویں سورت۔ عباد الرحمن کی صفت۔ یہ آیت تمام پچھلی تشخیصی آیات کی قرآنی اصلاح ہے۔ قوام — درمیانی راستہ۔ قرآن کا زہد ترکِ دنیا نہیں — اس آیت نے یہ غلط فہمی ہمیشہ کے لیے دور کر دی۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">قَوَامًا</span> <span class="root-fm">ق-و-م · Qawam — the upright, just middle</span>
+      <div class="root-mn en-blk">From Q-W-M: to stand upright. Qawam: the middle that stands firm — not leaning toward extravagance, not leaning toward miserliness. The same root gives Qiyam (standing in prayer), Qayyim (the uprightly maintained), and Qiwamah (responsibility, uprightness). Zuhd is not a collapsing toward poverty — it is a standing upright in the middle where neither extreme pulls you down.</div>
+      <div class="root-mn-ur ur-blk">ق-و-م — سیدھا کھڑا ہونا۔ قوام: درمیان جو مضبوطی سے کھڑا ہو۔ اسی سے قیام، قیّم، قوامہ۔ زہد افلاس کی طرف جھکنا نہیں — درمیان میں سیدھا کھڑا ہونا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">The Quranic Correction — What This Ayah Permanently Establishes</div>
+      <div class="uniq-lbl-ur ur-blk">قرآنی اصلاح — یہ آیت جو ہمیشہ کے لیے طے کرتی ہے</div>
+      <div class="uniq-txt en-blk">This ayah prevents two misreadings of everything that came before it: (1) The condemnation of dunya does not mean you stop engaging with it. You spend — but with Qawam. (2) Zuhd is not the same as material poverty or ascetic withdrawal. The servants of the Most Merciful are not described as those who possess nothing — they are described as those who spend with a just balance. Zuhd is internal orientation, not external condition.</div>
+      <div class="uniq-txt-ur ur-blk">یہ آیت دو غلط فہمیاں دور کرتی ہے: (۱) دنیا کی تشخیص کا مطلب اس سے انقطاع نہیں — خرچ کرو، مگر قوام کے ساتھ۔ (۲) زہد مادی افلاس یا ترکِ دنیا نہیں۔ عباد الرحمن کا وصف یہ نہیں کہ کچھ نہیں رکھتے — بلکہ درست توازن سے خرچ کرتے ہیں۔ زہد اندرونی رخ ہے، ظاہری حال نہیں۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-25-67-my"></span></div>
+        <textarea class="note-ta" id="note-z-25-67-my" placeholder="Qawam — the upright middle. Where do you sit between extravagance and miserliness right now? Is your balance driven by Zuhd or by other reasons?" oninput="autoSave('z-25-67-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-25-67-after"></span></div>
+        <textarea class="note-ta" id="note-z-25-67-after" placeholder="What changed after deeper study?" oninput="autoSave('z-25-67-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-28-60">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-28-60')">
+    <span class="rev-badge rev-middle en-blk">Rev. #49</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #49</span>
+    <span class="card-ref">Al-Qasas 28:60</span>
+    <span class="card-preview">وَمَا أُوتِيتُم مِّن شَيْءٍ فَمَتَاعُ الْحَيَاةِ الدُّنْيَا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَا أُوتِيتُم مِّن شَيْءٍ فَمَتَاعُ الْحَيَاةِ الدُّنْيَا وَزِينَتُهَا ۚ وَمَا عِندَ اللَّهِ خَيْرٌ وَأَبْقَىٰ ۚ أَفَلَا تَعْقِلُونَ</div>
+    <div class="ayah-tr-en en-blk">"And whatever you have been given of things — it is the provision and adornment of worldly life. And what is with Allah is better and more lasting. Will you not use reason?"</div>
+    <div class="ayah-tr-ur ur-blk">«اور جو کچھ تمہیں دیا گیا ہے وہ دنیاوی زندگی کا سامان اور زینت ہے — اور جو اللہ کے پاس ہے وہ بہتر اور باقی رہنے والا ہے۔ کیا تم عقل سے کام نہیں لیتے؟»</div>
+    <div class="ayah-ref-line">Al-Qasas 28:60</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Qasas — 49th surah — contains the story of Qarun, who said "I was given this wealth because of knowledge I have." This ayah follows the Quran's engagement with Qarun as the archetype of dunya-intoxication. The Quran here addresses everyone: whatever you have been given — any of it — is Mata (provision, something to be used) and Ziyynah (adornment). Both words signal temporary, functional value. Mata is what a traveler uses on a journey; you do not build a house around provisions meant for the road.</div>
+      <div class="ctx-txt-ur ur-blk">القصص — ۴۹ویں سورت — قارون کا قصہ۔ قارون: دنیا کے نشے کا نمونہ۔ یہ آیت سب کو مخاطب: جو بھی دیا گیا — متاع اور زینت ہے۔ متاع: مسافر کا سامان — راستے کا سامان، گھر نہیں بنانا اس سے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">مَتَاعُ</span> <span class="root-fm">م-ت-ع · Mata — provision for a journey, temporary use</span>
+      <div class="root-mn en-blk">M-T-A: provision, something to be used and consumed on a journey. The same root gives Istimta (temporary enjoyment) and Matta (to let enjoy). Mata is not evil — it is functionally appropriate for its purpose. The error is treating journey provisions as a permanent dwelling. This is the Prophetic hadith made Quranic: the stranger or traveler who uses what is needed and moves on.</div>
+      <div class="root-mn-ur ur-blk">م-ت-ع — سفر کا سامان، جو استعمال ہو اور ختم ہو۔ متاع برا نہیں — اپنے مقصد کے لیے مناسب ہے۔ غلطی سفری سامان کو مستقل قیام سمجھنا ہے۔ یہ حدیث کا قرآنی بیان: مسافر جو ضرورت کا استعمال کرے اور آگے بڑھے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The Quran closes with Afala taqiloon — will you not use reason? Zuhd is presented here as a rational conclusion, not merely a spiritual one. The comparison is logical: X is temporary and lesser; Y is permanent and greater. A reasonable person chooses Y. The failure to practice Zuhd is, in this ayah, a failure of reasoning — not just a spiritual failure. This reframes Zuhd as something accessible through intellect, not only through spiritual states.</div>
+      <div class="uniq-txt-ur ur-blk">آیت افلا تعقلون پر ختم: زہد ایک عقلی نتیجہ ہے، صرف روحانی نہیں۔ موازنہ منطقی ہے: X عارضی اور کم، Y دائمی اور زیادہ — عاقل Y منتخب کرتا ہے۔ اس آیت میں زہد نہ کرنا روحانی کمزوری نہیں — عقل کی ناکامی ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-28-60-my"></span></div>
+        <textarea class="note-ta" id="note-z-28-60-my" placeholder="Afala taqiloon — will you not reason? Where does your attachment to dunya reflect a failure of reasoning rather than a spiritual weakness?" oninput="autoSave('z-28-60-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-28-60-after"></span></div>
+        <textarea class="note-ta" id="note-z-28-60-after" placeholder="What changed after deeper study?" oninput="autoSave('z-28-60-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-28-77" style="border-color:var(--tealbdr)">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-28-77')">
+    <span class="rev-badge rev-middle en-blk">Rev. #49</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #49</span>
+    <span class="card-ref">Al-Qasas 28:77</span>
+    <span style="font-family:var(--font-head);font-size:7px;letter-spacing:.5px;padding:2px 6px;border-radius:4px;background:var(--tealdim);border:1px solid var(--tealbdr);color:var(--teal);text-transform:uppercase;flex-shrink:0">Quranic Correction</span>
+    <span class="card-preview">وَلَا تَنسَ نَصِيبَكَ مِنَ الدُّنْيَا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَابْتَغِ فِيمَا آتَاكَ اللَّهُ الدَّارَ الْآخِرَةَ ۖ وَلَا تَنسَ نَصِيبَكَ مِنَ الدُّنْيَا ۖ وَأَحْسِن كَمَا أَحْسَنَ اللَّهُ إِلَيْكَ ۖ وَلَا تَبْغِ الْفَسَادَ فِي الْأَرْضِ ۖ إِنَّ اللَّهَ لَا يُحِبُّ الْمُفْسِدِينَ</div>
+    <div class="ayah-tr-en en-blk">"But seek, through what Allah has given you, the Home of the Hereafter — and do not forget your share of the world — and be excellent as Allah has been excellent to you — and do not seek corruption in the land. Indeed, Allah does not love corrupters."</div>
+    <div class="ayah-tr-ur ur-blk">«اور جو اللہ نے تمہیں دیا ہے اس سے آخرت کا گھر تلاش کرو — اور دنیا سے اپنا حصہ فراموش نہ کرو — اور احسان کرو جیسے اللہ نے تم پر کیا — اور زمین میں فساد مت ڈھونڈو۔»</div>
+    <div class="ayah-ref-line">Al-Qasas 28:77</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Quranic Correction</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — قرآنی اصلاح</div>
+      <div class="ctx-txt en-blk">Same surah as 28:60 — spoken to Qarun by people of knowledge. The Quran's complete instruction on the dunya-akhirah relationship in one ayah. The sequence within the ayah is decisive: (1) use what you have been given to seek akhirah — the dunya is the means, not the end; (2) do not forget your share of the world — poverty and withdrawal are not commanded; (3) be excellent — Ihsan is the standard; (4) do not seek corruption — the boundary. This is the complete Quranic framework for engaging with the world while practicing Zuhd.</div>
+      <div class="ctx-txt-ur ur-blk">اسی سورت میں — اہلِ علم کا قارون کو جواب۔ دنیا-آخرت تعلق پر قرآن کی مکمل تعلیم ایک آیت میں: (۱) جو ملا اس سے آخرت تلاش کرو — دنیا وسیلہ ہے منزل نہیں؛ (۲) دنیا کا حصہ فراموش مت کرو — افلاس اور انقطاع مطلوب نہیں؛ (۳) احسان کرو؛ (۴) فساد مت چاہو۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">نَصِيبَكَ</span> <span class="root-fm">ن-ص-ب · Naseeb — your appointed share, what is set for you</span>
+      <div class="root-mn en-blk">N-S-B: to set upright, to appoint, to establish. Naseeb: your appointed share — what has been set for you from the world. The Quran says: do not forget it. This is profound: Zuhd does not mean refusing your Naseeb. Allah has appointed a share of the world for you. Refusing it is not Zuhd — it may be a form of ingratitude. Zuhd means taking your Naseeb without letting it take you.</div>
+      <div class="root-mn-ur ur-blk">ن-ص-ب — سیدھا کھڑا کرنا، مقرر کرنا۔ نصیب: تمہارا مقررہ حصہ۔ قرآن کہتا ہے: فراموش مت کرو۔ زہد کا مطلب نصیب ٹھکرانا نہیں — ناشکری ہو سکتی ہے۔ زہد: نصیب لو مگر اسے اپنے اندر نہ اترنے دو۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">The Quranic Correction — The Most Important Corrective in the Entire Zuhd Framework</div>
+      <div class="uniq-lbl-ur ur-blk">قرآنی اصلاح — پورے زہد ڈھانچے میں سب سے اہم اصلاح</div>
+      <div class="uniq-txt en-blk">Do not forget your share of the world. This single instruction is the Quran's permanent prevention of asceticism. Zuhd in the Quran is not: refuse the world. It is: use what Allah has given you to seek the next life, without forgetting what is legitimately yours in this one, while maintaining excellence in all you do, and avoiding corruption. This is not a compromise — it is the higher standard. Monasticism and world-rejection are explicitly rejected by the command "do not forget your share."</div>
+      <div class="uniq-txt-ur ur-blk">دنیا سے اپنا حصہ فراموش نہ کرو۔ یہ ایک جملہ قرآن کی طرف سے رہبانیت کی مستقل ممانعت ہے۔ قرآن کا زہد: دنیا سے انکار نہیں — جو ملا اس سے آخرت تلاش کرو، اپنا جائز حصہ فراموش کیے بغیر، احسان کے ساتھ، فساد سے بچتے ہوئے۔ یہ سمجھوتہ نہیں — یہ اعلیٰ معیار ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-28-77-my"></span></div>
+        <textarea class="note-ta" id="note-z-28-77-my" placeholder="Do not forget your share of the world. Have you ever confused Zuhd with neglecting legitimate worldly responsibilities? How does this ayah reframe that?" oninput="autoSave('z-28-77-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-28-77-after"></span></div>
+        <textarea class="note-ta" id="note-z-28-77-after" placeholder="What changed after deeper study?" oninput="autoSave('z-28-77-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-12-20">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-12-20')">
+    <span class="rev-badge rev-middle en-blk">Rev. #53</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #53</span>
+    <span class="card-ref">Yusuf 12:20</span>
+    <span class="card-preview">وَكَانُوا فِيهِ مِنَ الزَّاهِدِينَ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَشَرَوْهُ بِثَمَنٍ بَخْسٍ دَرَاهِمَ مَعْدُودَةٍ وَكَانُوا فِيهِ مِنَ الزَّاهِدِينَ</div>
+    <div class="ayah-tr-en en-blk">"And they sold him for a cheap price — a few counted dirhams — and they were, concerning him, of those who had Zuhd."</div>
+    <div class="ayah-tr-ur ur-blk">«اور انہوں نے اسے تھوڑی قیمت پر بیچ دیا — چند گنے ہوئے درہموں میں — اور وہ اس کے بارے میں زاہدین میں سے تھے۔»</div>
+    <div class="ayah-ref-line">Yusuf 12:20</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context — The Only Explicit Use of the Root Z-H-D in the Quran</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق — قرآن میں جڑ ز-ه-د کا واحد صریح استعمال</div>
+      <div class="ctx-txt en-blk">Surah Yusuf — 53rd surah — the only place in the entire Quran where the root Z-H-D appears. The brothers of Yusuf, having thrown him in a well, sold him to a passing caravan for a few counted dirhams. They had Zuhd toward him — they were indifferent to him, they regarded him as worth little. They applied detachment to a prophet of Allah, a person of immense spiritual value, because they could not perceive what he was. This is the inversion that defines the concept.</div>
+      <div class="ctx-txt-ur ur-blk">سورہ یوسف — ۵۳ویں سورت — پورے قرآن میں جڑ ز-ه-د کا واحد مقام۔ یوسف علیہ السلام کے بھائیوں نے انہیں چند درہموں میں بیچا — وہ ان کے بارے میں زاہدین میں سے تھے۔ انہوں نے ایک نبی پر — ایک عظیم روحانی شخصیت پر — زہد اختیار کیا کیونکہ قدر نہ پہچانی۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah — The Definitive Quranic Definition by Inversion</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ — الٹی تعریف سے قرآنی اصل معنی</div>
+      <span class="root-wd">الزَّاهِدِينَ</span> <span class="root-fm">ز-ه-د · Az-zahideen — those who practice Zuhd, the indifferent ones</span>
+      <div class="root-mn en-blk">Z-H-D: to be indifferent to, to regard as beneath pursuit. The brothers are called az-zahideen — not as a compliment but as an explanation of their catastrophic misjudgement. They correctly perceived the dirhams (low value) but failed to perceive the prophetic reality they were selling. The Quranic lesson: Zuhd is only correct when applied to what is genuinely of low value. The discipline is in accurate perception — seeing what is truly precious and what is truly lesser.</div>
+      <div class="root-mn-ur ur-blk">ز-ه-د — بے رغبت ہونا، ناقابلِ حصول سمجھنا۔ بھائی زاہدین کہلائے — تعریف نہیں، غلطی کی وضاحت۔ انہوں نے درہموں کی کم قدر پہچانی لیکن جو بیچ رہے تھے اس کی حقیقت نہ پہچانی۔ قرآنی سبق: زہد صرف اسی پر درست جو واقعی کم قدر ہو۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Foundation of the Entire Concept</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے — پورے تصور کی بنیاد</div>
+      <div class="uniq-txt en-blk">The only explicit use of Z-H-D in the Quran defines it by catastrophic misapplication. Zuhd is the right response to something genuinely worthless. Applied correctly: indifference to dunya, which is truly temporary and lesser. Applied incorrectly — as the brothers applied it — it is the most devastating spiritual blindness. This makes accurate perception the prerequisite of all Zuhd: you must first be able to see what is precious and what is not. Muraqabah — awareness that Allah is watching — is what gives that perception. Without it, you risk having Zuhd toward the wrong things.</div>
+      <div class="uniq-txt-ur ur-blk">قرآن میں ز-ه-د کا واحد صریح استعمال اسے غلط اطلاق کے ذریعے تعریف کرتا ہے۔ درست اطلاق: دنیا سے بے رغبتی — جو واقعی عارضی ہے۔ غلط اطلاق: روحانی اندھا پن۔ اس لیے ادراک زہد کی شرط ہے۔ مراقبہ وہ ادراک دیتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-12-20-my"></span></div>
+        <textarea class="note-ta" id="note-z-12-20-my" placeholder="The brothers had Zuhd toward a prophet. Is there anything in your life toward which you have become indifferent that may actually carry great value you are not seeing?" oninput="autoSave('z-12-20-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-12-20-after"></span></div>
+        <textarea class="note-ta" id="note-z-12-20-after" placeholder="What changed after deeper study?" oninput="autoSave('z-12-20-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-6-32">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-6-32')">
+    <span class="rev-badge rev-middle en-blk">Rev. #55</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #55</span>
+    <span class="card-ref">Al-Anam 6:32</span>
+    <span class="card-preview">وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا لَعِبٌ وَلَهْوٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا لَعِبٌ وَلَهْوٌ ۖ وَلَلدَّارُ الْآخِرَةُ خَيْرٌ لِّلَّذِينَ يَتَّقُونَ ۗ أَفَلَا تَعْقِلُونَ</div>
+    <div class="ayah-tr-en en-blk">"And the worldly life is not but amusement and diversion — and the home of the Hereafter is better for those who have Taqwa. Will you not reason?"</div>
+    <div class="ayah-tr-ur ur-blk">«اور دنیاوی زندگی کھیل اور تماشے کے سوا کچھ نہیں — اور آخرت کا گھر ان لوگوں کے لیے بہتر ہے جو تقویٰ رکھتے ہیں۔ کیا تم عقل سے کام نہیں لیتے؟»</div>
+    <div class="ayah-ref-line">Al-Anam 6:32</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Anam — 55th surah — is a comprehensive Makki surah on theology and the signs of Allah. This ayah appears after addressing those who reject the akhirah as impossible. The Quran's response: the worldly life itself, when examined, is La'ib (play — purposeless activity) and Lahw (diversion — amusement that takes you away from what matters). The combination is precise: not merely entertainment, but entertainment that diverts you from purpose. The akhirah is better specifically for the people of Taqwa — connecting Zuhd back to Taqwa directly.</div>
+      <div class="ctx-txt-ur ur-blk">الانعام — ۵۵ویں سورت — آخرت کو ناممکن ماننے والوں کے جواب میں۔ لعب: بے مقصد سرگرمی۔ لہو: تفریح جو مقصد سے ہٹائے۔ دونوں ملاکر: وہ تفریح جو تمہیں اصل سے موڑ دے۔ آخرت تقویٰ والوں کے لیے — زہد اور تقویٰ کا براہِ راست تعلق۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">لَعِبٌ وَلَهْوٌ</span> <span class="root-fm">ل-ع-ب · Laib — play without purpose · ل-ه-و · Lahw — diversion from what matters</span>
+      <div class="root-mn en-blk">La'ib (L-A-B): play, purposeless activity — the child who plays without direction. Lahw (L-H-W): diversion, the same root as in Al-Takathur's Alhakum. Together: the world is activity without ultimate purpose that also diverts you from ultimate purpose. Neither is necessarily sinful in itself — it is the totality of a life spent this way that constitutes the problem Zuhd addresses.</div>
+      <div class="root-mn-ur ur-blk">لعب — بے مقصد کھیل۔ لہو — مقصد سے موڑنے والی تفریح۔ اکیلے گناہ نہیں — پوری زندگی اس طرح گزارنا وہ مسئلہ ہے جس کا زہد حل ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The connection between Zuhd and Taqwa made explicit: the akhirah is better for those with Taqwa. You cannot fully practice Zuhd without Taqwa — the guarding of the heart that keeps it oriented correctly. Zuhd without Taqwa is just aesthetic minimalism. Taqwa without Zuhd is guarding that has not yet cleared the heart of its attachments. The two are interdependent — which is why they appear in sequence in the five-concept study.</div>
+      <div class="uniq-txt-ur ur-blk">زہد اور تقویٰ کا تعلق صریح: آخرت تقویٰ والوں کے لیے بہتر ہے۔ تقویٰ کے بغیر زہد محض جمالیاتی کمی ہے۔ زہد کے بغیر تقویٰ وہ حفاظت ہے جس نے ابھی دل کو وابستگیوں سے خالی نہیں کیا۔ دونوں لازم و ملزوم۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-6-32-my"></span></div>
+        <textarea class="note-ta" id="note-z-6-32-my" placeholder="Laib and Lahw: purposeless activity that diverts from purpose. What in your daily life fits this description most honestly?" oninput="autoSave('z-6-32-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-6-32-after"></span></div>
+        <textarea class="note-ta" id="note-z-6-32-after" placeholder="What changed after deeper study?" oninput="autoSave('z-6-32-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-18-28">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-18-28')">
+    <span class="rev-badge rev-middle en-blk">Rev. #69</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #69</span>
+    <span class="card-ref">Al-Kahf 18:28</span>
+    <span class="card-preview">وَلَا تَعْدُ عَيْنَاكَ عَنْهُمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاصْبِرْ نَفْسَكَ مَعَ الَّذِينَ يَدْعُونَ رَبَّهُم بِالْغَدَاةِ وَالْعَشِيِّ يُرِيدُونَ وَجْهَهُ ۖ وَلَا تَعْدُ عَيْنَاكَ عَنْهُمْ تُرِيدُ زِينَةَ الْحَيَاةِ الدُّنْيَا</div>
+    <div class="ayah-tr-en en-blk">"And keep yourself patient with those who call upon their Lord morning and evening, seeking His face — and do not let your eyes pass beyond them, desiring the adornments of worldly life."</div>
+    <div class="ayah-tr-ur ur-blk">«اور اپنے آپ کو ان لوگوں کے ساتھ روکے رکھو جو صبح و شام اپنے رب کو پکارتے ہیں اس کا چہرہ چاہتے ہوئے — اور تمہاری آنکھیں انہیں چھوڑ کر دنیاوی زندگی کی زینت کی طرف نہ جائیں۔»</div>
+    <div class="ayah-ref-line">Al-Kahf 18:28</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Kahf — 69th surah. The wealthy Quraysh leaders had asked the Prophet ﷺ to send away the poor companions (Bilal, Suhayb, Ammar) when meeting with them — they found sitting with poor people beneath their dignity. This ayah is the direct response: hold yourself with those who seek Allah's face; do not let your eyes wander toward those with worldly adornment. This is the only ayah that addresses Zuhd in a communal and social context — who you sit with is a practice of Zuhd.</div>
+      <div class="ctx-txt-ur ur-blk">الکہف — ۶۹ویں سورت۔ قریش کے سردار غریب صحابہ (بلال، صہیب، عمار) کی موجودگی میں بیٹھنا اپنی توہین سمجھتے تھے۔ یہ آیت براہِ راست جواب: جو اللہ کا چہرہ چاہتے ہیں ان کے ساتھ رہو؛ زینت والوں کی طرف نظر نہ جائے۔ زہد کا سماجی پہلو: کس کے ساتھ بیٹھنا زہد کی عملی تربیت ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">تَعْدُ عَيْنَاكَ</span> <span class="root-fm">ع-د-و · Ta'du — to pass beyond, to transgress with the eye</span>
+      <div class="root-mn en-blk">From A-D-W: to go beyond a boundary, to transgress. Ta'du aynak: your two eyes passing beyond — the gaze that reaches past what is in front of you toward what glitters further away. The Quran is describing the mechanism of worldly distraction at the level of the gaze itself. Before the hand reaches for dunya, the eye moves toward it. Zuhd at this level is a discipline of attention — where you direct your eyes, you direct your heart.</div>
+      <div class="root-mn-ur ur-blk">ع-د-و — حد سے گزرنا۔ تعدُ عیناک: تمہاری دو آنکھیں حد سے گزریں۔ دنیاوی غفلت کا طریقہ نگاہ کی سطح پر: ہاتھ پہنچنے سے پہلے آنکھ موڑتی ہے۔ زہد توجہ کا نظم ہے — نگاہ جہاں جائے دل وہاں جاتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The only ayah that addresses Zuhd as a social and attentional practice. It has two dimensions: (1) who you keep company with — stay with those seeking Allah's face; (2) where your eyes go — do not let them stray toward worldly adornment. Both are practices of Zuhd before any internal state is achieved. This is the Quranic practical method: begin with the company you keep and the direction of your gaze. The inner follows.</div>
+      <div class="uniq-txt-ur ur-blk">واحد آیت جو زہد کو سماجی اور توجہ کی عملی مشق کے طور پر بیان کرتی ہے۔ دو پہلو: (۱) کس کے ساتھ رہو؛ (۲) نگاہ کہاں جائے۔ دونوں وہ عمل ہیں جو اندرونی کیفیت سے پہلے شروع ہوتے ہیں۔ قرآنی عملی طریقہ: صحبت اور نگاہ سے شروع کرو۔ اندرونی پیروی کرتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-18-28-my"></span></div>
+        <textarea class="note-ta" id="note-z-18-28-my" placeholder="Do not let your eyes pass beyond them toward worldly adornment. What does your gaze tend toward? What does that reveal about where your heart has already gone?" oninput="autoSave('z-18-28-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-18-28-after"></span></div>
+        <textarea class="note-ta" id="note-z-18-28-after" placeholder="What changed after deeper study?" oninput="autoSave('z-18-28-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-18-45">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-18-45')">
+    <span class="rev-badge rev-middle en-blk">Rev. #69</span>
+    <span class="rev-badge rev-middle ur-blk">ترتیب #69</span>
+    <span class="card-ref">Al-Kahf 18:45-46</span>
+    <span class="card-preview">وَاضْرِبْ لَهُم مَّثَلَ الْحَيَاةِ الدُّنْيَا</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَاضْرِبْ لَهُم مَّثَلَ الْحَيَاةِ الدُّنْيَا كَمَاءٍ أَنزَلْنَاهُ مِنَ السَّمَاءِ فَاخْتَلَطَ بِهِ نَبَاتُ الْأَرْضِ فَأَصْبَحَ هَشِيمًا تَذْرُوهُ الرِّيَاحُ ۗ وَكَانَ اللَّهُ عَلَىٰ كُلِّ شَيْءٍ مُّقْتَدِرًا ۞ الْمَالُ وَالْبَنُونَ زِينَةُ الْحَيَاةِ الدُّنْيَا ۖ وَالْبَاقِيَاتُ الصَّالِحَاتُ خَيْرٌ عِندَ رَبِّكَ ثَوَابًا وَخَيْرٌ أَمَلًا</div>
+    <div class="ayah-tr-en en-blk">"And present to them the example of worldly life — like rain We send down from the sky; the plants of the earth absorb it, then it becomes dry remnants scattered by the winds. And Allah is ever over all things All-Powerful. Wealth and children are the adornment of worldly life — but the enduring good deeds are better with your Lord in reward and better in hope."</div>
+    <div class="ayah-tr-ur ur-blk">«اور انہیں دنیاوی زندگی کی مثال دو — جیسے آسمان سے اتارا ہوا پانی، زمین کی نباتات اس سے ملی جلی، پھر چورا ہو گئی جسے ہوائیں اڑاتی ہیں — اللہ ہر چیز پر قادر ہے۔ مال اور بیٹے دنیاوی زندگی کی زینت ہیں — اور باقی رہنے والی نیکیاں تمہارے رب کے پاس ثواب اور امید میں بہتر ہیں۔»</div>
+    <div class="ayah-ref-line">Al-Kahf 18:45-46</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">The same surah, same context as 18:28. The Quran now gives a parable — its most powerful teaching tool. Rain descends, plants flourish abundantly, then they become Hasheem — dry crushed remnants scattered by the wind. Not destroyed violently but dried, crumbled, blown away. The Quran uses the same image for dunya that 57:20 will use later — a Madani surah confirming and completing the Makki teaching. Al-Baqiyat al-Salihat (the enduring righteous deeds) are explicitly contrasted: they remain.</div>
+      <div class="ctx-txt-ur ur-blk">اسی سورت کا سیاق۔ قرآن مثال دیتا ہے: بارش اترتی ہے، نباتات خوب اگتی ہیں، پھر ہشیم — خشک ریزے جنہیں ہوا اڑاتی ہے۔ تشدد سے نہیں — سوکھ کر، ٹوٹ کر، بکھر کر۔ باقیات الصالحات: وہ رہتی ہیں۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْبَاقِيَاتُ الصَّالِحَاتُ</span> <span class="root-fm">ب-ق-ي · Al-Baqiyat — the enduring ones · ص-ل-ح · Al-Salihat — the righteous</span>
+      <div class="root-mn en-blk">Baqiya (B-Q-Y): to remain, to endure, to last. Al-Baqiyat al-Salihat: the deeds that endure — SubhanAllah, Alhamdulillah, La ilaha illallah, Allahu Akbar. While all of dunya (including its greatest representatives — wealth and children) is Zinah (adornment, temporary beauty), these deeds are Baqiyat. The contrast is precise and permanent: nothing in dunya endures; the righteous deeds do.</div>
+      <div class="root-mn-ur ur-blk">باقی (ب-ق-ی) — رہنا، دائم رہنا۔ باقیات الصالحات: سبحان اللہ، الحمد للہ، لا الہ الا اللہ، اللہ اکبر۔ دنیا کی بڑی سے بڑی چیز — مال اور بیٹے — زینت ہیں، عارضی۔ یہ اعمال باقی ہیں۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The Quran's most complete visual parable of dunya, paired with its explicit identification of what endures. Wealth and children are named directly — not minor pleasures but the greatest goods dunya offers — and called Zinah (adornment). Adornment is real, beautiful, and valuable in its place. But it is surface. The parable completes what the ayah says: even in their height of flourishing, the plants are already on their way to becoming dry remnants. Zuhd is perceiving the Hasheem within the flourishing.</div>
+      <div class="uniq-txt-ur ur-blk">دنیا کی سب سے مکمل بصری مثال، اور جو باقی رہتا ہے اس کی صریح نشاندہی۔ مال اور بیٹے — دنیا کی سب سے بڑی نعمتیں — زینت کہلائے۔ زینت حقیقی، خوبصورت، اپنی جگہ قیمتی ہے — لیکن سطح ہے۔ زہد: کمال کے وقت بھی ہشیم کو دیکھنا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-18-45-my"></span></div>
+        <textarea class="note-ta" id="note-z-18-45-my" placeholder="Wealth and children are adornment — the greatest goods dunya offers, and they are still only surface. What do you treat as Baqiyat that is actually Zinah?" oninput="autoSave('z-18-45-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-18-45-after"></span></div>
+        <textarea class="note-ta" id="note-z-18-45-after" placeholder="What changed after deeper study?" oninput="autoSave('z-18-45-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider">
+  <div class="era-dot era-madani"></div>
+  <div class="era-label en-blk">Madani · 622–632 CE · The Completion</div>
+  <div class="era-label-ur ur-blk">مدنی · تکمیل</div>
+  <div class="era-line"></div>
+  <div class="era-count en-blk">6 ayat</div>
+</div>
+
+<div class="ayah-card" id="card-z-3-185">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-3-185')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Imran 3:185</span>
+    <span class="card-preview">وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا مَتَاعُ الْغُرُورِ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ ۗ وَإِنَّمَا تُوَفَّوْنَ أُجُورَكُمْ يَوْمَ الْقِيَامَةِ ۖ فَمَن زُحْزِحَ عَنِ النَّارِ وَأُدْخِلَ الْجَنَّةَ فَقَدْ فَازَ ۗ وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا مَتَاعُ الْغُرُورِ</div>
+    <div class="ayah-tr-en en-blk">"Every soul shall taste death — and you will only be given your full reward on the Day of Resurrection. So whoever is drawn away from the Fire and admitted to Paradise has succeeded — and what is the life of this world except the enjoyment of delusion."</div>
+    <div class="ayah-tr-ur ur-blk">«ہر نفس کو موت کا مزہ چکھنا ہے — اور قیامت کے دن پوری طرح بدلہ دیا جائے گا — جو جہنم سے بچا لیا گیا اور جنت میں داخل کیا گیا وہ کامیاب ہوا — اور دنیاوی زندگی دھوکے کا سامان ہے۔»</div>
+    <div class="ayah-ref-line">Al-Imran 3:185</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Imran is a Madani surah addressed to a Muslim community now living in political reality — governance, battle, treaties, the aftermath of Uhud. The Quran here grounds Zuhd not in Makki theological argument but in the lived experience of a community facing death directly. Kullu nafsin dha'iqatul mawt — every single soul, without exception, will taste death. In this context, Meta al-Ghurur lands differently: the delusion is not abstract — it is the false sense of security of those who have not yet tasted what every soul will taste.</div>
+      <div class="ctx-txt-ur ur-blk">آل عمران — مدنی سورت — سیاسی حقیقت میں جینے والی مسلم جماعت کو۔ احد کے بعد۔ کل نفسٍ ذائقۃ الموت — کوئی استثنا نہیں۔ اس سیاق میں متاع الغرور: وہم نہیں جو ابھی نہیں آیا — بلکہ وہ دھوکا جو اس سے پہلے ہے جو سب چکھیں گے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">الْغُرُورِ</span> <span class="root-fm">غ-ر-ر · Ghurur — deception, false security, delusion</span>
+      <div class="root-mn en-blk">Gh-R-R: to deceive, to make someone heedless through false promise. Al-Gharur is one of the names of Shaytan — the great deceiver. Ghurur: the deception that comes from being fooled by surface appearances. Mata al-Ghurur: the provision/enjoyment of delusion. The dunya does not just distract — it actively deceives. It presents itself as permanent, as the ultimate good, as worth grasping. Zuhd is the seeing-through of that deception.</div>
+      <div class="root-mn-ur ur-blk">غ-ر-ر — دھوکا دینا، جھوٹے وعدے سے غافل کرنا۔ الغرور شیطان کے ناموں میں سے ایک۔ متاع الغرور: دھوکے کا سامان۔ دنیا صرف مشغول نہیں کرتی — فعّال طور پر دھوکا دیتی ہے — خود کو دائمی اور سب سے بڑی بھلائی کے طور پر پیش کرتی ہے۔ زہد اس دھوکے کا دیکھنا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The Quran's definition of success, stated plainly: not wealth, status, legacy, or achievement — being drawn away from the Fire and entering Paradise. Everything before that definition is Mata al-Ghurur. This ayah makes Zuhd a matter of accurate definition: what does success actually mean? Once that is correctly defined, Zuhd follows naturally. The attachment to dunya is sustained by a false definition of success — Zuhd is what happens when the correct definition takes hold.</div>
+      <div class="uniq-txt-ur ur-blk">کامیابی کی قرآنی تعریف صاف: جہنم سے بچنا اور جنت میں داخل ہونا۔ اس سے پہلے سب متاع الغرور ہے۔ زہد درست تعریف کا معاملہ ہے: کامیابی کیا ہے؟ ایک بار درست تعریف ذہن میں ہو، زہد قدرتی طور پر آتا ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-3-185-my"></span></div>
+        <textarea class="note-ta" id="note-z-3-185-my" placeholder="What is your operational definition of success right now — the one that actually drives your choices — and how does it compare to the Quranic definition in this ayah?" oninput="autoSave('z-3-185-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-3-185-after"></span></div>
+        <textarea class="note-ta" id="note-z-3-185-after" placeholder="What changed after deeper study?" oninput="autoSave('z-3-185-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-4-77">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-4-77')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">An-Nisa 4:77</span>
+    <span class="card-preview">قُلْ مَتَاعُ الدُّنْيَا قَلِيلٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">قُلْ مَتَاعُ الدُّنْيَا قَلِيلٌ وَالْآخِرَةُ خَيْرٌ لِّمَنِ اتَّقَىٰ وَلَا تُظْلَمُونَ فَتِيلًا</div>
+    <div class="ayah-tr-en en-blk">"Say: the enjoyment of this world is little — and the Hereafter is better for he who has Taqwa — and you will not be wronged even as much as a thread on a date stone."</div>
+    <div class="ayah-tr-ur ur-blk">«کہو: دنیا کا فائدہ بہت کم ہے — اور آخرت ان کے لیے بہتر ہے جو تقویٰ رکھتے ہیں — اور تم پر کھجور کی گٹھلی کے دھاگے جتنا بھی ظلم نہیں کیا جائے گا۔»</div>
+    <div class="ayah-ref-line">An-Nisa 4:77</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">An-Nisa addresses a community that had been restrained from fighting for years and now asked why. The response culminates here: the provision of this world is Qaleel — little. This is the Quran's direct value assessment, delivered as a prophetic statement (Qul — Say). Not a metaphor, not a parable — a direct verdict. And it closes with an assurance: no effort, no sacrifice, no good deed will be lost even by the amount of a thread on a date stone. Zuhd toward dunya is safe — nothing of value will be missed.</div>
+      <div class="ctx-txt-ur ur-blk">النساء — جنگ سے روکے گئے جماعت کو۔ متاع الدنیا قلیل — براہِ راست فیصلہ، حکمِ نبوی (قل)۔ مثال نہیں، فیصلہ ہے۔ اختتام: فتیل جتنا بھی نقصان نہیں ہوگا۔ زہد محفوظ ہے — کوئی قیمتی چیز ضائع نہیں ہوگی۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">قَلِيلٌ</span> <span class="root-fm">ق-ل-ل · Qaleel — little, few, of small quantity</span>
+      <div class="root-mn en-blk">Q-L-L: to be little, few, of small amount. The Quran uses Qaleel deliberately: not zero, not worthless, but little. This preserves 28:77 (do not forget your share) while establishing the value: it is real, it is permitted, and it is little. The honest assessment of dunya is not that it is evil — it is that its quantity and duration are genuinely small relative to what follows. Qaleel is the honest word.</div>
+      <div class="root-mn-ur ur-blk">ق-ل-ل — کم، تھوڑا۔ قرآن نے قلیل جان بوجھ کر کہا: صفر نہیں، بے قدر نہیں — لیکن کم۔ ۲۸:۷۷ (اپنا حصہ فراموش مت کرو) برقرار ہے لیکن قدر طے ہے: حقیقی، جائز، اور کم۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The Quran's direct, unadorned verdict on the value of dunya — delivered as a prophetic command (Qul). Not metaphor, not parable, not diagnosis — a clear statement of quantity: Qaleel. And the closing assurance — no Fateel of good will be lost — removes the fear that makes people cling to dunya. The attachment to dunya is partly fear: if I let go, I will lose something. This ayah answers that fear directly: you will not lose even a thread's worth of what genuinely matters.</div>
+      <div class="uniq-txt-ur ur-blk">دنیا کی قدر پر قرآن کا براہِ راست، سادہ فیصلہ — نبوی حکم کے طور پر۔ اور اختتامی اطمینان — ایک فتیل جتنا بھی نہیں جائے گا — وہ خوف دور کرتا ہے جو دنیا سے چمٹاتا ہے۔ دنیا سے وابستگی جزوی طور پر خوف ہے: چھوڑوں گا تو کھو دوں گا۔ یہ آیت براہِ راست جواب ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-4-77-my"></span></div>
+        <textarea class="note-ta" id="note-z-4-77-my" placeholder="You will not be wronged even as much as a thread. What fear of loss keeps you attached to dunya? What are you afraid would be taken from you if you loosened your grip?" oninput="autoSave('z-4-77-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-4-77-after"></span></div>
+        <textarea class="note-ta" id="note-z-4-77-after" placeholder="What changed after deeper study?" oninput="autoSave('z-4-77-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-47-36">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-47-36')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Muhammad 47:36</span>
+    <span class="card-preview">إِنَّمَا الْحَيَاةُ الدُّنْيَا لَعِبٌ وَلَهْوٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">إِنَّمَا الْحَيَاةُ الدُّنْيَا لَعِبٌ وَلَهْوٌ ۚ وَإِن تُؤْمِنُوا وَتَتَّقُوا يُؤْتِكُمْ أُجُورَكُمْ وَلَا يَسْأَلْكُمْ أَمْوَالَكُمْ</div>
+    <div class="ayah-tr-en en-blk">"Indeed, the worldly life is only play and amusement — and if you believe and have Taqwa, He will give you your rewards and will not ask you for your wealth."</div>
+    <div class="ayah-tr-ur ur-blk">«دنیاوی زندگی کھیل اور تماشے کے سوا کچھ نہیں — اور اگر تم ایمان لاؤ اور تقویٰ اختیار کرو تو وہ تمہیں تمہارا اجر دے گا اور تم سے تمہارا مال نہیں مانگے گا۔»</div>
+    <div class="ayah-ref-line">Muhammad 47:36</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Surah Muhammad — a Madani surah revealed in the context of jihad and sacrifice. The community was being asked to give their wealth and their lives for the cause of Allah. This ayah appears in that context: what you hold onto so tightly — your wealth — is from a life that is itself only Laib and Lahw. And crucially: if you have Iman and Taqwa, Allah will give you your full rewards and will not even ask you for your wealth. He does not need it. Zuhd is not a transaction — it is not you sacrificing something in exchange for reward. It is a recognition that what you cling to, Allah does not even want from you in exchange.</div>
+      <div class="ctx-txt-ur ur-blk">سورہ محمد — جہاد اور قربانی کے سیاق میں۔ جماعت سے مال اور جان مانگی جا رہی تھی۔ یہ آیت: جسے تم تھامے ہو — مال — وہ لعب و لہو کی زندگی کا حصہ ہے۔ اور اہم: اگر ایمان اور تقویٰ ہو تو اللہ اجر بھی دے گا اور مال بھی نہیں مانگے گا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">يَسْأَلْكُمْ</span> <span class="root-fm">س-أ-ل · Yasa'lukum — He asks, He demands from you</span>
+      <div class="root-mn en-blk">S-A-L: to ask, to request, to demand. Wala yas'alukum amwalakum — He will not ask you for your wealth. This is the negative of a transaction: Zuhd is not giving your wealth to Allah in exchange for akhirah. Allah is not asking for your wealth. The akhirah is granted through Iman and Taqwa — internal states, not material payment. What you hold onto belongs to a life that is already Laib and Lahw. The grip serves nothing.</div>
+      <div class="root-mn-ur ur-blk">س-أ-ل — مانگنا، طلب کرنا۔ ولا یسألکم اموالکم — وہ تم سے مال نہیں مانگتا۔ زہد لین دین نہیں — آخرت ایمان اور تقویٰ سے ملتی ہے، مادی ادائیگی سے نہیں۔ پکڑ کسی کام نہیں آتی۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The most liberating statement in the entire Zuhd framework: Allah does not even ask for your wealth. He grants the reward through Iman and Taqwa — not through material sacrifice. This removes the transactional misunderstanding of Zuhd (I give up the world to get akhirah) and replaces it with the truth: the world is already Laib and Lahw; holding it tightly gains you nothing; Iman and Taqwa are what matter — and those are internal, not material. Zuhd is not the price you pay. It is the freedom you already have.</div>
+      <div class="uniq-txt-ur ur-blk">پورے زہد ڈھانچے کا سب سے آزادی بخش بیان: اللہ تم سے مال نہیں مانگتا۔ اجر ایمان اور تقویٰ سے ہے — مادی قربانی سے نہیں۔ زہد وہ قیمت نہیں جو تم چکاتے ہو — وہ آزادی ہے جو تمہارے پاس پہلے سے ہے۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-47-36-my"></span></div>
+        <textarea class="note-ta" id="note-z-47-36-my" placeholder="He will not ask you for your wealth. Does knowing that Zuhd is not a transaction — not giving something up in exchange for akhirah — change how you think about it?" oninput="autoSave('z-47-36-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-47-36-after"></span></div>
+        <textarea class="note-ta" id="note-z-47-36-after" placeholder="What changed after deeper study?" oninput="autoSave('z-47-36-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-57-20">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-57-20')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Hadid 57:20</span>
+    <span class="card-preview">اعْلَمُوا أَنَّمَا الْحَيَاةُ الدُّنْيَا لَعِبٌ وَلَهْوٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">اعْلَمُوا أَنَّمَا الْحَيَاةُ الدُّنْيَا لَعِبٌ وَلَهْوٌ وَزِينَةٌ وَتَفَاخُرٌ بَيْنَكُمْ وَتَكَاثُرٌ فِي الْأَمْوَالِ وَالْأَوْلَادِ ۖ كَمَثَلِ غَيْثٍ أَعْجَبَ الْكُفَّارَ نَبَاتُهُ ثُمَّ يَهِيجُ فَتَرَاهُ مُصْفَرًّا ثُمَّ يَكُونُ حُطَامًا ۖ وَفِي الْآخِرَةِ عَذَابٌ شَدِيدٌ وَمَغْفِرَةٌ مِّنَ اللَّهِ وَرِضْوَانٌ ۚ وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا مَتَاعُ الْغُرُورِ</div>
+    <div class="ayah-tr-en en-blk">"Know that the life of this world is only play, diversion, adornment, and boasting to one another, and competition in increase of wealth and children — like the example of a rain whose resulting plant growth amazes the tillers; then it dries and you see it turned yellow; then it becomes scattered debris. And in the Hereafter is severe punishment and forgiveness from Allah and approval. And what is the worldly life except the enjoyment of delusion."</div>
+    <div class="ayah-tr-ur ur-blk">«جان لو کہ دنیاوی زندگی محض کھیل، تماشا، زینت، آپس میں فخر، اور مال و اولاد میں کثرت کی خواہش ہے — جیسے بارش کی مثال جس کی نباتات کسانوں کو حیران کر دے، پھر سوکھ جائے، پھر پیلی ہو جائے، پھر ٹکڑے ٹکڑے ہو جائے — آخرت میں سخت عذاب بھی ہے اور اللہ کی مغفرت اور رضا بھی — اور دنیاوی زندگی دھوکے کے سامان کے سوا کچھ نہیں۔»</div>
+    <div class="ayah-ref-line">Al-Hadid 57:20</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Hadid — a late Madani surah, revealed during the mature Madani period when the Muslim community had achieved significant worldly success — territory, resources, political influence. The Quran issues this comprehensive definition precisely at the moment when the community most needed it: when success made attachment most dangerous. Alamu: Know — a command to conscious understanding, not just feeling. The five-stage definition of dunya is the Quran's most complete analytical account of what worldly life is.</div>
+      <div class="ctx-txt-ur ur-blk">الحدید — مدنی دور کے اواخر میں — جب مسلمان کمیونٹی نے نمایاں دنیوی کامیابی حاصل کر لی تھی۔ قرآن یہ جامع تعریف ٹھیک اس وقت دیتا ہے جب وابستگی سب سے خطرناک تھی۔ اعلموا: جانو — ایک حکم جو شعوری سمجھ کا مطالبہ کرتا ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">The Five Stages of Dunya — The Quran's Complete Definition</div>
+      <div class="root-lbl-ur ur-blk">دنیا کے پانچ مراحل — قرآن کی مکمل تعریف</div>
+      <span class="root-wd">لَعِبٌ · لَهْوٌ · زِينَةٌ · تَفَاخُرٌ · تَكَاثُرٌ</span>
+      <div class="root-mn en-blk">The five terms describe the lifecycle of human attachment: <strong style="color:var(--gold2)">Laib</strong> (childhood play — purposeless, innocent, absorbing), <strong style="color:var(--gold2)">Lahw</strong> (youth diversion — pleasure that takes you away from purpose), <strong style="color:var(--gold2)">Ziynah</strong> (adornment — the adult preoccupation with appearance and beauty), <strong style="color:var(--gold2)">Tafakhur</strong> (boasting — competition for status and recognition), <strong style="color:var(--gold2)">Takathur</strong> (multiplying — accumulating more of everything). Each stage builds on the last. Together they describe a life entirely absorbed in dunya from birth to death.</div>
+      <div class="root-mn-ur ur-blk">پانچ الفاظ انسانی وابستگی کی زندگی بیان کرتے ہیں: <strong style="color:var(--gold2)">لعب</strong> (بچپن کا کھیل)، <strong style="color:var(--gold2)">لہو</strong> (جوانی کی تفریح)، <strong style="color:var(--gold2)">زینت</strong> (بالغ: ظاہری آرائش)، <strong style="color:var(--gold2)">تفاخر</strong> (مقام کی دوڑ)، <strong style="color:var(--gold2)">تکاثر</strong> (بڑھاتے رہنا)۔ ہر مرحلہ اگلے پر۔ ملاکر: دنیا میں مکمل مستغرق زندگی۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے</div>
+      <div class="uniq-txt en-blk">The Quran's most comprehensive analytical definition of dunya in a single ayah. The five stages are sequential — not random — and map onto a human life from childhood to old age. This ayah does not describe sinful people; it describes the natural progression of any person who does not interrupt the sequence with Zuhd. The parable repeats the image of 18:45 (rain, growth, yellowing, debris) confirming: even at its peak, the flourishing already contains the seed of its collapse. Zuhd is the interruption of this natural sequence — at any stage.</div>
+      <div class="uniq-txt-ur ur-blk">دنیا کی سب سے جامع تجزیاتی تعریف ایک آیت میں۔ پانچ مراحل ترتیب سے — بچپن سے بڑھاپے تک۔ یہ گنہگاروں کا نہیں — کسی بھی ایسے شخص کا حال ہے جو اس سلسلے کو زہد سے نہیں توڑتا۔ کسی بھی مرحلے پر۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-57-20-my"></span></div>
+        <textarea class="note-ta" id="note-z-57-20-my" placeholder="Five stages: Laib, Lahw, Ziynah, Tafakhur, Takathur. Which stage are you in right now? Which stage has the strongest grip on you?" oninput="autoSave('z-57-20-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-57-20-after"></span></div>
+        <textarea class="note-ta" id="note-z-57-20-after" placeholder="What changed after deeper study?" oninput="autoSave('z-57-20-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-59-9">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-59-9')">
+    <span class="rev-badge rev-madani en-blk">Madani</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی</span>
+    <span class="card-ref">Al-Hashr 59:9</span>
+    <span class="card-preview">وَيُؤْثِرُونَ عَلَىٰ أَنفُسِهِمْ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">وَالَّذِينَ تَبَوَّءُوا الدَّارَ وَالْإِيمَانَ مِن قَبْلِهِمْ يُحِبُّونَ مَنْ هَاجَرَ إِلَيْهِمْ وَلَا يَجِدُونَ فِي صُدُورِهِمْ حَاجَةً مِّمَّا أُوتُوا وَيُؤْثِرُونَ عَلَىٰ أَنفُسِهِمْ وَلَوْ كَانَ بِهِمْ خَصَاصَةٌ ۚ وَمَن يُوقَ شُحَّ نَفْسِهِ فَأُولَٰئِكَ هُمُ الْمُفْلِحُونَ</div>
+    <div class="ayah-tr-en en-blk">"And those who had settled in the homeland and in faith before them — they love those who emigrated to them and find no need in their chests for what they have been given — and they prefer others over themselves even when they themselves are in need. And whoever is protected from the avarice of his own soul — those are the successful ones."</div>
+    <div class="ayah-tr-ur ur-blk">«اور جو لوگ ان سے پہلے ایمان اور گھر میں آباد تھے، وہ ان سے محبت کرتے ہیں جو ان کی طرف ہجرت کر کے آئے — اور جو انہیں دیا گیا اس کی کوئی حاجت اپنے سینوں میں نہیں پاتے — اور اپنے اوپر دوسروں کو ترجیح دیتے ہیں چاہے خود تنگی میں ہوں — اور جو اپنے نفس کی بخیلی سے بچایا گیا وہی کامیاب ہیں۔»</div>
+    <div class="ayah-ref-line">Al-Hashr 59:9</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">Al-Hashr describes the Ansar of Madinah — those who received the Muhajirin (emigrants) after the Hijra. The Ansar gave the Muhajirin their homes, food, and possessions, splitting what they had. This ayah is the Quran's commendation of their Ithar — preferring others. The description is precise: they find no Hajah (need, desire, want) in their Sudur (chests/Sadr) for what others have been given. The Zuhd has penetrated to the Sadr — the inner chest — and emptied it of desire for what belongs to others.</div>
+      <div class="ctx-txt-ur ur-blk">الحشر — انصارِ مدینہ کا ذکر جنہوں نے مہاجرین کو گھر، کھانا، مال دیا۔ ایثار کی قرآنی ستائش۔ تفصیل صحیح: وہ اپنے سینوں (صدر) میں اس کی کوئی حاجت نہیں پاتے جو دوسروں کو دیا گیا۔ زہد صدر تک پہنچ گیا — دوسروں کے مال کی خواہش سے خالی کر دیا۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">وَيُؤْثِرُونَ</span> <span class="root-fm">أ-ث-ر · Ithar — preferring others over yourself</span>
+      <div class="root-mn en-blk">The same root as 87:16-17 — Tu'thiroon — but inverted. There, you give precedence to dunya over akhirah (negative). Here, the Ansar give precedence to others over themselves (positive). Ithar is the positive flowering of Zuhd: when the heart is genuinely detached from dunya, giving becomes natural because you are not holding on. The closing word: Shuhh — the avarice, the tight-fistedness of the nafs. Whoever is protected from the Shuhh of the nafs has succeeded. Zuhd is protection from Shuhh.</div>
+      <div class="root-mn-ur ur-blk">وہی جڑ جو ۸۷:۱۶ میں — لیکن الٹا۔ وہاں دنیا کو آخرت پر ترجیح (منفی)۔ یہاں دوسروں کو خود پر ترجیح (مثبت)۔ ایثار زہد کا مثبت پھول: جب دل واقعی غیر وابستہ ہو، دینا فطری ہے۔ شح: نفس کی کنجوسی۔ زہد شح سے حفاظت ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — Zuhd at Its Highest Expression</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے — زہد کا اعلیٰ ترین اظہار</div>
+      <div class="uniq-txt en-blk">Ithar — preferring others over yourself even in your own need — is Zuhd made outward and social. All previous ayat describe Zuhd as internal reorientation. This ayah shows its external flower: when detachment from dunya is genuine, the hand opens naturally. The Ansar did not need to be commanded to give — their Sadr had no Hajah for what others received. This is the distinction between forced generosity (giving despite attachment) and Ithar (giving because the attachment is not there). It also directly connects to the inner anatomy: the Zuhd in the Sadr is visible in the Ithar of the hand.</div>
+      <div class="uniq-txt-ur ur-blk">ایثار — اپنی تنگی میں بھی دوسروں کو ترجیح — زہد کا ظاہری اور سماجی اظہار۔ پچھلی تمام آیات نے زہد کو اندرونی تبدیلی کے طور پر بیان کیا۔ یہ آیت اس کا ظاہری پھول دکھاتی ہے۔ انصار کو حکم نہیں دینا پڑا — ان کے صدر میں حاجت ہی نہ تھی۔ مجبوری سے دینے اور ایثار میں فرق: ایثار اس لیے کہ وابستگی ہی نہیں۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-59-9-my"></span></div>
+        <textarea class="note-ta" id="note-z-59-9-my" placeholder="They preferred others even in their own need — walau kana bihim khasasah. When you give, is it from genuine non-attachment or from a sense of obligation despite attachment? How would you know the difference?" oninput="autoSave('z-59-9-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-59-9-after"></span></div>
+        <textarea class="note-ta" id="note-z-59-9-after" placeholder="What changed after deeper study?" oninput="autoSave('z-59-9-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ayah-card" id="card-z-9-38">
+  <div class="ayah-card-hdr" onclick="toggleCard('card-z-9-38')">
+    <span class="rev-badge rev-madani en-blk">Madani — Late</span>
+    <span class="rev-badge rev-madani ur-blk">مدنی — اواخر</span>
+    <span class="card-ref">At-Tawbah 9:38</span>
+    <span class="card-preview">فَمَا مَتَاعُ الْحَيَاةِ الدُّنْيَا فِي الْآخِرَةِ إِلَّا قَلِيلٌ</span>
+    <span class="card-chevron">›</span>
+  </div>
+  <div class="card-body">
+    <div class="ayah-arabic">مَا لَكُمْ إِذَا قِيلَ لَكُمُ انفِرُوا فِي سَبِيلِ اللَّهِ اثَّاقَلْتُمْ إِلَى الْأَرْضِ ۚ أَرَضِيتُم بِالْحَيَاةِ الدُّنْيَا مِنَ الْآخِرَةِ ۚ فَمَا مَتَاعُ الْحَيَاةِ الدُّنْيَا فِي الْآخِرَةِ إِلَّا قَلِيلٌ</div>
+    <div class="ayah-tr-en en-blk">"What is the matter with you — when you are told to go forth in the way of Allah — that you cling heavily to the earth? Are you satisfied with the life of this world instead of the Hereafter? The enjoyment of worldly life is not but little compared to the Hereafter."</div>
+    <div class="ayah-tr-ur ur-blk">«تمہیں کیا ہوا کہ جب کہا گیا: اللہ کی راہ میں نکلو تو تم زمین سے چمٹ گئے؟ کیا تم آخرت کے بدلے دنیاوی زندگی پر راضی ہو گئے؟ تو دنیاوی زندگی کا سامان آخرت کے مقابلے میں بہت کم ہے۔»</div>
+    <div class="ayah-ref-line">At-Tawbah 9:38</div>
+    <div class="ctx-box">
+      <div class="ctx-lbl en-blk">Revelation Context</div>
+      <div class="ctx-lbl-ur ur-blk">نزول کا سیاق</div>
+      <div class="ctx-txt en-blk">At-Tawbah — one of the last surahs revealed. The context is the call to the Tabuk campaign — the most difficult, furthest, and most costly expedition of the Madinah period. Some Muslims hesitated. The Quran's question is direct and diagnostic: Athaqqaltum ila al-ard — you clung heavily to the earth. This is the most physical description of dunya-attachment in the Quran: the person becomes heavy, earthbound, unable to rise. Zuhd is lightness. Attachment to dunya is weight.</div>
+      <div class="ctx-txt-ur ur-blk">التوبہ — آخری سورتوں میں سے۔ غزوہ تبوک کی پکار — مدنی دور کا سب سے مشکل، دور اور مہنگا سفر۔ کچھ مسلمان ہچکچائے۔ قرآن کا سوال: اثاقلتم الی الارض — تم زمین سے چمٹ گئے۔ زمین سے وابستگی کی سب سے جسمانی قرآنی تصویر: بھاری ہو جاتا ہے، اٹھ نہیں سکتا۔ زہد ہلکا پن ہے۔</div>
+    </div>
+    <div class="root-box">
+      <div class="root-lbl en-blk">Root in This Ayah</div>
+      <div class="root-lbl-ur ur-blk">اس آیت کی جڑ</div>
+      <span class="root-wd">اثَّاقَلْتُمْ</span> <span class="root-fm">ث-ق-ل · Thaql — heaviness, weight, burden</span>
+      <div class="root-mn en-blk">Th-Q-L: to be heavy, to weigh down. Athaqqaltum: you became heavy, you weighed yourself down toward the earth. The same root gives Thiqal (heavy loads), and the Thaqalayn (the two weighty things — Quran and Ahlul Bayt). Attachment to dunya is Thiqal — it weighs the person into the earth. The Prophetic hadith completes this image: the traveler under the tree is light; they move on. The person who builds a house under the tree becomes Thaqeel — too heavy to leave.</div>
+      <div class="root-mn-ur ur-blk">ث-ق-ل — بھاری ہونا۔ اثاقلتم: تم زمین کی طرف بھاری ہو گئے۔ اسی سے ثقل، ثقلین۔ دنیا سے وابستگی ثقل ہے — زمین میں دھنساتی ہے۔ حدیث مکمل کرتی ہے: مسافر درخت تلے ہلکا ہے — آگے بڑھتا ہے۔ جو گھر بنا لے، ثقیل ہو جاتا ہے۔</div>
+    </div>
+    <div class="uniq-box">
+      <div class="uniq-lbl en-blk">What This Ayah Uniquely Adds — The Final Quranic Statement on Zuhd</div>
+      <div class="uniq-lbl-ur ur-blk">یہ آیت منفردانہ کیا اضافہ کرتی ہے — زہد پر آخری قرآنی بیان</div>
+      <div class="uniq-txt en-blk">From one of the last revelations — the Quranic argument on Zuhd reaches its conclusion. The final assessment is comparative and definitive: Qaleel — little. Not zero, not worthless, not forbidden — little. The sequence is complete: from the first Makki diagnosis (you prefer the near) to the final Madani verdict (what you preferred is genuinely little). The full journey of the argument is now visible. Zuhd was never about condemning the world — it was always about an accurate comparative assessment. The world is real, permitted, and little. The akhirah is real, required, and greater. Choose accordingly.</div>
+      <div class="uniq-txt-ur ur-blk">آخری وحیوں میں سے — زہد پر قرآنی استدلال اپنے اختتام تک پہنچا۔ آخری فیصلہ: قلیل — تھوڑا۔ صفر نہیں، بے قدر نہیں، حرام نہیں — تھوڑا۔ سلسلہ مکمل: ابتدائی مکی تشخیص (تم قریب کو ترجیح دیتے ہو) سے آخری مدنی فیصلہ (جسے ترجیح دی واقعی کم تھی)۔ زہد کبھی دنیا کی مذمت نہ تھا — ہمیشہ درست موازنہ تھا۔</div>
+    </div>
+    <div class="notes-sec">
+      <div class="notes-hdr"><span class="en-blk">Personal Study Notes</span><span class="ur-blk">ذاتی نوٹس</span></div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--gold)"></div><span class="en-blk">My Reading — Before Tafseer</span><span class="ur-blk">میری قرأت — تفسیر سے پہلے</span><span class="nsv" id="sv-z-9-38-my"></span></div>
+        <textarea class="note-ta" id="note-z-9-38-my" placeholder="Athaqqaltum ila al-ard — you became heavy toward the earth. Where in your life right now are you too heavy to move? What has you earthbound?" oninput="autoSave('z-9-38-my',this.value)"></textarea>
+      </div>
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--teal)"></div><span class="en-blk">After Tafseer — What Changed</span><span class="ur-blk">تفسیر کے بعد — کیا بدلا</span><span class="nsv" id="sv-z-9-38-after"></span></div>
+        <textarea class="note-ta" id="note-z-9-38-after" placeholder="What changed after deeper study?" oninput="autoSave('z-9-38-after',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="era-divider" style="margin-top:32px">
+  <div class="era-dot" style="background:var(--purple)"></div>
+  <div class="era-label en-blk">Sunnah on Zuhd — Authenticated Hadith Only</div>
+  <div class="era-label-ur ur-blk">زہد پر سنت — صرف مستند احادیث</div>
+  <div class="era-line"></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Stranger and the Traveler — The Foundational Hadith on Zuhd</span><span class="ur-blk">مسافر اور اجنبی — زہد کی بنیادی حدیث</span></div>
+  <div class="sh-ar">كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ</div>
+  <div class="sh-en en-blk">"Be in the world as though you are a stranger or a traveler along a path." Ibn Umar added: "When evening comes, do not expect to see the morning. When morning comes, do not expect to see the evening. Take from your health before your illness, and from your life before your death."</div>
+  <div class="sh-ur ur-blk">«دنیا میں ایسے رہو جیسے تم اجنبی ہو یا راستہ چلنے والے ہو۔» ابن عمر نے مزید فرمایا: «شام ہو تو صبح کی توقع مت رکھو۔ صبح ہو تو شام کی امید مت رکھو۔ اپنی بیماری سے پہلے صحت سے فائدہ اٹھاؤ، اور موت سے پہلے زندگی سے۔»</div>
+  <div class="sh-src">Sahih Bukhari 6416 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">My Wealth, My Wealth — The Prophetic Correction of Ownership</span><span class="ur-blk">میرا مال، میرا مال — ملکیت کی نبوی اصلاح</span></div>
+  <div class="sh-ar">يَقُولُ ابْنُ آدَمَ مَالِي مَالِي وَهَلْ لَكَ مِنْ مَالِكَ إِلَّا مَا أَكَلْتَ فَأَفْنَيْتَ أَوْ لَبِسْتَ فَأَبْلَيْتَ أَوْ تَصَدَّقْتَ فَأَمْضَيْتَ</div>
+  <div class="sh-en en-blk">"The son of Adam says: My wealth, my wealth. But what do you have from your wealth except what you ate and consumed, what you wore and wore out, or what you gave in charity and sent forward?"</div>
+  <div class="sh-ur ur-blk">«ابن آدم کہتا ہے: میرا مال، میرا مال۔ مگر تمہارے مال میں سے تمہارا کیا ہے سوائے اس کے جو تم نے کھایا اور ختم کیا، پہنا اور پرانا کیا، یا صدقہ کیا اور آگے بھیجا؟»</div>
+  <div class="sh-src">Sahih Muslim 2958 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Rider Under the Tree — The Prophet's Own Description of His Relationship to This World</span><span class="ur-blk">درخت تلے مسافر — دنیا سے اپنے تعلق کی نبوی تعبیر</span></div>
+  <div class="sh-ar">مَا لِي وَلِلدُّنْيَا مَا أَنَا فِي الدُّنْيَا إِلَّا كَرَاكِبٍ اسْتَظَلَّ تَحْتَ شَجَرَةٍ ثُمَّ رَاحَ وَتَرَكَهَا</div>
+  <div class="sh-en en-blk">"What do I have to do with this world? I am in this world only like a rider who rests in the shade of a tree, then moves on and leaves it."</div>
+  <div class="sh-ur ur-blk">«میرا دنیا سے کیا تعلق؟ میں دنیا میں صرف اس سوار کی طرح ہوں جو ایک درخت کے سائے میں آرام کرے، پھر چل دے اور اسے چھوڑ جائے۔»</div>
+  <div class="sh-src">Tirmidhi 2377 — Sahih al-Albani <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">Abstain from Dunya — The Hadith That Defines Zuhd in Two Dimensions</span><span class="ur-blk">دنیا سے بے رغبتی — زہد کو دو جہتوں میں بیان کرنے والی حدیث</span></div>
+  <div class="sh-ar">ازْهَدْ فِي الدُّنْيَا يُحِبَّكَ اللَّهُ وَازْهَدْ فِيمَا عِندَ النَّاسِ يُحِبَّكَ النَّاسُ</div>
+  <div class="sh-en en-blk">"Be indifferent to the world and Allah will love you. Be indifferent to what people possess and people will love you."</div>
+  <div class="sh-ur ur-blk">«دنیا سے بے رغبت رہو اللہ تم سے محبت کرے گا۔ جو لوگوں کے پاس ہے اس سے بے رغبت رہو لوگ تم سے محبت کریں گے۔»</div>
+  <div class="sh-src">Ibn Majah 4102 — Sahih al-Albani <span class="grade g-hasan">◈ Hasan</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Wing of a Mosquito — The Prophetic Value Assessment of Dunya</span><span class="ur-blk">مچھر کا پر — دنیا کی نبوی قدروقیمت</span></div>
+  <div class="sh-ar">لَوْ كَانَتِ الدُّنْيَا تَعْدِلُ عِنْدَ اللَّهِ جَنَاحَ بَعُوضَةٍ مَا سَقَى كَافِرًا مِنْهَا شَرْبَةَ مَاءٍ</div>
+  <div class="sh-en en-blk">"If the world were worth the wing of a mosquito in the sight of Allah, He would not give a disbeliever a drink of water from it."</div>
+  <div class="sh-ur ur-blk">«اگر دنیا اللہ کے نزدیک مچھر کے پر جتنی بھی وقعت رکھتی تو وہ کسی کافر کو اس میں سے پانی کا ایک گھونٹ نہ دیتا۔»</div>
+  <div class="sh-src">Tirmidhi 2320 — Sahih al-Albani <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">True Richness — Ghina al-Nafs</span><span class="ur-blk">اصل دولت — غنای نفس</span></div>
+  <div class="sh-ar">لَيْسَ الْغِنَى عَنْ كَثْرَةِ الْعَرَضِ وَلَكِنَّ الْغِنَى غِنَى النَّفْسِ</div>
+  <div class="sh-en en-blk">"Richness is not from having many possessions. True richness is the richness of the nafs."</div>
+  <div class="sh-ur ur-blk">«دولت مندی مال کی کثرت سے نہیں — اصل دولت نفس کی بے نیازی ہے۔»</div>
+  <div class="sh-src">Sahih Muslim 1051, Sahih Bukhari 6446 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Prophet's Household — Zuhd as a Lived Reality</span><span class="ur-blk">نبی کریم کا گھرانہ — زندہ زہد</span></div>
+  <div class="sh-ar">مَا شَبِعَ آلُ مُحَمَّدٍ مِنْ خُبْزِ بُرٍّ ثَلَاثَةَ أَيَّامٍ حَتَّى لَقِيَ اللَّهَ</div>
+  <div class="sh-en en-blk">Aisha (RA) reported: "The family of Muhammad never ate their fill of wheat bread for three consecutive days until he met Allah."</div>
+  <div class="sh-ur ur-blk">عائشہ رضی اللہ عنہا نے فرمایا: «آلِ محمد ﷺ نے کبھی تین دن متواتر گندم کی روٹی سے پیٹ نہیں بھرا یہاں تک کہ آپ ﷺ اللہ سے جا ملے۔»</div>
+  <div class="sh-src">Sahih Bukhari 5416, Sahih Muslim 2970 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card">
+  <div class="sh-lbl"><span class="en-blk">The Pledged Armor — The Prophet's Material State at Death</span><span class="ur-blk">گروی زرہ — وفات کے وقت مادی حال</span></div>
+  <div class="sh-ar">تُوُفِّيَ رَسُولُ اللَّهِ ﷺ وَدِرْعُهُ مَرْهُونَةٌ عِنْدَ يَهُودِيٍّ بِثَلَاثِينَ صَاعًا مِنْ شَعِيرٍ</div>
+  <div class="sh-en en-blk">"The Messenger of Allah ﷺ passed away while his armor was pledged with a Jewish man for thirty sa' of barley."</div>
+  <div class="sh-ur ur-blk">«رسول اللہ ﷺ کی وفات ہوئی تو آپ کی زرہ ایک یہودی کے پاس تیس صاع جو کے عوض گروی تھی۔»</div>
+  <div class="sh-src">Sahih Bukhari 2916 <span class="grade g-sahih">✦ Sahih</span></div>
+</div>
+
+<div class="sh-card" style="border-color:var(--goldbdr);background:rgba(201,168,76,.04)">
+  <div class="sh-lbl"><span class="en-blk">Connected Concepts — What Zuhd Produces and Requires</span><span class="ur-blk">متعلقہ تصورات — زہد کیا پیدا کرتا اور کیا مانگتا ہے</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;line-height:1.85;color:var(--text)"><strong style="color:var(--gold2)">Qana'ah (Contentment)</strong> — Zuhd is detachment from; Qana'ah is the positive state it produces: sufficiency with what Allah has given. They are not the same. Zuhd without Qana'ah is emptiness; Qana'ah without Zuhd is vulnerable to disturbance. The hadith on Ghina al-Nafs (above) is actually the hadith of Qana'ah expressed in the language of Zuhd.<br><br><strong style="color:var(--gold2)">Tawakkul (Reliance on Allah)</strong> — Once the heart stops treating dunya as its source of security, it must rest its security somewhere. Tawakkul is that resting. Zuhd without Tawakkul produces anxiety. Muraqabah — the next concept — is what makes Tawakkul natural: you see that Allah is always watching and managing, and reliance follows.<br><br><strong style="color:var(--gold2)">Wara' (Scrupulousness)</strong> — Ibn al-Qayyim: Zuhd is to the heart what Wara' is to the limbs. Zuhd without Wara' is a claim without evidence. Wara' without Zuhd is rule-following without a soul.</div>
+  <div class="sh-ur ur-blk" style="font-style:normal;line-height:2;color:var(--text);direction:rtl;text-align:right"><strong style="color:var(--gold2)">قناعت</strong> — زہد بے رغبتی ہے؛ قناعت وہ مثبت کیفیت جو پیدا ہوتی ہے: جو اللہ نے دیا اس پر اکتفا۔ دونوں ایک نہیں۔ زہد بغیر قناعت خلا ہے۔<br><br><strong style="color:var(--gold2)">توکل</strong> — جب دل دنیا کو سلامتی کا ذریعہ ماننا چھوڑے، کوئی اور جگہ چاہیے۔ توکل وہ جگہ ہے۔ مراقبہ توکل کو فطری بناتا ہے۔<br><br><strong style="color:var(--gold2)">ورع</strong> — ابن قیم: زہد دل کا ہے، ورع اعضا کا۔ زہد بغیر ورع، دعوی بلا ثبوت۔</div>
+</div>
+
+<div class="sh-card" style="margin-top:20px">
+  <div class="sh-lbl"><span class="en-blk">Your Personal Understanding of Zuhd</span><span class="ur-blk">زہد کے بارے میں آپ کا ذاتی فہم</span></div>
+  <div class="sh-en en-blk" style="font-style:normal;color:var(--text2);font-size:13px;line-height:1.8">After studying all 18 ayat across Early Makki, Middle Makki, and Madani periods — write your own understanding of Zuhd. Not what you have read but what has shifted. The Quran opened with a diagnosis (you prefer the near) and closed with a verdict (it is genuinely little). Where do you stand between those two statements? What has changed in how you see your own attachments?</div>
+  <div class="sh-ur ur-blk" style="font-size:14px;color:var(--text2);line-height:2;direction:rtl;text-align:right">تمام ۱۸ آیات کے مطالعے کے بعد — اپنا فہم لکھیں۔ پڑھا کیا نہیں — کیا بدلا۔ قرآن نے تشخیص سے شروع کیا (قریب کو ترجیح) اور فیصلے پر ختم کیا (یہ واقعی کم ہے)۔ آپ ان دو بیانوں کے درمیان کہاں ہیں؟</div>
+  <div class="notes-sec" style="border-top:none;padding-top:8px">
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Synthesis of Zuhd</span><span class="ur-blk">زہد پر میرا خلاصہ</span><span class="nsv" id="sv-z-synth"></span></div>
+      <textarea class="note-ta" id="note-z-synth" style="min-height:120px" placeholder="Write your personal understanding of Zuhd after studying all these ayat — in any language, in your own voice. The 12:20 inversion, the corrective ayat, the five stages of 57:20, the weight of 9:38. What do you actually believe about your relationship to this world right now?" oninput="autoSave('z-synth',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+
+<div class="stage3-hdr">
+  <div class="stage3-hdr-ar">الصوفية على الزهد</div>
+  <div class="stage3-hdr-en en-blk">Sufi Tradition on Zuhd &#8212; Seven Scholars</div>
+  <div class="stage3-hdr-rule"></div>
+</div>
+<p class="stage3-intro en-blk">Seven scholars in chronological order &#8212; each separately. Read each card fully before moving to the next.</p>
+<p class="stage3-intro ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">سات علماء تاریخی ترتیب میں &#8212; ہر ایک الگ۔</p>
+
+<div class="scholar-card" id="sc-z-basri">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-basri')">
+    <div class="sc-num">01</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Hasan al-Basri</div>
+      <div class="sc-name-ur ur-blk">حسن بصری</div>
+      <div class="sc-dates">642&#8211;728 CE &middot; Basra &middot; Companion-generation bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Prologue</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in Medina, met over 70 Companions. The foundational voice of the early spiritual tradition. Left no written works; teachings preserved by students.</div>
+      <div class="bio-txt-ur ur-blk">مدینہ میں پیدا، ۷۰ سے زیادہ صحابہ سے ملاقات۔ ابتدائی روحانی روایت کی بنیادی آواز۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Preserved in Hilyat al-Awliya (Abu Nuaym) and Sifat al-Safwa (Ibn al-Jawzi).</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">Hasan al-Basri lived Zuhd in a way that was visible to everyone who met him &#8212; he owned almost nothing, ate minimally, and wept constantly at the remembrance of the hereafter. His foundational insight on Zuhd: it is not about what you possess but about what possesses you. He owned a mat, a jug, and clothing. But more importantly, dunya did not own his heart. His most cited saying: &#39;I met people for whom dunya was no more valuable than the dust beneath their feet.&#39; The Companions he met had this &#8212; not because they were poor but because their hearts were already in the next life.</div>
+    <div class="sc-finding-ur ur-blk">حسن بصری نے زہد ایسے جیا جو سب کو نظر آتا تھا &#8212; تقریباً کچھ نہیں رکھتے، کم کھاتے، آخرت کی یاد میں گریہ۔ اہم ترین بصیرت: بات یہ نہیں کہ آپ کیا رکھتے ہیں بلکہ کیا آپ کو رکھتا ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الدُّنْيَا عِنْدَهُمْ كَالتُّرَابِ تَحْتَ أَقْدَامِهِمْ &#8212; يَضَعُونَهَا حَيْثُ شَاؤُوا</div>
+    <div class="sc-quote-en en-blk">&ldquo;The world for them was like dust beneath their feet &#8212; they placed it wherever they wished.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;دنیا ان کے لیے پاؤں تلے مٹی کی طرح تھی &#8212; جہاں چاہتے رکھ دیتے۔&raquo;</div>
+    <div class="sc-quote-src">Preserved in Hilyat al-Awliya (Abu Nuaym al-Isbahani)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Grounds Zuhd in the prophetic generation &#8212; making it historically visible, not just theoretically argued. His life demonstrates that Zuhd is compatible with full social engagement (he had students, he judged, he taught) and with having possessions. The Companions he referenced were not monastics; they were warriors, traders, and rulers who happened to have no attachment to what they owned.</div>
+    <div class="sc-contrib-ur ur-blk">زہد کو نبوی نسل میں تاریخی طور پر نظر آنے والا بناتے ہیں۔ دکھاتے ہیں: زہد سماجی مشارکت سے مطابقت رکھتا ہے۔ صحابہ راہب نہ تھے &#8212; جنگجو، تاجر، حکمران &#8212; لیکن دل لا تعلق۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-basri"></span></div>
+        <textarea class="note-ta" id="note-z3-basri" placeholder="Hasan al-Basri: the world was like dust beneath their feet. Think of the Companions he referenced &#8212; merchants, warriors, rulers. What made their ownership different from yours?" oninput="autoSave('z3-basri',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-z-muhasibi">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-muhasibi')">
+    <div class="sc-num">02</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Muhasibi</div>
+      <div class="sc-name-ur ur-blk">الحارث المحاسبی</div>
+      <div class="sc-dates">781&#8211;857 CE &middot; Baghdad &middot; Psychological school</div>
+    </div>
+    <div class="sc-badge en-blk">Psychology</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">First Islamic thinker to systematically apply psychology to spiritual states. His Ri&#39;aya is the first systematic manual of the interior life.</div>
+      <div class="bio-txt-ur ur-blk">روحانی کیفیات پر منظم نفسیاتی تجزیہ کرنے والے پہلے مفکر۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ri&#39;aya li-Huquq Allah; Muhasabat al-Nufus; Al-Wasaya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">Al-Muhasibi&#39;s unique angle on Zuhd: the nafs is capable of practicing Zuhd while secretly proud of its Zuhd. The person who has genuinely detached from wealth may have quietly attached to their reputation for detachment. This is Zuhd corrupted from the inside &#8212; the nafs has found a more refined attachment to replace the obvious one. His muhasabah approach: after every act of apparent Zuhd (giving, refraining, simplifying), examine whether the nafs has taken credit. True Zuhd leaves no trace in the self &#8212; no satisfaction, no comparison with others, no sense of superiority.</div>
+    <div class="sc-finding-ur ur-blk">المحاسبی کا منفرد زاویہ: نفس زہد کرتے ہوئے خفیہ طور پر اپنے زہد پر فخر کر سکتا ہے۔ جو مال سے لا تعلق ہو گیا وہ اپنی لا تعلقی کی شہرت سے وابستہ ہو گیا۔ اندر سے خراب شدہ زہد۔ اصل زہد نفس میں کوئی نشان نہیں چھوڑتا۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الزُّهْدُ الصَّادِقُ لَا يُبْقِي فِي النَّفْسِ أَثَرَ رِضًا بِهِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Genuine Zuhd leaves no trace of self-satisfaction in the soul.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;سچا زہد نفس میں خودرضامندی کا کوئی نشان نہیں چھوڑتا۔&raquo;</div>
+    <div class="sc-quote-src">Ri&#39;aya li-Huquq Allah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Identifies the most sophisticated failure-mode of Zuhd: spiritual pride about one&#39;s own detachment. This cannot be addressed by more Zuhd &#8212; only by muhasabah directed at the Zuhd itself. He introduces the diagnostic practice of examining your Zuhd for hidden attachment &#8212; a practice that makes Zuhd permanently uncomfortable and permanently honest.</div>
+    <div class="sc-contrib-ur ur-blk">زہد کی سب سے نفیس ناکامی: اپنی لا تعلقی پر روحانی فخر۔ مزید زہد سے حل نہیں &#8212; صرف زہد پر محاسبہ سے۔ تشخیصی مشق متعارف: اپنے زہد کو پوشیدہ وابستگی کے لیے جانچنا۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-muhasibi"></span></div>
+        <textarea class="note-ta" id="note-z3-muhasibi" placeholder="Al-Muhasibi: genuine Zuhd leaves no self-satisfaction. After your last act of giving or simplifying &#8212; did you notice any satisfaction, any sense of having done something admirable? What does your answer reveal?" oninput="autoSave('z3-muhasibi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-z-junayd">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-junayd')">
+    <div class="sc-num">03</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Junayd al-Baghdadi</div>
+      <div class="sc-name-ur ur-blk">الجنید البغدادی</div>
+      <div class="sc-dates">830&#8211;910 CE &middot; Baghdad &middot; Technical school</div>
+    </div>
+    <div class="sc-badge en-blk">Sayyid al-Taifa</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Undisputed master of the Baghdad school. Glass merchant by day. Created the technical vocabulary of inner states used by all subsequent scholars.</div>
+      <div class="bio-txt-ur ur-blk">بغداد مدرسے کے بے تکرار امام۔ باطنی کیفیات کی تکنیکی زبان کے خالق۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Rasa&#39;il (Letters); in Tabaqat al-Sufiyya (al-Sulami) and Hilyat al-Awliya.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">Al-Junayd&#39;s most precise definition of Zuhd: &#39;Zuhd is the emptying of the hands of possessions and the emptying of the heart of pursuit.&#39; This is the clean structural distinction that prevents both errors &#8212; the error of thinking external poverty is sufficient (empty hands with full heart) and the error of thinking inner detachment justifies external excess (full hands with supposedly empty heart). Both must be present. His technical contribution: Zuhd of the hand is visible and can be performed; Zuhd of the heart is invisible and must be examined. The former without the latter is asceticism; the latter without the former may be self-deception.</div>
+    <div class="sc-finding-ur ur-blk">الجنید کی صحیح ترین تعریف: زہد ہاتھوں کو مال سے خالی کرنا اور دل کو طلب سے۔ دونوں غلطیاں دور: ہاتھ خالی، دل بھرا &#8212; یا دل خالی کا دعویٰ، ہاتھ بھرے۔ ہاتھ کا زہد ظاہر؛ دل کا زہد پوشیدہ &#8212; پہلا بغیر دوسرے رہبانیت، دوسرا بغیر پہلے خود فریبی۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الزُّهْدُ خُلُوُّ الْيَدِ مِنَ الْمُلْكِ وَخُلُوُّ الْقَلْبِ مِنَ الطَّلَبِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Zuhd is the emptying of the hand of possessions and the emptying of the heart of pursuit.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;زہد ہاتھ کو ملکیت سے خالی کرنا ہے اور دل کو طلب سے۔&raquo;</div>
+    <div class="sc-quote-src">Tabaqat al-Sufiyya (al-Sulami)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Creates the structural distinction that clarifies every subsequent debate about Zuhd. The &#39;heart-Zuhd vs hand-Zuhd&#39; divergence &#8212; the first live disagreement in this file &#8212; is answered here in its most precise form: both are required, and neither is reducible to the other. This framework makes Zuhd simultaneously verifiable (can I examine whether my hand is empty?) and always under question (is my heart&#39;s pursuit actually gone?).</div>
+    <div class="sc-contrib-ur ur-blk">وہ ساختی امتیاز جو زہد کی تمام بعد کی بحثیں واضح کرتا ہے۔ ہاتھ اور دل &#8212; دونوں ضروری، نہ ایک دوسرے میں ضم۔ زہد قابلِ جانچ (ہاتھ خالی؟) اور ہمیشہ زیرِ سوال (دل کی طلب گئی؟)۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-junayd"></span></div>
+        <textarea class="note-ta" id="note-z3-junayd" placeholder="Al-Junayd: empty hands AND empty heart of pursuit. You may have simplified your possessions &#8212; but what are you still pursuing? Name it honestly." oninput="autoSave('z3-junayd',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-z-ghazali">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-ghazali')">
+    <div class="sc-num">04</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Al-Ghazali</div>
+      <div class="sc-name-ur ur-blk">ابوحامد الغزالی</div>
+      <div class="sc-dates">1058&#8211;1111 CE &middot; Tus / Baghdad &middot; Systematic bridge</div>
+    </div>
+    <div class="sc-badge en-blk">Hujjat al-Islam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Abandoned the highest scholarly position in the Abbasid world after a spiritual crisis at 37. Spent years in solitary practice. The Ihya is the most comprehensive treatment of the interior life in Islamic history.</div>
+      <div class="bio-txt-ur ur-blk">۳۷ سال میں روحانی بحران، خلوت۔ احیاء: اسلامی تاریخ میں باطنی زندگی کا سب سے جامع علاج۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Ihya Ulum al-Din (4 vols.); Minhaj al-Abidin; Kimiya-yi Sa&#39;adat.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">Al-Ghazali&#39;s framework maps Zuhd onto three ascending levels corresponding to what you turn away from and what you turn toward. Level 1: turning from haram &#8212; the Zuhd of the repentant. Level 2: turning from the unnecessary halal &#8212; the Zuhd of the righteous. Level 3: turning from anything that distracts from Allah &#8212; the Zuhd of the gnostics (&#39;arifin). His critical contribution: Zuhd without a positive direction is mere renunciation &#8212; what matters is not only what you leave but what you are going toward. Dunya is left for akhirah; the lesser is left for the greater. If there is no clearer vision of the greater, Zuhd degenerates into dry minimalism.</div>
+    <div class="sc-finding-ur ur-blk">الغزالی کا ڈھانچہ: زہد کی تین چڑھتی سطحیں۔ (۱) حرام سے &#8212; توائب کا زہد۔ (۲) غیرضروری حلال سے &#8212; صالحین کا۔ (۳) اللہ سے غافل کرنے والی ہر چیز سے &#8212; عارفین کا۔ اہم: زہد مثبت رخ کے بغیر ترک محض ہے۔ دنیا چھوڑی آخرت کے لیے؛ اگر بڑی چیز کا واضح وژن نہ ہو، زہد خشک کم پرستی بن جاتا ہے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الزُّهْدُ بِلَا رَغْبَةٍ فِي الْآخِرَةِ لَيْسَ زُهْداً &#8212; بَلْ هُوَ حُزْنٌ وَقِسْوَةٌ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Zuhd without longing for the hereafter is not Zuhd &#8212; it is only grief and hardness.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;زہد بغیر آخرت کی رغبت کے زہد نہیں &#8212; غم اور قساوت ہے۔&raquo;</div>
+    <div class="sc-quote-src">Ihya Ulum al-Din, Kitab Dhamm al-Dunya (Book on the Censure of the World)</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Prevents Zuhd from becoming dry asceticism by insisting it requires positive orientation. You do not leave dunya into a void &#8212; you leave it for something. This connects Zuhd back to the Zuhd framework from the Quran (28:77 &#8212; do not forget your share of this world; and 57:20 &#8212; the five stages of dunya&#39;s grip). The three-level framework also shows that Zuhd is not binary &#8212; there are degrees, and the question is always &#39;which level am I at and what is the next?&#39;</div>
+    <div class="sc-contrib-ur ur-blk">زہد کو خشک رہبانیت سے بچاتے ہیں: مثبت رخ لازم۔ دنیا خلا میں نہیں چھوڑتے &#8212; کچھ کے لیے چھوڑتے ہیں۔ تین سطحی ڈھانچہ: زہد یا نہیں کا معاملہ نہیں &#8212; درجات ہیں۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-ghazali"></span></div>
+        <textarea class="note-ta" id="note-z3-ghazali" placeholder="Al-Ghazali: Zuhd without longing for the hereafter is grief, not Zuhd. Honestly &#8212; is your current simplicity or restraint driven by genuine longing for akhirah, or is it more like discipline or habit?" oninput="autoSave('z3-ghazali',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-z-atailla">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-atailla')">
+    <div class="sc-num">05</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Ata&#39;illah al-Iskandari</div>
+      <div class="sc-name-ur ur-blk">ابن عطاء اللہ الاسکندری</div>
+      <div class="sc-dates">1259&#8211;1309 CE &middot; Alexandria / Cairo &middot; Shadhili order</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Hikam</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Third master of the Shadhili order. Maliki jurist before his spiritual path. Author of Al-Hikam and Miftah al-Falah. Debated Ibn Taymiyya publicly.</div>
+      <div class="bio-txt-ur ur-blk">شاذلی سلسلے کے تیسرے مرشد۔ الحکم کے مصنف۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Hikam al-Ata&#39;iyyah; Miftah al-Falah; Al-Tanwir fi Isqat al-Tadbir.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">Ibn Ata&#39;illah&#39;s most important contribution to Zuhd: the distinction between Zuhd of the hand and Zuhd of the heart &#8212; and the insistence that only the latter is spiritually meaningful. He goes further than al-Junayd by arguing that you can practice complete material poverty and still be more attached to dunya than a wealthy person who has genuine heart-Zuhd. The proof: look at what preoccupies you. The poor person who constantly thinks about what they lack is more attached to dunya than the wealthy Muhsin who holds his wealth without being held by it. His Hikam cuts this precisely: &#39;Nothing is smaller than dunya &#8212; yet how can you be satisfied with what is smaller than you?&#39;</div>
+    <div class="sc-finding-ur ur-blk">ابن عطاء اللہ کا اہم ترین تعاون: ہاتھ اور دل کے زہد میں فرق &#8212; صرف دل کا روحانی لحاظ سے معنی خیز۔ مکمل مادی فقر بھی ہو سکتا ہے اور اس دولت مند سے زیادہ دنیا سے وابستہ ہو سکتے ہیں جس کے دل میں اصل زہد ہو۔ ثبوت: آپ کو کیا مشغول رکھتا ہے؟</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">مَا أَصْغَرَ الدُّنْيَا &#8212; فَكَيْفَ يَرْضَى الْعَاقِلُ بِمَا هُوَ أَصْغَرُ مِنْهُ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Nothing is smaller than the world &#8212; so how can the rational person be satisfied with what is even smaller than him?&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;دنیا سے چھوٹا کچھ نہیں &#8212; تو عاقل اس سے کیسے راضی ہو جو اس سے بھی چھوٹی ہے؟&raquo;</div>
+    <div class="sc-quote-src">Al-Hikam al-Ata&#39;iyyah</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Makes the heart the only valid measure of Zuhd &#8212; material conditions are secondary. This prevents two errors simultaneously: (1) thinking material poverty equals Zuhd; (2) thinking material wealth disqualifies Zuhd. The only question is the heart&#39;s actual orientation. His Hikam approach also makes this vivid rather than philosophical: the world is smaller than you &#8212; because you are created for the infinite and the world is finite. Attachment to it is therefore not just spiritually wrong but ontologically beneath your actual station.</div>
+    <div class="sc-contrib-ur ur-blk">دل کو زہد کا واحد درست پیمانہ بناتے ہیں &#8212; مادی حالت ثانوی۔ دو غلطیاں بیک وقت دور: مادی فقر = زہد نہیں؛ مادی دولت زہد کو نااہل نہیں کرتی۔ دنیا آپ سے چھوٹی &#8212; کیونکہ آپ لامحدود کے لیے بنائے گئے۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-atailla"></span></div>
+        <textarea class="note-ta" id="note-z3-atailla" placeholder="Ibn Ata&#39;illah: nothing is smaller than the world. What is currently occupying more of your attention than the world&#39;s actual size warrants? What does that reveal about where heart-Zuhd stands?" oninput="autoSave('z3-atailla',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-z-ibnqayyim">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-ibnqayyim')">
+    <div class="sc-num">06</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn al-Qayyim al-Jawziyya</div>
+      <div class="sc-name-ur ur-blk">ابن قیم الجوزیہ</div>
+      <div class="sc-dates">1292&#8211;1350 CE &middot; Damascus &middot; Quran-anchored tradition</div>
+    </div>
+    <div class="sc-badge en-blk">Rigorous</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Student of Ibn Taymiyya. Imprisoned alongside him. The doctor of hearts &#8212; profoundly spiritual, gifted poet, who engaged Sufi concepts with both appreciation and critique.</div>
+      <div class="bio-txt-ur ur-blk">ابن تیمیہ کے شاگرد، دلوں کے طبیب &#8212; روحانی گہرائی، بہترین شاعر۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Wabil al-Sayyib; Madarij al-Salikin; Kitab al-Ruh; Zad al-Ma&#39;ad.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">Ibn al-Qayyim&#39;s sharpest contribution to Zuhd comes from his radical reframing of the concept: Zuhd is not primarily about dunya &#8212; it is about Raghbah (intense longing) toward akhirah. You cannot sustain detachment from something by focusing on what you are detaching from. The person who thinks constantly about the dunya they are trying to leave is still mentally in dunya. True Zuhd requires something to be Zahid toward AND something to be Raghib toward simultaneously. His critique of certain Sufi approaches: Zuhd that focuses on condemning dunya produces a kind of spiritual moroseness; Zuhd that is fueled by genuine Raghbah toward akhirah produces joy. Also: Zuhd is to the heart what Wara&#39; (scrupulousness) is to the limbs &#8212; one without the other is incomplete.</div>
+    <div class="sc-finding-ur ur-blk">ابن قیم کا تیز ترین تعاون: زہد بنیادی طور پر دنیا کے بارے میں نہیں &#8212; آخرت کی رغبت کے بارے میں ہے۔ جس سے الگ ہونا ہو اس پر توجہ سے لا تعلقی قائم نہیں رہتی۔ اصل زہد: دنیا سے لا تعلقی اور آخرت کی رغبت &#8212; بیک وقت۔ تنقید: دنیا کی مذمت پر مرکوز زہد مایوسی پیدا کرتا ہے؛ آخرت کی رغبت سے بھرا زہد خوشی۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الزُّهْدُ فِي الدُّنْيَا لَا يَكُونُ إِلَّا بِالرَّغْبَةِ فِي الْآخِرَةِ</div>
+    <div class="sc-quote-en en-blk">&ldquo;Zuhd in the world cannot exist except through longing for the hereafter.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;دنیا میں زہد آخرت کی رغبت کے بغیر نہیں ہو سکتا۔&raquo;</div>
+    <div class="sc-quote-src">Al-Wabil al-Sayyib; Madarij al-Salikin, station of Zuhd</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">Resolves the psychological problem of Zuhd: how do you detach from something without becoming obsessed with detaching? By turning the attention toward what you are going to, not away from what you are leaving. This is why his reading of the Zuhd ayat consistently highlights the dunya-akhirah comparison rather than dunya&#39;s condemnation: Khayrun wa Abqa (better and more lasting) &#8212; the akhirah&#39;s superiority is the argument, not dunya&#39;s vileness. His Wara&#39;-Zuhd pairing also prevents the error of thinking heart-detachment is enough without behavioral scrupulousness.</div>
+    <div class="sc-contrib-ur ur-blk">زہد کا نفسیاتی مسئلہ حل: لا تعلقی پر مرکوز ہوئے بغیر کیسے الگ ہوں؟ جانے والی جگہ کی طرف توجہ موڑ کر۔ آخرت کی برتری دلیل ہے، دنیا کی برائی نہیں۔ ورع-زہد جوڑا: دل کی لا تعلقی اعضاء کی احتیاط کے بغیر ناقص۔</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-ibnqayyim"></span></div>
+        <textarea class="note-ta" id="note-z3-ibnqayyim" placeholder="Ibn al-Qayyim: Zuhd cannot exist without Raghbah toward akhirah. When you think about reducing your attachment to dunya, what is the positive thing you are turning toward? If you cannot name it clearly, what does that tell you?" oninput="autoSave('z3-ibnqayyim',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scholar-card" id="sc-z-ibnarabi">
+  <div class="sc-hdr" onclick="toggleCard('sc-z-ibnarabi')">
+    <div class="sc-num">07</div>
+    <div class="sc-hdr-main">
+      <div class="sc-name-en en-blk">Ibn Arabi</div>
+      <div class="sc-name-ur ur-blk">ابن عربی</div>
+      <div class="sc-dates">1165&#8211;1240 CE &middot; Murcia / Damascus &middot; Metaphysical school</div>
+    </div>
+    <div class="sc-badge en-blk">Al-Shaykh al-Akbar</div>
+    <span class="sc-chevron">&#8250;</span>
+  </div>
+  <div class="card-body">
+    <details class="bio-box">
+      <summary class="en-blk">Biography &amp; Primary Works</summary>
+      <div class="bio-txt en-blk">Born in al-Andalus. Met Ibn Rushd in Cordoba. Settled in Damascus. Largest body of written work in Islamic intellectual history. Most contested figure in the tradition.</div>
+      <div class="bio-txt-ur ur-blk">اندلس میں پیدا، دمشق میں انتقال۔ اسلامی فکری تاریخ کا سب سے بڑا تحریری ذخیرہ۔ سب سے متنازع شخصیت۔</div>
+      <div class="bio-works en-blk"><strong>Primary works:</strong> Al-Futuhat al-Makkiyya (37 vols.); Fusus al-Hikam; Tarjuman al-Ashwaq.</div>
+    </details>
+    <div class="sc-sec en-blk">Sharpest Finding on Z</div>
+    <div class="sc-finding en-blk">For Ibn Arabi, Zuhd in its deepest form is not the renunciation of things but the recognition of their true nature. When you perceive created things as they actually are &#8212; as self-disclosures (tajalliyat) of the Divine &#8212; the attachment that ordinary Zuhd seeks to eliminate has already dissolved. You are not attached to the thing; you are in relationship with the Divine disclosure it carries. His radical position: the person of complete marifah does not practice Zuhd &#8212; they have transcended the duality between attachment and detachment because they see through the veil of creation to what creation actually is.</div>
+    <div class="sc-finding-ur ur-blk">ابن عربی کے لیے زہد کی گہری ترین شکل: چیزوں کو ترک کرنا نہیں بلکہ ان کی اصل ماہیت پہچاننا۔ جب مخلوقات کو تجلیاتِ الٰہی کے طور پر دیکھو &#8212; عام زہد جو وابستگی ختم کرنا چاہتا ہے پہلے ہی حل ہو جاتی ہے۔ مکمل معرفت والا زہد مشق نہیں کرتا &#8212; وابستگی اور لا تعلقی کی دوئی سے آگے۔</div>
+    <div class="sc-sec en-blk">Direct Quotation</div>
+    <div class="sc-quote-ar">الزَّاهِدُ الْحَقِيقِيُّ لَا يَرَى الدُّنْيَا دُنْيَا &#8212; بَلْ يَرَاهَا مَجَالِيَ الْحَقِّ</div>
+    <div class="sc-quote-en en-blk">&ldquo;The true Zahid does not see the world as world &#8212; but as the manifestations of the Real.&rdquo;</div>
+    <div class="sc-quote-ur ur-blk">&laquo;حقیقی زاہد دنیا کو دنیا نہیں دیکھتا &#8212; بلکہ حق کی تجلیات کے طور پر۔&raquo;</div>
+    <div class="sc-quote-src">Al-Futuhat al-Makkiyya, on the station of Zuhd</div>
+    <div class="sc-sec en-blk">Unique Contribution</div>
+    <div class="sc-contrib en-blk">The most radical reframing of Zuhd in the entire tradition. Where every other scholar asks &#39;how do I detach from things?&#39;, Ibn Arabi asks &#39;what are things, really?&#39; If the answer is &#39;divine self-disclosures&#39;, the question of attachment changes entirely. This is either the deepest understanding of Zuhd or a position that removes the practical urgency of Zuhd from ordinary life &#8212; the Divergence section addresses this tension directly.</div>
+    <div class="sc-contrib-ur ur-blk">روایت میں زہد کی سب سے بنیادی بازتشکیل۔ ہر اور عالم: چیزوں سے کیسے الگ ہوں؟ ابن عربی: چیزیں اصل میں کیا ہیں؟ تجلیاتِ الٰہی ہیں تو وابستگی کا سوال بدل جاتا ہے۔ یا گہری ترین سمجھ &#8212; یا زہد کی عملی اہمیت عام زندگی سے ہٹا دینا۔</div>
+    <div class="sc-controversy"><strong>Note on Controversy:</strong> Ibn Arabi&#39;s Wahdat al-Wujud framework remains the most contested position in Islamic intellectual history. Ibn al-Qayyim &#8212; in this same list &#8212; considered aspects of it incompatible with sound Tawhid. Neither endorsement nor dismissal: engage the insight, hold the theological concern, and let the Divergence section below address the tension directly.</div>
+    <div class="notes-sec" style="margin-top:16px;border-top:1px solid var(--purplebdr);padding-top:14px;">
+      <div class="note-f">
+        <div class="note-lbl"><div class="nd" style="background:var(--purple)"></div><span class="en-blk">Personal Reflection</span><span class="ur-blk">ذاتی غور</span><span class="nsv" id="sv-z3-ibnarabi"></span></div>
+        <textarea class="note-ta" id="note-z3-ibnarabi" placeholder="Ibn Arabi: the true Zahid sees the world as divine manifestations, not as world. Does this open something &#8212; a way of being in the world without being of it &#8212; or does it feel like it dissolves the necessary tension of Zuhd?" oninput="autoSave('z3-ibnarabi',this.value)"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="div-wrap">
+  <div class="div-hdr">
+    <div class="div-hdr-ar">الاختلاف</div>
+    <div class="div-hdr-en en-blk">Divergence &#8212; Three Live Disagreements on Zuhd</div>
+    <div class="div-hdr-desc en-blk">Three disagreements that have shaped how Muslims understand Zuhd for twelve centuries. State your position on each &#8212; and date it.</div>
+    <div class="div-hdr-desc ur-blk" style="font-family:var(--font-ar);direction:rtl;text-align:right">تین اختلافات جنہوں نے بارہ صدیوں سے زہد کو شکل دی۔ تاریخ کے ساتھ پوزیشن بیان کریں۔</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 01</div>
+    <div class="div-q en-blk">Is Zuhd from the hand (external poverty) or from the heart (internal non-attachment) &#8212; or necessarily both?</div>
+    <div class="div-q-ur ur-blk">زہد ہاتھ کا ہے (ظاہری فقر) یا دل کا (اندرونی لا تعلقی) &#8212; یا لازماً دونوں؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Hasan al-Basri &middot; Ibn al-Qayyim</div><div class="div-view en-blk">Both hand and heart. External simplicity disciplines the heart and prevents the hand from clutching. Heart-detachment that is not expressed in any outward restraint is likely self-deception. The prophetic model: the Prophet ﷺ died with his armor pledged; he did not possess much, and he was not attached to what he possessed.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Junayd &middot; Ibn Ata&#39;illah</div><div class="div-view en-blk">Heart is primary and sufficient in principle. A wealthy person can have complete Zuhd if their heart is genuinely unattached. A poor person can be deeply attached to what little they have. Hand-Zuhd without heart-Zuhd is performance; heart-Zuhd without hand-Zuhd is possible but requires honest self-examination.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn Arabi</div><div class="div-view en-blk">The question dissolves at the highest station: when things are seen as divine manifestations, the duality between having and not-having loses its spiritual weight. The person of marifah neither grasps nor renounces &#8212; they receive and release as the Real disposes.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">12:20 (az-zahideen &#8212; Zuhd defined by heart-orientation, not poverty); 28:77 (do not forget your share of the world &#8212; external renunciation not required); 59:9 (Ansar gave even in their own need &#8212; both hand and heart expressed). The Quran&#39;s strongest Zuhd ayat address the heart (87:16 &#8212; you prefer the near; 9:38 &#8212; you clung to the earth). Ibn al-Qayyim and al-Junayd both have Quranic support; the heart position is more consistent with the explicit Zuhd ayat.</div></div>
+    <div class="div-verdict en-blk">Heart-Zuhd is primary &#8212; the Quran&#39;s Zuhd ayat address inner orientation, not external conditions. But hand-Zuhd disciplines the heart and prevents self-deception: the person claiming heart-Zuhd while accumulating must examine that claim. The Prophetic model shows both: he had little and was unattached to what he had. Do not use heart-primacy to justify external excess.</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 02</div>
+    <div class="div-q en-blk">Is voluntary institutional poverty &#8212; choosing to own as little as possible &#8212; spiritually required for complete Zuhd?</div>
+    <div class="div-q-ur ur-blk">کیا اختیاری ادارہ جاتی فقر &#8212; کم سے کم رکھنے کا انتخاب &#8212; مکمل زہد کے لیے روحانی ضرورت ہے؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Some Sufi orders (influenced by Al-Junayd)</div><div class="div-view en-blk">Complete Zuhd in practice tends toward material simplicity. Not as a requirement but as a natural expression: if the heart is genuinely unattached, it does not accumulate beyond need. The person who claims heart-Zuhd while actively pursuing wealth accumulation should examine whether the claim is genuine.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn al-Qayyim &middot; Ibn Ata&#39;illah</div><div class="div-view en-blk">Institutional poverty is not established as a requirement in Quran or Sunnah. Wealthy Companions &#8212; Abdurrahman ibn Awf, Uthman ibn Affan &#8212; had complete Zuhd. The requirement is heart-orientation; the external condition varies by circumstance, need, and responsibility. Choosing poverty to earn spiritual credit is itself a form of attachment &#8212; to the idea of being poor.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">28:77 &#8212; do not forget your share of the world &#8212; explicitly prohibits treating self-imposed poverty as a Quranic command. The Quranic verdict (4:77, 9:38) is Qaleel (little) &#8212; not Safr (zero). The Sunnah shows the Prophet ﷺ sometimes having and sometimes not having; what was constant was his heart&#39;s orientation. Institutional poverty has no direct Quranic or Sunnah basis. Ibn al-Qayyim&#39;s position has the strongest textual grounding.</div></div>
+    <div class="div-verdict en-blk">Voluntary institutional poverty is not required. 28:77 explicitly commands not forgetting your share of the world. The test is heart-orientation, not ownership. However: if accumulation is happening despite claimed Zuhd, the accumulation should be examined &#8212; not as proof of lack of Zuhd, but as occasion for honest self-accounting.</div>
+  </div>
+  <div class="div-point">
+    <div class="div-num en-blk">Divergence 03</div>
+    <div class="div-q en-blk">Should Zuhd focus on condemning dunya &#8212; or on longing for akhirah? Does the direction of attention matter?</div>
+    <div class="div-q-ur ur-blk">زہد دنیا کی مذمت پر مرکوز ہو &#8212; یا آخرت کی رغبت پر؟ کیا توجہ کی سمت اہمیت رکھتی ہے؟</div>
+    <div class="div-pos-row"><div class="div-scholars">Some traditional approaches</div><div class="div-view en-blk">Dwelling on dunya&#39;s vileness and temporality is a legitimate and Quranically supported practice. The ayat on dunya&#39;s smallness (4:77, 9:38), its deceptive quality (3:185), and its stages (57:20) are designed to produce disgust and detachment. Meditating on these produces Zuhd.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Ibn al-Qayyim (sharpest correction)</div><div class="div-view en-blk">You cannot sustain detachment from something by focusing on it. Zuhd that is fuelled by anti-dunya meditation keeps dunya at the centre of attention &#8212; even if negatively. The Quran&#39;s Zuhd argument is comparative: akhirah is Khayrun wa Abqa (better and more lasting). The focus should be Raghbah toward akhirah, not revulsion toward dunya. The emotion that generates sustainable Zuhd is longing, not disgust.</div></div>
+    <div class="div-pos-row"><div class="div-scholars">Al-Ghazali</div><div class="div-view en-blk">Both are necessary at different stages. Disgust at dunya is the beginning &#8212; it creates the initial break. Longing for akhirah is the sustaining fuel. You need the first to start; you cannot maintain Zuhd on disgust alone. The highest Zuhd is not fuelled by either but by clear sight of what is real &#8212; which is al-Ghazali&#39;s level 3.</div></div>
+    <div class="div-ground"><div class="div-ground-lbl en-blk">Quranic Grounding</div><div class="div-ground-txt en-blk">The Quran uses both: ayat that condemn dunya (57:20, 3:185) and ayat that praise akhirah (87:17, 4:77). Ibn al-Qayyim&#39;s reading is confirmed by 87:16-17: you prefer the near &#8212; but the akhirah is Khayrun wa Abqa. The argument is comparative, not purely condemnatory. Al-Ghazali&#39;s both-stages reading is the most complete. Ibn al-Qayyim&#39;s correction about sustained direction of attention is psychologically the most important.</div></div>
+    <div class="div-verdict en-blk">Ibn al-Qayyim&#39;s correction is the most practically important: sustainable Zuhd requires Raghbah toward akhirah as its fuel, not primarily revulsion toward dunya. Start with al-Ghazali&#39;s disgust-as-beginning if needed. But transition to longing-as-sustainer. A Zuhd that keeps dunya at the centre of attention &#8212; even to condemn it &#8212; has not yet fully left it.</div>
+  </div>
+  <div class="div-pos-box">
+    <div class="div-pos-lbl en-blk">Your Personal Position &#8212; Zuhd Stage 3</div>
+    <div class="div-pos-lbl ur-blk" style="font-family:var(--font-ar)">آپ کی ذاتی پوزیشن &#8212; زہد مرحلہ ۳</div>
+    <p class="en-blk" style="font-size:12.5px;color:var(--text2);line-height:1.85;margin:0 0 12px">Seven scholars, three divergences. State your position on each &#8212; date it.</p>
+    <div class="note-f">
+      <div class="note-lbl"><div class="nd" style="background:var(--gold2)"></div><span class="en-blk">My Position (dated)</span><span class="ur-blk">میری پوزیشن (بتاریخ)</span><span class="nsv" id="sv-z3-pos"></span></div>
+      <textarea class="note-ta" id="note-z3-pos" style="min-height:120px" placeholder="(1) Hand-Zuhd vs heart-Zuhd vs both: where do I stand? (2) Is voluntary poverty required? (3) Focus on dunya&#39;s vileness or akhirah&#39;s beauty &#8212; which fuels my Zuhd? Date: " oninput="autoSave('z3-pos',this.value)"></textarea>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="file-bottom-nav">
+  <a href="taqwa.html" class="file-nav-link">← Taqwa</a>
+  <a href="index.html" class="file-nav-home">☰ Index</a>
+  <a href="muraqabah.html" class="file-nav-link">Muraqabah →</a>
+</div>
+
+<script>
+function toggleCard(id){
+  var el=document.getElementById(id);
+  if(el){el.classList.toggle('open');}
+}
+function autoSave(key,val){
+  localStorage.setItem('ss_'+key,val);
+  var sv=document.getElementById('sv-'+key);
+  if(sv){sv.textContent='✦';sv.style.color='var(--teal)';}
+}
+function loadNotes(){
+  document.querySelectorAll('textarea.note-ta').forEach(function(ta){
+    var k='ss_'+ta.id.replace('note-','');
+    var v=localStorage.getItem(k);
+    if(v){ta.value=v;}
+  });
+  document.querySelectorAll('.nsv').forEach(function(sv){
+    var k='ss_'+sv.id.replace('sv-','');
+    if(localStorage.getItem(k)){sv.textContent='✦';sv.style.color='var(--teal)';}
+  });
+}
+function setLang(lang){
+  localStorage.setItem('ss_lang',lang);
+  if(lang==='ur'){
+    document.body.classList.add('ur-mode');
+  } else {
+    document.body.classList.remove('ur-mode');
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.style.opacity=(btn.getAttribute('data-lang-btn')===lang)?'1':'0.45';
+  });
+}
+window.addEventListener('DOMContentLoaded',function(){
+  loadNotes();
+  var lang=localStorage.getItem('ss_lang')||'en';
+  setLang(lang);
+});
+</script>
+</body>
+</html>
